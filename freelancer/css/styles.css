@@ -1,5 +1,6 @@
 :root {
-	--blanco: #ffffff;
+	/*--blanco: #ffffff;*/
+	--blanco: #eee7e7;
 	--oscuro: #212121;
 	--primario: #ffc107;
 	--secundario: #0097a7;
@@ -48,6 +49,21 @@ h1,h2,h3 {
 .contenedor {
 	max-width: 120rem;
 	margin: 0 auto;
+}
+
+.boton {
+	background-color: var(--secundario);
+	color: var(--blanco);
+	padding: 1rem 3rem;
+	font-size: 2rem;
+	margin-top: 1rem;
+	font-size: 2rem;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-radius: .5rem;
+	width: 90%;
+	text-align: center;
 }
 
 .nav-bg {
@@ -104,13 +120,18 @@ h1,h2,h3 {
 	align-items: center;
 }
 
-@media (min-width: 480px){
 
+@media (min-width: 480px){
+	
 }
 
 @media (min-width: 768px) {
 	.navegacion-principal {
 		flex-direction: row;
 		justify-content: space-between;
+	}
+
+	.boton {
+		width: auto;
 	}
 }
