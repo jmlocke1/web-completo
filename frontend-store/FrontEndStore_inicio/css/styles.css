@@ -182,7 +182,12 @@ h3 {
 }
 
 .legend__image {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.legend__image {
+    grid-row: 1 / 2;
 }
 
 /* Media Querys */
@@ -199,7 +204,26 @@ h3 {
         min-height: 30rem;
     }
 }*/
+
+@media(max-width: 218px) {
+    .producto__nombre {
+        font-size: 2rem;
+    }
+}
     
+@media(max-width: 400px) {
+    /*.producto__nombre {
+        font-size: 2rem;
+    }*/
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grafico {
+        grid-column: 1;
+    }
+}
 
 @media(min-width: 768px) {
     .grid {
@@ -213,5 +237,9 @@ h3 {
 
     .legend {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .legend__image {
+        grid-column: 2 / 3;
     }
 }
