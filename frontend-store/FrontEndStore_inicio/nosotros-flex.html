@@ -9,6 +9,45 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="css/styles.css">
+	<style type="text/css">
+		    /*Presentacion Nosotros*/
+     
+			.presentacion {
+				margin: 1rem 2rem;
+			}
+			
+			@media (min-width: 768px) {
+				.presentacion {
+					margin: 0 auto;
+					display: flex;
+				}
+			}
+			
+			.presentacion__texto {
+				text-align: center;
+				font-size: 1.4rem;
+				margin-bottom: 5rem;
+			}
+			
+			@media (min-width: 768px) {
+				.presentacion__texto {
+					text-align: left;
+					font-size: 1.8rem;
+					margin-right: 2rem;
+				}
+			}
+			.presentacion__imagen {
+				width: 100%;
+			}
+			@media (min-width: 768px) {
+				
+			}
+			
+			.iconos {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+			}
+	</style>
 </head>
 <body>
 	<header class="header">
@@ -22,12 +61,12 @@
 	</nav>
 	<main class="contenedor">
 		<h1>Sobre nosotros</h1>
-		<div class="nosotros">
-			<div class="nosotros__contenido">
+		<div class="presentacion">
+			<div class="presentacion__texto">
 				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam atque accusantium hic porro, libero laboriosam, modi, nemo iusto ut fuga quidem? Ratione, suscipit adipisci doloribus atque tempora, dolore quae autem aliquid totam non officiis iste? Facilis minus molestiae optio nobis. Iusto quis totam praesentium, numquam amet perferendis? Quam incidunt distinctio iure repudiandae? Quos hic omnis ea deleniti dolores, illum iusto temporibus, tempora autem officia molestiae modi. Maiores ut assumenda inventore ipsam aut quae recusandae iure obcaecati ipsum. Temporibus sint neque nobis ducimus nihil cum minus quibusdam voluptate ipsum dolor eaque corrupti accusamus eligendi, odio amet maxime eos quas impedit ex dolorem. Earum debitis corporis neque commodi quae quam, quibusdam sapiente explicabo, minus, tenetur expedita.</p>
 				<p> Odio unde at aut! Id, iusto sequi quas molestiae voluptatem provident animi incidunt non doloremque omnis nihil voluptates accusamus illum vitae optio distinctio est recusandae quibusdam sint iure, consequuntur et a! Amet odio minima adipisci facere.</p>
 			</div>
-			<img class="nosotros__imagen" src="img/nosotros.jpg" alt="Imagen de una chica que representa al equipo">
+			<img class="presentacion__imagen" src="img/nosotros.jpg" alt="Imagen de una chica que representa al equipo">
 
 			<!-- <div class="legend__image">
 				<img class="" src="img/nosotros.jpg" alt="Imagen de una chica que representa al equipo">
