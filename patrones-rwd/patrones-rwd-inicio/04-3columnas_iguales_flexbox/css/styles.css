@@ -39,3 +39,22 @@ h1 {
 }
 
 /** CODIGO AQUI **/
+
+@media (min-width: 768px) {
+    .tres-columnas {
+        display: flex;
+        justify-content: space-between;
+        /* gap: 2rem; */
+    }
+
+    /* Esta opción sí funcionará en todos los navegadores */
+    .entrada-blog {
+        flex: 0 0 calc( 33.3% - 1rem);
+        /* Solución con margin-right
+        margin-right: 2rem; */
+    }
+
+    /* .entrada-blog:last-child { 
+        margin-right: 0;
+    }*/
+}
