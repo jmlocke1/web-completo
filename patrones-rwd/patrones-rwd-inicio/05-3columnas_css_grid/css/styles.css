@@ -55,7 +55,7 @@ p {
         display: grid;
         grid-template-areas: "izquierda contenido derecha";
         grid-template-columns: 15rem 3fr 15rem;
-        grid-auto-flow: column;
+        /* grid-auto-flow: column; */
         column-gap: 2rem;
     }
 
