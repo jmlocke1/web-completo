@@ -48,3 +48,16 @@ p {
 }
 
 /** CODIGO AQUI **/
+
+@media (min-width: 768px) {
+    .layout-shifter {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+@media (min-width: 992px) {
+    .layout-shifter {
+        flex-direction: row-reverse;
+    }
+}
