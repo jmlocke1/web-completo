@@ -75,8 +75,4 @@ p {
         column-gap: 4rem;
         grid-auto-flow: column;
     }
-
-    aside {
-        /* grid-column: 1 / 2; */
-    }
 }
