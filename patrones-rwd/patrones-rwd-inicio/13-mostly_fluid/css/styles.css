@@ -40,13 +40,20 @@ p {
 
 .contenedor {
     max-width: 120rem;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
+}
+/* Este añadido es por mi parte, para poner la imagen al 100% */
+.contenedor p {
+    padding: 0 2rem;
 }
 
 @media (min-width: 768px) {
     .contenedor {
         width: 80%;
+    }
+    .contenedor p {
+        padding: 0;
     }
 }
 
