@@ -153,3 +153,24 @@ img {
 .boton--primario {
 	background-color: var(--negro);
 }
+.boton--secundario {
+	background-color: var(--primario);
+}
+.cursos {
+	list-style: none;
+}
+
+.widget-curso {
+	border-bottom: 1px solid var(--gris);
+	margin-bottom: 2rem;
+}
+.widget-curso:last-of-type {
+	border: none;
+	margin-bottom: none;
+}
+.widget-curso__label {
+
+}
+.widget-curso__info {
+
+}
