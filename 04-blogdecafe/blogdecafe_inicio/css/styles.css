@@ -26,8 +26,10 @@ body {
 /* Globales */
 
 .contenedor {
+	/* Con CSS 3 se puede aplicar la función min, que aplica el menor de los valores pasados
 	max-width: 120rem;
-	width: 90%;
+	width: 90%; */
+	width: min(90%, 120rem);
 	margin: 0 auto;
 }
 
@@ -182,4 +184,9 @@ img {
 .widget-curso__label,
 .widget-curso__info {
 	font-size: 2rem;
+}
+
+.footer {
+	background-color: var(--negro);
+	padding-bottom: 3rem;
 }
