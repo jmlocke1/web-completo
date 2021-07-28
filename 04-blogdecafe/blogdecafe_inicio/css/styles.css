@@ -87,6 +87,9 @@ img {
 		margin-top: 15rem;
 	}
 }
+.barra {
+	padding-top: 4rem;
+}
 @media (min-width: 768px) {
 	.barra {
 		display: flex;
