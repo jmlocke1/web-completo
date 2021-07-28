@@ -174,19 +174,60 @@ img {
 	border: none;
 	margin-bottom: none;
 }
-.widget-curso__label {
+.widget-curso__label,
+.curso__label {
 	font-family: var(--fuenteHeading);
 	font-weight: bold;
 }
-.widget-curso__info {
+.widget-curso__info,
+.curso__info {
 	font-weight: 400;
 }
 .widget-curso__label,
-.widget-curso__info {
+.curso__label,
+.widget-curso__info,
+.curso__info {
 	font-size: 2rem;
 }
 
 .footer {
 	background-color: var(--negro);
 	padding-bottom: 3rem;
+}
+
+/* Sobre Nosotros */
+@media (min-width: 768px) {
+	/* Con Flex
+	.sobre-nosotros {
+		display: flex;
+		gap: 2rem;
+	}
+	.sobre-nosotros__imagen,
+	.sobre-nosotros__texto {
+		flex-basis: 50%;
+	} */
+	/* Con Grid */
+	.sobre-nosotros{
+		display: grid;
+		grid-template-columns: repeat(2, 50%);
+		column-gap: 2rem;
+	}
+	.sobre-nosotros__texto p:first-of-type {
+		margin-top: 0;
+	}
+}
+
+.curso {
+	padding: 3rem 0;
+	border-bottom: 1px solid var(--gris);
+}
+@media (min-width: 768px) {
+	.curso {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		column-gap: 2rem;
+	}
+}
+.curso:last-of-type {
+	border: none;
 }
