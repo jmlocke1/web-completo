@@ -156,6 +156,9 @@ img {
 		display: inline-block;
 	}
 }
+.boton:hover {
+	cursor: pointer;
+}
 .boton--primario {
 	background-color: var(--negro);
 }
@@ -193,6 +196,7 @@ img {
 .footer {
 	background-color: var(--negro);
 	padding-bottom: 3rem;
+	margin-top: 4rem;
 }
 
 /* Sobre Nosotros */
@@ -230,4 +234,35 @@ img {
 }
 .curso:last-of-type {
 	border: none;
+}
+
+/* Contacto */
+.contacto-bg {
+	background-image: url(../img/contacto.jpg);
+	height: 40rem;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.formulario {
+	background-color: var(--blanco);
+	margin: -5rem auto 0 auto;
+	width: 95%;
+	padding: 5rem;
+}
+.campo {
+	display: flex;
+	margin-bottom: 2rem;
+	gap: 2rem;
+}
+.campo__label {
+	flex: 0 0 9rem;
+	text-align: right;
+}
+.campo__field {
+	flex: 1;
+	border: 1px solid var(--gris);
+}
+.campo__field--textarea {
+	height: 20rem;
 }
