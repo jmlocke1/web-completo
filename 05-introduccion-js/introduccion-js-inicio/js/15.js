@@ -10,6 +10,10 @@ const carrito = [
 	{ nombre: 'Altavoces', precio: 300 },
 	{ nombre: 'Laptop', precio: 800 }
 ];
+console.log("El array meses es:");
+console.table(meses);
+console.log("El array carrito es:");
+console.table(carrito);
 
 // forEach
 meses.forEach(function(mes){
@@ -36,3 +40,23 @@ resultado = carrito.some(function(producto){
 	return producto.nombre === nombreProducto;
 });
 console.log('¿Existe', nombreProducto, 'entre los objetos de carrito?', resultado);
+
+// Reduce
+resultado = carrito.reduce(function(total, producto) {
+	return total + producto.precio;
+}, 0);
+console.log("El total de los productos es:", resultado);
+
+// Filter
+let precio = 400;
+resultado = carrito.filter(function(producto){
+	return producto.precio > precio;
+});
+console.log(`Filter. Los elementos del carrito cuyo precio es mayor que ${precio} son:`);
+console.table(resultado);
+
+resultado = carrito.filter(function(producto){
+	return producto.nombre !== 'Celular';
+});
+console.log("Los elementos del carrito que no son celulares son:");
+console.table(resultado);
