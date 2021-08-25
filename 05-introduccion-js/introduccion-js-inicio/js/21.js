@@ -43,6 +43,16 @@ nombreProducto = 'Celular Pro';
 resultado = carrito.some( producto =>  producto.nombre === nombreProducto);
 console.log('¿Existe', nombreProducto, 'entre los objetos de carrito?', resultado);
 
+resultado = carrito.reduce((total, producto) =>	total + producto.precio, 0);
+
+console.log(`El precio total de todos los productos es ${resultado}`);
+
+console.log("Los productos con valor superior a 400 son:");
+console.table(carrito.filter(producto => producto.precio >= 400));
+
+resultado = carrito.filter( producto => producto.nombre !== 'Celular');
+console.log("Los productos que no son celulares:");
+console.table(resultado);
 var sum = function sum() {
 	var result = 0;
 	[5, 5, 5].forEach(function addTo(number) { result += number; });
