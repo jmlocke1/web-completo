@@ -18,11 +18,12 @@ const carrito = [
 // const array1 = carrito.forEach(producto => console.log(`Producto: ${producto.nombre}, precio: ${producto.precio}`));
 
 // Map
-const array2 = carrito.map(producto => producto.nombre);
-const array1 = carrito.forEach(producto => producto.nombre);
+const array1 = carrito.map(producto => `${producto.nombre} - ${producto.precio}`);
+const array2 = carrito.forEach(producto => producto.nombre);
+
 // La diferencia entre forEach y map es que map devuelve 
 // un array, mientras que forEach no devuelve nada
-// Esto devolverá undefined
-console.log(array1);
 // Esto devolverá un array con los nombres de los productos
+console.log(array1);
+// Esto devolverá undefined
 console.log(array2);
