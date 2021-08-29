@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript in header example</title>
+    <script type="text/javascript">
+      var startTime = new Date();
+    </script>
+    <!-- <script src="js/slow.js" defer></script> -->
+  </head>
+
+  <body>
+    <h1>Javascript in header example</h1>
+    The following is the time difference in milliseconds of these two value:
+    <ul>
+      <li>
+        Time calculated using javascript Date in header immediately after title
+        tag.
+      </li>
+      <li>Time calculated using javascript Date close to the end.</li>
+    </ul>
+    Here javascript is inclued in the header after the first time value is
+    calculated.
+    <br />
+    <script type="text/javascript">
+      var currentTime = new Date();
+      var deltaMillis = currentTime - startTime;
+      document.write("<p>deltaMillis=" + deltaMillis + "<p/>");
+    </script>
+	<script src="js/slow.js" ></script>
+  </body>
+</html>
