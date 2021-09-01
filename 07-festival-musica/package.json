@@ -14,7 +14,9 @@
   ],
   "author": "José Miguel Izquierdo Martínez",
   "license": "ISC",
-  "dependencies": {
-    "gulp": "^4.0.2"
+  "devDependencies": {
+    "dart-sass": "^1.25.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0"
   }
 }
