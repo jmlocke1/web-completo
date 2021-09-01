@@ -79,7 +79,7 @@ console.log('Después de insertar enlace dinámico', nuevoEnlace);
 tit = 'Otro', href='https://web-completo.test', text='Web Completo', target='_blank';
 nuev.innerHTML = `<a title='${tit}' href='${href}' class='${"navegacion__enlace"}' target='${target}'>${text}</a>`;
 //navegacionSuperior.appendChild(nuev.firstChild);
-
+/*
 // Eventos
 function imprimir(){
 	console.log(3);
@@ -101,7 +101,86 @@ window.onscroll = function() {
 // Seleccionar elementos y asociarles un evento
 const btnEnviar = document.querySelector('.boton--primario');
 btnEnviar.addEventListener('click', function(evento) {
-	console.log(evento.target);
+	console.log("Argumentos", arguments);
+	console.log(evento);
 	evento.preventDefault();
 	console.log('Enviando formulario');
 });
+*/
+
+
+
+// Dispara un evento cuando el ratón está encima de un campo de formulario
+// y otro evento cuando sale del foco
+const inputs = document.querySelectorAll('.campo input, .campo textarea');
+inputs.forEach(input => {
+input.addEventListener('mouseover', (event) => {
+	event.target.style.borderColor = 'black';
+});
+input.addEventListener('mouseout', (event) => {
+	event.target.style.borderColor = 'lightgray';
+});
+});
+const form = document.querySelector('.formulario');
+
+const nombre = document.querySelector('#nombre');
+const email = document.querySelector('#email');
+const mensaje = document.querySelector('#mensaje');
+const datos = {
+	nombre: nombre.value,
+	email: email.value,
+	mensaje: mensaje.value
+};
+nombre.addEventListener('input', leerTexto);
+nombre.addEventListener('change', cambiar);
+email.addEventListener('input', leerTexto);
+email.addEventListener('change', cambiar);
+mensaje.addEventListener('input', leerTexto);
+mensaje.addEventListener('change', cambiar);
+
+// El evento de Submit
+form.addEventListener('submit', evento => {
+	evento.preventDefault();
+	// Validar el formulario
+	const {nombre, email, mensaje}= datos;
+
+	if(nombre === '' || email === '' || mensaje === ''){
+		mostrarAlerta('Todos los campos son obligatorios', false);
+		return; // Corta la ejecución del código
+	}
+	console.log('Enviando formulario');
+	mostrarAlerta('Formulario enviado correctamente', true);
+});
+// Eventos de los Inputs y Textarea
+
+form.addEventListener('focusin', (event) => {
+	event.target.style.background = '#f0f0f5';
+});
+  
+form.addEventListener('focusout', (event) => {
+	event.target.style.background = '';
+	// leerTexto(event);
+});
+
+function leerTexto(e) {
+	datos[e.target.id] = e.target.value;
+	// console.log(datos);
+}
+function cambiar(e){
+	console.log('Se ha cambiado el campo', e.target.id);
+}
+
+function mostrarAlerta(mensaje, correcto){
+	const alerta = document.createElement('P');
+	alerta.textContent = mensaje;
+	if(correcto){
+		alerta.classList.add('correcto');
+	}else{
+		alerta.classList.add('error');
+	}
+	form.appendChild(alerta);
+	// Desaparezca después de 5 segundos
+	setTimeout(() => {
+		alerta.remove();
+	}, 5000);
+}
