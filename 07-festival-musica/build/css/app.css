@@ -1,5 +1,12 @@
 body {
+  font-family: "Arial";
+}
+
+h1 {
+  font-family: "Arial";
   background-color: "green";
 }
 
-/*# sourceMappingURL=app.css.map */
+p {
+  margin-top: 12px;
+}
