@@ -16,7 +16,8 @@ function minificarCSS(){
 }
 
 function watchArchivos(){
-	watch( "./src/scss/*.scss", series(compilarSASS, minificarCSS));
+	// * = La carpeta actual - ** ? Todos los archivos con esa extensión
+	watch( "./src/scss/**/*.scss", parallel(compilarSASS, minificarCSS));
 }
 
 exports.compilarSASS = compilarSASS;

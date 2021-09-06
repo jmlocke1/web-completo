@@ -1,16 +1,4 @@
-$rojo: 'red';
-$verde: 'green';
-$fuentePrincipal : "Arial";
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/globales';
 
-body {
-	font-family: $fuentePrincipal;
-}
-
-h1 {
-	font-family: $fuentePrincipal;
-	background-color: $verde;
-}
-
-p {
-	margin-top: 12px;
-}
