@@ -379,9 +379,43 @@ h3 {
   font-size: 3rem;
 }
 
+h1, h2, h3 {
+  margin: 0;
+}
+
 .header {
   background-color: #4CB8B3;
 }
 .header .contenido-header {
   padding: 1.6666666667rem 0;
+}
+@media (min-width: 768px) {
+  .header .contenido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.header h1 {
+  color: #FFF;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .header h1 {
+    margin-bottom: 0;
+  }
+}
+
+.navegacion-principal {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+.navegacion-principal a {
+  color: #FFF;
+  font-size: 2rem;
+}
+.navegacion-principal a:hover {
+  color: #FEF46D;
 }
