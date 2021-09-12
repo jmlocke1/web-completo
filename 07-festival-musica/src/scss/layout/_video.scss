@@ -18,3 +18,25 @@
         width: 100%;
     }
 }
+.contenido-video {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    h2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        color: $blanco;
+        font-size: 4rem;
+        @include tablet {
+            font-size: 7rem;
+        }
+        span {
+            background-color: $rosa;
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+    }
+}

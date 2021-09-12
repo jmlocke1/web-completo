@@ -1,7 +1,8 @@
 .header {
 	background-color: $verde;
 	.contenido-header {
-		padding: math.div($separacion, 3) 0;
+		padding: math.div($separacion, 2) 0;
+		
 		@include tablet {
 			display: flex;
 			justify-content: space-between;
