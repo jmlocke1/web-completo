@@ -480,6 +480,22 @@ img {
   .sobre-festival {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 5rem;
+    gap: 5rem;
   }
+}
+
+.contenido-festival {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contenido-festival h2 {
+  font-size: 3rem;
+}
+.contenido-festival .fecha {
+  color: #F53756;
+  font-weight: 700;
+}
+.contenido-festival .texto {
+  line-height: 3rem;
 }
