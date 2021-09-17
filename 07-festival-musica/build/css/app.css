@@ -387,6 +387,14 @@ img {
   max-width: 100%;
 }
 
+.bg-verde {
+  background-color: #4CB8B3;
+}
+
+.bg-amarillo {
+  background-color: #FEF46D;
+}
+
 .header {
   background-color: #4CB8B3;
 }
@@ -498,4 +506,71 @@ img {
 }
 .contenido-festival .texto {
   line-height: 3rem;
+}
+
+.lineup {
+  background-color: #F53756;
+  padding: 5rem 0;
+}
+.lineup h3, .lineup p {
+  text-align: center;
+  color: #FFF;
+}
+.lineup .dia {
+  text-transform: uppercase;
+  margin: 5rem 0;
+}
+
+@media (min-width: 768px) {
+  .escenarios-contenedor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+}
+.escenarios-contenedor .escenario {
+  padding-top: 2.5rem;
+}
+.escenarios-contenedor .nombre-escenario {
+  color: #000;
+  font-size: 2rem;
+  font-weight: 300;
+}
+.escenarios-contenedor .nombre-escenario:after {
+  content: "";
+  width: 20rem;
+  height: 10rem;
+  display: block;
+  margin: 2rem auto 0 auto;
+  background-size: 15rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.edm .nombre-escenario:after {
+  background-image: url("../img/icono_edm.png");
+}
+
+.rock .nombre-escenario:after {
+  background-image: url("../img/icono_rock.png");
+}
+
+.calendario {
+  list-style-type: none;
+  padding: 0;
+}
+.calendario li {
+  padding: 2.5rem;
+  font-weight: 700;
+}
+.calendario li span {
+  font-weight: 400;
+}
+
+.bg-amarillo .calendario li:nth-child(odd) {
+  background-color: #fef03a;
+}
+
+.bg-verde .calendario li:nth-child(odd) {
+  background-color: #3b9691;
 }
