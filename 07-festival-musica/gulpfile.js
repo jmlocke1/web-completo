@@ -4,6 +4,7 @@ const imagemin = require( 'gulp-imagemin' );
 // const rename = require('gulp-rename');
 const notify = require('gulp-notify');
 const webp = require('gulp-webp');
+const concat = require('gulp-concat');
 
 const paths = {
 	imagenes: 'src/img/**/*',
@@ -27,7 +28,8 @@ function minificarCSS(){
 
 function javascript(){
 	return src(paths.js)
-		.pipe()
+		.pipe( concat('bundle.js') )
+		.pipe( dest('./build/js'));
 }
 
 function imagenes() {
@@ -63,4 +65,4 @@ exports.minImages = series(imagenes, versionWebp, notifyImages);
 // Ejecutando simplemente gulp se ejecutan todas las funciones
 // La función parallel lanza todas las tareas en paralelo
 // exports.default = parallel(compilarSASS, compilarJavaScript, minificarCSS );
-exports.default = series(compilarSASS, minificarCSS );
+exports.default = series(compilarSASS, minificarCSS, javascript, this.minImages, watchArchivos);
