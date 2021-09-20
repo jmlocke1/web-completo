@@ -51,7 +51,8 @@ function notifyImages() {
 
 function watchArchivos(){
 	// * = La carpeta actual - ** ? Todos los archivos con esa extensión
-	watch( "./src/scss/**/*.scss", parallel(compilarSASS, minificarCSS));
+	watch( paths.scss, parallel(compilarSASS, minificarCSS));
+	watch( paths.js, javascript);
 }
 
 exports.compilarSASS = compilarSASS;
@@ -65,4 +66,5 @@ exports.minImages = series(imagenes, versionWebp, notifyImages);
 // Ejecutando simplemente gulp se ejecutan todas las funciones
 // La función parallel lanza todas las tareas en paralelo
 // exports.default = parallel(compilarSASS, compilarJavaScript, minificarCSS );
-exports.default = series(compilarSASS, minificarCSS, javascript, this.minImages, watchArchivos);
+//exports.default = series(compilarSASS, minificarCSS, javascript, this.minImages, watchArchivos);
+exports.default = series(javascript, watchArchivos);
