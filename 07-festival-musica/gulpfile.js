@@ -1,10 +1,11 @@
 const { src, dest, series, parallel, watch } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const imagemin = require( 'gulp-imagemin' );
-// const rename = require('gulp-rename');
+const rename = require('gulp-rename');
 const notify = require('gulp-notify');
 const webp = require('gulp-webp');
 const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
 const paths = {
 	imagenes: 'src/img/**/*',
@@ -29,7 +30,10 @@ function minificarCSS(){
 function javascript(){
 	return src(paths.js)
 		.pipe( concat('bundle.js') )
-		.pipe( dest('./build/js'));
+		.pipe( dest('./build/js'))
+		.pipe(rename('bundle.min.js'))
+		.pipe(uglify())
+		.pipe(dest('./build/js'));
 }
 
 function imagenes() {
