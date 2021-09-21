@@ -628,7 +628,42 @@ h3 {
   font-weight: 900;
   font-size: 3rem;
   border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 3rem;
 }
 .btn-cerrar:hover {
   cursor: pointer;
+}
+
+.btn-izquierda,
+.btn-derecha {
+  position: absolute;
+  z-index: 2;
+  margin: 0 2.5rem;
+  padding: 2rem 1rem;
+  background-color: #FFF;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #F53756;
+}
+.btn-izquierda:hover,
+.btn-derecha:hover {
+  cursor: pointer;
+}
+
+.btn-izquierda {
+  left: 0;
+}
+
+.btn-derecha {
+  right: 0;
+}
+
+.boletos {
+  padding: 5rem 0;
+}
+.boletos h3 {
+  text-align: center;
+  color: #FFF;
 }
