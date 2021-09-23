@@ -667,3 +667,17 @@ h3 {
   text-align: center;
   color: #FFF;
 }
+@media (min-width: 768px) {
+  .boletos .contenedor-boletos {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+}
+.boletos .plan p {
+  color: #FFF;
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
