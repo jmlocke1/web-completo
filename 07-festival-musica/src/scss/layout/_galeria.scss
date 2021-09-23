@@ -53,7 +53,7 @@ h3 {
 .btn-derecha {
     position: absolute;
     z-index: 2;
-    margin: 0 $separacion / 2;
+    margin: 0 math.div($separacion, 2);
     padding: 2rem 1rem;
     background-color: $blanco;
     font-size: 2rem;

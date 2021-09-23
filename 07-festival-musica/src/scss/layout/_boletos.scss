@@ -20,3 +20,42 @@
 		}
 	}
 }
+
+.pase {
+	width: 100%;
+	border-spacing: 0;
+	thead {
+		background-color: $rosa;
+		
+		th {
+			padding: math.div($separacion, 4);
+			color: $blanco;
+			font-weight: $delgada;
+			font-size: 2rem;
+			text-transform: uppercase;
+		}
+	}
+	tbody {
+		background-color: $blanco;
+		td {
+			padding: math.div($separacion, 4);
+			border-bottom: 1px solid $gris;
+		}
+		tr {
+			&:last-of-type {
+				td {
+					border: none;
+				}
+			}
+		}
+	}
+	tfoot {
+		background-color: $morado;
+		td {
+			color: $blanco;
+			padding: math.div($separacion, 4);
+			font-size: 3rem;
+			text-align: center;
+		}
+	}
+}
