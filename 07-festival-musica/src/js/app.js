@@ -28,9 +28,10 @@ function scrollNav() {
 function clickHandler(e) {
 	e.preventDefault();
 	const seccion = document.querySelector(e.target.attributes.href.value);
+	let offsetTop = seccion.offsetTop;
 	const header = document.querySelector('.header');
 	const headerHeight = header.offsetHeight;
-	let offsetTop = seccion.offsetTop;
+	console.log(headerHeight);
 	if(window.scrollY >= 0 && window.scrollY <= headerHeight){
 		offsetTop -= headerHeight;
 	}
@@ -42,8 +43,8 @@ function clickHandler(e) {
 /*
 https://www.udemy.com/course/desarrollo-web-completo-con-html5-css3-js-php-y-mysql/learn/lecture/24148644#questions/14505582
 Hola Gisela.
-
 Cuando leí tu pregunta caí en la cuenta de eso, no me había dado ni cuenta. Después de varias horas dándole vueltas, he obtenido una solución que funciona incluso en móviles.
 
-El tema es que con la implementación actual, cuando se desplaza la pantalla al elemento, éste se queda en la parte superior de la pantalla.
+El tema es que con la implementación actual, cuando se desplaza la pantalla al elemento, éste se queda en la parte superior de la pantalla. Lo deseable sería que al hacer scroll se le pudiera restar el alto del header a la distancia de scroll. 
+Sin embargo, la función ScrollIntoView no permite desplazarte un número de píxeles concreto. Después de mucho buscar, la función scroll viene como anillo al dedo, pues sí permite indicar a qué posición de la pantalla te quieres desplazar
 */
