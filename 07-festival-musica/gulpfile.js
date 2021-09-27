@@ -10,6 +10,11 @@ const uglify = require('gulp-uglify');
 // Utilidades CSS
 const autoprefixer = require('autoprefixer');
 const postcss = require('gulp-postcss');
+const cssnano = require('cssnano');
+const sourcemaps = require('gulp-sourcemaps');
+
+// Utilidades JS
+const terser = require('gulp-terser-js');
 
 const paths = {
 	imagenes: 'src/img/**/*',
@@ -19,8 +24,10 @@ const paths = {
 
 function compilarSASS(){
 	return src(paths.scss)
+	.pipe( sourcemaps.init() )
 		.pipe( sass() )
-		.pipe( postcss( autoprefixer() ) )
+		.pipe( postcss( [autoprefixer(), cssnano()] ) )
+		.pipe( sourcemaps.write('.'))
 		.pipe( dest("./build/css") );
 }
 
@@ -34,10 +41,14 @@ function minificarCSS(){
 
 function javascript(){
 	return src(paths.js)
+		.pipe( sourcemaps.init() )
 		.pipe( concat('bundle.js') )
 		.pipe( dest('./build/js'))
-		.pipe(rename('bundle.min.js'))
-		.pipe(uglify())
+		//.pipe(rename('bundle.min.js'))
+		//.pipe(uglify())
+		.pipe( terser() )
+		.pipe( sourcemaps.write('.') )
+		.pipe( rename({ suffix: '.min' }) )
 		.pipe(dest('./build/js'));
 }
 
