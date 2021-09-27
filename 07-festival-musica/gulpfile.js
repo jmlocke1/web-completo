@@ -7,6 +7,10 @@ const webp = require('gulp-webp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
+// Utilidades CSS
+const autoprefixer = require('autoprefixer');
+const postcss = require('gulp-postcss');
+
 const paths = {
 	imagenes: 'src/img/**/*',
 	scss: 'src/scss/**/*.scss',
@@ -16,6 +20,7 @@ const paths = {
 function compilarSASS(){
 	return src(paths.scss)
 		.pipe( sass() )
+		.pipe( postcss( autoprefixer() ) )
 		.pipe( dest("./build/css") );
 }
 
