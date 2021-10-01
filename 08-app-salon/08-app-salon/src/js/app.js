@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function iniciarApp() {
 	mostrarServicios();
+	seleccionarServicios();
 }
 
 async function mostrarServicios() {
@@ -12,14 +13,14 @@ async function mostrarServicios() {
 		const db = await resultado.json();
 
 		const {servicios} = db;
-		//const listadoServicios = document.querySelector('#servicios');
-		let servicioDiv = '';
+		const listadoServicios = document.querySelector('#servicios');
+		//let servicioDiv = '';
 		// Generar el HTML
 		servicios.forEach(servicio => {
 			const { id, nombre, precio } = servicio;
 
 			// DOM Scripting
-			/*
+			
 			// Generar nombre de servicio
 			const nombreServicio = document.createElement('P');
 			nombreServicio.textContent = nombre;
@@ -32,27 +33,45 @@ async function mostrarServicios() {
 			// Generar div contenedor de servicio
 			const servicioDiv = document.createElement('DIV');
 			servicioDiv.classList.add('servicio');
+			servicioDiv.dataset.idServicio = id;
 
+			// Selecciona un servicio para la cita
+			servicioDiv.onclick = seleccionarServicio;
+			console
 			// Inyectar precio y nombre al div de servicio
 			servicioDiv.appendChild(nombreServicio);
 			servicioDiv.appendChild(precioServicio);
-			*/
+			
 			
 			// Añadir el servicio al listado de servicios
-			// listadoServicios.appendChild(servicioDiv);
+			listadoServicios.appendChild(servicioDiv);
 
 			// Solución con innerHTML
+			/*
 			servicioDiv += `
 					<div class="servicio" data-id-servicio="${id}">
 						<p class="nombre-servicio">${nombre}</p>
 						<p class="precio-servicio">$ ${precio}</p>
-					</div>`;
+					</div>`;*/
 		});
 		// Insertamos el HTML
-		document.querySelector('#servicios').innerHTML = servicioDiv;
+		//document.querySelector('#servicios').innerHTML = servicioDiv;
+		
 	} catch (error) {
 		console.log('Fichero no encontrado: ');
 		console.log(error);
 	}
 	
+}
+
+function seleccionarServicios() {
+	const servicios = document.querySelectorAll('.servicio');
+	servicios.forEach(servicio => {
+		console.log(servicio);
+		servicio.onclick = seleccionarServicio;
+	});
+	
+}
+function seleccionarServicio(servicio) {
+	console.log(`Click en servicio: `, servicio.target);
 }
