@@ -73,5 +73,15 @@ function seleccionarServicios() {
 	
 }
 function seleccionarServicio(servicio) {
-	console.log(`Click en servicio: `, servicio.target);
+	let elemento;
+	if(servicio.target.tagName == 'P'){
+		elemento = servicio.target.parentElement;
+	}else {
+		elemento = servicio.target;
+	}
+	if(elemento.classList.contains('seleccionado')) {
+		elemento.classList.remove('seleccionado');
+	}else{
+		elemento.classList.add('seleccionado');
+	}
 }
