@@ -1,10 +1,46 @@
+let pagina = 1;
 document.addEventListener('DOMContentLoaded', function() {
 	iniciarApp();
 });
 
 function iniciarApp() {
 	mostrarServicios();
-	seleccionarServicios();
+
+	// Resalta el Div Actual según el tab al que se presiona
+	mostrarSeccion();
+	// Oculta o muestra una sección según el tab al que se presiona
+	cambiarSeccion();
+}
+
+function mostrarSeccion() {
+	const seccionActual = document.querySelector(`#paso-${pagina}`);
+	seccionActual.classList.add('mostrar-seccion');
+
+	// Resalta el tab actual
+	const tab = document.querySelector(`[data-paso="${pagina}"]`);
+	tab.classList.add('actual');
+}
+
+function cambiarSeccion() {
+	const enlaces = document.querySelectorAll('.tabs button');
+
+	enlaces.forEach( enlace => {
+		enlace.addEventListener('click', e => {
+			e.preventDefault();
+			pagina = parseInt(e.target.dataset.paso);
+
+			// Eliminar mostrar-seccion de la seccion anterior
+			document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+			// Agrega mostrar-seccion donde dimos click
+			const seccion = document.querySelector(`#paso-${pagina}`);
+			seccion.classList.add('mostrar-seccion');
+			// Eliminar actual de la sección anterior
+			document.querySelector('.actual').classList.remove('actual');
+			// Agrega actual donde dimos click
+			const actual = document.querySelector(`[data-paso="${pagina}"]`);
+			actual.classList.add("actual");
+		});
+	});
 }
 
 async function mostrarServicios() {
@@ -64,14 +100,7 @@ async function mostrarServicios() {
 	
 }
 
-function seleccionarServicios() {
-	const servicios = document.querySelectorAll('.servicio');
-	servicios.forEach(servicio => {
-		console.log(servicio);
-		servicio.onclick = seleccionarServicio;
-	});
-	
-}
+
 function seleccionarServicio(servicio) {
 	let elemento;
 	if(servicio.target.tagName == 'P'){
