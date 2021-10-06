@@ -31,12 +31,18 @@ function cambiarSeccion() {
 
 			// Eliminar mostrar-seccion de la seccion anterior
 			document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+
 			// Agrega mostrar-seccion donde dimos click
 			const seccion = document.querySelector(`#paso-${pagina}`);
 			seccion.classList.add('mostrar-seccion');
+
 			// Eliminar actual de la sección anterior
-			document.querySelector('.actual').classList.remove('actual');
-			// Agrega actual donde dimos click
+			document.querySelector('.tabs .actual').classList.remove('actual');
+
+			// Eliminar la clase actual en el tab anterior
+			
+
+			// Agregar la clase actual en el nuevo tab
 			const actual = document.querySelector(`[data-paso="${pagina}"]`);
 			actual.classList.add("actual");
 		});
