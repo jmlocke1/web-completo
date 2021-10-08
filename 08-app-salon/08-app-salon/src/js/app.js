@@ -8,8 +8,14 @@ function iniciarApp() {
 
 	// Resalta el Div Actual según el tab al que se presiona
 	mostrarSeccion();
+
 	// Oculta o muestra una sección según el tab al que se presiona
 	cambiarSeccion();
+
+	// Paginación siguiente y anterior
+	paginaAnterior();
+
+	paginaSiguiente();
 }
 
 function mostrarSeccion() {
@@ -119,4 +125,40 @@ function seleccionarServicio(servicio) {
 	}else{
 		elemento.classList.add('seleccionado');
 	}
+}
+
+function paginaSiguiente() {
+	const paginaSiguiente = document.querySelector('#siguiente');
+	paginaSiguiente.addEventListener('click', () => {
+		pagina++;
+		console.log(pagina);
+		switch (pagina) {
+			case 3:
+				console.log('Has llegado a la página 3');
+				break;
+			case 4:
+				console.log('Página mayor que 3, pasamos a página 1');
+				pagina = 1;
+			default:
+				break;
+		}
+	});
+}
+
+function paginaAnterior() {
+	const paginaSiguiente = document.querySelector('#anterior');
+	paginaSiguiente.addEventListener('click', () => {
+		pagina--;
+		console.log(pagina);
+		switch (pagina) {
+			case 1:
+				console.log('Has llegado a la página 1');
+				break;
+			case 0:
+				console.log('Página menor que 0, pasamos a página 3');
+				pagina = 3;
+			default:
+				break;
+		}
+	});
 }
