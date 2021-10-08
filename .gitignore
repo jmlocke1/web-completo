@@ -1,4 +1,3 @@
-07-festival-musica/node_modules/
-08-app-salon/08-app-salon/node_modules/
-08-app-salon/08-app-salon/build/js/bundle.min.js.map
-08-app-salon/08-app-salon/build/css/app.css.map
+**/node_modules/
+*.js.map
+*.css.map
