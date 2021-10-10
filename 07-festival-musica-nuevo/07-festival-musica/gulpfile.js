@@ -3,9 +3,9 @@ const sass = require('gulp-sass')(require('sass'));
 
 function css( done ) {
 	// Identificar el archivo css a compilar
-	src('src/scss/app.scss')
+	src('src/scss/**/*.scss')
 		.pipe( sass() )  // Compilarlo
-		.pipe( dest('build/css') )  // Almacenarla en el disco duro
+		.pipe( dest('./build/css') )  // Almacenarla en el disco duro
 	done();
 }
 
