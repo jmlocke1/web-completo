@@ -4,8 +4,16 @@
   "description": "Aprendiendo SASS y Gulp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass src/scss:build/css"
   },
+  "keywords": [
+    "SASS",
+    "Gulp"
+  ],
   "author": "José Miguel Izquierdo",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.42.1"
+  }
 }
