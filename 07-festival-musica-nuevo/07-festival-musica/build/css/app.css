@@ -466,7 +466,7 @@ h3 {
   width: auto;
   display: block;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .video video {
     width: 100%;
   }

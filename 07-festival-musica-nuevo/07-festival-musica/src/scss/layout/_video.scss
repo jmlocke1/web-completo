@@ -23,7 +23,7 @@
 	video {
 		width: auto;
 		display: block;
-		@include m.tablet {
+		@include m.desktop {
 			width: 100%;
 		}
 	}
