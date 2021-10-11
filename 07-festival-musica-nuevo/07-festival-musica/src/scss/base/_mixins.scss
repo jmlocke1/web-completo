@@ -1,4 +1,4 @@
-//@use 'variables' as v;
+@use 'variables' as v;
 /*
 Prueba de mixins con parámetros, parámetros por defecto y condicionales
 @mixin heading($color: blue, $border-radius: false) {
@@ -12,3 +12,24 @@ Prueba de mixins con parámetros, parámetros por defecto y condicionales
     }
 }
 */
+@mixin telefono {
+    @media (min-width: v.$telefono){
+        @content;
+    }
+}
+
+@mixin tablet{
+    @media (min-width: v.$tablet){
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: v.$desktop){
+        @content;
+    }
+}
+@mixin desktopXL {
+    @media (min-width: v.$desktopXL){
+        @content;
+    }
+}

@@ -405,6 +405,11 @@ h3 {
   color: #fff;
 }
 
+@media (min-width: 480px) {
+  .navegacion-principal {
+    background-color: black;
+  }
+}
 .navegacion-principal a {
   color: #fff;
   font-size: 2.4rem;
