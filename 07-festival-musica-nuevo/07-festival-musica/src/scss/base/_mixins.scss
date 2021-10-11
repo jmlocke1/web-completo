@@ -1,6 +1,14 @@
-@mixin heading {
+//@use 'variables' as v;
+/*
+Prueba de mixins con parámetros, parámetros por defecto y condicionales
+@mixin heading($color: blue, $border-radius: false) {
     text-transform: uppercase;
     font-size: 2.4rem;
-    color: black;
+    color: $color;
     letter-spacing: 1px;
+    background-color: black;
+    @if $border-radius {
+        border-radius: 1rem;
+    }
 }
+*/

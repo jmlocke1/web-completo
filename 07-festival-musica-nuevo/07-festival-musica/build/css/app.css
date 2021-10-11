@@ -1,3 +1,17 @@
+@charset "UTF-8";
+/*
+Prueba de mixins con parámetros, parámetros por defecto y condicionales
+@mixin heading($color: blue, $border-radius: false) {
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    color: $color;
+    letter-spacing: 1px;
+    background-color: black;
+    @if $border-radius {
+        border-radius: 1rem;
+    }
+}
+*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -397,11 +411,4 @@ h3 {
 }
 .navegacion-principal a:hover {
   color: #fef46d;
-}
-
-.prueba {
-  text-transform: uppercase;
-  font-size: 2.4rem;
-  color: black;
-  letter-spacing: 1px;
 }
