@@ -33,3 +33,8 @@ Prueba de mixins con parámetros, parámetros por defecto y condicionales
         @content;
     }
 }
+@mixin grid($columnas, $espaciado: 1rem) {
+	display: grid;
+	grid-template-columns: repeat(($columnas, 1fr));
+	gap: $espaciado;
+}
