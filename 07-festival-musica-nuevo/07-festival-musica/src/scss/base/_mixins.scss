@@ -23,18 +23,27 @@ Prueba de mixins con parámetros, parámetros por defecto y condicionales
         @content;
     }
 }
+
 @mixin desktop {
     @media (min-width: v.$desktop){
         @content;
     }
 }
+
 @mixin desktopXL {
     @media (min-width: v.$desktopXL){
         @content;
     }
 }
+
 @mixin grid($columnas, $espaciado: 1rem) {
 	display: grid;
 	grid-template-columns: repeat(($columnas, 1fr));
 	gap: $espaciado;
+}
+
+@mixin resetear-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }

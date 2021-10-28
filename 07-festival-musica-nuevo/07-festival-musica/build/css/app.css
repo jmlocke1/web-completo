@@ -574,6 +574,19 @@ img {
   background-image: url("../img/icono_rock.png");
 }
 
+.calendario {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.calendario li {
+  padding: 2.5rem;
+  font-weight: 700;
+}
+.calendario li span {
+  font-weight: 400;
+}
+
 .bg-amarillo {
   background-color: #fef46d;
 }
