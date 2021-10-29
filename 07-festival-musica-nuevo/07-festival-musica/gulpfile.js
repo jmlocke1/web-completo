@@ -15,7 +15,7 @@ function css( done ) {
 	src('src/scss/**/*.scss')
 		.pipe( plumber() )
 		.pipe( sass() )  // Compilarlo
-		.pipe( dest('./build/css') )  // Almacenarla en el disco duro
+		.pipe( dest('./build/css') );  // Almacenarla en el disco duro
 	done();
 }
 
@@ -25,7 +25,7 @@ function imagenes( done ) {
 	};
 	src('src/img/**/*.{png,jpg}')
 		.pipe( cache( imagemin(opciones) ) )
-		.pipe( dest('build/img'))
+		.pipe( dest('build/img'));
 
 	done();
 }
