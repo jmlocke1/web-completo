@@ -30,7 +30,11 @@ function mostrarImagen(id) {
         <source srcset="build/img/grande/${id}.webp" type="image/webp"> 
         <img width="200" height="300" loading="lazy" src="build/img/grande/${id}d.jpg" alt="Imagen ${id} de la galería" title="Imagen ${id} de la galería">
     `;
+    
     const overlay = document.createElement('DIV');
     overlay.appendChild(imagen);
     overlay.classList.add('overlay');
+
+    const body = document.querySelector('body');
+    body.appendChild(overlay);
 }
