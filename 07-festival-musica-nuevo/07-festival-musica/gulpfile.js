@@ -8,7 +8,8 @@ const plumber = require('gulp-plumber');
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
-//const avif = require('gulp-avif');
+// const avif = require('gulp-avif');
+
 
 function css( done ) {
     src('src/scss/**/*.scss')   // Identificar el archivo .SCSS a compilar
@@ -53,6 +54,7 @@ function versionAvif( done ){
 
 function dev( done ) {
     watch('src/scss/**/*.scss', css);
+    done();
 }
 
 exports.css = css;
