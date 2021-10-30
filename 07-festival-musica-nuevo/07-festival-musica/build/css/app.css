@@ -538,7 +538,7 @@ img {
 }
 .lineup .dia {
   text-transform: uppercase;
-  margin-bottom: 5rem;
+  margin: 5rem;
 }
 
 @media (min-width: 768px) {
@@ -566,7 +566,7 @@ img {
   margin: 2rem auto 0 auto;
 }
 
-.edm .nombre-escenario::after {
+.edm .nombre-escenario:after {
   background-image: url("../img/icono_edm.png");
 }
 
@@ -590,7 +590,13 @@ img {
 .bg-amarillo {
   background-color: #fef46d;
 }
+.bg-amarillo li:nth-child(odd) {
+  background-color: #fdee21;
+}
 
 .bg-verde {
   background-color: #4cb8b3;
+}
+.bg-verde li:nth-child(odd) {
+  background-color: #3b9691;
 }
