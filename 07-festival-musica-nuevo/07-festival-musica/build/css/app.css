@@ -366,6 +366,9 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
 }
+body.fijar-body {
+  overflow: hidden;
+}
 
 p {
   font-size: 2rem;
@@ -653,4 +656,45 @@ img {
 .overlay picture {
   display: block;
   max-width: 80rem;
+}
+
+.btn-cerrar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: rgba(254, 244, 109, 0.5);
+  color: #000;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  right: 3rem;
+}
+.btn-cerrar:hover {
+  cursor: pointer;
+}
+
+.btn-izquierda,
+.btn-derecha {
+  position: absolute;
+  z-index: 2;
+  margin: 0 2.5rem;
+  padding: 2rem 1rem;
+  background-color: rgba(254, 244, 109, 0.5);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #000;
+}
+.btn-izquierda:hover,
+.btn-derecha:hover {
+  cursor: pointer;
+}
+
+.btn-izquierda {
+  left: 0;
+}
+
+.btn-derecha {
+  right: 0;
 }

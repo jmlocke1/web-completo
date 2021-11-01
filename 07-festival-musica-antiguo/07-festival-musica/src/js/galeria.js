@@ -18,12 +18,10 @@ function crearGaleria() {
 }
 
 function mostrarImagen(e) {
-    const totalImages = 12;
     let id = parseInt(e.target.dataset.imagenId);
     const imagen = getImage(id);
     
     const overlay = document.createElement('DIV');
-    //overlay.appendChild(imagen);
     overlay.classList.add('overlay');
 
     // Cuando se da click, cerrar la imagen
@@ -77,6 +75,7 @@ function mostrarImagen(e) {
         return imagen;
     }
     function normalizeId(id){
+        const totalImages = 12;
         if(id === 0){
             id = totalImages;
         }else if(id === 13){

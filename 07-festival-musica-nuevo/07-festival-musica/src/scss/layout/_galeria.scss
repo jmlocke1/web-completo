@@ -1,5 +1,6 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
+@use 'sass:math';
 
 .galeria {
     padding: 5rem 0;
@@ -40,4 +41,42 @@
         display: block;
         max-width: 80rem;
     }
+}
+
+.btn-cerrar {
+    width: v.$separacion - 1;
+    height: v.$separacion - 1;
+    border-radius: 50%;
+    background-color: v.$amarilloBtn;
+    color: v.$negro;
+    display: grid;
+    place-items: center;
+    font-weight: v.$bold;
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.btn-izquierda,
+.btn-derecha {
+    position: absolute;
+    z-index: 2;
+    margin: 0 math.div(v.$separacion, 2);
+    padding: 2rem 1rem;
+    background-color: v.$amarilloBtn;
+    font-size: 2rem;
+    font-weight: v.$black;
+    color: v.$negro;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.btn-izquierda {
+    left: 0;
+}
+.btn-derecha {
+    right: 0;
 }
