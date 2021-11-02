@@ -8,7 +8,8 @@ const plumber = require('gulp-plumber');
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
-const avif = require('gulp-avif');
+// const avif = require('gulp-avif');
+const squoosh = require('gulp-libsquoosh');
 
 
 function css( done ) {
@@ -52,6 +53,14 @@ function versionAvif( done ){
     done();
 }
 
+function versionSquoosh( done ) {
+    src('src/img/**/*.{png,jpg}')
+        .pipe(squoosh())
+        .pipe( dest('build/pruimg') );
+
+    done();
+}
+
 function dev( done ) {
     watch('src/scss/**/*.scss', css);
     done();
@@ -61,5 +70,6 @@ exports.css = css;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
+exports.versionSquoosh = versionSquoosh;
 exports.minImages = parallel(imagenes, versionWebp);
 exports.dev = dev;
