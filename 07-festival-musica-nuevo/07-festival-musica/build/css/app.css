@@ -698,3 +698,11 @@ img {
 .btn-derecha {
   right: 0;
 }
+
+.boletos {
+  padding: 5rem;
+}
+.boletos h3 {
+  text-align: center;
+  color: #fff;
+}

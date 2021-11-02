@@ -1,0 +1,13 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.boletos {
+    padding: 5rem;
+    h3 {
+        text-align: center;
+        color: v.$blanco;
+    }
+    .contenedor-boletos {
+        
+    }
+}
