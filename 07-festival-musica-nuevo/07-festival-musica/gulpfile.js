@@ -8,7 +8,9 @@ const plumber = require('gulp-plumber');
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
-const avif = require('gulp-avif');
+// Paquete comentado para que no falle en el linux
+// de los ordenadores pequeños
+// const avif = require('gulp-avif');
 
 function css( done ) {
 	// Identificar el archivo css a compilar
