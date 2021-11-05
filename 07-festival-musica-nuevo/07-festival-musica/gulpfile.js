@@ -16,6 +16,9 @@ const webp = require('gulp-webp');
 // de los ordenadores pequeños
 // const avif = require('gulp-avif');
 
+// JavaScript
+const terser = require('gulp-terser-js');
+
 function css( done ) {
 	// Identificar el archivo css a compilar
 	src('src/scss/**/*.scss')
@@ -63,6 +66,9 @@ function versionAvif( done ) {
 
 function javascript( done ) {
     src('src/js/**/*.js')
+		.pipe( sourcemaps.init() )
+		.pipe( terser() )
+		.pipe( sourcemaps.write('.'))
         .pipe( dest('build/js') );
     done();
 }
