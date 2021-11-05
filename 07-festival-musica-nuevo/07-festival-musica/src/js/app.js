@@ -14,17 +14,17 @@ function navegacionFija() {
     const body = document.querySelector('body');
     let esFijo = false;
     window.addEventListener('scroll', function() {
-        if( sobreFestival.getBoundingClientRect().top < 0){
+        const alturaHeader = barra.offsetHeight;
+        if( sobreFestival.getBoundingClientRect().bottom - alturaHeader < 0){
             barra.classList.add('fijo');
             // Si el ancho de la ventana es inferior al de tablet,
             // No se le aplica el atributo, pues no se incluye el header
             if(window.innerWidth > 768){
-                body.style.paddingTop = barra.offsetHeight + "px";
+                body.style.paddingTop = alturaHeader + "px";
             }
             //body.classList.add('body-scroll');
         }else{
             barra.classList.remove('fijo');
-            //body.classList.remove('body-scroll');
             body.removeAttribute("style");
         }
     });
