@@ -88,16 +88,23 @@ function cambiarSeccion() {
     })
 }
 
+function getUrl() {
+    // Primero obtenemos la url base, por ejemplo, https://web-completo.test o http://localhost
+    let url = window.location.origin;
+    // Ahora obtenemos el resto del path
+    url += window.location.pathname;
+    // Devolvemos la url ya calculada
+    return url;
+}
 
 async function mostrarServicios() {
     try {
-        const resultado = await fetch('./servicios.json');
+        const url = getUrl() + 'servicios.php';
+        const resultado = await fetch( url );
         const db = await resultado.json();
 
-        const { servicios } = db;
-
        // Generar el HTML
-       servicios.forEach( servicio => {
+       db.forEach( servicio => {
             const { id, nombre, precio } = servicio;
 
             // DOM Scripting
