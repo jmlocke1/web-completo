@@ -12,9 +12,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
+const svg = require('gulp-svgmin');//svg
 // Paquete comentado para que no falle en el linux
 // de los ordenadores pequeños
-// const avif = require('gulp-avif');
+const avif = require('gulp-avif');
 
 // JavaScript
 const concat = require('gulp-concat');
@@ -66,13 +67,20 @@ function versionAvif( done ) {
 	done();
 }
 
+function versionSVG( done ){
+    src('src/img/**/*.svg')
+        .pipe( svg() )
+        .pipe( dest('build/img') );
+    done();
+}
+
 function javascript( done ) {
     src('src/js/**/*.js')
 		.pipe( sourcemaps.init() )
         .pipe(concat('bundle.js')) // final output file name
 		.pipe( terser() )
-		.pipe( sourcemaps.write('.'))
         .pipe(rename({ suffix: '.min' }))
+		.pipe( sourcemaps.write('.'))
         .pipe( dest('build/js') );
     done();
 }
@@ -88,5 +96,7 @@ exports.js = javascript;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
-exports.minImages = parallel(imagenes, versionWebp, versionAvif);
+exports.versionSVG = versionSVG;
+exports.minImages = parallel(imagenes, versionWebp, versionAvif, versionSVG);
 exports.dev = parallel( javascript, dev );
+exports.default = parallel( javascript, dev );
