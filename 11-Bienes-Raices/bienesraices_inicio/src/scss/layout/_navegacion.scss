@@ -1,0 +1,12 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.barra {
+    display: flex;
+    flex-direction: column;
+    @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
