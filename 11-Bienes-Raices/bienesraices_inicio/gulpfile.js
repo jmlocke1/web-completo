@@ -69,7 +69,7 @@ function versionAvif( done ) {
 
 function versionSVG( done ){
     src('src/img/**/*.svg')
-        .pipe( svg() )
+        // .pipe( svg() )
         .pipe( dest('build/img') );
     done();
 }
