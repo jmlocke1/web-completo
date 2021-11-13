@@ -2,6 +2,10 @@
 @use 'base/mixins' as m;
 
 .boton-amarillo {
+    @include m.boton( v.$amarillo, inline-block );
+}
+
+.boton-amarillo-block {
     @include m.boton( v.$amarillo, block );
 }
 
