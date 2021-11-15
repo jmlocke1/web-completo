@@ -12,9 +12,7 @@
 .entrada-blog {
     margin-bottom: 2rem;
 
-    img, picture {
-        height: auto;
-    }
+    
     @include m.tablet {
         display: grid;
         grid-template-columns: 1fr 2fr;
