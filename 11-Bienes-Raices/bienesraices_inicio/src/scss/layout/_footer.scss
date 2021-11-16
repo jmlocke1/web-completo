@@ -9,6 +9,12 @@
 
     .contenedor-footer {
         padding-top: math.div(v.$separacion, 2);
+        
+    }
+    .navegacion {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
     }
 
     .copyright {
