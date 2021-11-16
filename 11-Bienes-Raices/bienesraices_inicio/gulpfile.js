@@ -15,7 +15,7 @@ const webp = require('gulp-webp');
 const svg = require('gulp-svgmin');//svg
 // Paquete comentado para que no falle en el linux
 // de los ordenadores pequeños
-const avif = require('gulp-avif');
+// const avif = require('gulp-avif');
 
 // JavaScript
 const concat = require('gulp-concat');
