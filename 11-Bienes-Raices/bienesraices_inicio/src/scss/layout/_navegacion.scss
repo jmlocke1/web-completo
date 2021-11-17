@@ -17,6 +17,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility .3s ease-in-out, opacity 0.5s linear;
+    height: 0;
     @include m.tablet {
         display: flex;
         align-items: center;
@@ -39,12 +40,21 @@
             }
         }
     }
+    a:hover {
+        color: v.$verde;
+    }
 }
 
 .mostrar {
     visibility: visible;
     opacity: 1;
     height: auto;
+}
+.alturaTemporal {
+    height: auto;
+}
+.visibilidadTemporal {
+    display: none;
 }
 .mobile-menu {
     @include m.tablet {
