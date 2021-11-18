@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas importantes</title>
+    <link rel="stylesheet" href="../bienesraices_inicio/build/css/app.css">
 </head>
 <body>
     <h1>Preguntas importantes planteadas en el curso</h1>
@@ -12,61 +13,49 @@
 
     <p>{<strong>Editado</strong>: Después de investigar un poco di con la solución}</p>
 
-<p>{<strong>Editado de nuevo</strong>: He conseguido eliminar la solapación del menú al redimensionar la ventana}</p>
+    <p>{<strong>Editado de nuevo</strong>: He conseguido eliminar la solapación del menú al redimensionar la ventana}</p>
 
-<p>Cuando se reduce la pantalla, el menú de navegación se pone en horizontal y va desapareciendo durante medio segundo. Eso provoca que, durante medio segundo se vea la barra de navegación cuando no se tenía que ver. Además, se solapa con el texto de "Venta de Casas...".</p>
+    <p>Cuando se reduce la pantalla, el menú de navegación se pone en horizontal y va desapareciendo durante medio segundo. Eso provoca que, durante medio segundo se vea la barra de navegación cuando no se tenía que ver. Además, se solapa con el texto de "Venta de Casas...".</p>
 
-<p>¿Hay alguna manera de evitar ese desagradable efecto? El proyecto está quedando verdaderamente genial, y este pequeño detallito le resta un poco de UX.</p>
+    <p>¿Hay alguna manera de evitar ese desagradable efecto? El proyecto está quedando verdaderamente genial, y este pequeño detallito le resta un poco de UX.</p>
 
-<p>{<strong>Solución</strong>:}</p>
+    <p>{<strong>Solución</strong>:}</p>
 
-<p>La solución que se me ha ocurrido, y funciona, es la siguiente:</p>
+    <p>La solución que se me ha ocurrido, y funciona, es la siguiente:</p>
 
-<p>Primero, en el fichero navegacion.scss se añade una clase:</p>
+    <p>Primero, en el fichero navegacion.scss se añade una clase:</p>
 
-<pre class="prettyprint linenums">// _navegacion.scss
-
+    <pre class="prettyprint linenums">
+// _navegacion.scss
 .alturaTemporal {
-
 &nbsp; &nbsp; height: auto;
+}
+    </pre>
 
-}</pre>
+    <p>Ahora, en el fichero app.js se añade otra función:</p>
 
-<p>Ahora, en el fichero app.js se añade otra función:</p>
-
-<pre class="prettyprint linenums">// app.js
-
+    <pre class="prettyprint linenums">
+// app.js
 /**
-
  * Función que añade a un elemento una clase temporalmente durante
-
  * el tiempo pasado por parámetro
-
  * 
-
  * @param {*} element       Nodo del DOM al que añadir la clase
-
  * @param {*} className     Nombre de la clase a añadir
-
  * @param {*} time          Tiempo que tiene que estar añadida la clase
-
  */
-
 function temporaryClass ( element, className, time ) {
-
     element.classList.add(className);
-
     setTimeout(() =&gt; {
-
         element.classList.remove(className);
-
     }, time);
+}
+    </pre>
 
-}</pre>
+    <p>Y se modifica la función navegacionResponsive para añadir la nueva función:</p>
 
-<p>Y se modifica la función navegacionResponsive para añadir la nueva función:</p>
-
-<pre class="prettyprint linenums">// app.js
+    <pre class="prettyprint linenums">
+// app.js
 
 function navegacionResponsive() {
 
@@ -84,39 +73,45 @@ function navegacionResponsive() {
 
     }
 
-}</pre>
+}
+    </pre>
 
-<p>Con esta nueva función le añadimos temporalmente una clase para que navegación tenga un 'height: auto' mientras desaparece el menú, y una vez que desaparece, o sea, después de medio segundo, le quita esa clase temporal. Hice también pruebas modificando el atributo height de .navegacion, pero no funcionó.</p>
+    <p>Con esta nueva función le añadimos temporalmente una clase para que navegación tenga un 'height: auto' mientras desaparece el menú, y una vez que desaparece, o sea, después de medio segundo, le quita esa clase temporal. Hice también pruebas modificando el atributo height de .navegacion, pero no funcionó.</p>
 
-<p>En móviles funciona perfectamente, cuando el móvil está en posición vertical, el menú se muestra y oculta correctamente. Si estando el menú mostrado se gira a horizontal, muestra el menú de nuevo horizontal, y al volver a girarlo sigue el menú desplegado.</p>
+    <p>En móviles funciona perfectamente, cuando el móvil está en posición vertical, el menú se muestra y oculta correctamente. Si estando el menú mostrado se gira a horizontal, muestra el menú de nuevo horizontal, y al volver a girarlo sigue el menú desplegado.</p>
 
-<p>Aún queda el pequeño detalle de que si redimensionamos el navegador, al pasar a anchura de móvil se muestra temporalmente el menú vertical desapareciendo y solapado con el título. En el móvil no se solapa, pues aparece directamente invisible. </p>
+    <p>Aún queda el pequeño detalle de que si redimensionamos el navegador, al pasar a anchura de móvil se muestra temporalmente el menú vertical desapareciendo y solapado con el título. En el móvil no se solapa, pues aparece directamente invisible. </p>
 
-<p>Es de esperar que el usuario no base su trabajo en redimensionar el navegador para ver como cambia el responsive, pero si se pudiera solucionar también ese pequeño detalle, se ganaría mucho en UX</p>
+    <p>Es de esperar que el usuario no base su trabajo en redimensionar el navegador para ver como cambia el responsive, pero si se pudiera solucionar también ese pequeño detalle, se ganaría mucho en UX</p>
 
-<p>{<strong>Solución al redimensionado de ventana</strong>}</p>
+    <p>{<strong>Solución al redimensionado de ventana</strong>}</p>
 
-<p>Primero creamos una clase que oculte el elemento al que pertenece. Como era importante que anulara la transición, le añadí un display. Como dijo el profesor en la clase, no se puede aplicar una transición a un display.</p>
+    <p>Primero creamos una clase que oculte el elemento al que pertenece. Como era importante que anulara la transición, le añadí un display. Como dijo el profesor en la clase, no se puede aplicar una transición a un display.</p>
 
-<pre class="prettyprint linenums">// _navegacion.scss
+    <pre class="prettyprint linenums">
+// _navegacion.scss
 
 .visibilidadTemporal {
 
     display: none;
 
-}</pre>
+}
+    </pre>
 
-<p>Ahora pasamos al javascript. Ha quedado un pelín complejo, pero el resultado funciona.</p>
+    <p>Ahora pasamos al javascript. Ha quedado un pelín complejo, pero el resultado funciona.</p>
 
-<p>Primero añadimos una variable global al principio del fichero app.js</p>
+    <p>Primero añadimos una variable global al principio del fichero app.js</p>
 
-<pre class="prettyprint linenums">// app.js, hay que ponerla al principio del fichero, fuera de toda función
+    <pre class="prettyprint linenums">
+// app.js, hay que ponerla al principio del fichero, fuera de toda función
 
-let oldSize = window.innerWidth;</pre>
+let oldSize = window.innerWidth;
+    </pre>
 
-<p>Creamos una función que compruebe si el cambio de tamaño del navegador está disminuyendo o aumentando</p>
+    <p>Creamos una función que compruebe si el cambio de tamaño del navegador está disminuyendo o aumentando</p>
 
-<pre class="prettyprint linenums">// app.js
+    <pre class="prettyprint linenums">
+// app.js
 
 function cambioTamano() {
 
@@ -132,15 +127,17 @@ function cambioTamano() {
 
 &nbsp; &nbsp; oldSize = newSize;
 
-}</pre>
+}
+    </pre>
 
-<p>Como se ve, se realiza una triple comprobación, primero, si el nuevo tamaño de la ventana es menor que 768, que es el tamaño que hemos establecido para que cambie a vista de teléfono, si el tamaño es mayor, ya no comprueba el resto de condiciones, aumentando el rendimiento. La segunda condición comprueba si la ventana está disminuyendo de tamaño, si estuviera aumentando, no tiene que aplicarse la ocultación. La tercera condición comprueba si el elemento navegación contiene la clase mostrar, pues si la contuviera, tampoco se debe ocultar. </p>
+    <p>Como se ve, se realiza una triple comprobación, primero, si el nuevo tamaño de la ventana es menor que 768, que es el tamaño que hemos establecido para que cambie a vista de teléfono, si el tamaño es mayor, ya no comprueba el resto de condiciones, aumentando el rendimiento. La segunda condición comprueba si la ventana está disminuyendo de tamaño, si estuviera aumentando, no tiene que aplicarse la ocultación. La tercera condición comprueba si el elemento navegación contiene la clase mostrar, pues si la contuviera, tampoco se debe ocultar. </p>
 
-<p>Si se cumplen todas las condiciones, aplica la clase visibilidadTemporal durante 500 milisegundos, el tiempo de la transición. Por último, asignamos a oldSize el nuevo tamaño de la ventana para la siguiente comprobación.</p>
+    <p>Si se cumplen todas las condiciones, aplica la clase visibilidadTemporal durante 500 milisegundos, el tiempo de la transición. Por último, asignamos a oldSize el nuevo tamaño de la ventana para la siguiente comprobación.</p>
 
-<p>Una vez creada la función cambioTamano, solo queda asignarle un eventListener</p>
+    <p>Una vez creada la función cambioTamano, solo queda asignarle un eventListener</p>
 
-<pre class="prettyprint linenums">// app.js
+    <pre class="prettyprint linenums">
+// app.js
 
 function eventListeners() {
 
@@ -152,8 +149,33 @@ function eventListeners() {
 
 &nbsp; &nbsp; window.addEventListener('resize', cambioTamano);
 
-}</pre>
+}
+    </pre>
 
-<p>Aparentemente ya se han solucionado todos los problemas visuales con la transición del menú de navegación, <em>pero no</em>, cuando se refresca la pantalla, vuelve a aparecer el solapamiento del menú, si la ventana está en tamaño teléfono, pero ya voy a dejarlo ahí, si alguien tiene una solución a eso, que la exponga aquí.</p>
+    <p>Aparentemente ya se han solucionado todos los problemas visuales con la transición del menú de navegación, <em>pero no</em>, cuando se refresca la pantalla, vuelve a aparecer el solapamiento del menú, si la ventana está en tamaño teléfono, pero ya voy a dejarlo ahí, si alguien tiene una solución a eso, que la exponga aquí.</p>
+
+    <h3>Nueva respuesta de José Miguel</h3>
+
+    <p>Bien, hasta ahora había solucionado casi todos los problemas de visibilidad del menú, salvo el del refresco de pantalla, pues cuando se refrescaba la pantalla en tamaño teléfono, el menú aparecía solapado con el otro texto mientras desaparecía.</p>
+
+    <p>La solución que he encontrado es super simple, pues ¡ya la tenía implementada!, solo tenía que aplicarla una vez más.</p>
+
+    <p>Tanto cuando se refresca la pantalla como cuando se entra en la página, se ejecuta el script de Javascript. Voy a considerar que cuando se entre a la página, el menú de navegación tiene que estar oculto, mostrando solo la hamburguesa, independientemente de si antes de refrescar estaba mostrado. Para que no aparezca la transición en ese momento, basta con realizar una llamada a la función temporaryClass definida anteriormente para añadir la clase visibilidadTemporal a la navegación:</p>
+
+    <pre class="prettyprint linenums">
+document.addEventListener('DOMContentLoaded', function() {
+
+    eventListeners();
+
+    temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
+
+});
+    </pre>
+
+    <p>Esta solución tan simple funciona, tanto cuando se refresca la pantalla como cuando se entra en una nueva página.</p>
+
+    <p>Si fuera un requisito de la aplicación que el menú recordara si antes del refresco estaba mostrado u oculto, podríamos hacerlo guardando un valor en localStorage, pero esa posible solución la dejo para otros compañeros motivados que quieran hacerlo. Por mi parte doy por finalizada esta parte del desarrollo.</p>
+
+    <p>Por supuesto, todo esto habría sido innecesario si no se hubiera añadido la transición. No me ha importado invertir varias horas, dado que era un proyecto didáctico y me ha servido para aprender unas cuantas cosas. En un proyecto real habría que evaluar detalladamente si merece la pena invertir ese tiempo para añadir una funcionalidad y que ésta esté suficientemente pulida.</p>
 </body>
 </html>

@@ -2,6 +2,7 @@ let oldSize = window.innerWidth;
 
 document.addEventListener('DOMContentLoaded', function() {
     eventListeners();
+    temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
 });
 
 function darkMode() {
