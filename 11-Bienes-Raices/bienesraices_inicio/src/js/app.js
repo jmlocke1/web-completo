@@ -2,12 +2,43 @@ let oldSize = window.innerWidth;
 
 document.addEventListener('DOMContentLoaded', function() {
     eventListeners();
-    temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
+    if(window.innerWidth <= 768){
+        temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
+    }
+    
 });
 
 function darkMode() {
-    const botonDarkMode = document.querySelector('.dark-mode-boton');
-    botonDarkMode.addEventListener('click', () => document.body.classList.toggle('dark-mode'));
+    // Comprueba si estaba habilidado dark mode
+    let darkLocal = window.localStorage.getItem('dark');
+    if(darkLocal === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    // Añadimos el evento de click al botón de dark mode
+    document.querySelector('.dark-mode-boton').addEventListener('click', darkChange);
+}
+
+function darkChange() {
+    let darkLocal = window.localStorage.getItem('dark');
+
+    if(darkLocal === null || darkLocal === 'false') {
+        // No está inicializado darkLocal
+        console.log('darkLocal es null o false, se establece a true');
+        window.localStorage.setItem('dark', true);
+        document.body.classList.add('dark-mode');
+    }
+    // else if(darkLocal === 'false') {
+    //     // No está activado darkMode
+    //     console.log('darkLocal es false, se cambia a true');
+    //     window.localStorage.setItem('dark', true);
+    //     document.body.classList.add('dark-mode');
+    // } 
+    else {
+        // Está activado darkMode, por lo que se desactiva
+        console.log('darkLocal es true, se cambia a false');
+        window.localStorage.setItem('dark', false);
+        document.body.classList.remove('dark-mode');
+    }
 }
 
 // function darkMode(){
