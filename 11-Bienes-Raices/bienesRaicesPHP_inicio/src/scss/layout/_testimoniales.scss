@@ -1,15 +1,15 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
 .testimonial {
-    background-color: $verde;
+    background-color: v.$verde;
     font-size: 2.4rem;
     padding: 2rem;
-    color: $blanco;
-    border-radius: 2rem;    
-
+    color: v.$blanco;
+    border-radius: 2rem;
     blockquote {
         padding-left: 5rem;
         position: relative;
-
-
         &::before {
             content: '';
             background-image: url(../img/comilla.svg);
@@ -21,9 +21,8 @@
             left: -2rem;
         }
     }
-
     p {
         text-align: right;
-        color: $blanco;
+        color: v.$blanco;
     }
 }

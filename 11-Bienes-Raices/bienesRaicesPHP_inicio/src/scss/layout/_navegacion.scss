@@ -1,9 +1,12 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
 .derecha {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    @include tablet {
+    @include m.tablet {
         align-items: flex-end;
     }
 
@@ -15,9 +18,9 @@
 
         &:hover {
             cursor: pointer;
+            filter: invert(70%);
         }
-
-        @include tablet {
+        @include m.tablet {
             margin-top: 0;
         }
     }
@@ -28,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 3rem;
-    @include tablet {
+    @include m.tablet {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
@@ -36,27 +39,25 @@
 }
 
 .navegacion {
-
     visibility: hidden;
     opacity: 0;
+    transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
+    //transition: visibility .3s ease-in-out, opacity 0.5s linear;
     height: 0;
-    transition: visibility .3s ease-in-out, opacity .5s linear, height .5s linear; 
-
-    @include tablet {
+    @include m.tablet {
         display: flex;
         align-items: center;
         opacity: 1;
         visibility: visible;
     }
-    
     a {
-        color: $blanco;
+        color: v.$blanco;
         text-decoration: none;
         font-size: 2.2rem;
         display: block;
         text-align: center;
 
-        @include tablet {
+        @include m.tablet {
             margin-right: 2rem;
             font-size: 1.8rem;
 
@@ -64,22 +65,9 @@
                 margin-right: 0;
             }
         }
-
-        &:hover {
-            color: $verde;
-        }
     }
-}
-
-
-/** Menu de hamburguesa **/
-.mobile-menu {
-    @include tablet {
-        display: none;
-    }
-
-    img {
-        width: 5rem;
+    a:hover {
+        color: v.$verde;
     }
 }
 
@@ -87,4 +75,19 @@
     visibility: visible;
     opacity: 1;
     height: auto;
+}
+.alturaTemporal {
+    height: auto;
+}
+.visibilidadTemporal {
+    display: none;
+}
+.mobile-menu {
+    @include m.tablet {
+        display: none;
+    }
+
+    img {
+        width: 5rem;
+    }
 }

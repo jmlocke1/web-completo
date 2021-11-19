@@ -1,12 +1,16 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:math';
+
 .footer {
-    padding: $separacion / 2 0 ;
-    background-color: $grisOscuro;
+    padding: math.div(v.$separacion, 2) 0;
+    background-color: v.$grisOscuro;
     margin-bottom: 0;
 
     .contenedor-footer {
-        padding-top: $separacion / 2;
+        padding-top: math.div(v.$separacion, 2);
+        
     }
-
     .navegacion {
         visibility: visible;
         opacity: 1;
@@ -14,8 +18,7 @@
     }
 
     .copyright {
-        color: $blanco;
+        color: v.$blanco;
         text-align: center;
     }
 }
-
