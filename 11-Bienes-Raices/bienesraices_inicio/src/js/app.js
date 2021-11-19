@@ -23,19 +23,10 @@ function darkChange() {
 
     if(darkLocal === null || darkLocal === 'false') {
         // No está inicializado darkLocal
-        console.log('darkLocal es null o false, se establece a true');
         window.localStorage.setItem('dark', true);
         document.body.classList.add('dark-mode');
-    }
-    // else if(darkLocal === 'false') {
-    //     // No está activado darkMode
-    //     console.log('darkLocal es false, se cambia a true');
-    //     window.localStorage.setItem('dark', true);
-    //     document.body.classList.add('dark-mode');
-    // } 
-    else {
+    } else {
         // Está activado darkMode, por lo que se desactiva
-        console.log('darkLocal es true, se cambia a false');
         window.localStorage.setItem('dark', false);
         document.body.classList.remove('dark-mode');
     }
