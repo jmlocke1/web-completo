@@ -1,40 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienes Raices</title>
-    <link rel="stylesheet" href="build/css/app.css">
-    <script src="build/js/bundle.min.js" defer></script>
-</head>
-<body>
-    <header class="header inicio">
-        <div class="contenedor contenido-header">
-            <div class="barra">
-                <a href="../../11-Bienes-Raices/bienesraices_inicio/">
-                    <img class="logo-header" src="build/img/logo.svg" alt="Logotipo de la aplicación">
-                </a>
+<?php
+$inicio = ' inicio';
+include __DIR__.'/includes/templates/header.php';
+?>
 
-                <div class="mobile-menu">
-                    <img src="build/img/barras.svg" alt="Icono Menú Responsive">
-                </div>
-                <div class="derecha">
-                    <img src="build/img/dark-mode.svg" alt="Icono del modo oscuro del tema" class="dark-mode-boton">
-                    <nav class="navegacion">
-                        <a href="nosotros.html">Nosotros</a>
-                        <a href="anuncios.html">Anuncios</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="contacto.html">Contacto</a>
-                    </nav>
-                </div>
-                
-            </div> <!--.barra-->
 
-            <h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>
-        </div>
-    </header>
-
-    <main class="contenedor">
+<main class="contenedor">
         <h2>Más sobre nosotros</h2>
 
         <div class="iconos-nosotros">
@@ -88,7 +58,7 @@
                             <p>3</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">Ver Propiedad</a>
+                    <a href="anuncio.php" class="boton-amarillo-block">Ver Propiedad</a>
                 </div> <!--.contenido-anuncio-->
             </div><!--.anuncio-->
             <div class="anuncio">
@@ -116,7 +86,7 @@
                             <p>3</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">Ver Propiedad</a>
+                    <a href="anuncio.php" class="boton-amarillo-block">Ver Propiedad</a>
                 </div> <!--.contenido-anuncio-->
             </div><!--.anuncio-->
             <div class="anuncio">
@@ -144,20 +114,20 @@
                             <p>3</p>
                         </li>
                     </ul>
-                    <a href="anuncio.html" class="boton-amarillo-block">Ver Propiedad</a>
+                    <a href="anuncio.php" class="boton-amarillo-block">Ver Propiedad</a>
                 </div> <!--.contenido-anuncio-->
             </div><!--.anuncio-->
         </div><!--.contenedor-anuncio-->
 
         <div class="alinear-derecha">
-            <a class="boton-verde" href="anuncios.html">Ver Todas</a>
+            <a class="boton-verde" href="anuncios.php">Ver Todas</a>
         </div>
     </section>
 
     <section class="imagen-contacto">
         <h2>Encuentra la casa de tus sueños</h2>
         <p>Llena el formulario de contacto y un asesor se pondrá en contacto contigo con la mayor brevedad</p>
-        <a href="contacto.html" class="boton-amarillo">Contáctanos</a>
+        <a href="contacto.php" class="boton-amarillo">Contáctanos</a>
     </section>
 
     <div class="contenedor seccion seccion-inferior">
@@ -171,7 +141,7 @@
                     <img width="200" height="300" loading="lazy" src="build/img/blog1.jpg" alt="Texto entrada blog" title="Texto entrada blog">
                 </picture>
                 <div class="texto-entrada">
-                    <a href="entrada.html" alt="Redirige a la entrada de blog ampliada" title="Redirige a la entrada de blog ampliada">
+                    <a href="entrada.php" alt="Redirige a la entrada de blog ampliada" title="Redirige a la entrada de blog ampliada">
                         <h4>Terraza en el techo de tu casa</h4>
                         <p class="informacion-meta">Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Consejos para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero</p>
@@ -185,7 +155,7 @@
                     <img width="200" height="300" loading="lazy" src="build/img/blog2.jpg" alt="Texto entrada blog" title="Texto entrada blog">
                 </picture>
                 <div class="texto-entrada">
-                    <a href="entrada.html" alt="Redirige a la entrada de blog ampliada" title="Redirige a la entrada de blog ampliada">
+                    <a href="entrada.php" alt="Redirige a la entrada de blog ampliada" title="Redirige a la entrada de blog ampliada">
                         <h4>Guía para la decoración de tu hogar.</h4>
                         <p class="informacion-meta">Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Maximiza el espacio en tu hogar con esta guía, aprende a combinar muebles y colores para darle vida a tu espacio.</p>
@@ -205,17 +175,5 @@
             </div>
         </section>
     </div>
-
-    <footer class="footer seccion">
-        <div class="contenedor contenedor-footer">
-            <nav class="navegacion">
-                <a href="nosotros.html">Nosotros</a>
-                <a href="anuncios.html">Anuncios</a>
-                <a href="blog.html">Blog</a>
-                <a href="contacto.html">Contacto</a>
-            </nav>
-        </div>
-        <p class="copyright">Todos los derechos reservados 2021 &copy;</p>
-    </footer>
-</body>
-</html>
+<?php
+require_once 'includes/templates/footer.php';
