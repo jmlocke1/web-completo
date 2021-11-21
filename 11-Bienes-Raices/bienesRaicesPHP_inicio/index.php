@@ -1,6 +1,6 @@
 <?php
-$inicio = ' inicio';
-include __DIR__.'/includes/templates/header.php';
+require 'includes/funciones.php';
+incluirTemplate('header', ' inicio');
 ?>
 
 
@@ -176,4 +176,4 @@ include __DIR__.'/includes/templates/header.php';
         </section>
     </div>
 <?php
-require_once 'includes/templates/footer.php';
+incluirTemplate('footer');

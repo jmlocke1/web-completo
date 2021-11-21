@@ -1,5 +1,6 @@
 <?php
-include __DIR__.'/includes/templates/header.php';
+require 'includes/funciones.php';
+incluirTemplate('header');
 ?>
 
 
@@ -48,4 +49,4 @@ include __DIR__.'/includes/templates/header.php';
         </div>
     </section>
 <?php
-require_once 'includes/templates/footer.php';
+incluirTemplate('footer');

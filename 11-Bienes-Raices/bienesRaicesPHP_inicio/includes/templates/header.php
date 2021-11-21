@@ -8,7 +8,7 @@
     <script src="build/js/bundle.min.js" defer></script>
 </head>
 <body>
-    <header class="header<?= isset($inicio) ? $inicio : '' ?>">
+    <header class="header<?= $inicio ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="../../11-Bienes-Raices/bienesRaicesPHP_inicio/">
@@ -30,6 +30,6 @@
                 
             </div> <!--.barra-->
 
-            <h1>Venta de Casas y Departamentos Exclusivos de Lujosss</h1>
+            <h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>
         </div>
     </header>
