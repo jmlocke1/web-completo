@@ -1,0 +1,2 @@
+Este proyecto tiene varios virtualhosts asociados. Uno de ellos es bienes-raices.test, que referencia a la parte de php de este proyecto.
+Este virtualhost hay que copiarlo en C:\laragon\etc\apache2\sites-enabled\auto.bienes-raices.test.conf. Si no se ha creado automáticamente un virtualhost con laragon, habrá que editar el fichero hosts y añadir este nuevo dominio.

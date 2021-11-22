@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienes Raices - <?= getTitle() ?></title>
     <link rel="stylesheet" href="build/css/app.css">
-    <script src="build/js/bundle.min.js" defer></script>
+    <script src="/build/js/bundle.min.js" defer></script>
 </head>
 <body>
     <header class="header<?= $inicio ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="../../11-Bienes-Raices/bienesRaicesPHP_inicio/">
+                <a href="/">
                     <img class="logo-header" src="build/img/logo.svg" alt="Logotipo de la aplicación">
                 </a>
 

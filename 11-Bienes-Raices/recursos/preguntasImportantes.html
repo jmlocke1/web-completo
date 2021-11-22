@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../bienesraices_inicio/build/css/app.css">
 </head>
 <body>
+    <section class="seccion contenedor">
     <h1>Preguntas importantes planteadas en el curso</h1>
 
     <h2><a href="https://www.udemy.com/course/desarrollo-web-completo-con-html5-css3-js-php-y-mysql/learn/#questions/16252039" title="Pregunta de José Miguel">Animación al desaparecer la navegación en versión mobile</a></h2>
@@ -177,5 +178,81 @@ document.addEventListener('DOMContentLoaded', function() {
     <p>Si fuera un requisito de la aplicación que el menú recordara si antes del refresco estaba mostrado u oculto, podríamos hacerlo guardando un valor en localStorage, pero esa posible solución la dejo para otros compañeros motivados que quieran hacerlo. Por mi parte doy por finalizada esta parte del desarrollo.</p>
 
     <p>Por supuesto, todo esto habría sido innecesario si no se hubiera añadido la transición. No me ha importado invertir varias horas, dado que era un proyecto didáctico y me ha servido para aprender unas cuantas cosas. En un proyecto real habría que evaluar detalladamente si merece la pena invertir ese tiempo para añadir una funcionalidad y que ésta esté suficientemente pulida.</p>
+</section>
+    <section class="seccion contenedor">
+    <h2><a href="https://www.udemy.com/course/desarrollo-web-completo-con-html5-css3-js-php-y-mysql/learn/lecture/24488678#questions/16280436">Solución a las rutas con laragon</a></h2>
+
+    <p>Laragon tiene una opción estupenda para manejar proyectos donde se manejen rutas absolutas.</p>
+    <p>Esa opción son los virtualhost, que laragon los crea automáticamente. Si no los crea, la opción está en Menú > Preferencias > Pestaña General > Crear automáticamente hosts virtuales, opción que está abajo del todo y tiene que estar marcada. Debajo del selector hay una ventanita que dice:</p>
+    <pre>
+        Hostname: {name}.test
+    </pre>
+    <p>Si creas una carpeta en laragon/www, laragon te creará automáticamente un host virtual que apunte a esa carpeta (necesitará permisos de administrador), y podrás acceder a tu proyecto con un nombre de dominio como si estuviera en internet.</p>
+    <p>Por ejemplo, si creas la carpeta C:\laragon\www\bienes-raices y metes dentro todo tu proyecto, laragon te creará el dominio bienes-raices.test, con el que podrás acceder desde tu navegador (olvidándote del localhost que tantos dolores de cabeza os está trayendo), o sea en tu navegador tienes que poner como url:</p>
+
+    <pre>bienes-raices.test</pre>
+
+    <p>o también, si lo quieres poner completo:</p>
+    <pre>https://bienes-raices.test</pre>
+
+    <p>Cualquier otro proyecto que creéis en el raíz de laragon, se le asignará un virtualhost a cada uno, lo que facilita enormemente el trabajo si tienes que mantener muchos proyectos</p>
+
+    <h3>Respuesta ampliada de José Miguel para crear virtualhosts en directorios diferentes al root</h3>
+
+
+    <p>En mi caso concreto tengo todos los proyectos de este curso en la carpeta web-completo, en el directorio laragon/www, de esa manera solo tengo que mantener un repositorio git para todos los proyectos del curso.</p>
+
+<p>Sin embargo, para este proyecto empieza a complicarse ligeramente la cosa, pues para bienes-raices debería crear una carpeta aparte para crear su propio virtualhost. Como no me apetece crear repositorios git separados para cada uno de los proyectos del curso, voy a echar mano de un pequeño truco.</p>
+
+<p>Crear un virtualhost en windows no es nada difícil (en linux tampoco), pero en este caso voy a aprovechar la ventaja que me da laragon para crear virtualHost automáticamente. Estos son los pasos:</p>
+
+<p>1- Creo una carpeta llamada bienes-raices en el directorio C:/laragon/www</p>
+
+<p>2- Si está activo laragon, se detienen todos los servicios y una vez detenidos se inician de nuevo (si no está activo, óbviese la parte de detener los servicios).</p>
+
+<p>3- Al activar laragon, detectará la nueva carpeta y nos saldrá una notificación como que se va a crear un nuevo virtualhost. Para poder hacerlo nos pedirá la contraseña de administrador (salvo que estés trabajando como usuario administrador, opción nada recomendable).</p>
+
+<p>4- En ese momento ya puedes usar el nuevo dominio. Si tecleas en el navegador 'bienes-raices.test' te saldrá una ventana vacía. Si creas un fichero index.html en ese directorio con algún texto, te debería salir.</p>
+
+<p>5- Una vez comprobado que el nuevo dominio funciona, vamos a cambiarlo, pues no me interesa que apunte a la carpeta www/bienes-raices. Para cambiarlo, primero detenemos todos los servicios de laragon. Luego editamos el fichero C:\laragon\etc\apache2\sites-enabled\auto.bienes-raices.test.conf. Nos saldrá algo como esto:</p>
+
+<pre class="prettyprint linenums">
+define ROOT "C:/laragon/www/Bienes-Raices"
+define SITE "bienes-raices.test"
+&lt;VirtualHost *:80&gt; 
+&nbsp; &nbsp; DocumentRoot "${ROOT}"
+&nbsp; &nbsp; ServerName ${SITE}
+&nbsp; &nbsp; ServerAlias *.${SITE}
+&nbsp; &nbsp; &lt;Directory "${ROOT}"&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; AllowOverride All
+&nbsp; &nbsp; &nbsp; &nbsp; Require all granted
+&nbsp; &nbsp; &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+&lt;VirtualHost *:443&gt;
+&nbsp; &nbsp; DocumentRoot "${ROOT}"
+&nbsp; &nbsp; ServerName ${SITE}
+&nbsp; &nbsp; ServerAlias *.${SITE}
+&nbsp; &nbsp; &lt;Directory "${ROOT}"&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; AllowOverride All
+&nbsp; &nbsp; &nbsp; &nbsp; Require all granted
+&nbsp; &nbsp; &lt;/Directory&gt;
+&nbsp; &nbsp; SSLEngine on
+&nbsp; &nbsp; SSLCertificateFile &nbsp; &nbsp; &nbsp;C:/laragon/etc/ssl/laragon.crt
+&nbsp; &nbsp; SSLCertificateKeyFile &nbsp; C:/laragon/etc/ssl/laragon.key
+&nbsp;
+&lt;/VirtualHost&gt;
+</pre>
+
+<p>La primera línea apunta a la carpeta que hemos creado, ahora vamos a poner la ruta que realmente nos interesa. Para ello cambiamos la primera línea para que diga:</p>
+
+<pre class="prettyprint linenums">define ROOT "C:/laragon/www/web-completo/11-Bienes-Raices/bienesRaicesPHP_inicio"</pre>
+
+<p>Esta ruta es donde yo tengo el proyecto de php de bienes raices, cada uno debe poner su propia ruta.</p>
+
+<p>Guarda los cambios, inicia los servicios de laragon y escribe en el navegador 'bienes-raices.test' . Debería salirte la página principal de tu proyecto, si no fuera así, comprueba que has puesto correctamente la ruta hasta tu proyecto en el fichero.</p>
+
+<p><strong>SSL </strong>- Si te gusta tener urls seguras incluso en local (recomendable en algunas situaciones, que no vienen al caso ahora), al crear el nuevo virtualHost se habrán desactivado todas las url seguras que tuvieras antes. Que no cunda el pánico, echa mano de la solución ancestral para resolver el 90% de los problemas informáticos, o sea, reiniciar el ordenador, y volverás a tener todas tus urls seguras con el protocolo https (eso sí, solo virtualmente, pues el certificado de laragon es un 'snake oil', que está autofirmado, y no da ninguna seguridad en el internet real)</p>
+
+</section>
 </body>
 </html>
