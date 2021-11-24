@@ -23,15 +23,18 @@ incluirTemplate('header');
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
 
             $numero = "1Hola";
-            $numero2 = 1;
+            $numero2 = 'Hola@generoso.olé';
+            $resultado = filter_var($numero, FILTER_SANITIZE_NUMBER_INT);
+            $resultado = filter_var($numero2, FILTER_SANITIZE_EMAIL);
+            var_dump($resultado);
             exit;
-            $titulo = $_POST['titulo'];
-            $precio = $_POST['precio'];
-            $descripcion = $_POST['descripcion'];
-            $habitaciones = $_POST['habitaciones'];
+            $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
+            $precio = mysqli_real_escape_string( $db, $_POST['precio']);
+            $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
+            $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones']);
             $wc = $_POST['wc'];
-            $estacionamiento = $_POST['estacionamiento'];
-            $vendedorId = $_POST['vendedorId'];
+            $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
+            $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedorId']);
             $creado = date('Y/m/d');
 
             if(!$titulo) {
