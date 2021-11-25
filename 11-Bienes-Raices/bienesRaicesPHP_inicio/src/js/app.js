@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if(window.innerWidth <= 768){
         temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
     }
-    
 });
 
 function darkMode() {

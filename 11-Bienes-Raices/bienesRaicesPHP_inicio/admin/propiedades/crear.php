@@ -22,12 +22,9 @@ incluirTemplate('header');
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
 
-            $numero = "1Hola";
-            $numero2 = 'Hola@generoso.olé';
-            $resultado = filter_var($numero, FILTER_SANITIZE_NUMBER_INT);
-            $resultado = filter_var($numero2, FILTER_SANITIZE_EMAIL);
-            var_dump($resultado);
-            exit;
+            // var_dump($_POST);
+            var_dump($_FILES);
+            
             $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
             $precio = mysqli_real_escape_string( $db, $_POST['precio']);
             $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
@@ -37,6 +34,9 @@ incluirTemplate('header');
             $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedorId']);
             $creado = date('Y/m/d');
 
+            // Asignar files hacia una variable
+            $imagen = $_FILES['imagen'];
+            
             if(!$titulo) {
                 $errores[] = "Debes añadir un título";
             }
@@ -58,6 +58,17 @@ incluirTemplate('header');
             if(!$vendedorId) {
                 $errores[] = "Elige un vendedor";
             }
+            if(!$imagen['name']) {
+                $errores[] = 'La imagen es obligatoria';
+            }
+
+            // Validar por tamaño (100 kb máximo)
+            $medida = 1024 * 100;
+
+            if($imagen['size'] > $medida){
+                $errores[] = 'La imagen es muy pesada. No debe pasar de 100 KB';
+            }
+
             //var_dump($errores);
 
             // Revisar que el array de errores esté vacío
@@ -95,7 +106,7 @@ incluirTemplate('header');
             <?= $error; ?>
         </div>
         <?php endforeach; ?>
-        <form action="/admin/propiedades/crear.php" class="formulario" method="POST">
+        <form action="/admin/propiedades/crear.php" class="formulario" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información General</legend>
 
