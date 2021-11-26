@@ -11,7 +11,6 @@ function comprobarTamano() {
     const imagen = document.querySelector('#imagen');
     const infoimagen = createElementIfNotExist('infoimagen', imagen);
     const peso = imagen.files[0].size;
-    console.log("Se ha seleccionado una imagen, y pesa:", peso);
     if(peso > limite){
         infoimagen.textContent = `La imagen pesa: ${round(peso / 1024 / 1024)} Megabytes, y el máximo admitido es: ${round(limite /1024/1024)} Megabytes`;
         imagen.value = '';
