@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', function() {
     comprobarImagen();
 });
 function comprobarImagen() {
-    document.querySelector('#imagen').addEventListener('change', comprobarTamano);
+    const imagen = document.querySelector('#imagen');
+    if(imagen !== null) {
+        imagen.addEventListener('change', comprobarTamano);
+    }
 }
 
 function comprobarTamano() {

@@ -100,7 +100,7 @@ incluirTemplate('header');
                 $resultado = mysqli_query($db, $query);
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin');
+                    header('Location: /admin?resultado=1');
                 }
             }
             

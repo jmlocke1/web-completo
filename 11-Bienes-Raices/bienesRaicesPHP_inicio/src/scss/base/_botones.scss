@@ -13,3 +13,10 @@
     @include m.boton( v.$verde, inline-block );
 }
 
+.boton-rojo-block {
+    @include m.boton( v.$rojo, inline-block);
+}
+
+.boton-verde-block {
+    @include m.boton( v.$verde, inline-block);
+}
