@@ -12,10 +12,9 @@ $resultadoConsulta = mysqli_query($db, $query);
 
 
 // Muestra mensaje condicional
-// $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
-$resultado = (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
-var_dump($_GET);
-var_dump($resultado);
+$resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
+//$resultado = (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
+
 incluirTemplate('header');
 ?>
 
@@ -44,9 +43,9 @@ incluirTemplate('header');
                     <td><?= $propiedad['titulo']; ?></td>
                     <td><img src="/imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>"> </td>
                     <td>$<?= $propiedad['precio']; ?></td>
-                    <td class="alinear-centro">
+                    <td class="alinear-centro-gap2">
                         <a href="#" class="boton-rojo-block">Eliminar</a>
-                        <a href="#" class="boton-verde-block">Actualizar</a>
+                        <a href="#" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -55,4 +54,7 @@ incluirTemplate('header');
     </main>
 
 <?php
+// Cerrar la conexión
+mysqli_close($db);
+
 incluirTemplate('footer');
