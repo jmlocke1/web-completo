@@ -1,4 +1,6 @@
 <?php
+
+// Muestra mensaje condicional
 // $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
 $resultado = (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
 var_dump($_GET);
