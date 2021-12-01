@@ -25,7 +25,7 @@ incluirTemplate('header');
         <?php if($resultado === 1): ?>
             <p class="alerta exito">Anuncio creado correctamente</p>
         <?php elseif($resultado === 2): ?>
-            <p class="alerta error">Esa propiedad no existe</p>
+            <p class="alerta exito">Propiedad actualizada correctamente</p>
         <?php endif; ?>
 
         <!-- Errores -->

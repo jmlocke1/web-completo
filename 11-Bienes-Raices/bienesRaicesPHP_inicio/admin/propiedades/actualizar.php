@@ -1,7 +1,5 @@
 <?php
-if(isset($_GET['propiedad'])){
-    echo "Propiedad ".$_GET['propiedad'];
-}
+
 require '../../includes/funciones.php';
 $db = conectarDB();
 
@@ -24,10 +22,10 @@ incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
-            echo "<pre>";
-            var_dump($_POST);
-            var_dump($_FILES);
-            echo "</pre>";
+            // echo "<pre>";
+            // var_dump($_POST);
+            // var_dump($_FILES);
+            // echo "</pre>";
             $id = $_POST['id'];
             $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
             $precio = mysqli_real_escape_string( $db, $_POST['precio']);
@@ -39,8 +37,9 @@ incluirTemplate('header');
             $creado = $_POST['creado'];
 
             // Asignar files hacia una variable
-            $imagen = isset($_FILES['imagen']) ? $_FILES['imagen'] : null;
-            
+            $imagen = strlen($_FILES['imagen']['name']) > 0 ? $_FILES['imagen'] : null;
+            echo "FILES tiene el valor:";
+            var_dump($_FILES['imagen']);
             if(!$titulo) {
                 $errores[] = "Debes añadir un título";
             }
@@ -73,16 +72,16 @@ incluirTemplate('header');
             }
             
 
-            //var_dump($errores);
 
             // Revisar que el array de errores esté vacío
             if(empty($errores)){
-
+                
                 if(isset($imagen)){
+                    
                     /** SUBIDA DE ARCHIVOS */
 
                     // Crear carpeta
-                    $carpetaImagenes = '../../imagenes';
+                    $carpetaImagenes = '../../imagenes/';
 
                     if(!is_dir($carpetaImagenes)){
                         mkdir($carpetaImagenes);
@@ -93,29 +92,30 @@ incluirTemplate('header');
                     var_dump($nombreImagen);
                     // Subir la imagen
 
-                    move_uploaded_file($imagen['tmp_name'], $carpetaImagenes."/".$nombreImagen);
+                    move_uploaded_file($imagen['tmp_name'], $carpetaImagenes.$nombreImagen);
+                    // Eliminar la imagen anterior
+                    $query = "SELECT imagen FROM propiedades WHERE id=$id";
+                    $resultado = mysqli_query($db, $query);
+                    $antiguaImagen = mysqli_fetch_assoc($resultado)['imagen'];
+                    unlink($carpetaImagenes . $antiguaImagen);
                 }
                 
-                
+
                 // Insertar en la base de datos
                 $campoImagen = isset($nombreImagen) ? "imagen='$nombreImagen', " : '';
                 $query = "UPDATE propiedades SET titulo='$titulo', precio=$precio, $campoImagen descripcion='$descripcion', habitaciones=$habitaciones, wc=$wc, estacionamiento=$estacionamiento, creado='$creado', vendedorId=$vendedorId";
                 $query .= " WHERE id=$id";
-                echo $query;
-                //var_dump($db);
                 
 
                 $resultado = mysqli_query($db, $query);
                 echo '<br>';
-                var_dump($resultado);
-                exit();
                 if($resultado){
                     // Redireccionar al usuario
                     header('Location: /admin?resultado=2');
                     exit;
                 }else{
-                    echo "No se ha podido insertar, y el resultado es: ", $resultado;
-                    var_dump($db);
+                    header('Location: /admin?error=2');
+                    exit;
                 }
             }
             
