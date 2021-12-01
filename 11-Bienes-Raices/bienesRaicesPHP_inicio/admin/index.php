@@ -1,4 +1,8 @@
 <?php
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
+
 
 // Importar la conexión
 require '../includes/funciones.php';
@@ -56,7 +60,11 @@ incluirTemplate('header');
                     <td><img src="/imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>"> </td>
                     <td>$<?= $propiedad['precio']; ?></td>
                     <td class="alinear-centro-gap2">
-                        <a href="#" class="boton-rojo-block">Eliminar</a>
+                        <form method="POST" class="w-100">
+                            <input type="hidden" name="id" value="<?= $propiedad['id'] ?>">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                        </form>
+                        
                         <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>

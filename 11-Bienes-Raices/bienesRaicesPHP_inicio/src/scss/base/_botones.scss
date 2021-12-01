@@ -15,6 +15,8 @@
 
 .boton-rojo-block {
     @include m.boton( v.$rojo, inline-block);
+    width: 100%;
+    max-width: 20rem;
 }
 
 .boton-verde-block {
