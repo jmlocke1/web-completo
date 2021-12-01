@@ -13,6 +13,7 @@ $resultadoConsulta = mysqli_query($db, $query);
 
 // Muestra mensaje condicional
 $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
+$error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZE_NUMBER_INT)  : 0;
 //$resultado = (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
 
 incluirTemplate('header');
@@ -20,11 +21,20 @@ incluirTemplate('header');
 
     <main class="contenedor">
         <h2>Administrador de Bienes Raices</h2>
+
         <?php if($resultado === 1): ?>
             <p class="alerta exito">Anuncio creado correctamente</p>
         <?php elseif($resultado === 2): ?>
             <p class="alerta error">Esa propiedad no existe</p>
         <?php endif; ?>
+
+        <!-- Errores -->
+        <?php if($error === 1): ?>
+            <p class="alerta error">Esa propiedad no existe</p>
+        <?php elseif($error === 2): ?>
+            <p class="alerta error">La propiedad no se pudo actualizar</p>
+        <?php endif; ?>
+
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
         <table class="propiedades">

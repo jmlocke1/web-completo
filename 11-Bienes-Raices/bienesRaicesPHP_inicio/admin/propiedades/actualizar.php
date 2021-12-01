@@ -99,16 +99,19 @@ incluirTemplate('header');
                 
                 // Insertar en la base de datos
                 $campoImagen = isset($nombreImagen) ? "imagen='$nombreImagen', " : '';
-                $query = "UPDATE propiedades SET titulo='$titulo', precio='$precio', $campoImagen descripcion='$descripcion', habitaciones='$habitaciones', wc='$wc', estacionamiento='$estacionamiento', creado='$creado', vendedorId='$vendedorId'";
-                $query .= " WHERE id='$id'";
+                $query = "UPDATE propiedades SET titulo='$titulo', precio=$precio, $campoImagen descripcion='$descripcion', habitaciones=$habitaciones, wc=$wc, estacionamiento=$estacionamiento, creado='$creado', vendedorId=$vendedorId";
+                $query .= " WHERE id=$id";
                 echo $query;
                 //var_dump($db);
                 
 
                 $resultado = mysqli_query($db, $query);
+                echo '<br>';
+                var_dump($resultado);
+                exit();
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin?resultado=1');
+                    header('Location: /admin?resultado=2');
                     exit;
                 }else{
                     echo "No se ha podido insertar, y el resultado es: ", $resultado;
@@ -126,7 +129,7 @@ incluirTemplate('header');
             // Se comprueba el id y el resultado. id debe ser entero y 
             // existir en la base de datos
             if(!$id || $resultadoConsulta->num_rows === 0) {
-                header('Location: /admin?resultado=2');
+                header('Location: /admin?error=1');
                 exit;
             }
             
