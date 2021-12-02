@@ -6,7 +6,6 @@
 
 // Importar la conexión
 require '../includes/funciones.php';
-$db = conectarDB();
 
 // Escribir el query
 $query = "SELECT * FROM propiedades";
@@ -24,19 +23,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
     if($id) {
         $query = "DELETE FROM propiedades WHERE id=${id}";
-        $resultado = mysqli_query($db, $query);
-        if($resultado){
+        $result = mysqli_query($db, $query);
+        if($result){
             header('Location: /admin');
         }
     }
 }
-
+//$error = 2;
 incluirTemplate('header');
 ?>
 
     <main class="contenedor">
         <h2>Administrador de Bienes Raices</h2>
-
+        
         <?php if($resultado === 1): ?>
             <p class="alerta exito">Anuncio creado correctamente</p>
         <?php elseif($resultado === 2): ?>
@@ -73,10 +72,10 @@ incluirTemplate('header');
                     <td class="form-admin-action">
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?= $propiedad['id'] ?>">
-                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar">
+                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina la propiedad <?= $propiedad['id']; ?>- <?= $propiedad['titulo']; ?>">
                         </form>
                         
-                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block w-100">Actualizar</a>
+                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block w-100" title="Actualiza los datos de la propiedad <?= $propiedad['id']; ?>- <?= $propiedad['titulo']; ?>">Actualizar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>

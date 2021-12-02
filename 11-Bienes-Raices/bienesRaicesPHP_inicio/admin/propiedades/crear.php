@@ -1,6 +1,5 @@
 <?php
 require '../../includes/funciones.php';
-$db = conectarDB();
 
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";

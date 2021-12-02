@@ -5,7 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if(window.innerWidth <= 768){
         temporaryClass(document.querySelector('.navegacion'), 'visibilidadTemporal', 500);
     }
+
+    //Eliminar texto de confirmación de CRUD en admin/index.php
+    borraMensaje();
 });
+
+function borraMensaje() {
+    const mensajeConfirm = document.querySelector('.alerta');
+    if(mensajeConfirm !== null){
+        setTimeout(function() {
+            const padre = mensajeConfirm.parentElement;
+            padre.removeChild(mensajeConfirm);
+        }, 3500);
+        console.log("Hay mensaje de error");
+    }else {
+        console.log("No hay mensaje de error");
+    }
+}
 
 function darkMode() {
     // Comprueba si estaba habilidado dark mode
