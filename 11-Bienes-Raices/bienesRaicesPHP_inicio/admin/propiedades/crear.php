@@ -1,6 +1,7 @@
 <?php
 require '../../includes/funciones.php';
 
+
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
@@ -22,7 +23,7 @@ incluirTemplate('header');
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
 
             // var_dump($_POST);
-            var_dump($_FILES);
+            // var_dump($_FILES);
             
             $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
             $precio = mysqli_real_escape_string( $db, $_POST['precio']);
@@ -65,7 +66,7 @@ incluirTemplate('header');
             $medida = 1024 * 1024 * 2;
 
             if($imagen['size'] > $medida){
-                $errores[] = 'La imagen es muy pesada. No debe pasar de 100 KB';
+                $errores[] = 'La imagen es muy pesada. No debe pasar de 2 MB';
             }
 
             //var_dump($errores);
@@ -76,15 +77,15 @@ incluirTemplate('header');
                 /** SUBIDA DE ARCHIVOS */
 
                 // Crear carpeta
-                $carpetaImagenes = '../../imagenes';
+                $carpetaImagenes = getImageFolder();
 
                 if(!is_dir($carpetaImagenes)){
                     mkdir($carpetaImagenes);
                 }
 
                 // Generar un nombre único
-                $nombreImagen = md5(uniqid( rand(), true)).".jpg";
-                var_dump($nombreImagen);
+                $nombreImagen = getImageName($imagen['name']);
+                
                 // Subir la imagen
 
                 move_uploaded_file($imagen['tmp_name'], $carpetaImagenes."/".$nombreImagen);

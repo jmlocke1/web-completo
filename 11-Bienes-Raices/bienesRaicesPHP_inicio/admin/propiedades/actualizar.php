@@ -80,22 +80,20 @@ incluirTemplate('header');
                     /** SUBIDA DE ARCHIVOS */
 
                     // Crear carpeta
-                    $carpetaImagenes = '../../imagenes/';
+                    $carpetaImagenes = getImageFolder();
 
                     if(!is_dir($carpetaImagenes)){
                         mkdir($carpetaImagenes);
                     }
 
                     // Generar un nombre único
-                    $nombreImagen = md5(uniqid( rand(), true)).".jpg";
-                    var_dump($nombreImagen);
+                    $nombreImagen = getImageName($imagen['name']);
+
                     // Subir la imagen
 
                     move_uploaded_file($imagen['tmp_name'], $carpetaImagenes.$nombreImagen);
                     // Eliminar la imagen anterior
-                    $query = "SELECT imagen FROM propiedades WHERE id=$id";
-                    $resultado = mysqli_query($db, $query);
-                    $antiguaImagen = mysqli_fetch_assoc($resultado)['imagen'];
+                    $antiguaImagen = getImageFromDB($id);
                     unlink($carpetaImagenes . $antiguaImagen);
                 }
                 

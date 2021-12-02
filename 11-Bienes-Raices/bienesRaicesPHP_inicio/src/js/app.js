@@ -17,9 +17,6 @@ function borraMensaje() {
             const padre = mensajeConfirm.parentElement;
             padre.removeChild(mensajeConfirm);
         }, 3500);
-        console.log("Hay mensaje de error");
-    }else {
-        console.log("No hay mensaje de error");
     }
 }
 
