@@ -45,3 +45,28 @@ table.propiedades {
 input.boton-rojo-block {
     align-items: center;
 }
+
+.form-admin-action {
+    @include m.tablet {
+        @include m.grid(2, 2rem);
+
+        align-items: center;
+        justify-content: center;
+
+    }
+    form {
+        //display: flex;
+        //align-items: center;
+        //justify-content: center;
+    }
+    .boton-rojo-block {
+        
+        //width: 100%;
+        padding: 1.1rem 3rem;
+        margin-top: 1.5rem;
+    }
+    .boton-amarillo-block {
+        margin-top: 0;
+        //width: 100%;
+    }
+}

@@ -18,7 +18,7 @@
 
 .alinear-centro-gap2 {
     @include m.tablet {
-        display: flex;
+        display: grid;
         justify-content: center;
         gap: 2rem;
         align-items: center;

@@ -59,13 +59,13 @@ incluirTemplate('header');
                     <td><?= $propiedad['titulo']; ?></td>
                     <td><img src="/imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>"> </td>
                     <td>$<?= $propiedad['precio']; ?></td>
-                    <td class="alinear-centro-gap2">
+                    <td class="form-admin-action">
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?= $propiedad['id'] ?>">
-                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar">
                         </form>
                         
-                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block">Actualizar</a>
+                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block w-100">Actualizar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
