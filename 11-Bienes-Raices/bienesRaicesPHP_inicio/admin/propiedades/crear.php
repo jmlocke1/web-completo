@@ -1,6 +1,32 @@
 <?php
 require '../../includes/funciones.php';
 
+// var_dump(setIdRecicled(20)) ;
+// echo setIdRecicled(20);
+// echo setIdRecicled(1);
+// echo setIdRecicled(6);
+// $id = getIdRecicledAndDelete();
+// echo "El próximo id reciclado es: ", $id, "<br>";
+// echo "<pre>";
+// var_dump($id);
+// echo "</pre>";
+// $id = getIdRecicledAndDelete();
+// echo "El próximo id reciclado es: ", $id, "<br>";
+// echo "<pre>";
+// var_dump($id);
+// echo "</pre>";
+// $id = getIdRecicledAndDelete();
+// echo "El próximo id reciclado es: ", $id, "<br>";
+// echo "<pre>";
+// var_dump($id);
+// echo "</pre>";
+// $id = getIdRecicledAndDelete();
+// echo "El próximo id reciclado es: ", $id, "<br>";
+// echo "<pre>";
+// var_dump($id);
+// echo "</pre>";
+// // echo deleteIdRecicled(5);
+// exit;
 
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
@@ -91,13 +117,16 @@ incluirTemplate('header');
                 move_uploaded_file($imagen['tmp_name'], $carpetaImagenes."/".$nombreImagen);
                 
                 // Insertar en la base de datos
-                $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) ";
-                $query .= " VALUES ( '$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
-                // echo $query;
+                // $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) ";
+                // $query .= " VALUES ( '$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+                $resultado = createProperty(  $titulo,  $precio, $nombreImagen, $descripcion, $habitaciones, $wc, $estacionamiento, $creado, $vendedorId);
+                echo "<pre>";
+                var_dump($resultado);
+                echo "</pre>";
 
                 
 
-                $resultado = mysqli_query($db, $query);
+                // $resultado = mysqli_query($db, $query);
                 if($resultado){
                     // Redireccionar al usuario
                     header('Location: /admin?resultado=1');

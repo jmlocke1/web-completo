@@ -22,8 +22,9 @@ $error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZ
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
     if($id) {
-        $query = "DELETE FROM propiedades WHERE id=${id}";
-        $result = mysqli_query($db, $query);
+        // $query = "DELETE FROM propiedades WHERE id=${id}";
+        // $result = mysqli_query($db, $query);
+        $result = deleteProperty($id);
         if($result){
             header('Location: /admin');
         }
