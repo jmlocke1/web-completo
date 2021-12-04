@@ -1,5 +1,7 @@
 <?php
 require 'includes/funciones.php';
+$id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+var_dump($id);
 incluirTemplate('header');
 ?>
 

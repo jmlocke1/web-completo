@@ -16,7 +16,8 @@ incluirTemplate('header');
                 </picture>
                 <div class="contenido-anuncio">
                     <h3>Casa de Lujo en el Lago</h3>
-                    <p>Casa en el lago con excelente vista, acabados de lujo a un excelente precio.</p>
+                    <!-- <p>Casa en el lago con excelente vista, acabados de lujo a un excelente precio.</p> -->
+                    <p><?= truncate("Casa en el lago con excelente vista, acabados de lujo a un excelente precio. Casa en el lago con excelente vista, acabados de lujo a un excelente precio. Casa en el lago con excelente vista, acabados de lujo a un excelente precio.", 15); ?></p>
                     <p class="precio">$3,000,000</p>
                     <ul class="iconos-caracteristicas">
                         <li>
