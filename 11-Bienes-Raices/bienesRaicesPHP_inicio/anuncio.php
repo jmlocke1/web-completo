@@ -1,37 +1,42 @@
 <?php
 require 'includes/funciones.php';
 $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-var_dump($id);
+
+// Obtener registro de la base de datos
+$query = "SELECT * FROM propiedades WHERE id='$id'";
+$resultadoConsulta = mysqli_query($db, $query);
+// Se comprueba el id y el resultado. id debe ser entero y 
+// existir en la base de datos
+if(!$id || $resultadoConsulta->num_rows === 0) {
+    header('Location: /anuncios.php?error=1');
+    exit;
+}
+$propiedad = mysqli_fetch_assoc($resultadoConsulta);
 incluirTemplate('header');
 ?>
 
     <main class="contenedor seccion contenido-centrado">
-        <h2>Casa en Venta frente al bosque</h2>
+        <h2><?= $propiedad['titulo']; ?></h2>
 
-        <picture>
-            <source srcset="build/img/destacada.avif" type="image/avif">
-            <source srcset="build/img/destacada.webp" type="image/webp">
-            <img width="200" height="300" loading="lazy" src="build/img/destacada.jpg" alt="Anuncio de casa" title="Anuncio de casa">
-        </picture>
+        <img loading="lazy" src="/imagenes/<?= $propiedad['imagen']; ?>" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>">
     
         <div class="resumen-propiedad">
-            <p class="precio">$3,000,000</p>
+            <p class="precio">$<?= $propiedad['precio']; ?></p>
             <ul class="iconos-caracteristicas">
                 <li>
                     <img loading="lazy" src="build/img/icono_wc.svg" alt="icono WC">
-                    <p>3</p>
+                    <p><?= $propiedad['wc']; ?></p>
                 </li>
                 <li>
                     <img loading="lazy" src="build/img/icono_estacionamiento.svg" alt="icono estacionamiento">
-                    <p>3</p>
+                    <p><?= $propiedad['estacionamiento']; ?></p>
                 </li>
                 <li>
                     <img loading="lazy" src="build/img/icono_dormitorio.svg" alt="icono dormitorio">
-                    <p>3</p>
+                    <p><?= $propiedad['habitaciones']; ?></p>
                 </li>
             </ul>
-            <p>Proin consequat viverra sapien, malesuada tempor tortor feugiat vitae. In dictum felis et nunc aliquet molestie. Proin tristique commodo felis, sed auctor elit auctor pulvinar. Nunc porta, nibh quis convallis sollicitudin, arcu nisl semper mi, vitae sagittis lorem dolor non risus. Vivamus accumsan maximus est, eu mollis mi. Proin id nisl vel odio semper hendrerit. Nunc porta in justo finibus tempor. Suspendisse lobortis dolor quis elit suscipit molestie. Sed condimentum, erat at tempor finibus, urna nisi fermentum est, a dignissim nisi libero vel est. Donec et imperdiet augue. Curabitur malesuada sodales congue. Suspendisse potenti. Ut sit amet convallis nisi.</p>
-            <p>Aliquam lectus magna, luctus vel gravida nec, iaculis ut augue. Praesent ac enim lorem. Quisque ac dignissim sem, non condimentum orci. Morbi a iaculis neque, ac euismod felis. Fusce augue quam, fermentum sed turpis nec, hendrerit dapibus ante. Cras mattis laoreet nibh, quis tincidunt odio fermentum vel. Nulla facilisi.</p>
+            <p><?= $propiedad['descripcion']; ?></p>
         </div>
     </main>
     
