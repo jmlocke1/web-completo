@@ -1,14 +1,14 @@
 <?php
-require 'includes/funciones.php';
-$id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
 
+require 'includes/funciones.php';
+$id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : '';
+$error = filter_var($_GET['error'], FILTER_VALIDATE_INT);
 // Obtener registro de la base de datos
 $query = "SELECT * FROM propiedades WHERE id='$id'";
 $resultadoConsulta = mysqli_query($db, $query);
-// Se comprueba el id y el resultado. id debe ser entero y 
-// existir en la base de datos
-if(!$id || $resultadoConsulta->num_rows === 0) {
-    header('Location: /anuncios.php?error=1');
+if((!$id || $resultadoConsulta->num_rows === 0) && !$error) {
+    $page = getReferer();
+    header('Location: /anuncio.php?error=1');
     exit;
 }
 $propiedad = mysqli_fetch_assoc($resultadoConsulta);
@@ -16,6 +16,7 @@ incluirTemplate('header');
 ?>
 
     <main class="contenedor seccion contenido-centrado">
+        <?php if(!$error): ?>
         <h2><?= $propiedad['titulo']; ?></h2>
 
         <img loading="lazy" src="/imagenes/<?= $propiedad['imagen']; ?>" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>">
@@ -38,6 +39,12 @@ incluirTemplate('header');
             </ul>
             <p><?= $propiedad['descripcion']; ?></p>
         </div>
+        <?php else: ?>
+        <div class="alerta error">
+            La propiedad no existe.
+            <?= $error; ?>
+        </div>
+        <?php endif; ?>
     </main>
     
 <?php

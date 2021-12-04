@@ -135,3 +135,18 @@ function truncate(string $texto, int $cantidad) : string
         return $texto;
     }
 }
+
+function getReferer() {
+    $protocolos = array('http://', 'https://', 'ftp://', 'www.');
+    $referer = $_SERVER["HTTP_REFERER"];
+    // Limpiamos los posibles parámetros get
+    $url = explode('?', $referer)[0];
+    // Extraemos el protocolo
+    $url = str_replace($protocolos, '', $url);
+    // Extraemos el dominio
+    $domain = explode('/', $url)[0];
+    // Eliminamos el dominio de la url
+    $url = str_replace($domain, '', $url);
+    
+    return $url;
+}
