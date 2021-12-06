@@ -2,16 +2,22 @@
 
 require 'includes/funciones.php';
 $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : '';
-$error = filter_var($_GET['error'], FILTER_VALIDATE_INT);
+$error = isset($_GET['error']) ?  filter_var($_GET['error'], FILTER_VALIDATE_INT) : '';
 // Obtener registro de la base de datos
-$query = "SELECT * FROM propiedades WHERE id='$id'";
-$resultadoConsulta = mysqli_query($db, $query);
-if((!$id || $resultadoConsulta->num_rows === 0) && !$error) {
+$query = "SELECT * FROM propiedades WHERE id=$id";
+if(!$error){
+    $resultadoConsulta = mysqli_query($db, $query);
+    $propiedad = mysqli_fetch_assoc($resultadoConsulta);
+}
+
+if((!$id || !$resultadoConsulta->num_rows) && !$error) {
     $page = getReferer();
     header('Location: /anuncio.php?error=1');
     exit;
+}else {
+    
 }
-$propiedad = mysqli_fetch_assoc($resultadoConsulta);
+
 incluirTemplate('header');
 ?>
 
@@ -42,7 +48,11 @@ incluirTemplate('header');
         <?php else: ?>
         <div class="alerta error">
             La propiedad no existe.
-            <?= $error; ?>
+            <?php 
+            header("refresh:3 url=/"); 
+            
+            ?>
+            
         </div>
         <?php endif; ?>
     </main>
