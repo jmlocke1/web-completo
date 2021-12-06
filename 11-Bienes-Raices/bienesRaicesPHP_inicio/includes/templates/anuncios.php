@@ -15,7 +15,7 @@ $resultado = mysqli_query($db, $query);
     <?php while($propiedad = mysqli_fetch_assoc($resultado)): ?>
             <div class="anuncio">
                     
-                <img loading="lazy" src="/imagenes/<?= $propiedad['imagen']; ?>"  alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>">
+                <img loading="lazy" src="/imagenes/<?= $propiedad['imagen']; ?>"  alt="Imagen de la propiedad <?= $propiedad['titulo']; ?>" title="Imagen de la propiedad <?= $propiedad['titulo']; ?>">
                 
                 <div class="contenido-anuncio">
                     <h3><?= $propiedad['titulo']; ?></h3>

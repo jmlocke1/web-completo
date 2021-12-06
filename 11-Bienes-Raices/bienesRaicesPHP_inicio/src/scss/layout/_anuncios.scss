@@ -11,8 +11,11 @@
 @include m.tablet {
     .contenedor-anuncios {
         @include m.grid(3, 2rem);
+        
+        p {
+            overflow-wrap: anywhere;
+        }
     }
-    
 }
 
 
@@ -26,10 +29,12 @@
     }
     .contenido-anuncio {
         padding: 2rem;
+        
     }
 
     h3, p {
         margin: 0;
+        
     }
 }
 
