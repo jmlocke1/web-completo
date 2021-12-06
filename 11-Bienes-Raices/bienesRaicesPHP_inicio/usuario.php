@@ -5,3 +5,15 @@ require 'includes/funciones.php';
 $email = "correo@correo.com";
 $password = "123456";
 
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+echo "<pre>";
+var_dump($passwordHash);
+echo "</pre>";
+
+// Query para crear el usuario
+$query = " INSERT INTO usuarios (email, password) VALUES ( '${email}', '${passwordHash}')";
+echo $query;
+exit;
+
+mysqli_query($db, $query);
