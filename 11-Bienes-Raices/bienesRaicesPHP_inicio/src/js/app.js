@@ -11,13 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function borraMensaje() {
-    const mensajeConfirm = document.querySelector('.alerta');
-    if(mensajeConfirm !== null){
-        setTimeout(function() {
-            const padre = mensajeConfirm.parentElement;
-            padre.removeChild(mensajeConfirm);
-        }, 3500);
-    }
+    const mensajeConfirmAll = document.querySelectorAll('.alerta');
+    mensajeConfirmAll.forEach(function(mensajeConfirm) {
+        if(mensajeConfirm !== null){
+            setTimeout(function() {
+                const padre = mensajeConfirm.parentElement;
+                padre.removeChild(mensajeConfirm);
+            }, 3500);
+        }
+    });
+    
 }
 
 function darkMode() {
