@@ -1,12 +1,11 @@
 <?php
-// echo "<pre>";
-// var_dump($_POST);
-// echo "</pre>";
-
 
 // Importar la conexión
 require '../includes/funciones.php';
-
+if( !estaAutenticado() ) {
+    header('Location: /');
+    exit;
+}
 // Escribir el query
 $query = "SELECT * FROM propiedades";
 

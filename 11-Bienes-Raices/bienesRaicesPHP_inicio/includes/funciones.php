@@ -150,3 +150,15 @@ function getReferer() {
     
     return $url;
 }
+
+function estaAutenticado(): bool {
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    
+    $auth = $_SESSION['login'] ?? false;
+    if($auth) {
+        return true;
+    }
+    return false;
+}

@@ -1,6 +1,9 @@
 <?php
 require '../../includes/funciones.php';
-
+if( !estaAutenticado() ) {
+    header('Location: /');
+    exit;
+}
 // var_dump(setIdRecicled(20)) ;
 // echo setIdRecicled(20);
 // echo setIdRecicled(1);
