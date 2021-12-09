@@ -5,14 +5,17 @@ require 'includes/funciones.php';
 // $email = "correo@correo.com";
 // $password = "123456";
 
-// $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+$email = "correo2@correo.com";
+$password = "123456";
 
-// echo "<pre>";
-// var_dump($passwordHash);
-// echo "</pre>";
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-// // Query para crear el usuario
-// $query = " INSERT INTO usuarios (email, password) VALUES ( '${email}', '${passwordHash}')";
+echo "<pre>";
+var_dump($passwordHash);
+echo "</pre>";
+
+// Query para crear el usuario
+$query = " INSERT INTO usuarios (email, password) VALUES ( '${email}', '${passwordHash}')";
 
 
-// mysqli_query($db, $query);
+mysqli_query($db, $query);
