@@ -33,7 +33,7 @@ $auth = $_SESSION['login'] ?? false;
                         <a href="/blog.php">Blog</a>
                         <a href="/contacto.php">Contacto</a>
                     <?php if($auth): ?>
-
+                        <a href="cerrar-sesion.php">Cerrar Sesión</a>
                     <?php endif; ?>
                     </nav>
                 </div>

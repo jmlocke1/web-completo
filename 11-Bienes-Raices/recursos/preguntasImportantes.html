@@ -10,6 +10,30 @@
     <section class="seccion contenedor">
     <h1>Preguntas importantes planteadas en el curso</h1>
 
+    <h2><a href="https://www.udemy.com/course/desarrollo-web-completo-con-html5-css3-js-php-y-mysql/learn/lecture/24154044#questions/16220736">Mostrar el logotipo SVG en Firefox</a></h2>
+
+    <p>Al probar el proyecto, vi que el logotipo no aparecía en Firefox (es el navegador que uso habitualmente), pero sí en el resto de navegadores.</p>
+    <p>Como no me apetece cambiar de navegador, ni obligar a mis posibles visitantes a cambiar el navegador, me puse a investigar un poco.</p>
+    <p>En mi sitio web worldcode.info me pasó lo mismo, el logotipo no se veía en Firefox, y lo solucioné dándole un ancho fijo, no relativo. Debe ser por la implementación de Firefox, si no se especifica un ancho o un alto fijo, coge una anchura o una altura de 0px, por lo que no se ve, y el enlace al homepage queda inaccesible.</p>
+    <p>Por tanto, la solución que se me ha ocurrido, y que funciona sin problemas es la siguiente:</p>
+    <pre class="prettyprint linenums">
+        &lt;!-- Primero añadimos una clase al logo --&gt;
+        &lt;a href="/11-Bienes-Raices/bienesraices_inicio/"&gt;
+        &nbsp; &nbsp; &lt;img class="logo-header" src="build/img/logo.svg" alt="Logotipo de la aplicación"&gt;
+        &lt;/a&gt;
+
+        // En _header.scss se define una anchura para el logo, así como un máximo de anchura
+        .barra {
+            .logo-header {
+                max-width: 100%;
+                width: 28rem;
+                height: auto;
+            }
+        }
+    </pre>
+
+    <p>Con esto ya se muestra correctamente. Además, el max-width asegura que la imagen reescale bien en pantallas pequeñas. Por ejemplo, si se define una anchura de 500rem, el logotipo no irá más allá de su anchura total, y según se disminuye la anchura de la imagen, el tamaño del logo también disminuye proporcionalmente. Sin el max-width, la imagen no reescala, se queda del ancho fijo definido, y desborda por la pantalla.</p>
+
     <h2><a href="https://www.udemy.com/course/desarrollo-web-completo-con-html5-css3-js-php-y-mysql/learn/#questions/16252039" title="Pregunta de José Miguel">Animación al desaparecer la navegación en versión mobile</a></h2>
 
     <p>{<strong>Editado</strong>: Después de investigar un poco di con la solución}</p>
