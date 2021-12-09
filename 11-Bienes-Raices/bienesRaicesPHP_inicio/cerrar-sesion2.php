@@ -22,7 +22,7 @@ if (ini_get("session.use_cookies")) {
 
 // Finalmente, destruir la sesión.
 //session_destroy();
-$session_id_to_destroy = "t2ela6hs717pr07ncve0f5sh3t";
+$session_id_to_destroy = "h0i16r3hluv2ni9gb01u95s414";
 // 1. commit session if it's started.
 if (session_id()) {
     session_commit();
@@ -41,6 +41,17 @@ session_start();
 echo "Sesión a destruir:";
 verSession();
 $_SESSION = [];
+
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    var_dump($params);
+    var_dump(session_name());
+    var_dump(session_id());
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
 
 session_destroy();
 session_commit();
