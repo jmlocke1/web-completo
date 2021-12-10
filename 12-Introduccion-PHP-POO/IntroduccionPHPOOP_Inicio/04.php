@@ -3,22 +3,21 @@ declare(strict_types = 1);
 include 'includes/header.php';
 
 class Transporte {
-	private string $nombre = "El Transporte";
+	protected string $nombre;
 	public function __construct(protected int $ruedas, protected int $capacidad)
 	{
-		
+		$this->nombre = "El Transporte";
 	}
 
 	public function getInfo() : string {
-		return $this->nombre ." tiene $this->ruedas ruedas y una capacidad de $this->capacidad personas";
+		return $this->nombre ." tiene $this->ruedas ruedas y una capacidad de $this->capacidad persona".($this->capacidad > 1 ? 's.' : '.');
 	}
 }
 
 class Bicicleta extends Transporte {
-	private string $nombre = "La Bicicleta";
 	public function __construct(protected int $ruedas, protected int $capacidad)
 	{
-		
+		$this->nombre = "La Bicicleta";
 	}
 	// public function getInfo(): string
 	// {
@@ -31,15 +30,18 @@ class Bicicleta extends Transporte {
 }
 
 class Automovil extends Transporte {
-	private string $nombre = "El Automóvil";
-	public function __construct(protected int $ruedas, protected int $capacidad)
+	
+	public function __construct(protected int $ruedas, protected int $capacidad, protected string $transmision)
 	{
-		
+		$this->nombre = "El Automóvil";
 	}
 
-	public function getInfo(): string
-	{
-		return $this->nombre . parent::getInfo();
+	public function getTransmision() : string {
+		return $this->transmision;
+	}
+
+	public function getInfo() : string {
+		return parent::getInfo()." Tiene una transmisión: " . $this->getTransmision();
 	}
 }
 
@@ -48,8 +50,10 @@ echo $bicicleta->getInfo()."<br>";
 echo $bicicleta->getRuedas();
 echo "<hr>";
 
-$automovil = new Automovil(4,4);
-echo $automovil->getInfo();
+$automovil = new Automovil(4,4, 'Manual');
+echo $automovil->getInfo()."<br>";
+echo "Tiene una transmisión: ", $automovil->getTransmision();
 echo "<hr>";
-
+echo $bicicleta->getInfo()."<br>";
+echo "<hr>";
 include 'includes/footer.php';
