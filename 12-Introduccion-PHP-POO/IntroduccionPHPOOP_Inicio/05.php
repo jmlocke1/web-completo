@@ -1,8 +1,6 @@
 <?php 
 declare(strict_types = 1);
 
-use Transporte as GlobalTransporte;
-
 include 'includes/header.php';
 
 abstract class Transporte {
