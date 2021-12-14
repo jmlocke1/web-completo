@@ -2,3 +2,4 @@
 *.js.map
 *.css.map
 11-Bienes-Raices/bienesRaicesPHP_inicio/imagenes/
+**/vendor/
