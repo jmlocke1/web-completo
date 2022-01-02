@@ -19,7 +19,9 @@ $resultado = mysqli_query($db, $query);
                 
                 <div class="contenido-anuncio">
                     <h3><?= $propiedad['titulo']; ?></h3>
-                    <p><?= truncate($propiedad['descripcion'], TRUNCATE_LIMIT); ?></p>
+                    
+                    <p class="anuncio-descripcion"><?= $propiedad['descripcion']; ?></p>
+                    
                     <p class="precio">$<?= $propiedad['precio']; ?></p>
                     <ul class="iconos-caracteristicas">
                         <li>
