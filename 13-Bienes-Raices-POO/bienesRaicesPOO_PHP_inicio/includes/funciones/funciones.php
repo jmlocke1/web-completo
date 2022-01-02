@@ -144,14 +144,21 @@ function getReferer() {
     return $url;
 }
 
-function estaAutenticado(): bool {
+function estaAutenticado(): void {
     if(!isset($_SESSION)) {
         session_start();
     }
     
     $auth = $_SESSION['login'] ?? false;
-    if($auth) {
-        return true;
+    if(!$auth) {
+        header('Location: /');
+        exit;
     }
-    return false;
+}
+
+function debuguear($variable){
+    echo "<pre>";
+    var_dump($variable);
+    echo "</pre>";
+    exit;
 }

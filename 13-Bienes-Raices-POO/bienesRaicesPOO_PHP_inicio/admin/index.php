@@ -1,11 +1,9 @@
 <?php
 
 // Importar la conexión
-require '../includes/funciones.php';
-if( !estaAutenticado() ) {
-    header('Location: /');
-    exit;
-}
+require '../includes/app.php';
+estaAutenticado();
+
 // Escribir el query
 $query = "SELECT * FROM propiedades";
 

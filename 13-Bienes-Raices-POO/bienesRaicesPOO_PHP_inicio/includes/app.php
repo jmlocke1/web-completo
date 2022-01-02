@@ -6,6 +6,3 @@ require_once 'funciones/funciones.php';
 require_once "config/database.php";
 
 
-
-
-

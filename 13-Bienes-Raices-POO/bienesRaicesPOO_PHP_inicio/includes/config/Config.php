@@ -14,5 +14,5 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 class Config {
-	const PRUEBA = "Frase de prueba";
+	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
 }

@@ -1,9 +1,11 @@
 <?php
-require '../../includes/funciones.php';
-if( !estaAutenticado() ) {
-    header('Location: /');
-    exit;
-}
+require '../../includes/app.php';
+
+use App\Propiedad;
+
+
+estaAutenticado();
+
 // var_dump(setIdRecicled(20)) ;
 // echo setIdRecicled(20);
 // echo setIdRecicled(1);
@@ -50,9 +52,9 @@ incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
-
-            // var_dump($_POST);
-            // var_dump($_FILES);
+            $propiedad = new Propiedad($_POST);
+            $propiedad->guardar();
+            exit;
             
             $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
             $precio = mysqli_real_escape_string( $db, $_POST['precio']);
@@ -123,9 +125,6 @@ incluirTemplate('header');
                 // $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) ";
                 // $query .= " VALUES ( '$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
                 $resultado = createProperty(  $titulo,  $precio, $nombreImagen, $descripcion, $habitaciones, $wc, $estacionamiento, $creado, $vendedorId);
-                echo "<pre>";
-                var_dump($resultado);
-                echo "</pre>";
 
                 
 
@@ -138,9 +137,9 @@ incluirTemplate('header');
             
  
         }else if($_SERVER["REQUEST_METHOD"] === 'GET') {
-            echo "GET: ",var_dump($_GET);
+            //echo "GET: ",var_dump($_GET);
         }else {
-            echo "No sé qué tipo de envío es";
+            //echo "No sé qué tipo de envío es";
         } ?>
         
     </pre>

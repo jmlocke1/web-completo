@@ -1,10 +1,8 @@
 <?php
 
-require '../../includes/funciones.php';
-if( !estaAutenticado() ) {
-    header('Location: /');
-    exit;
-}
+require '../../includes/app.php';
+estaAutenticado();
+
 
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
