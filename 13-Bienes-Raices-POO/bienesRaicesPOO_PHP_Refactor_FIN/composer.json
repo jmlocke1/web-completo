@@ -1,0 +1,19 @@
+{
+    "name": "juandelatorre/bienes-raices-poo_php_inicio",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Juan Pablo De la torre Valdez",
+            "email": "ptorre@creativaweb.mx"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}

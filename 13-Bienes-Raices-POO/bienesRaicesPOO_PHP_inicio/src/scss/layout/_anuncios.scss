@@ -1,0 +1,66 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+// Por si se decide poner también a dos columnas
+// @include m.telefono {
+//     .contenedor-anuncios {
+//         @include m.grid(2, 2rem);
+//     }
+// }
+
+@include m.tablet {
+    .contenedor-anuncios {
+        @include m.grid(3, 2rem);
+        
+        p {
+            overflow-wrap: anywhere;
+        }
+    }
+}
+
+
+
+.anuncio {
+    background-color: lighten($color: v.$gris, $amount: 5);
+    border: 1px solid darken(v.$gris,10);
+    margin-bottom: 2rem;
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .contenido-anuncio {
+        padding: 2rem;
+        
+    }
+
+    h3, p {
+        margin: 0;
+        
+    }
+}
+
+.precio {
+    color: v.$verde;
+    font-weight: v.$bold;
+    font-size: 3rem;
+}
+
+.iconos-caracteristicas {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    max-width: 40rem;
+    li {
+        flex: 1;
+        display: flex;
+        img {
+            flex: 0 0 3rem;
+            margin-right: 1rem;
+        }
+        p {
+            font-weight: v.$black;
+        }
+    }
+}
+.resumen-propiedad {
+    border: 1px solid white;
+}
