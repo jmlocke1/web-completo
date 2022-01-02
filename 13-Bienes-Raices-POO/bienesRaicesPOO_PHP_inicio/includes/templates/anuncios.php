@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../funciones.php';
+//require_once __DIR__ . '/../funciones.php';
 
 // Consultar
 $limitarRegistros = isset($limite) ? "LIMIT $limite" : '';

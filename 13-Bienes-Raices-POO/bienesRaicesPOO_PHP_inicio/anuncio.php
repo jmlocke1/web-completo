@@ -1,6 +1,6 @@
 <?php
 
-require 'includes/funciones.php';
+require 'includes/app.php';
 $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : '';
 $error = isset($_GET['error']) ?  filter_var($_GET['error'], FILTER_VALIDATE_INT) : '';
 // Obtener registro de la base de datos

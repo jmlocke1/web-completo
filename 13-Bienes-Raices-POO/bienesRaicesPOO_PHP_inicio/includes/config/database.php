@@ -9,3 +9,5 @@ function conectarDB() : mysqli {
     }
     return $db;
 }
+
+$db = conectarDB();

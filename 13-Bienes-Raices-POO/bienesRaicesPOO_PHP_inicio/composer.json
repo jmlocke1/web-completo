@@ -1,0 +1,21 @@
+{
+    "name": "jmizq_z/bienes-raices-poo_php_inicio",
+    "description": "Bienes Raices con POO",
+    "autoload": {
+        "psr-4": {
+            "JmizqZ\\BienesRaicesPooPhpInicio\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Josemi Xeon",
+            "email": "worldcode.info@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "./classes"
+        }
+    }
+}
