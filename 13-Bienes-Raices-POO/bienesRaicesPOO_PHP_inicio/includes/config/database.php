@@ -1,6 +1,7 @@
 <?php
+use App\Database\DB;
 
-function conectarDB() : mysqli {
+function conectarDB() {
     $db = mysqli_connect('localhost', 'usprueba', 'usprueba', 'bienes_raices');
 
     if(!$db) {
@@ -10,4 +11,4 @@ function conectarDB() : mysqli {
     return $db;
 }
 
-$db = conectarDB();
+//$db = DB::getDB();

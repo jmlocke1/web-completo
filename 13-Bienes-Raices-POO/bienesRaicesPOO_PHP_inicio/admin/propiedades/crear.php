@@ -2,6 +2,7 @@
 require '../../includes/app.php';
 
 use App\Propiedad;
+use App\Database\DB;
 
 
 estaAutenticado();
@@ -34,6 +35,7 @@ estaAutenticado();
 // exit;
 
 // Consultar para obtener los vendedores
+$db = DB::getDB();
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
 

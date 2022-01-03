@@ -1,6 +1,7 @@
 <?php
+use App\Database\DB;
 //require_once __DIR__ . '/../funciones.php';
-
+$db = DB::getDB();
 // Consultar
 $limitarRegistros = isset($limite) ? "LIMIT $limite" : '';
 $query = "SELECT * FROM propiedades $limitarRegistros";

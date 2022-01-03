@@ -1,7 +1,11 @@
 <?php
 namespace App;
 
+use App\Database\DB;
+
+require_once __DIR__.'/../includes/funciones/funciones.php';
 class Propiedad {
+	protected static $db;
 	public $id;
 	public $titulo;
 	public $precio;
@@ -14,6 +18,10 @@ class Propiedad {
 	public $vendedorId;
 	public function __construct($args = [])
 	{
+		if(!isset(self::$db)){
+			self::$db = DB::getDB();
+		}
+		
 		$this->id = $args['id'] ?? '';
 		$this->titulo = $args['titulo'] ?? '';
 		$this->precio = $args['precio'] ?? '';
@@ -27,6 +35,9 @@ class Propiedad {
 	}
 
 	public function guardar() {
-		echo "Guardando en la base de datos";
+		$query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) ";
+    	$query .= " VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedorId')";
+		$resultado = self::$db->query($query);
+		debuguear($resultado);
 	}
 }

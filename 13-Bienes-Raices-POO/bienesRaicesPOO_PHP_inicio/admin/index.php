@@ -1,7 +1,10 @@
 <?php
-
-// Importar la conexión
 require '../includes/app.php';
+use App\Propiedad;
+use App\Database\DB;
+$db = DB::getDB();
+// Importar la conexión
+
 estaAutenticado();
 
 // Escribir el query
