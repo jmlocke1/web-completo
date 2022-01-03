@@ -1,6 +1,7 @@
 <?php
 require 'includes/app.php';
-
+use App\Database\DB;
+$db = DB::getDB();
 // Autenticar el usuario
 $errores = [];
 if($_SERVER['REQUEST_METHOD'] === 'POST') {

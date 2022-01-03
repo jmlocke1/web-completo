@@ -6,6 +6,8 @@ use App\Database\DB;
 require_once __DIR__.'/../includes/funciones/funciones.php';
 class Propiedad {
 	protected static $db;
+	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
+	protected static $errores = [];
 	public $id;
 	public $titulo;
 	public $precio;
@@ -35,9 +37,69 @@ class Propiedad {
 	}
 
 	public function guardar() {
-		$query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) ";
-    	$query .= " VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedorId')";
+		// Sanitizar los datos
+		$atributos = $this->sanitizarAtributos();
+
+		$query = " INSERT INTO propiedades ( ";
+		$query .= join(", ", array_keys($atributos));
+		$query .= ") ";
+    	$query .= " VALUES ( '";
+		$query .= join("', '", array_values($atributos));
+		$query .= "' )";
+		
 		$resultado = self::$db->query($query);
 		debuguear($resultado);
+	}
+	
+	/**
+	 * Identifica y uno los atributos de la BD
+	 */
+	public function atributos(): array{
+		$atributos = [];
+		foreach(self::$columnasDB as $columna){
+			$atributos[$columna] = $this->$columna;
+		}
+		return $atributos;
+	}
+
+	public function sanitizarAtributos(){
+		$atributos = $this->atributos();
+		$sanitizado = [];
+		foreach($atributos as $key => $value){
+			if($key == 'id') continue;
+			$sanitizado[$key] = self::$db->escape_string($value);
+		}
+		return $sanitizado;
+	}
+
+	public static function getErrors(){
+		return self::$errores;
+	}
+
+	public function validar(){
+		if(!$this->titulo) {
+			self::$errores[] = "Debes añadir un título";
+		}
+		if(!$this->precio) {
+			self::$errores[] = "El precio es obligatorio";
+		}
+		if(strlen( $this->descripcion ) < 50) {
+			self::$errores[] = "La descripción es obligatoria y debe tener al menos 50 caracteres";
+		}
+		if(!$this->habitaciones) {
+			self::$errores[] = "El número de habitaciones es obligatorio";
+		}
+		if(!$this->wc) {
+			self::$errores[] = "El número de baños es obligatorio";
+		}
+		if(!$this->estacionamiento) {
+			self::$errores[] = "El número de estacionamientos es obligatorio";
+		}
+		if(!$this->vendedorId) {
+			self::$errores[] = "Elige un vendedor";
+		}
+		// if(!$this->imagen['name']) {
+		// 	self::$errores[] = 'La imagen es obligatoria';
+		// }
 	}
 }

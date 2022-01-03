@@ -7,40 +7,14 @@ use App\Database\DB;
 
 estaAutenticado();
 
-// var_dump(setIdRecicled(20)) ;
-// echo setIdRecicled(20);
-// echo setIdRecicled(1);
-// echo setIdRecicled(6);
-// $id = getIdRecicledAndDelete();
-// echo "El próximo id reciclado es: ", $id, "<br>";
-// echo "<pre>";
-// var_dump($id);
-// echo "</pre>";
-// $id = getIdRecicledAndDelete();
-// echo "El próximo id reciclado es: ", $id, "<br>";
-// echo "<pre>";
-// var_dump($id);
-// echo "</pre>";
-// $id = getIdRecicledAndDelete();
-// echo "El próximo id reciclado es: ", $id, "<br>";
-// echo "<pre>";
-// var_dump($id);
-// echo "</pre>";
-// $id = getIdRecicledAndDelete();
-// echo "El próximo id reciclado es: ", $id, "<br>";
-// echo "<pre>";
-// var_dump($id);
-// echo "</pre>";
-// // echo deleteIdRecicled(5);
-// exit;
 
 // Consultar para obtener los vendedores
 $db = DB::getDB();
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
 
-// Array con mensajes de errores
-$errores = [];
+$errores = Propiedad::getErrors();
+
 // Inicializamos las variables vacías
 
 $titulo = '';
@@ -55,57 +29,29 @@ incluirTemplate('header');
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
             $propiedad = new Propiedad($_POST);
-            $propiedad->guardar();
-            exit;
             
-            $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
-            $precio = mysqli_real_escape_string( $db, $_POST['precio']);
-            $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
-            $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones']);
-            $wc = $_POST['wc'];
-            $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
-            $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedorId']);
-            $creado = date('Y/m/d');
-
+            
+            $propiedad->validar();
+            $errores = Propiedad::getErrors();
+            
             // Asignar files hacia una variable
-            $imagen = $_FILES['imagen'];
+            //$imagen = $_FILES['imagen'];
             
-            if(!$titulo) {
-                $errores[] = "Debes añadir un título";
-            }
-            if(!$precio) {
-                $errores[] = "El precio es obligatorio";
-            }
-            if(strlen( $descripcion ) < 50) {
-                $errores[] = "La descripción es obligatoria y debe tener al menos 50 caracteres";
-            }
-            if(!$habitaciones) {
-                $errores[] = "El número de habitaciones es obligatorio";
-            }
-            if(!$wc) {
-                $errores[] = "El número de baños es obligatorio";
-            }
-            if(!$estacionamiento) {
-                $errores[] = "El número de estacionamientos es obligatorio";
-            }
-            if(!$vendedorId) {
-                $errores[] = "Elige un vendedor";
-            }
-            if(!$imagen['name']) {
-                $errores[] = 'La imagen es obligatoria';
-            }
+            
 
             // Validar por tamaño (2 MB máximo)
-            $medida = 1024 * 1024 * 2;
+            // $medida = 1024 * 1024 * 2;
 
-            if($imagen['size'] > $medida){
-                $errores[] = 'La imagen es muy pesada. No debe pasar de 2 MB';
-            }
+            // if($imagen['size'] > $medida){
+            //     $errores[] = 'La imagen es muy pesada. No debe pasar de 2 MB';
+            // }
 
             //var_dump($errores);
 
             // Revisar que el array de errores esté vacío
             if(empty($errores)){
+
+                $propiedad->guardar();
 
                 /** SUBIDA DE ARCHIVOS */
 
