@@ -25,7 +25,7 @@ function deleteImageProperty(int $id): bool {
     $imageName = getImageFromDB($id);
     $exito = false;
     if($imageName) {
-        $imageFolder = getImageFolder();
+        $imageFolder = Config::CARPETA_IMAGENES;
         if(file_exists( $imageFolder . $imageName)) {
             unlink($imageFolder . $imageName);
             $exito = true;
@@ -86,12 +86,7 @@ function getImageExtension(string $imageName): string {
     return $extension;
 }
 
-/**
- * Devuelve el path completo que lleva a la carpeta imágenes
- */
-function getImageFolder(): string {
-    return __DIR__."/../imagenes/";
-}
+
 
 function setIdRecicled( int $id ): bool {
     global $db;

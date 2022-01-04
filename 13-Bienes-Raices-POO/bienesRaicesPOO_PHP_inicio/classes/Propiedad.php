@@ -46,9 +46,8 @@ class Propiedad {
     	$query .= " VALUES ( '";
 		$query .= join("', '", array_values($atributos));
 		$query .= "' )";
-		
 		$resultado = self::$db->query($query);
-		debuguear($resultado);
+		return $resultado;
 	}
 	
 	/**
@@ -70,6 +69,13 @@ class Propiedad {
 			$sanitizado[$key] = self::$db->escape_string($value);
 		}
 		return $sanitizado;
+	}
+
+	public function setImagen($imagen){
+		// Asignar al atributo de imagen el nombre de la imagen
+		if($imagen){
+			$this->imagen = $imagen;
+		}
 	}
 
 	public static function getErrors(){
@@ -98,8 +104,10 @@ class Propiedad {
 		if(!$this->vendedorId) {
 			self::$errores[] = "Elige un vendedor";
 		}
-		// if(!$this->imagen['name']) {
-		// 	self::$errores[] = 'La imagen es obligatoria';
-		// }
+		if(!$this->imagen) {
+			self::$errores[] = 'La imagen es obligatoria';
+		}
+
+		return self::$errores;
 	}
 }

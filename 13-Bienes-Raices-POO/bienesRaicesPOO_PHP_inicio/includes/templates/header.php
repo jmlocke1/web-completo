@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {
     session_start();
 }
 $auth = $_SESSION['login'] ?? false;
-echo "Estado de autorización: ",$auth;
+
 ?>
 
 <!DOCTYPE html>
