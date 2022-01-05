@@ -1,5 +1,5 @@
 <?php 
-require 'includes/funciones.php';
+require 'includes/app.php';
 // Primero borramos todos los datos del array
 $_SESSION = [];
 // Eliminamos las cookies de sesión del navegador

@@ -17,4 +17,12 @@ error_reporting(E_ALL);
 class Config {
 	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
 	const CARPETA_IMAGENES = DIR_ROOT."imagenes/";
+	/**
+	 * Precio mínimo de una vivienda
+	 */
+	const MIN_PRICE_VALUE = 0;
+	/**
+	 * Precio máximo de una vivienda
+	 */
+	const MAX_PRICE_VALUE = 99999999.99;
 }

@@ -2,7 +2,7 @@
 
 require '../../includes/app.php';
 estaAutenticado();
-
+$db = \App\Database\DB::getDB();
 
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
@@ -82,10 +82,9 @@ incluirTemplate('header');
                     /** SUBIDA DE ARCHIVOS */
 
                     // Crear carpeta
-                    $carpetaImagenes = getImageFolder();
 
-                    if(!is_dir($carpetaImagenes)){
-                        mkdir($carpetaImagenes);
+                    if(!is_dir(Config::CARPETA_IMAGENES)){
+                        mkdir(Config::CARPETA_IMAGENES);
                     }
 
                     // Generar un nombre único
@@ -93,10 +92,10 @@ incluirTemplate('header');
 
                     // Subir la imagen
 
-                    move_uploaded_file($imagen['tmp_name'], $carpetaImagenes.$nombreImagen);
+                    move_uploaded_file($imagen['tmp_name'], Config::CARPETA_IMAGENES.$nombreImagen);
                     // Eliminar la imagen anterior
                     $antiguaImagen = getImageFromDB($id);
-                    unlink($carpetaImagenes . $antiguaImagen);
+                    unlink(Config::CARPETA_IMAGENES . $antiguaImagen);
                 }
                 
 
