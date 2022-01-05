@@ -1,4 +1,5 @@
 <?php
+//namespace App\Config;
 define('DIR_ROOT', dirname(dirname(__DIR__)).'/');
 define('TEMPLATES_URL', DIR_ROOT.'includes/templates');
 define('FUNCIONES_URL', DIR_ROOT.'funciones/funciones.php');
@@ -25,4 +26,20 @@ class Config {
 	 * Precio máximo de una vivienda
 	 */
 	const MAX_PRICE_VALUE = 99999999.99;
+	/**
+	 * Host de la base de datos
+	 */
+	const DB_HOST = 'localhost';
+	/**
+	 * Usuario de la base de datos
+	 */
+	const DB_USER = 'usprueba';
+	/**
+	 * Password del usuario de la base de datos
+	 */
+	const DB_PASSWORD = 'usprueba';
+	/**
+	 * Nombre de la base de datos
+	 */
+	const DB_NAME = 'bienes_raices';
 }

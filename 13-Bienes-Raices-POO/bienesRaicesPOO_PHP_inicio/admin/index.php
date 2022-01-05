@@ -7,11 +7,8 @@ $db = DB::getDB();
 
 estaAutenticado();
 
-// Escribir el query
-$query = "SELECT * FROM propiedades";
-
-// Consultar la BD
-$resultadoConsulta = mysqli_query($db, $query);
+// Implementar un método para obtener todas las propiedades utilizando Active Record
+$propiedades = Propiedad::all();
 
 
 // Muestra mensaje condicional
@@ -64,22 +61,22 @@ incluirTemplate('header');
             </thead>
 
             <tbody>
-            <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)): ?>
+            <?php foreach ($propiedades as $propiedad): ?>
                 <tr>
-                    <td><?= $propiedad['id']; ?></td>
-                    <td><?= $propiedad['titulo']; ?></td>
-                    <td><img src="/imagenes/<?= $propiedad['imagen'] ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad['titulo']; ?>" title="Imagen de la <?= $propiedad['titulo']; ?>"> </td>
-                    <td>$<?= $propiedad['precio']; ?></td>
+                    <td><?= $propiedad->id; ?></td>
+                    <td><?= $propiedad->titulo; ?></td>
+                    <td><img src="/imagenes/<?= $propiedad->imagen; ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad->titulo; ?>" title="Imagen de la <?= $propiedad->titulo; ?>"> </td>
+                    <td>$<?= $propiedad->precio; ?></td>
                     <td class="form-admin-action">
                         <form method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?= $propiedad['id'] ?>">
-                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina la propiedad <?= $propiedad['id']; ?>- <?= $propiedad['titulo']; ?>">
+                            <input type="hidden" name="id" value="<?= $propiedad->id; ?>">
+                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina la propiedad <?= $propiedad->id; ?>- <?= $propiedad->titulo; ?>">
                         </form>
                         
-                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad['id']; ?>"  class="boton-amarillo-block w-100" title="Actualiza los datos de la propiedad <?= $propiedad['id']; ?>- <?= $propiedad['titulo']; ?>">Actualizar</a>
+                        <a href="propiedades/actualizar.php?propiedad=<?= $propiedad->id; ?>"  class="boton-amarillo-block w-100" title="Actualiza los datos de la propiedad <?= $propiedad->id; ?>- <?= $propiedad->titulo; ?>">Actualizar</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </main>

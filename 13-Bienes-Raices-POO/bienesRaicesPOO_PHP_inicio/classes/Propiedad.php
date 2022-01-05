@@ -5,6 +5,7 @@ use App\Database\DB;
 
 require_once __DIR__.'/../includes/funciones/funciones.php';
 class Propiedad {
+	const TABLENAME = "propiedades";
 	protected static $db;
 	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
 	protected static $errores = [];
@@ -20,9 +21,7 @@ class Propiedad {
 	public $vendedorId;
 	public function __construct($args = [])
 	{
-		if(!isset(self::$db)){
-			self::$db = DB::getDB();
-		}
+		self::hayDB();
 		
 		$this->id = $args['id'] ?? '';
 		$this->titulo = $args['titulo'] ?? '';
@@ -46,8 +45,7 @@ class Propiedad {
     	$query .= " VALUES ( '";
 		$query .= join("', '", array_values($atributos));
 		$query .= "' )";
-		$resultado = self::$db->query($query);
-		return $resultado;
+		return DB::insert($query);
 	}
 	
 	/**
@@ -109,5 +107,46 @@ class Propiedad {
 		}
 
 		return self::$errores;
+	}
+
+	public static function all(){
+		$query = "SELECT * FROM ".self::TABLENAME;
+		$resultado = self::consultarSQL($query);
+		return $resultado;
+	}
+
+	public static function consultarSQL($query){
+		// Consultar la base de datos
+		self::hayDB();
+		$resultado = self::$db->query($query);
+
+		// Iterar los resultados
+		$array = [];
+		while($registro = $resultado->fetch_assoc()){
+			$array[] = self::crearObjeto($registro);
+		}
+		// Liberar la memoria
+		$resultado->free();
+		// Retornar los resultados
+		return $array;
+	}
+
+	protected static function crearObjeto($registro){
+		$objeto = new self;
+		foreach($registro as $key => $value){
+			if(property_exists( $objeto, $key )){
+				$objeto->$key = $value;
+			}
+		}
+		return $objeto;
+	}
+
+	/**
+	 * Comprueba si tenemos conexión a la base de datos, de lo contrario obtiene una
+	 */
+	private static function hayDB(){
+		if(!isset(self::$db)){
+			self::$db = DB::getDB();
+		}
 	}
 }
