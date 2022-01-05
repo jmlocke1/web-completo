@@ -60,14 +60,15 @@ incluirTemplate('header');
                     mkdir(Config::CARPETA_IMAGENES);
                 }
 
-                // Guarda la imagen en el servidor
-                $image->save(Config::CARPETA_IMAGENES.$nombreImagen);
+                
                 
                 // Insertar en la base de datos
                 $resultado = $propiedad->guardar();
 
                 // $resultado = mysqli_query($db, $query);
                 if($resultado){
+                    // Guarda la imagen en el servidor
+                    $image->save(Config::CARPETA_IMAGENES.$nombreImagen);
                     // Redireccionar al usuario
                     header('Location: /admin?resultado=1');
                 }else{
@@ -99,45 +100,7 @@ incluirTemplate('header');
         </div>
         <?php endforeach; ?>
         <form action="/admin/propiedades/crear.php" class="formulario" method="POST" enctype="multipart/form-data">
-            <fieldset>
-                <legend>Información General</legend>
-
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" placeholder="Título Propiedad" value="<?= $propiedad->titulo; ?>">
-
-                <label for="precio">Precio:</label>
-                <input type="number" step=".01" min="<?= Config::MIN_PRICE_VALUE; ?>" max="<?= Config::MAX_PRICE_VALUE; ?>" id="precio" name="precio" placeholder="Precio Propiedad" value="<?= $propiedad->precio; ?>">
-
-                <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
-
-                <label for="descripcion">Descripción:</label>
-                <textarea name="descripcion" id="descripcion" cols="30" rows="10" minlength="50" maxlength="3000"><?= $propiedad->descripcion; ?></textarea>
-            </fieldset>
-
-            <fieldset>
-                <legend>Información de la Propiedad</legend>
-
-                <label for="habitaciones">Habitaciones:</label>
-                <input type="number" id="habitaciones" name="habitaciones" placeholder="Ej: 3" min="1" max="9" value="<?= $propiedad->habitaciones; ?>">
-
-                <label for="wc">Baños:</label>
-                <input type="number" id="wc" name="wc" placeholder="Ej: 3" min="1" max="9" value="<?= $propiedad->wc; ?>">
-
-                <label for="estacionamiento">Estacionamiento:</label>
-                <input type="number" id="estacionamiento" name="estacionamiento" placeholder="Ej: 3" min="1" max="9" value="<?= $propiedad->estacionamiento; ?>">
-            </fieldset>
-
-            <fieldset>
-                <legend>Vendedor</legend>
-
-                <select name="vendedorId" id="vendedorId">
-                    <option value="">-- Seleccione --</option>
-                <?php while($vendedor = mysqli_fetch_assoc($vendedores)): ?>
-                    <option <?= $propiedad->vendedorId === $vendedor['id'] ? 'selected' : ''; ?>  value="<?= $vendedor['id']; ?>"><?= $vendedor['nombre']." ". $vendedor['apellido']; ?></option>
-                <?php endwhile; ?>
-                </select>
-            </fieldset>
+            <?php include DIR_ROOT. "includes/templates/formulario_propiedades.php"; ?>
             <input type="submit" value="Crear Propiedad" class="boton boton-verde">
         </form>
     </main>
