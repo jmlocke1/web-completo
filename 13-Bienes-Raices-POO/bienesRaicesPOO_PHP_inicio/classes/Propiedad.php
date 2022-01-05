@@ -109,10 +109,22 @@ class Propiedad {
 		return self::$errores;
 	}
 
+	/**
+	 * Lista todos los registros
+	 */
 	public static function all(){
 		$query = "SELECT * FROM ".self::TABLENAME;
 		$resultado = self::consultarSQL($query);
 		return $resultado;
+	}
+
+	/**
+	 * Busca un registro por su id
+	 */
+	public static function find($id){
+		$query = "SELECT * FROM propiedades WHERE id='$id'";
+		$result = self::consultarSQL($query);
+		return array_shift($result);
 	}
 
 	public static function consultarSQL($query){
@@ -147,6 +159,18 @@ class Propiedad {
 	private static function hayDB(){
 		if(!isset(self::$db)){
 			self::$db = DB::getDB();
+		}
+	}
+
+	/**
+	 * Sincroniza el objeto en memoria con los cambios realizados por el usuario
+	 */
+	public function sincronizar( $args = [] ){
+		foreach($args as $key => $value){
+			if($key == "id") continue;
+			if(property_exists($this, $key) && !is_null($value)){
+				$this->key = $value;
+			}
 		}
 	}
 }

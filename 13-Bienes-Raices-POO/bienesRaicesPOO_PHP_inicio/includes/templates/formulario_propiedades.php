@@ -6,9 +6,19 @@
 
                 <label for="precio">Precio:</label>
                 <input type="number" step=".01" min="<?= Config::MIN_PRICE_VALUE; ?>" max="<?= Config::MAX_PRICE_VALUE; ?>" id="precio" name="precio" placeholder="Precio Propiedad" value="<?= s($propiedad->precio); ?>">
+				<div class="imagen-muestra">
+				<?php if($propiedad->imagen){ ?>
+					<img src="/imagenes/<?= $propiedad->imagen ?>" alt="" class="imagen-small">
+				<?php } ?>
+					<div class="imagen-label">
+						<label for="imagen">Imagen:</label>
+						<input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
+					</div>
+					
+				</div>
+                
 
-                <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
+				
 
                 <label for="descripcion">Descripción:</label>
                 <textarea name="descripcion" id="descripcion" cols="30" rows="10" minlength="50" maxlength="3000"><?= s($propiedad->descripcion); ?></textarea>

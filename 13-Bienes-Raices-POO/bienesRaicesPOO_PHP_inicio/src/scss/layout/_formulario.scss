@@ -45,5 +45,17 @@
 		margin: 0;
 		width: auto;
 	}
+	.imagen-muestra{
+		display: flex;
+		gap: 2rem;
+		justify-content: space-between;
+		label, input{
+			display: block;
+		}
+		
+		.imagen-label{
+			width: 100%;
+		}
+	}
 }
 

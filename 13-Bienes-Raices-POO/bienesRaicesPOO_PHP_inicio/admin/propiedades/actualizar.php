@@ -7,6 +7,15 @@ use App\Database\DB;
 estaAutenticado();
 $db = DB::getDB();
 
+// Validar la url por id válido
+$id = $_GET['propiedad'];
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+// if(!$id){
+//     header('Location: /admin');
+// }
+$propiedad = Propiedad::find(($id));
+
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
@@ -15,56 +24,26 @@ $vendedores = mysqli_query($db, $query);
 $errores = [];
 // Inicializamos las variables vacías
 
-$titulo = '';
-$precio = '';
-$descripcion = '';
-$habitaciones = '';
-$wc = '';
-$estacionamiento = '';
-$vendedorId = '';
+
 incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
-            // echo "<pre>";
-            // var_dump($_POST);
-            // var_dump($_FILES);
-            // echo "</pre>";
             $id = $_POST['id'];
-            $titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
-            $precio = mysqli_real_escape_string( $db, $_POST['precio']);
-            $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion']);
-            $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones']);
-            $wc = $_POST['wc'];
-            $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
-            $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedorId']);
-            $creado = $_POST['creado'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+            // Asignar los atributos
+            $args = [];
+            $args['titulo'] = $_POST['titulo'] ?? null;
+            $args['precio'] = $_POST['precio'] ?? null;
+            $propiedad->sincronizar($args);
+
+            debuguear($propiedad);
 
             // Asignar files hacia una variable
             $imagen = strlen($_FILES['imagen']['name']) > 0 ? $_FILES['imagen'] : null;
             echo "FILES tiene el valor:";
             var_dump($_FILES['imagen']);
-            if(!$titulo) {
-                $errores[] = "Debes añadir un título";
-            }
-            if(!$precio) {
-                $errores[] = "El precio es obligatorio";
-            }
-            if(strlen( $descripcion ) < 50) {
-                $errores[] = "La descripción es obligatoria y debe tener al menos 50 caracteres";
-            }
-            if(!$habitaciones) {
-                $errores[] = "El número de habitaciones es obligatorio";
-            }
-            if(!$wc) {
-                $errores[] = "El número de baños es obligatorio";
-            }
-            if(!$estacionamiento) {
-                $errores[] = "El número de estacionamientos es obligatorio";
-            }
-            if(!$vendedorId) {
-                $errores[] = "Elige un vendedor";
-            }
+            
 
             if(isset($imagen)){
                 // Validar por tamaño (2 MB máximo)
@@ -125,29 +104,20 @@ incluirTemplate('header');
             $id = filter_var($_GET['propiedad'], FILTER_VALIDATE_INT);
             
             // Obtener registro de la base de datos
-            $query = "SELECT * FROM propiedades WHERE id='$id'";
-            $resultadoConsulta = mysqli_query($db, $query);
-            // Se comprueba el id y el resultado. id debe ser entero y 
-            // existir en la base de datos
-            if(!$id || $resultadoConsulta->num_rows === 0) {
-                header('Location: /admin?error=1');
-                exit;
-            }
-            
-            $propiedad = mysqli_fetch_assoc($resultadoConsulta);
+            //$propiedad = Propiedad::find(s())
 
             // Asignar valores a las variables
-            $titulo = $propiedad['titulo'];
-            $precio = $propiedad['precio'];
-            $descripcion = $propiedad['descripcion'];
-            $habitaciones = $propiedad['habitaciones'];
-            $wc = $propiedad['wc'];
-            $estacionamiento = $propiedad['estacionamiento'];
-            $vendedorId = $propiedad['vendedorId'];
-            $creado = $propiedad['creado'];
+            // $titulos = $propiedad['titulo'];
+            // $precio = $propiedad['precio'];
+            // $descripcion = $propiedad['descripcion'];
+            // $habitaciones = $propiedad['habitaciones'];
+            // $wc = $propiedad['wc'];
+            // $estacionamiento = $propiedad['estacionamiento'];
+            // $vendedorId = $propiedad['vendedorId'];
+            // $creado = $propiedad['creado'];
 
-            // Asignar files hacia una variable
-            $imagen = $propiedad['imagen'];
+            // // Asignar files hacia una variable
+            // $imagen = $propiedad['imagen'];
         }else {
             echo "No sé qué tipo de envío es";
         } ?>
