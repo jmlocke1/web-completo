@@ -11,6 +11,7 @@ estaAutenticado();
 $propiedades = Propiedad::all();
 
 
+
 // Muestra mensaje condicional
 $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
 $error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZE_NUMBER_INT)  : 0;

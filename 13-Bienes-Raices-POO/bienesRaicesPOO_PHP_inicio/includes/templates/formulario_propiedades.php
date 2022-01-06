@@ -1,6 +1,8 @@
 			<fieldset>
                 <legend>Información General</legend>
-
+                <?php if(isset($propiedad->id)){ ?>
+                    <h2>Estamos actualizando</h2>
+                <?php } ?>
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" placeholder="Título Propiedad" value="<?= s($propiedad->titulo); ?>">
 

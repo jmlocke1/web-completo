@@ -1,14 +1,14 @@
 <?php
 namespace App;
 
-use App\Database\DB;
+//use App\Database\DB;
 
 require_once __DIR__.'/../includes/funciones/funciones.php';
-class Propiedad {
+class Propiedad extends ActiveRecord {
 	const TABLENAME = "propiedades";
-	protected static $db;
+	
 	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
-	protected static $errores = [];
+	
 	public $id;
 	public $titulo;
 	public $precio;
@@ -35,39 +35,9 @@ class Propiedad {
 		$this->vendedorId = $args['vendedorId'] ?? '';
 	}
 
-	public function guardar() {
-		// Sanitizar los datos
-		$atributos = $this->sanitizarAtributos();
-
-		$query = " INSERT INTO propiedades ( ";
-		$query .= join(", ", array_keys($atributos));
-		$query .= ") ";
-    	$query .= " VALUES ( '";
-		$query .= join("', '", array_values($atributos));
-		$query .= "' )";
-		return DB::insert($query);
-	}
 	
-	/**
-	 * Identifica y uno los atributos de la BD
-	 */
-	public function atributos(): array{
-		$atributos = [];
-		foreach(self::$columnasDB as $columna){
-			$atributos[$columna] = $this->$columna;
-		}
-		return $atributos;
-	}
-
-	public function sanitizarAtributos(){
-		$atributos = $this->atributos();
-		$sanitizado = [];
-		foreach($atributos as $key => $value){
-			if($key == 'id') continue;
-			$sanitizado[$key] = self::$db->escape_string($value);
-		}
-		return $sanitizado;
-	}
+	
+	
 
 	public function setImagen($imagen){
 		// Asignar al atributo de imagen el nombre de la imagen
@@ -76,11 +46,12 @@ class Propiedad {
 		}
 	}
 
-	public static function getErrors(){
-		return self::$errores;
-	}
-
+	
+	/**
+	 * Valida los datos introducidos a la clase
+	 */
 	public function validar(){
+		//self::$errores = [];
 		if(!$this->titulo) {
 			self::$errores[] = "Debes añadir un título";
 		}
@@ -107,70 +78,5 @@ class Propiedad {
 		}
 
 		return self::$errores;
-	}
-
-	/**
-	 * Lista todos los registros
-	 */
-	public static function all(){
-		$query = "SELECT * FROM ".self::TABLENAME;
-		$resultado = self::consultarSQL($query);
-		return $resultado;
-	}
-
-	/**
-	 * Busca un registro por su id
-	 */
-	public static function find($id){
-		$query = "SELECT * FROM propiedades WHERE id='$id'";
-		$result = self::consultarSQL($query);
-		return array_shift($result);
-	}
-
-	public static function consultarSQL($query){
-		// Consultar la base de datos
-		self::hayDB();
-		$resultado = self::$db->query($query);
-
-		// Iterar los resultados
-		$array = [];
-		while($registro = $resultado->fetch_assoc()){
-			$array[] = self::crearObjeto($registro);
-		}
-		// Liberar la memoria
-		$resultado->free();
-		// Retornar los resultados
-		return $array;
-	}
-
-	protected static function crearObjeto($registro){
-		$objeto = new self;
-		foreach($registro as $key => $value){
-			if(property_exists( $objeto, $key )){
-				$objeto->$key = $value;
-			}
-		}
-		return $objeto;
-	}
-
-	/**
-	 * Comprueba si tenemos conexión a la base de datos, de lo contrario obtiene una
-	 */
-	private static function hayDB(){
-		if(!isset(self::$db)){
-			self::$db = DB::getDB();
-		}
-	}
-
-	/**
-	 * Sincroniza el objeto en memoria con los cambios realizados por el usuario
-	 */
-	public function sincronizar( $args = [] ){
-		foreach($args as $key => $value){
-			if($key == "id") continue;
-			if(property_exists($this, $key) && !is_null($value)){
-				$this->key = $value;
-			}
-		}
 	}
 }

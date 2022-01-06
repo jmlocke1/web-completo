@@ -158,6 +158,12 @@ function debuguear($variable){
     exit;
 }
 
+function debuguearSinExit($variable){
+    echo "<pre>";
+    var_dump($variable);
+    echo "</pre>";
+}
+
 function s($html){
     $s = htmlspecialchars($html);
     return $s;

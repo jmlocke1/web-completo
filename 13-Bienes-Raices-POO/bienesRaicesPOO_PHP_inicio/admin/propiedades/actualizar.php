@@ -29,7 +29,7 @@ incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
-            $id = $_POST['id'];
+            //$id = $_POST['id'];
             $id = filter_var($id, FILTER_VALIDATE_INT);
             // Asignar los atributos
             $args = [];
