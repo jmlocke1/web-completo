@@ -40,24 +40,10 @@ incluirTemplate('header');
             if(empty($errores)){
                 $hayImagen = !empty($_FILES['propiedad']['name']['imagen']);
                 if($hayImagen){
-                    $propiedad->setImagen($_FILES['propiedad']);
-                    // /** SUBIDA DE ARCHIVOS */
-                    
-
-                    // // Generar un nombre único
-                    // $nombreImagen = getImageName($_FILES['propiedad']['name']['imagen']);
-
-                    // // Subir la imagen
-                    // if($_FILES['propiedad']['tmp_name']['imagen']){
-                    //     $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
-                    //     $propiedad->setImagen($nombreImagen);
-                    // }
-
+                    $propiedad->setImagen($_FILES['propiedad']);                    
                 }
                 $resultado = $propiedad->guardar();
                 if($resultado){
-                    // Guarda la imagen en el servidor
-                    //$image->save(Config::CARPETA_IMAGENES.$nombreImagen);
                     // Redireccionar al usuario
                     header('Location: /admin?resultado=2');
                     exit;
