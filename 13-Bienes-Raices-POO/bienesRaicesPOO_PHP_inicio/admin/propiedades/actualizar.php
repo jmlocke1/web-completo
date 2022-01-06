@@ -9,10 +9,11 @@ $db = DB::getDB();
 
 // Validar la url por id válido
 $id = $_GET['propiedad'];
+debuguearSinExit($_GET);
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if(!$id){
-    header('Location: /admin');
+    //header('Location: /admin');
 }
 $propiedad = Propiedad::find(($id));
 debuguearSinExit($propiedad);
@@ -36,15 +37,14 @@ incluirTemplate('header');
             $args = [];
             $args['titulo'] = $_POST['titulo'] ?? null;
             $args['precio'] = $_POST['precio'] ?? null;
-            echo "Vamos a sincronizar <br>";
+            
             $propiedad->sincronizar($args);
 
-            debuguear($propiedad);
+           
 
             // Asignar files hacia una variable
             $imagen = strlen($_FILES['imagen']['name']) > 0 ? $_FILES['imagen'] : null;
-            echo "FILES tiene el valor:";
-            var_dump($_FILES['imagen']);
+            
             
 
             if(isset($imagen)){
@@ -136,7 +136,7 @@ incluirTemplate('header');
             <?= $error; ?>
         </div>
         <?php endforeach; ?>
-        <form action="/admin/propiedades/actualizar.php" class="formulario" method="POST" enctype="multipart/form-data">
+        <form class="formulario" method="POST" enctype="multipart/form-data">
         <?php include DIR_ROOT. "includes/templates/formulario_propiedades.php"; ?>
             
             <input type="submit" value="Actualizar Propiedad" class="boton boton-verde">
