@@ -84,7 +84,17 @@ class ActiveRecord {
 		return $atributos;
 	}
 
-	public function guardar() {
+	public function guardar(){
+		if($this->id){
+			// Actualizar
+			return $this->actualizar();
+		}else{
+			// Creando un nuevo registro
+			return $this->crear();
+		}
+	}
+
+	public function crear() {
 		// Sanitizar los datos
 		$atributos = $this->sanitizarAtributos();
 		
@@ -95,7 +105,32 @@ class ActiveRecord {
 		$query .= join("', '", array_values($atributos));
 		$query .= "' )";
 		
-		return DB::insert($query);
+		$resultado = self::$db->query($query);
+		if($resultado && isset($this->imageFile)){
+			// Guardar imagen
+			$this->imageFile->guardar();
+		}
+		return $resultado;
+	}
+
+	public function actualizar(){
+		// Sanitizar los datos
+		$atributos = $this->sanitizarAtributos();
+
+		$valores = [];
+		foreach($atributos as $key => $value){
+			$valores[] = "{$key}='{$value}'";
+		}
+		$query = "UPDATE propiedades SET ". join(', ', $valores);
+		$query .= " WHERE id='". self::$db->escape_string($this->id). "' ";
+		$query .= " LIMIT 1";
+		
+		$resultado = self::$db->query($query);
+		if($resultado && isset($this->imageFile)){
+			// Guardar imagen
+			$this->imageFile->guardar();
+		}
+		return $resultado;
 	}
 
 	/**

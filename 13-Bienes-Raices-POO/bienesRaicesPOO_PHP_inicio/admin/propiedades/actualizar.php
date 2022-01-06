@@ -3,95 +3,61 @@
 require '../../includes/app.php';
 use App\Propiedad;
 use App\Database\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 
 estaAutenticado();
 $db = DB::getDB();
 
 // Validar la url por id válido
 $id = $_GET['propiedad'];
-debuguearSinExit($_GET);
+
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
 if(!$id){
-    //header('Location: /admin');
+    header('Location: /admin');
 }
 $propiedad = Propiedad::find(($id));
-debuguearSinExit($propiedad);
+
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
 
 // Array con mensajes de errores
-$errores = [];
-// Inicializamos las variables vacías
+$errores = Propiedad::getErrors();
 
 
 incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
-
-            //$id = $_POST['id'];
-            $id = filter_var($id, FILTER_VALIDATE_INT);
             // Asignar los atributos
-            $args = [];
-            $args['titulo'] = $_POST['titulo'] ?? null;
-            $args['precio'] = $_POST['precio'] ?? null;
+            $args = $_POST['propiedad'];
             
             $propiedad->sincronizar($args);
-
-           
-
-            // Asignar files hacia una variable
-            $imagen = strlen($_FILES['imagen']['name']) > 0 ? $_FILES['imagen'] : null;
-            
-            
-
-            if(isset($imagen)){
-                // Validar por tamaño (2 MB máximo)
-                $medida = 1024 * 1024 * 2;
-
-                if($imagen['size'] > $medida){
-                    $errores[] = 'La imagen es muy pesada. No debe pasar de 2 MB';
-                }
-            }
-            
-
+            $errores = $propiedad->validar();
 
             // Revisar que el array de errores esté vacío
             if(empty($errores)){
-                
-                if(isset($imagen)){
+                $hayImagen = !empty($_FILES['propiedad']['name']['imagen']);
+                if($hayImagen){
+                    $propiedad->setImagen($_FILES['propiedad']);
+                    // /** SUBIDA DE ARCHIVOS */
                     
-                    /** SUBIDA DE ARCHIVOS */
 
-                    // Crear carpeta
+                    // // Generar un nombre único
+                    // $nombreImagen = getImageName($_FILES['propiedad']['name']['imagen']);
 
-                    if(!is_dir(Config::CARPETA_IMAGENES)){
-                        mkdir(Config::CARPETA_IMAGENES);
-                    }
+                    // // Subir la imagen
+                    // if($_FILES['propiedad']['tmp_name']['imagen']){
+                    //     $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                    //     $propiedad->setImagen($nombreImagen);
+                    // }
 
-                    // Generar un nombre único
-                    $nombreImagen = getImageName($imagen['name']);
-
-                    // Subir la imagen
-
-                    move_uploaded_file($imagen['tmp_name'], Config::CARPETA_IMAGENES.$nombreImagen);
-                    // Eliminar la imagen anterior
-                    $antiguaImagen = getImageFromDB($id);
-                    unlink(Config::CARPETA_IMAGENES . $antiguaImagen);
                 }
-                
-
-                // Insertar en la base de datos
-                $campoImagen = isset($nombreImagen) ? "imagen='$nombreImagen', " : '';
-                $query = "UPDATE propiedades SET titulo='$titulo', precio=$precio, $campoImagen descripcion='$descripcion', habitaciones=$habitaciones, wc=$wc, estacionamiento=$estacionamiento, creado='$creado', vendedorId=$vendedorId";
-                $query .= " WHERE id=$id";
-                
-
-                $resultado = mysqli_query($db, $query);
-                echo '<br>';
+                $resultado = $propiedad->guardar();
                 if($resultado){
+                    // Guarda la imagen en el servidor
+                    //$image->save(Config::CARPETA_IMAGENES.$nombreImagen);
                     // Redireccionar al usuario
                     header('Location: /admin?resultado=2');
                     exit;
@@ -99,27 +65,12 @@ incluirTemplate('header');
                     header('Location: /admin?error=2');
                     exit;
                 }
+                
             }
             
  
         }else if($_SERVER["REQUEST_METHOD"] === 'GET') {
             $id = filter_var($_GET['propiedad'], FILTER_VALIDATE_INT);
-            
-            // Obtener registro de la base de datos
-            //$propiedad = Propiedad::find(s())
-
-            // Asignar valores a las variables
-            // $titulos = $propiedad['titulo'];
-            // $precio = $propiedad['precio'];
-            // $descripcion = $propiedad['descripcion'];
-            // $habitaciones = $propiedad['habitaciones'];
-            // $wc = $propiedad['wc'];
-            // $estacionamiento = $propiedad['estacionamiento'];
-            // $vendedorId = $propiedad['vendedorId'];
-            // $creado = $propiedad['creado'];
-
-            // // Asignar files hacia una variable
-            // $imagen = $propiedad['imagen'];
         }else {
             echo "No sé qué tipo de envío es";
         } ?>

@@ -1,13 +1,14 @@
 <?php
 namespace App;
 
-//use App\Database\DB;
+
 
 require_once __DIR__.'/../includes/funciones/funciones.php';
 class Propiedad extends ActiveRecord {
 	const TABLENAME = "propiedades";
 	
 	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
+	protected Image $imageFile;
 	
 	public $id;
 	public $titulo;
@@ -40,9 +41,17 @@ class Propiedad extends ActiveRecord {
 	
 
 	public function setImagen($imagen){
+		$this->imageFile = new Image($imagen);
 		// Asignar al atributo de imagen el nombre de la imagen
+		if(!empty($this->id) && $imagen){
+			// Estamos editando la propiedad
+			// Comprobamos si existe el archivo
+			if(isset($this->imagen) && file_exists(\Config::CARPETA_IMAGENES . $this->imagen)){
+				unlink(\Config::CARPETA_IMAGENES . $this->imagen);
+			}
+		}
 		if($imagen){
-			$this->imagen = $imagen;
+			$this->imagen = $this->imageFile->imageName;
 		}
 	}
 

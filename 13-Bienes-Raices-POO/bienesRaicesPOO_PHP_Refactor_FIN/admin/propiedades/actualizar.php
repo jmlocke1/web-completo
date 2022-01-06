@@ -15,9 +15,9 @@
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if(!$id) {
-        //header('Location: /admin');
+        header('Location: /admin');
     }
-    debuguearSinExit($_GET);
+    
     // Obtener los datos de la propiedad
     $propiedad = Propiedad::find($id);
 
@@ -32,7 +32,7 @@
 
         // Asignar los atributos
         $args = $_POST['propiedad'];
-        debuguear($_POST);
+        
         $propiedad->sincronizar($args);
 
 
