@@ -11,11 +11,11 @@ $db = DB::getDB();
 $id = $_GET['propiedad'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
-// if(!$id){
-//     header('Location: /admin');
-// }
+if(!$id){
+    header('Location: /admin');
+}
 $propiedad = Propiedad::find(($id));
-
+debuguearSinExit($propiedad);
 // Consultar para obtener los vendedores
 $query = "SELECT id, nombre, apellido, telefono FROM vendedores";
 $vendedores = mysqli_query($db, $query);
@@ -29,12 +29,14 @@ incluirTemplate('header');
 ?>
     <pre>
         <?php if($_SERVER["REQUEST_METHOD"] === 'POST') {
+
             //$id = $_POST['id'];
             $id = filter_var($id, FILTER_VALIDATE_INT);
             // Asignar los atributos
             $args = [];
             $args['titulo'] = $_POST['titulo'] ?? null;
             $args['precio'] = $_POST['precio'] ?? null;
+            echo "Vamos a sincronizar <br>";
             $propiedad->sincronizar($args);
 
             debuguear($propiedad);
