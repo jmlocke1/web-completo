@@ -46,12 +46,12 @@ incluirTemplate('header');
     <main class="contenedor">
         <h2>Administrador de Bienes Raices</h2>
         <?php if($resultado): ?>
-            <p class="alerta exito"><?= Notification::successNotification($resultado); ?></p>
+            <p class="alerta exito"><?= s(Notification::successNotification($resultado)); ?></p>
         <?php endif; ?>
         
         <!-- Errores -->
         <?php if($error): ?>
-            <p class="alerta error"><?= Notification::successNotification($error); ?></p>
+            <p class="alerta error"><?= s(Notification::successNotification($error)); ?></p>
         <?php endif; ?>
 
         <h2>Propiedades</h2>
