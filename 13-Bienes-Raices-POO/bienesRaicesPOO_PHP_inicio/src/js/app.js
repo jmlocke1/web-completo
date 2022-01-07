@@ -17,7 +17,7 @@ function borraMensaje() {
             setTimeout(function() {
                 const padre = mensajeConfirm.parentElement;
                 padre.removeChild(mensajeConfirm);
-            }, 3500);
+            }, 13500);
         }
     });
     

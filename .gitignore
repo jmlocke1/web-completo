@@ -3,3 +3,5 @@
 *.css.map
 11-Bienes-Raices/bienesRaicesPHP_inicio/imagenes/
 **/vendor/
+/13-Bienes-Raices-POO/bienesRaicesPOO_PHP_inicio/nbproject/private/
+**/nbproject/

@@ -42,4 +42,54 @@ class Config {
 	 * Nombre de la base de datos
 	 */
 	const DB_NAME = 'bienes_raices';
+
+	/**
+	 * MENSAJES DE ÉXITO
+	 */
+
+	/**
+	 * Anuncio creado correctamente
+	 */
+	const AD_CREATED_SUCCESSFULLY = 1;
+	/**
+	 * Propiedad actualizada correctamente
+	 */
+	const PROPERTY_UPDATED_SUCCESSFULLY = 2;
+	/**
+	 * Propiedad eliminada correctamente
+	 */
+	const PROPERTY_REMOVED_SUCCESSFULLY = 3;
+/**
+	 * Vendedor creado correctamente
+	 */
+	const SELLER_CREATED_SUCCESSFULLY = 4;
+	/**
+	 * Vendedor eliminado correctamente
+	 */
+	const SELLER_REMOVED_SUCCESSFULLY = 5;
+
+	/**
+	 * MENSAJES DE ERROR
+	 */
+
+	/**
+	 * Esa propiedad no existe
+	 */
+	const PROPERTY_NOT_EXIST = 1;
+	/**
+	 * La propiedad no se pudo actualizar
+	 */
+	const PROPERTY_COULD_NOT_BE_UPDATED = 2;
+	/**
+	 * La propiedad no se pudo eliminar
+	 */
+	const PROPERTY_COULD_NOT_BE_REMOVED = 3;
+	/**
+	 * Vendedor no se pudo crear
+	 */
+	const SELLER_COULD_NOT_BE_CREATED = 4;
+	/**
+	 * Vendedor no se pudo eliminar
+	 */
+	const SELLER_COULD_NOT_BE_DELETED = 5;
 }

@@ -18,7 +18,10 @@ if(!$id){
     header('Location: /admin');
 }
 $propiedad = Propiedad::find(($id));
-
+// Comprobamos si existe la propiedad
+if(is_null($propiedad)){
+    header('Location: /admin?error='.Config::PROPERTY_NOT_EXIST);
+}
 // Obtener los vendedores
 $vendedores = Vendedor::all();
 
@@ -45,10 +48,10 @@ incluirTemplate('header');
                 $resultado = $propiedad->guardar();
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin?resultado=2');
+                    header('Location: /admin?resultado='.Config::PROPERTY_UPDATED_SUCCESSFULLY);
                     exit;
                 }else{
-                    header('Location: /admin?error=2');
+                    header('Location: /admin?error='.Config::PROPERTY_COULD_NOT_BE_UPDATED);
                     exit;
                 }
                 

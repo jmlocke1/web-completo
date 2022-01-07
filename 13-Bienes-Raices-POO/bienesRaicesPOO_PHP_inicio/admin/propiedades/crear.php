@@ -33,7 +33,7 @@ incluirTemplate('header');
                 $resultado = $propiedad->guardar();
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin?resultado=1');
+                    header('Location: /admin?resultado='.config::AD_CREATED_SUCCESSFULLY);
                 }else{
                     $errores[] = "Error $db->errno al insertar en la base de datos: $db->error";
                 }
