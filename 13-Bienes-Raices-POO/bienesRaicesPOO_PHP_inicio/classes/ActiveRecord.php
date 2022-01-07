@@ -92,7 +92,7 @@ class ActiveRecord {
 	}
 
 	public function guardar(){
-		if(is_null($this->id)){
+		if(!is_null($this->id)){
 			// Actualizar
 			return $this->actualizar();
 		}else{
