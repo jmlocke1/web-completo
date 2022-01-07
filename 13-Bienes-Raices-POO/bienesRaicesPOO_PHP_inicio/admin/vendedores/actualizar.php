@@ -6,8 +6,19 @@ use App\Vendedor;
 
 estaAutenticado();
 
+// Validar la url por id válido
+$id = $_GET['vendedor'];
 
-$vendedor = new Vendedor();
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+if(!$id){
+    header('Location: /admin');
+}
+$vendedor = Vendedor::find($id);
+// Comprobamos si existe el vendedor
+if(is_null($vendedor)){
+    header('Location: /admin?error='.Config::SELLER_NOT_EXIST);
+}
 
 // Array con mensajes de errores
 $errores = Vendedor::getErrors();
@@ -29,7 +40,7 @@ incluirTemplate('header');
             <?= $error; ?>
         </div>
         <?php endforeach; ?>
-        <form action="/admin/vendedores/actualizar.php" class="formulario" method="POST">
+        <form class="formulario" method="POST">
             <?php include DIR_ROOT. "includes/templates/formulario_vendedores.php"; ?>
             <input type="submit" value="Guardar Cambios" class="boton boton-verde">
         </form>

@@ -92,4 +92,8 @@ class Config {
 	 * Vendedor no se pudo eliminar
 	 */
 	const SELLER_COULD_NOT_BE_DELETED = 5;
+	/**
+	 * Vendedor no existe
+	 */
+	const SELLER_NOT_EXIST = 6;
 }

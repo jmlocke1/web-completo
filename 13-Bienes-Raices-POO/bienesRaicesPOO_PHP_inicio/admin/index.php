@@ -68,6 +68,8 @@ incluirTemplate('header');
             <p class="alerta error">El vendedor no se pudo eliminar</p>
             <p class="alerta error">Error reportado: <?= $_SESSION['error']; ?></p>
             <?php unset($_SESSION['error']); ?>
+        <?php elseif($error === Config::SELLER_NOT_EXIST): ?>
+            <p class="alerta error">El vendedor no existe</p>
         <?php endif; ?>
 
         <h2>Propiedades</h2>
@@ -127,10 +129,10 @@ incluirTemplate('header');
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?= $vendedor->id; ?>">
                             <input type="hidden" name="tipo" value="vendedor">
-                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina la propiedad <?= $propiedad->id; ?>- <?= $propiedad->titulo; ?>">
+                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina el vendedor <?= $vendedor->id; ?>- <?= $vendedor->nombre; ?>">
                         </form>
                         
-                        <a href="vendedores/actualizar.php?vendedor=<?= $propiedad->id; ?>"  class="boton-amarillo-block w-100" title="Actualiza los datos de la propiedad <?= $propiedad->id; ?>- <?= $propiedad->titulo; ?>">Actualizar</a>
+                        <a href="vendedores/actualizar.php?vendedor=<?= $vendedor->id; ?>"  class="boton-amarillo-block w-100" title="Actualiza los datos del vendedor <?= $vendedor->id; ?>- <?= $vendedor->nombre; ?>">Actualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
