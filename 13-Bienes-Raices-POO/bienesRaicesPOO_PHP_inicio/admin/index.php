@@ -15,20 +15,20 @@ $propiedades = Propiedad::all();
 // Muestra mensaje condicional
 $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
 $error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZE_NUMBER_INT)  : 0;
-//$resultado = (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
     if($id) {
-        // $query = "DELETE FROM propiedades WHERE id=${id}";
-        // $result = mysqli_query($db, $query);
-        $result = deleteProperty($id);
-        if($result){
-            header('Location: /admin');
-        }
+        $propiedad = Propiedad::find($id);
+        $resultado = $propiedad->eliminar();
+        if($resultado){
+			header('location: /admin?resultado=3');
+		}else{
+			header('location: /admin?error=3');
+		}
     }
 }
-//$error = 2;
+
 incluirTemplate('header');
 ?>
 
@@ -39,6 +39,8 @@ incluirTemplate('header');
             <p class="alerta exito">Anuncio creado correctamente</p>
         <?php elseif($resultado === 2): ?>
             <p class="alerta exito">Propiedad actualizada correctamente</p>
+        <?php elseif($resultado === 3): ?>
+            <p class="alerta exito">Propiedad eliminada correctamente</p>
         <?php endif; ?>
 
         <!-- Errores -->
@@ -46,6 +48,8 @@ incluirTemplate('header');
             <p class="alerta error">Esa propiedad no existe</p>
         <?php elseif($error === 2): ?>
             <p class="alerta error">La propiedad no se pudo actualizar</p>
+        <?php elseif($error === 3): ?>
+            <p class="alerta error">La propiedad no se pudo eliminar</p>
         <?php endif; ?>
 
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>

@@ -25,6 +25,13 @@ class ActiveRecord {
 		return array_shift($result);
 	}
 
+	public function eliminar(){
+		// Eliminar la propiedad
+		$query = "DELETE FROM propiedades WHERE id='".self::$db->escape_string($this->id)."' LIMIT 1";
+		$resultado = self::$db->query($query);
+		return $resultado;
+	}
+
 	/**
 	 * Devuelve los errores al insertar datos
 	 */
@@ -85,7 +92,7 @@ class ActiveRecord {
 	}
 
 	public function guardar(){
-		if($this->id){
+		if(is_null($this->id)){
 			// Actualizar
 			return $this->actualizar();
 		}else{

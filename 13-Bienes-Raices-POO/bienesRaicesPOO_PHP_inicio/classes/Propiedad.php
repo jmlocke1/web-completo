@@ -24,7 +24,7 @@ class Propiedad extends ActiveRecord {
 	{
 		self::hayDB();
 		
-		$this->id = $args['id'] ?? '';
+		$this->id = $args['id'] ?? null;
 		$this->titulo = $args['titulo'] ?? '';
 		$this->precio = $args['precio'] ?? '';
 		$this->imagen = $args['imagen'] ?? '';
@@ -38,7 +38,14 @@ class Propiedad extends ActiveRecord {
 
 	
 	
-	
+	public function eliminar(){
+		$resultado = parent::eliminar();
+		if($resultado){
+			$this->borrarImagen();
+		}
+		return $resultado;
+	}
+
 
 	public function setImagen($imagen){
 		$this->imageFile = new Image($imagen);
@@ -46,12 +53,17 @@ class Propiedad extends ActiveRecord {
 		if(!empty($this->id) && $imagen){
 			// Estamos editando la propiedad
 			// Comprobamos si existe el archivo
-			if(isset($this->imagen) && file_exists(\Config::CARPETA_IMAGENES . $this->imagen)){
-				unlink(\Config::CARPETA_IMAGENES . $this->imagen);
-			}
+			$this->borrarImagen();
 		}
 		if($imagen){
 			$this->imagen = $this->imageFile->imageName;
+		}
+	}
+
+	public function borrarImagen(){
+		// Primero eliminamos la imagen
+		if(!empty($this->imagen) && file_exists(\Config::CARPETA_IMAGENES . $this->imagen)){
+			unlink(\Config::CARPETA_IMAGENES . $this->imagen);
 		}
 	}
 
