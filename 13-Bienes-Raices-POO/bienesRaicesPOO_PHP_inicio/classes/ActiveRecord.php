@@ -2,7 +2,9 @@
 namespace App;
 use App\Database\DB;
 
+
 class ActiveRecord {
+	const TABLENAME = '';
 	protected static $db;
 	protected static $errores = [];
 
@@ -22,12 +24,13 @@ class ActiveRecord {
 	public static function find($id){
 		$query = "SELECT * FROM ".get_called_class()::TABLENAME." WHERE id='$id'";
 		$result = self::consultarSQL($query);
+		// Devuelve el primer elemento del array
 		return array_shift($result);
 	}
 
 	public function eliminar(){
-		// Eliminar la propiedad
-		$query = "DELETE FROM propiedades WHERE id='".self::$db->escape_string($this->id)."' LIMIT 1";
+		// Eliminar el registro
+		$query = "DELETE FROM ". static::TABLENAME ." WHERE id='".self::$db->escape_string($this->id)."' LIMIT 1";
 		$resultado = self::$db->query($query);
 		return $resultado;
 	}
@@ -128,7 +131,7 @@ class ActiveRecord {
 		foreach($atributos as $key => $value){
 			$valores[] = "{$key}='{$value}'";
 		}
-		$query = "UPDATE propiedades SET ". join(', ', $valores);
+		$query = "UPDATE ". static::TABLENAME ." SET ". join(', ', $valores);
 		$query .= " WHERE id='". self::$db->escape_string($this->id). "' ";
 		$query .= " LIMIT 1";
 		

@@ -2,17 +2,16 @@
 require '../../includes/app.php';
 
 use App\Propiedad;
+use App\Vendedor;
 use App\Database\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
 estaAutenticado();
 
 
-// Consultar para obtener los vendedores
-$db = DB::getDB();
-$query = "SELECT id, nombre, apellido, telefono FROM vendedores";
-$vendedores = mysqli_query($db, $query);
-    
+// Obtener los vendedores
+$vendedores = Vendedor::all();
+
 $errores = Propiedad::getErrors();
 
 

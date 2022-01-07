@@ -52,6 +52,12 @@ class DB {
         return $data;
     }
 
+    public static function close(){
+        if(isset(self::$db)){
+            mysqli_close(self::$db);
+        }
+    }
+
     /**
 	 * Comprueba si tenemos conexión a la base de datos, de lo contrario obtiene una
 	 */

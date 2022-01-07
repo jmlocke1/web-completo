@@ -1,6 +1,7 @@
 <?php
 require '../includes/app.php';
 use App\Propiedad;
+use App\Vendedor;
 use App\Database\DB;
 $db = DB::getDB();
 // Importar la conexión
@@ -9,8 +10,7 @@ estaAutenticado();
 
 // Implementar un método para obtener todas las propiedades utilizando Active Record
 $propiedades = Propiedad::all();
-
-
+$vendedores = Vendedor::all();
 
 // Muestra mensaje condicional
 $resultado = isset($_GET['resultado']) ? (int)filter_var( $_GET['resultado'], FILTER_SANITIZE_NUMBER_INT)  : 0;
@@ -53,7 +53,7 @@ incluirTemplate('header');
         <?php endif; ?>
 
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-
+        <h2>Propiedades</h2>
         <table class="propiedades">
             <thead>
                 <tr>
@@ -84,6 +84,8 @@ incluirTemplate('header');
             <?php endforeach; ?>
             </tbody>
         </table>
+
+        <h2>Vendedores</h2>
     </main>
 
 <?php

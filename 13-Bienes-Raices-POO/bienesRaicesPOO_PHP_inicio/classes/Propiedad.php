@@ -72,7 +72,7 @@ class Propiedad extends ActiveRecord {
 	 * Valida los datos introducidos a la clase
 	 */
 	public function validar(){
-		//self::$errores = [];
+		self::$errores = [];
 		if(!$this->titulo) {
 			self::$errores[] = "Debes añadir un título";
 		}

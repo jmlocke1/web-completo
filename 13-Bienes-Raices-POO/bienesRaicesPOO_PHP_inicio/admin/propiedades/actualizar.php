@@ -2,11 +2,12 @@
 
 require '../../includes/app.php';
 use App\Propiedad;
+use App\Vendedor;
 use App\Database\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
 estaAutenticado();
-$db = DB::getDB();
+
 
 // Validar la url por id válido
 $id = $_GET['propiedad'];
@@ -18,9 +19,8 @@ if(!$id){
 }
 $propiedad = Propiedad::find(($id));
 
-// Consultar para obtener los vendedores
-$query = "SELECT id, nombre, apellido, telefono FROM vendedores";
-$vendedores = mysqli_query($db, $query);
+// Obtener los vendedores
+$vendedores = Vendedor::all();
 
 // Array con mensajes de errores
 $errores = Propiedad::getErrors();

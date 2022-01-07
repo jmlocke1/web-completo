@@ -13,6 +13,4 @@
 </body>
 </html>
 <?php 
-if(isset($db)){
-    mysqli_close($db);
-}
+\App\Database\DB::close();
