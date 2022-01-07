@@ -5,6 +5,7 @@ use App\Propiedad;
 use App\Vendedor;
 use App\Database\DB;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Notification;
 
 estaAutenticado();
 
@@ -33,9 +34,9 @@ incluirTemplate('header');
                 $resultado = $propiedad->guardar();
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin?resultado='.config::AD_CREATED_SUCCESSFULLY);
+                    header('Location: /admin?resultado='.Notification::AD_CREATED_SUCCESSFULLY);
                 }else{
-                    $errores[] = "Error $db->errno al insertar en la base de datos: $db->error";
+                    $errores[] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
                 }
             }
             

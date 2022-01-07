@@ -3,7 +3,8 @@ require '../includes/app.php';
 use App\Propiedad;
 use App\Vendedor;
 use App\Database\DB;
-$db = DB::getDB();
+use App\Notification;
+// $db = DB::getDB();
 // Importar la conexión
 
 estaAutenticado();
@@ -23,18 +24,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $propiedad = Propiedad::find($id);
         $resultado = $propiedad->eliminar();
         if($resultado){
-			header('location: /admin?resultado='.Config::PROPERTY_REMOVED_SUCCESSFULLY);
+			header('location: /admin?resultado='.Notification::PROPERTY_REMOVED_SUCCESSFULLY);
 		}else{
-			header('location: /admin?error='.Config::PROPERTY_COULD_NOT_BE_REMOVED);
+			header('location: /admin?error='.Notification::PROPERTY_COULD_NOT_BE_REMOVED);
 		}
     }else if($id && $tipo === 'vendedor'){
         $vendedor = Vendedor::find($id);
         $resultado = $vendedor->eliminar();
         if($resultado){
-			header('location: /admin?resultado='.Config::SELLER_REMOVED_SUCCESSFULLY);
+			header('location: /admin?resultado='.Notification::SELLER_REMOVED_SUCCESSFULLY);
 		}else{
             $_SESSION['error'] = DB::getDB()->error;
-			header('location: /admin?error='.Config::SELLER_COULD_NOT_BE_DELETED);
+			header('location: /admin?error='.Notification::SELLER_COULD_NOT_BE_DELETED);
 		}
     }
 }
@@ -44,32 +45,13 @@ incluirTemplate('header');
 
     <main class="contenedor">
         <h2>Administrador de Bienes Raices</h2>
-        
-        <?php if($resultado === Config::AD_CREATED_SUCCESSFULLY): ?>
-            <p class="alerta exito">Anuncio creado correctamente</p>
-        <?php elseif($resultado === Config::PROPERTY_UPDATED_SUCCESSFULLY): ?>
-            <p class="alerta exito">Propiedad actualizada correctamente</p>
-        <?php elseif($resultado === Config::PROPERTY_REMOVED_SUCCESSFULLY): ?>
-            <p class="alerta exito">Propiedad eliminada correctamente</p>
-        <?php elseif($resultado === Config::SELLER_CREATED_SUCCESSFULLY): ?>
-            <p class="alerta exito">Vendedor creado correctamente</p>
-            <?php elseif($resultado === Config::SELLER_REMOVED_SUCCESSFULLY): ?>
-            <p class="alerta exito">Vendedor eliminado correctamente</p>
+        <?php if($resultado): ?>
+            <p class="alerta exito"><?= Notification::successNotification($resultado); ?></p>
         <?php endif; ?>
-
+        
         <!-- Errores -->
-        <?php if($error === Config::PROPERTY_NOT_EXIST): ?>
-            <p class="alerta error">Esa propiedad no existe</p>
-        <?php elseif($error === Config::PROPERTY_COULD_NOT_BE_UPDATED): ?>
-            <p class="alerta error">La propiedad no se pudo actualizar</p>
-        <?php elseif($error === Config::PROPERTY_COULD_NOT_BE_REMOVED): ?>
-            <p class="alerta error">La propiedad no se pudo eliminar</p>
-        <?php elseif($error === Config::SELLER_COULD_NOT_BE_DELETED): ?>
-            <p class="alerta error">El vendedor no se pudo eliminar</p>
-            <p class="alerta error">Error reportado: <?= $_SESSION['error']; ?></p>
-            <?php unset($_SESSION['error']); ?>
-        <?php elseif($error === Config::SELLER_NOT_EXIST): ?>
-            <p class="alerta error">El vendedor no existe</p>
+        <?php if($error): ?>
+            <p class="alerta error"><?= Notification::successNotification($error); ?></p>
         <?php endif; ?>
 
         <h2>Propiedades</h2>

@@ -5,6 +5,7 @@ use App\Propiedad;
 use App\Vendedor;
 use App\Database\DB;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Notification;
 
 estaAutenticado();
 
@@ -20,7 +21,7 @@ if(!$id){
 $propiedad = Propiedad::find(($id));
 // Comprobamos si existe la propiedad
 if(is_null($propiedad)){
-    header('Location: /admin?error='.Config::PROPERTY_NOT_EXIST);
+    header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
 }
 // Obtener los vendedores
 $vendedores = Vendedor::all();
@@ -48,11 +49,10 @@ incluirTemplate('header');
                 $resultado = $propiedad->guardar();
                 if($resultado){
                     // Redireccionar al usuario
-                    header('Location: /admin?resultado='.Config::PROPERTY_UPDATED_SUCCESSFULLY);
+                    header('Location: /admin?resultado='.Notification::PROPERTY_UPDATED_SUCCESSFULLY);
                     exit;
                 }else{
-                    header('Location: /admin?error='.Config::PROPERTY_COULD_NOT_BE_UPDATED);
-                    exit;
+                    $errores[] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
                 }
                 
             }

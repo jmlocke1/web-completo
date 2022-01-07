@@ -3,6 +3,8 @@
 require '../../includes/app.php';
 use App\Propiedad;
 use App\Vendedor;
+use App\Database\DB;
+use App\Notification;
 
 estaAutenticado();
 
@@ -17,14 +19,27 @@ if(!$id){
 $vendedor = Vendedor::find($id);
 // Comprobamos si existe el vendedor
 if(is_null($vendedor)){
-    header('Location: /admin?error='.Config::SELLER_NOT_EXIST);
+    header('Location: /admin?error='.Notification::SELLER_NOT_EXIST);
 }
 
 // Array con mensajes de errores
 $errores = Vendedor::getErrors();
 
 if($_SERVER["REQUEST_METHOD"] === 'POST') {
-
+	// Asignar los valores
+	$vendedor->sincronizar($_POST['vendedor']);
+	// Validación
+	$errores = $vendedor->validar();
+	if(empty($errores)){
+		$resultado = $vendedor->guardar();
+		if($resultado){
+			// Redireccionar al usuario
+			header('Location: /admin?resultado='.Notification::SELLER_UPDATED_SUCCESSFULLY);
+			exit;
+		}else{
+			$errores[] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
+		}
+	}
 }
 
 incluirTemplate('header');
