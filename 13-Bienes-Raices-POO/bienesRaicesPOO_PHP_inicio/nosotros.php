@@ -6,7 +6,7 @@ incluirTemplate('header');
 
     <main class="contenedor">
         <h2>Conoce sobre Nosotros</h2>
-
+        <blockquote>Texto de prueba</blockquote>
         <div class="contenido-nosotros">
             <div class="imagen">
                 <picture>
@@ -15,6 +15,7 @@ incluirTemplate('header');
                     <img width="200" height="300" loading="lazy" src="build/img/nosotros.jpg" alt="Sobre Nosotros" title="Sobre Nosotros">
                 </picture>
             </div>
+            
             <div class="texto-nosotros">
                 <blockquote>
                     25 Años de experiencia
