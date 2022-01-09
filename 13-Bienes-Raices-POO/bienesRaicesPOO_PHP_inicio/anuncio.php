@@ -1,5 +1,6 @@
 <?php
-
+use App\Notification;
+use App\Propiedad;
 require 'includes/app.php';
 $id = isset($_GET['id']) ? filter_var($_GET['id'], FILTER_VALIDATE_INT) : '';
 $error = isset($_GET['error']) ?  filter_var($_GET['error'], FILTER_VALIDATE_INT) : '';

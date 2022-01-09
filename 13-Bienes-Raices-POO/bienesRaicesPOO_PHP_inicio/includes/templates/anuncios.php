@@ -1,45 +1,43 @@
 <?php
-use App\Database\DB;
+//use App\Database\DB;
 //require_once __DIR__ . '/../funciones.php';
-$db = DB::getDB();
-// Consultar
-$limitarRegistros = isset($limite) ? "LIMIT $limite" : '';
-$query = "SELECT * FROM propiedades $limitarRegistros";
+//$db = DB::getDB();
+use App\Propiedad;
 
-// Obtener resultado
-$resultado = mysqli_query($db, $query);
+$propiedades = Propiedad::all();
+
 
 
 ?>
 
 <div class="contenedor-anuncios">
-    <?php while($propiedad = mysqli_fetch_assoc($resultado)): ?>
+    <?php foreach($propiedades as $propiedad): ?>
             <div class="anuncio">
                     
-                <img loading="lazy" src="/imagenes/<?= $propiedad['imagen']; ?>"  alt="Imagen de la propiedad <?= $propiedad['titulo']; ?>" title="Imagen de la propiedad <?= $propiedad['titulo']; ?>">
+                <img loading="lazy" src="/imagenes/<?= $propiedad->imagen; ?>"  alt="Imagen de la propiedad <?= $propiedad->titulo; ?>" title="Imagen de la propiedad <?= $propiedad->titulo; ?>">
                 
                 <div class="contenido-anuncio">
-                    <h3><?= $propiedad['titulo']; ?></h3>
+                    <h3><?= $propiedad->titulo; ?></h3>
                     
-                    <p class="anuncio-descripcion"><?= $propiedad['descripcion']; ?></p>
+                    <p class="anuncio-descripcion"><?= $propiedad->descripcion; ?></p>
                     
-                    <p class="precio">$<?= $propiedad['precio']; ?></p>
+                    <p class="precio">$<?= $propiedad->precio; ?></p>
                     <ul class="iconos-caracteristicas">
                         <li>
                             <img class="icono" loading="lazy" src="build/img/icono_wc.svg" alt="icono WC">
-                            <p><?= $propiedad['wc']; ?></p>
+                            <p><?= $propiedad->wc; ?></p>
                         </li>
                         <li>
                             <img class="icono" loading="lazy" src="build/img/icono_estacionamiento.svg" alt="icono estacionamiento">
-                            <p><?= $propiedad['estacionamiento']; ?></p>
+                            <p><?= $propiedad->estacionamiento; ?></p>
                         </li>
                         <li>
                             <img class="icono" loading="lazy" src="build/img/icono_dormitorio.svg" alt="icono dormitorio">
-                            <p><?= $propiedad['habitaciones']; ?></p>
+                            <p><?= $propiedad->habitaciones; ?></p>
                         </li>
                     </ul>
-                    <a href="anuncio.php?id=<?= $propiedad['id']; ?>" class="boton-amarillo-block">Ver Propiedad</a>
+                    <a href="anuncio.php?id=<?= $propiedad->id; ?>" class="boton-amarillo-block">Ver Propiedad</a>
                 </div> <!--.contenido-anuncio-->
             </div><!--.anuncio-->
-    <?php endwhile; ?>
+    <?php endforeach; ?>
         </div><!--.contenedor-anuncio-->
