@@ -3,13 +3,21 @@ namespace App\Database;
 //require_once dirname(dirname(__DIR__))."/includes/config/Config.php";
 class DB {
     protected static $db;
+    private $query;
+
+
+    public function __construct($query = null){
+        self::hayDB();
+        if(isset($query)){
+            $this->query = $query;
+        }else{
+            $this->query = "";
+        }
+    }
 
     public static function getDB(){
-        if(!isset(self::$db)){
-            return self::conectarDB();
-        }else{
-            return self::$db;
-        }
+        self::hayDB();
+        return self::$db;
     }
 
     /**
@@ -66,4 +74,9 @@ class DB {
 			self::conectarDB();
 		}
 	}
+
+    public static function table($table){
+        $newDB = new self( "SELECT * FROM {$table}" );
+        return $newDB;
+    }
 }

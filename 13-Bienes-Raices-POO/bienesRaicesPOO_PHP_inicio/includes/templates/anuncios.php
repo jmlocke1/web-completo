@@ -3,8 +3,12 @@
 //require_once __DIR__ . '/../funciones.php';
 //$db = DB::getDB();
 use App\Propiedad;
+if(isset($limite)){
+    $propiedades = Propiedad::all($limite);
+}else{
+    $propiedades = Propiedad::all();
+}
 
-$propiedades = Propiedad::all();
 
 
 
@@ -17,7 +21,7 @@ $propiedades = Propiedad::all();
                 <img loading="lazy" src="/imagenes/<?= $propiedad->imagen; ?>"  alt="Imagen de la propiedad <?= $propiedad->titulo; ?>" title="Imagen de la propiedad <?= $propiedad->titulo; ?>">
                 
                 <div class="contenido-anuncio">
-                    <h3><?= $propiedad->titulo; ?></h3>
+                    <h3 title="<?= $propiedad->titulo; ?>"><?= $propiedad->titulo; ?></h3>
                     
                     <p class="anuncio-descripcion"><?= $propiedad->descripcion; ?></p>
                     

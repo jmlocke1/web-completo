@@ -15,7 +15,12 @@ class ActiveRecord {
 	public static function all($limit = null, $offset = null){
 		
 		$query = "SELECT * FROM ".get_called_class()::TABLENAME;
-		
+		if(isset($limit)){
+			$query .= " LIMIT {$limit}";
+		}
+		if(isset($offset)){
+			$query .= " OFFSET {$offset}";
+		}
 		$resultado = self::consultarSQL($query);
 		return $resultado;
 	}
