@@ -4,7 +4,7 @@
 //$db = DB::getDB();
 use App\Propiedad;
 if(isset($limite)){
-    $propiedades = Propiedad::all($limite);
+    $propiedades = Propiedad::get($limite);
 }else{
     $propiedades = Propiedad::all();
 }

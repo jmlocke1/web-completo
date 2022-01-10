@@ -12,7 +12,18 @@ class ActiveRecord {
 	/**
 	 * Lista todos los registros
 	 */
-	public static function all($limit = null, $offset = null){
+	public static function all(){
+		
+		$query = "SELECT * FROM ".get_called_class()::TABLENAME;
+		
+		$resultado = self::consultarSQL($query);
+		return $resultado;
+	}
+
+	/**
+	 * Lista un determinado número de  registros
+	 */
+	public static function get($limit = null, $offset = null){
 		
 		$query = "SELECT * FROM ".get_called_class()::TABLENAME;
 		if(isset($limit)){
