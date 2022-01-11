@@ -1,6 +1,6 @@
 <?php
-namespace App;
-use App\Database\DB;
+namespace Model;
+use Model\Database\DB;
 
 
 class ActiveRecord {

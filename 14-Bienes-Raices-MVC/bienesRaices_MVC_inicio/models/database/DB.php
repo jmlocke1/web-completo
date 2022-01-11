@@ -1,5 +1,5 @@
 <?php
-namespace App\Database;
+namespace Model\Database;
 //require_once dirname(dirname(__DIR__))."/includes/config/Config.php";
 class DB {
     protected static $db;
@@ -23,7 +23,7 @@ class DB {
     /**
      * Devuelve una conexión a la base de datos
      */
-    private static function conectarDB() {
+    public static function conectarDB() {
         self::$db = new \mysqli(\Config::DB_HOST, \Config::DB_USER, \Config::DB_PASSWORD, \Config::DB_NAME);
         if(self::$db->connect_errno) {
             echo "Error. No se pudo conectar: ".self::$db->connect_error;
