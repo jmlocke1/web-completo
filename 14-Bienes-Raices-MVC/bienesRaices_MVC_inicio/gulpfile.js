@@ -15,7 +15,7 @@ const webp = require('gulp-webp');
 const svg = require('gulp-svgmin');//svg
 // Paquete comentado para que no falle en el linux
 // de los ordenadores pequeños
-// const avif = require('gulp-avif');
+const avif = require('gulp-avif');
 
 // JavaScript
 const concat = require('gulp-concat');
@@ -30,7 +30,7 @@ function css( done ) {
 		.pipe( sass() )  // Compilarlo
 		.pipe( postcss([autoprefixer(), cssnano()]) )
 		.pipe( sourcemaps.write('.') )
-		.pipe( dest('./build/css') );  // Almacenarla en el disco duro
+		.pipe( dest('./public/build/css') );  // Almacenarla en el disco duro
 	done();
 }
 
@@ -40,7 +40,7 @@ function imagenes( done ) {
 	};
 	src('src/img/**/*.{png,jpg}')
 		.pipe( cache( imagemin(opciones) ) )
-		.pipe( dest('build/img'));
+		.pipe( dest('public/build/img'));
 
 	done();
 }
@@ -51,7 +51,7 @@ function versionWebp( done ) {
 	};
 	src('src/img/**/*.{png,jpg}')
 		.pipe( webp(opciones) )
-		.pipe( dest('build/img') );
+		.pipe( dest('public/build/img') );
 
 	done();
 }
@@ -62,7 +62,7 @@ function versionAvif( done ) {
 	};
 	src('src/img/**/*.{png,jpg}')
 		.pipe( avif(opciones) )
-		.pipe( dest('build/img') );
+		.pipe( dest('public/build/img') );
 
 	done();
 }
@@ -70,7 +70,7 @@ function versionAvif( done ) {
 function versionSVG( done ){
     src('src/img/**/*.svg')
         // .pipe( svg() )
-        .pipe( dest('build/img') );
+        .pipe( dest('public/build/img') );
     done();
 }
 
@@ -81,7 +81,7 @@ function javascript( done ) {
 		.pipe( terser() )
         .pipe(rename({ suffix: '.min' }))
 		.pipe( sourcemaps.write('.'))
-        .pipe( dest('build/js') );
+        .pipe( dest('public/build/js') );
     done();
 }
 
