@@ -9,10 +9,14 @@ class Router{
     }
 
     public function comprobarRutas(){
-        $urlActual = $_SERVER['PATH_INFO'] ?? '/';
+        $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
+        
+        echo "Método: ", $metodo, ". URL Actual: ", $urlActual, " PathInfo: ", $_SERVER['REDIRECT_URL'], "<br>";
+        
         if($metodo === 'GET'){
-            debuguear($this->rutasGET[$urlActual]);
+            echo $this->rutasGET[$urlActual], "<br>";
+            debuguear($_SERVER);
         }
     }
 }
