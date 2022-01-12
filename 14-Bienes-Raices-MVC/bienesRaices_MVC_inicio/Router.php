@@ -15,10 +15,10 @@ class Router{
             $fn = $this->rutasGET[$urlActual] ?? null;
         }
         if($fn){
-            echo "Existe $fn";
+            // La url existe y hay una función asociada
+            call_user_func($fn, $this);
         }else{
             echo "Página no encontrada";
         }
-        debuguear($_SERVER);
     }
 }

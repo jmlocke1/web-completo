@@ -1,5 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
+# Redirige la url a una url segura con https
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteRule ^(models|config|database)/ - [F]
