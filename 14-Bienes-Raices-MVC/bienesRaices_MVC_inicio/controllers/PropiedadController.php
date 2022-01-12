@@ -4,6 +4,7 @@ use MVC\Router;
 use Model\Propiedad;
 use Model\Notification;
 use Model\Vendedor;
+use Model\Database\DB;
 
 class PropiedadController {
     public static function index(Router $router){
@@ -27,7 +28,27 @@ class PropiedadController {
         $datos['propiedad'] = new Propiedad;
         $datos['vendedores'] = Vendedor::all();
         if($_SERVER["REQUEST_METHOD"] === 'POST') {
-            debuguear($_POST);
+            $propiedad = new Propiedad($_POST['propiedad']);
+            
+            !empty($_FILES['propiedad']['tmp_name']['imagen']) ? $propiedad->setImagen($_FILES['propiedad']) : '';
+            
+
+            $propiedad->validar();
+            $datos['errores'] = Propiedad::getErrors();
+            
+            // Revisar que el array de errores esté vacío
+            if(empty($datos['errores'])){
+                // Insertar en la base de datos
+                $resultado = $propiedad->guardar();
+                if($resultado){
+                    // Redireccionar al usuario
+                    header('Location: /admin?resultado='.Notification::AD_CREATED_SUCCESSFULLY);
+                }else{
+                    $datos['errores'][] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
+                }
+            }
+            
+ 
         }
         $router->render('propiedades/crear', $datos);
     }
