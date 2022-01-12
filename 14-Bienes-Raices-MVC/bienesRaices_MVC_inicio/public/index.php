@@ -5,6 +5,7 @@ use MVC\Router;
 $router = new Router();
 $router->get('/', 'funcion_raiz');
 $router->get('/nosotros', 'funcion_nosotros');
+$router->get('/nosotros/admin', 'funcion_nosotros_admin');
 $router->get('/tienda_virtual', 'funcion_tienda');
 $router->get('/contacto', 'funcion_contacto');
 $router->get('/admin', 'funcion_admin');

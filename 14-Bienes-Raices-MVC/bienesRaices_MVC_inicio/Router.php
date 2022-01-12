@@ -12,7 +12,13 @@ class Router{
         $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
         if($metodo === 'GET'){
-            debuguear($this->rutasGET[$urlActual]);
+            $fn = $this->rutasGET[$urlActual] ?? null;
         }
+        if($fn){
+            echo "Existe $fn";
+        }else{
+            echo "Página no encontrada";
+        }
+        debuguear($_SERVER);
     }
 }
