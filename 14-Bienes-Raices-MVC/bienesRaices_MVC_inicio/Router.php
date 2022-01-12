@@ -12,7 +12,7 @@ class Router{
         $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
         
-        echo "Método: ", $metodo, ". URL Actual: ", $urlActual, " PathInfo: ", $_SERVER['REDIRECT_URL'], "<br>";
+        
         
         if($metodo === 'GET'){
             $fn = $this->rutasGET[$urlActual] ?? null;
@@ -26,6 +26,11 @@ class Router{
     }
 
     public function render($view) {
+        ob_start(); // Almacenamiento en memoria durante un momento...
         include __DIR__."/views/$view.php";
+
+        $contenido = ob_get_clean(); // Limpia el Buffer
+
+        include __DIR__."/views/layout.php";
     }
 }
