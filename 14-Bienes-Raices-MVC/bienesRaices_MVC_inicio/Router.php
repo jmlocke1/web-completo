@@ -9,7 +9,7 @@ class Router{
     }
 
     public function comprobarRutas(){
-        $urlActual = $_SERVER['PATH_INFO'] ?? '/';
+        $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
         if($metodo === 'GET'){
             debuguear($this->rutasGET[$urlActual]);
