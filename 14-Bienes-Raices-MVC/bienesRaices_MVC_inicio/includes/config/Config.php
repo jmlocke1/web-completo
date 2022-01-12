@@ -17,7 +17,7 @@ error_reporting(E_ALL);
 
 class Config {
 	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
-	const CARPETA_IMAGENES = DIR_ROOT."imagenes/";
+	const CARPETA_IMAGENES = DIR_ROOT."/public/build/imagenes/";
 	/**
 	 * Precio mínimo de una vivienda
 	 */
