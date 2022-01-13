@@ -56,6 +56,17 @@ class PropiedadController {
     }
 
     public static function actualizar(Router $router){
-        echo "Actualizar propiedad";
+        $id = validarORedireccionar('/admin', 'propiedad');
+        $propiedad = Propiedad::find(($id));
+        // Comprobamos si existe la propiedad
+        if(is_null($propiedad)){
+            header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
+        }
+        $errores = Propiedad::getErrors();
+        $router->render('/propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores' => Vendedor::all()
+        ]);
     }
 }

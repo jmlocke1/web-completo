@@ -164,7 +164,27 @@ function debuguearSinExit($variable){
     echo "</pre>";
 }
 
+/**
+ * Sanitiza el html pasado para mostrarlo tal cual en pantalla, sin interpretar
+ * las etiquetas html
+ */
 function s($html){
     $s = htmlspecialchars($html);
     return $s;
+}
+
+/**
+ * Valida un identificador pasado por get para comprobar que es un entero
+ * válido
+ */
+function validarORedireccionar(string $url, string $nombreId = 'id'){
+    // Validar la url por id válido
+    $id = $_GET[$nombreId];
+
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    if(!$id){
+        header('Location: '.$url);
+    }
+    return $id;
 }
