@@ -48,14 +48,16 @@ class Propiedad extends ActiveRecord {
 
 
 	public function setImagen($imagen){
-		$this->imageFile = new Image($imagen);
+		if(!empty($imagen['tmp_name']['imagen'])){
+			$this->imageFile = new Image($imagen);
+		}
 		// Asignar al atributo de imagen el nombre de la imagen
-		if(!is_null($this->id) && $imagen){
+		if(!is_null($this->id) && isset($this->imageFile)){
 			// Estamos editando la propiedad
 			// Comprobamos si existe el archivo
 			$this->borrarImagen();
 		}
-		if($imagen){
+		if(isset($this->imageFile)){
 			$this->imagen = $this->imageFile->imageName;
 		}
 	}

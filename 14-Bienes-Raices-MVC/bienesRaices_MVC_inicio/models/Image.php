@@ -21,11 +21,28 @@ class Image{
 			mkdir($this->imageFolder);
 		}
 		
-		$this->imageName = getImageName($file['name']['imagen']);
+		$this->imageName = $this->getImageName($file['name']['imagen']);
 		$this->imageFile = ImageManager::make($file['tmp_name']['imagen'])->fit(800,600);
 	}
 
 	public function guardar(){
 		$this->imageFile->save($this->imageFolder.$this->imageName);
+	}
+
+	/**
+	 * Devuelve un nombre único para una imagen
+	 */
+	public function getImageName(string $nombreAntiguo): string {
+		$nombreImagen = md5(uniqid( rand(), true)).".". $this->getImageExtension($nombreAntiguo);
+		return $nombreImagen;
+	}
+
+	/**
+	 * Devuelve la extensión de una imagen dada como parámetro
+	 */
+	public function getImageExtension(string $imageName): string {
+		$imgParts = explode('.', $imageName);
+		$extension = $imgParts[count($imgParts) - 1];
+		return $extension;
 	}
 }

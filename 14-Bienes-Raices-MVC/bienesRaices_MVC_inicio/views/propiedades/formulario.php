@@ -8,7 +8,7 @@
                 <input type="number" step=".01" min="<?= Config::MIN_PRICE_VALUE; ?>" max="<?= Config::MAX_PRICE_VALUE; ?>" id="precio" name="propiedad[precio]" placeholder="Precio Propiedad" value="<?= s($propiedad->precio); ?>">
 				<div class="imagen-muestra">
 				<?php if($propiedad->imagen){ ?>
-					<img src="/imagenes/<?= $propiedad->imagen ?>" alt="" class="imagen-small">
+					<img src="<?= $imageFolder . $propiedad->imagen ?>" alt="" class="imagen-small">
 				<?php } ?>
 					<div class="imagen-label">
 						<label for="imagen">Imagen:</label>

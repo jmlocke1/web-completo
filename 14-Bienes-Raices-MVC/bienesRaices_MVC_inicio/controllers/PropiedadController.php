@@ -1,5 +1,7 @@
 <?php
 namespace Controllers;
+
+use Config;
 use MVC\Router;
 use Model\Propiedad;
 use Model\Notification;
@@ -25,17 +27,17 @@ class PropiedadController {
 
     public static function crear(Router $router) {
         $datos = [];
-        $datos['propiedad'] = new Propiedad;
+        $datos['errores'] = [];
         $datos['vendedores'] = Vendedor::all();
         if($_SERVER["REQUEST_METHOD"] === 'POST') {
             $propiedad = new Propiedad($_POST['propiedad']);
             
-            !empty($_FILES['propiedad']['tmp_name']['imagen']) ? $propiedad->setImagen($_FILES['propiedad']) : '';
+            $propiedad->setImagen($_FILES['propiedad']);
             
 
             $propiedad->validar();
             $datos['errores'] = Propiedad::getErrors();
-            
+            $datos['propiedad'] = $propiedad;
             // Revisar que el array de errores esté vacío
             if(empty($datos['errores'])){
                 // Insertar en la base de datos
@@ -47,8 +49,8 @@ class PropiedadController {
                     $datos['errores'][] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
                 }
             }
-            
- 
+        }else{ 
+            $datos['propiedad'] = new Propiedad;
         }
         $router->render('propiedades/crear', $datos);
     }
