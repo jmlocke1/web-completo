@@ -17,7 +17,14 @@ error_reporting(E_ALL);
 
 class Config {
 	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
+	/**
+	 * Carpeta de imágenes para PHP
+	 */
 	const CARPETA_IMAGENES = DIR_ROOT."/public/build/imagenes/";
+	/**
+	 * Carpeta de imágenes para la vista
+	 */
+	const CARPETA_IMAGENES_VIEW = '/build/imagenes/';
 	/**
 	 * Precio mínimo de una vivienda
 	 */

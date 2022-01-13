@@ -25,48 +25,68 @@ class PropiedadController {
         $router->render('propiedades/admin', $datos);
     }
 
-    public static function crear(Router $router) {
-        $datos = [];
-        $datos['errores'] = [];
-        $datos['vendedores'] = Vendedor::all();
-        if($_SERVER["REQUEST_METHOD"] === 'POST') {
-            $propiedad = new Propiedad($_POST['propiedad']);
-            
-            $propiedad->setImagen($_FILES['propiedad']);
-            
-
-            $propiedad->validar();
-            $datos['errores'] = Propiedad::getErrors();
-            $datos['propiedad'] = $propiedad;
-            // Revisar que el array de errores esté vacío
-            if(empty($datos['errores'])){
-                // Insertar en la base de datos
-                $resultado = $propiedad->guardar();
-                if($resultado){
-                    // Redireccionar al usuario
-                    header('Location: /admin?resultado='.Notification::AD_CREATED_SUCCESSFULLY);
-                }else{
-                    $datos['errores'][] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
-                }
-            }
-        }else{ 
-            $datos['propiedad'] = new Propiedad;
-        }
-        $router->render('propiedades/crear', $datos);
+    public static function crearGet(Router $router) {
+        $router->render('propiedades/crear', [
+            'propiedad' => new Propiedad(),
+            'errores' => [],
+            'vendedores' => Vendedor::all()
+        ]);
     }
 
-    public static function actualizar(Router $router){
+    public static function crearPost(Router $router){
+        $propiedad = new Propiedad($_POST['propiedad']);
+        $propiedad->setImagen($_FILES['propiedad']);
+        $propiedad->validar();
+        $errores = Propiedad::getErrors();
+        // Revisar que el array de errores esté vacío
+        if(empty($errores)){
+            // Insertar en la base de datos
+            $resultado = $propiedad->guardar();
+            if($resultado){
+                // Redireccionar al usuario
+                header('Location: /admin?resultado='.Notification::AD_CREATED_SUCCESSFULLY);
+                exit;
+            }else{
+                $errores[] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
+            }
+        }
+        $router->render('propiedades/crear', [
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores' => Vendedor::all()
+        ]);
+    }
+
+    public static function actualizarGet(Router $router){
         $id = validarORedireccionar('/admin', 'propiedad');
         $propiedad = Propiedad::find(($id));
         // Comprobamos si existe la propiedad
         if(is_null($propiedad)){
             header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
+            exit;
         }
-        $errores = Propiedad::getErrors();
+        
         $router->render('/propiedades/actualizar', [
             'propiedad' => $propiedad,
-            'errores' => $errores,
-            'vendedores' => Vendedor::all()
+            'errores' => Propiedad::getErrors(),
+            'vendedores' => Vendedor::all(),
+            'imageFolder' => Config::CARPETA_IMAGENES_VIEW
+        ]);
+    }
+
+    public static function actualizarPost(Router $router){
+        $id = validarORedireccionar('/admin', 'propiedad');
+        $propiedad = Propiedad::find(($id));
+        // Comprobamos si existe la propiedad
+        if(is_null($propiedad)){
+            header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
+            exit;
+        }
+        $router->render('/propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'errores' => Propiedad::getErrors(),
+            'vendedores' => Vendedor::all(),
+            'imageFolder' => Config::CARPETA_IMAGENES_VIEW
         ]);
     }
 }

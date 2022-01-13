@@ -6,10 +6,10 @@ $router = new Router();
 $router->get('/', 'funcion_raiz');
 
 $router->get('/admin', [PropiedadController::class, 'index']);
-$router->get('/propiedades/crear', [PropiedadController::class, 'crear']);
-$router->post('/propiedades/crear', [PropiedadController::class, 'crear']);
-$router->get('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
-$router->post('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
+$router->get('/propiedades/crear', [PropiedadController::class, 'crearGet']);
+$router->post('/propiedades/crear', [PropiedadController::class, 'crearPost']);
+$router->get('/propiedades/actualizar', [PropiedadController::class, 'actualizarGet']);
+$router->post('/propiedades/actualizar', [PropiedadController::class, 'actualizarPost']);
 $router->post('/propiedades/eliminar', [PropiedadController::class, 'eliminar']);
 
 $router->comprobarRutas();
