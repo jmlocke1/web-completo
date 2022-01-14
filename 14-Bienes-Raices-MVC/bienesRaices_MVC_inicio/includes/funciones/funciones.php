@@ -1,5 +1,6 @@
 <?php
-
+use Model\Propiedad;
+use Model\Notification;
 
 
 function incluirTemplate( string $nombre, string $inicio = '' ) {
@@ -179,12 +180,25 @@ function s($html){
  */
 function validarORedireccionar(string $url, string $nombreId = 'id'){
     // Validar la url por id válido
+    debuguear($_GET);
     $id = $_GET[$nombreId];
-
+    debuguear($_GET);
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if(!$id){
         header('Location: '.$url);
     }
     return $id;
+}
+
+function existsProperty(string $url, string $nombreId = 'id'){
+    $id = validarORedireccionar($url, $nombreId);
+    $propiedad = Propiedad::find($id);
+    debuguear($propiedad);
+    // Comprobamos si existe la propiedad
+    if(is_null($propiedad)){
+        header('location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
+        exit;
+    }
+    return $propiedad;
 }

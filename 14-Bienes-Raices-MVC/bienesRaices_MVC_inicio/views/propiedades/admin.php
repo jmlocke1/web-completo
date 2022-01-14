@@ -31,7 +31,7 @@
                     <td><img src="/build/imagenes/<?= $propiedad->imagen; ?>" class="imagen-tabla" alt="Imagen de la <?= $propiedad->titulo; ?>" title="Imagen de la <?= $propiedad->titulo; ?>"> </td>
                     <td>$<?= $propiedad->precio; ?></td>
                     <td class="form-admin-action">
-                        <form method="POST" class="w-100">
+                        <form action="/propiedades/eliminar" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?= $propiedad->id; ?>">
                             <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block w-100" value="Eliminar" title="Elimina la propiedad <?= $propiedad->id; ?>- <?= $propiedad->titulo; ?>">

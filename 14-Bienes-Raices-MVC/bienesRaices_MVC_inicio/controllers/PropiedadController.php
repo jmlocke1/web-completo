@@ -113,4 +113,22 @@ class PropiedadController {
             'imageFolder' => Config::CARPETA_IMAGENES_VIEW
         ]);
     }
+
+    public static function eliminar(Router $router){
+        $propiedad = existsProperty('/admin');
+        $resultado = $propiedad->eliminar();
+        if($resultado){
+            header('location: /admin?resultado='.Notification::PROPERTY_REMOVED_SUCCESSFULLY);
+        }else{
+            header('location: /admin?error='.Notification::PROPERTY_COULD_NOT_BE_REMOVED);
+        }
+    }
+
+    public static function eliminarGet(Router $router){
+        if($_SERVER['REQUEST_METHOD'] === 'GET'){
+            echo "Estamos en eliminar en get";
+        }else{
+            echo "No sé donde estoy desde get";
+        }
+    }
 }
