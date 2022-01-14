@@ -82,9 +82,33 @@ class PropiedadController {
             header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
             exit;
         }
+        // Asignar los atributos
+        $args = $_POST['propiedad'];
+            
+        $propiedad->sincronizar($args);
+        $errores = $propiedad->validar();
+
+        // Revisar que el array de errores esté vacío
+        if(empty($errores)){
+            $hayImagen = !empty($_FILES['propiedad']['name']['imagen']);
+            if($hayImagen){
+                $propiedad->setImagen($_FILES['propiedad']);                    
+            }
+            $resultado = $propiedad->guardar();
+            if($resultado){
+                // Redireccionar al usuario
+                header('Location: /admin?resultado='.Notification::PROPERTY_UPDATED_SUCCESSFULLY);
+                exit;
+            }else{
+                $errores[] = "Error ".DB::getDB()->errno." al insertar en la base de datos: ".DB::getDB()->error;
+            }
+            
+        }
+
+
         $router->render('/propiedades/actualizar', [
             'propiedad' => $propiedad,
-            'errores' => Propiedad::getErrors(),
+            'errores' => $errores,
             'vendedores' => Vendedor::all(),
             'imageFolder' => Config::CARPETA_IMAGENES_VIEW
         ]);
