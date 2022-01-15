@@ -60,8 +60,7 @@ class PropiedadController {
     }
 
     public static function actualizarGet(Router $router){
-        $id = validarORedireccionar('/admin', 'propiedad');
-        $propiedad = Propiedad::find(($id));
+        $propiedad = Propiedad::existsById($_GET['propiedad']);
         // Comprobamos si existe la propiedad
         if(is_null($propiedad)){
             header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);

@@ -8,7 +8,14 @@ class ActiveRecord {
 	protected static $db;
 	protected static $errores = [];
 	protected static $notifications = [];
-
+	/**
+	 * Script de destino en caso de éxito
+	 */
+	protected static $destinationOnSuccess = '';
+	/**
+	 * Script de destino en caso de error
+	 */
+	protected static $destinationOnError = '';
 	/**
 	 * Lista todos los registros
 	 */
@@ -183,5 +190,24 @@ class ActiveRecord {
 			$sanitizado[$key] = self::$db->escape_string($value);
 		}
 		return $sanitizado;
+	}
+
+	/**
+	 * Comprueba si el id es válido. Si es válido devuelve un objeto con ese id.
+	 * Si el objeto no existe redirecciona a otra página mostrando un mensaje de error
+	 */
+	public static function existsById($id){
+		$id = filter_var($id, FILTER_VALIDATE_INT);
+		if(!$id){
+			header('Location: '.static::$destinationOnError.'?error='. Notification::ID_NOT_VALID);
+			exit;
+		}
+		$object = static::find($id);
+		// Comprobamos si existe el objeto
+		if(is_null($object)){
+			header('location: '.static::$destinationOnError.'?error='.static::$notifications['notExist']);
+			exit;
+		}
+		return $object;
 	}
 }

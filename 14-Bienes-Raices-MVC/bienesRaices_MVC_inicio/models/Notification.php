@@ -4,9 +4,48 @@ namespace Model;
 class Notification{
 
 	/**
+	 * MENSAJES DE ÉXITO GENÉRICOS
+	 */
+	/**
+	 * Creado correctamente
+	 */
+	const CREATED_SUCCESSFULLY = 'CREATED_SUCCESSFULLY';
+	/**
+	 * Actualizado/a correctamente
+	 */
+	const UPDATED_SUCCESSFULLY = 'UPDATED_SUCCESSFULLY';
+	/**
+	 * Eliminado correctamente
+	 */
+	const REMOVED_SUCCESSFULLY = 'REMOVED_SUCCESSFULLY';
+
+	/**
+	 * MENSAJES DE ERROR
+	 */
+	/**
+	 * No se pudo crear
+	 */
+	const NOT_CREATED = 'NOT_CREATED';
+	/**
+	 * No se pudo actualizar
+	 */
+	const NOT_UPDATED = 'NOT_UPDATED';
+	/**
+	 * No se pudo eliminar
+	 */
+	const NOT_REMOVED = 'NOT_REMOVED';
+	/**
+	 * No existe
+	 */
+	const NOT_EXIST = 'NOT_EXIST';
+	/**
+	 * El identificador no es válido
+	 */
+	const ID_NOT_VALID = 'ID_NOT_VALID';
+
+	/**
 	 * MENSAJES DE ÉXITO
 	 */
-
 	/**
 	 * Anuncio creado correctamente
 	 */
@@ -41,6 +80,10 @@ class Notification{
 	 */
 	const PROPERTY_NOT_EXIST = 1;
 	/**
+	 * El anuncio no se pudo crear
+	 */
+	const ADD_COULD_NOT_BE_CREATED = 'ADD_COULD_NOT_BE_CREATED';
+	/**
 	 * La propiedad no se pudo actualizar
 	 */
 	const PROPERTY_COULD_NOT_BE_UPDATED = 2;
@@ -64,10 +107,20 @@ class Notification{
 	 * Vendedor no existe
 	 */
 	const SELLER_NOT_EXIST = 7;
+	
 
 	public static function successNotification($code){
 		$mensaje = "";
 		switch($code){
+			case self::CREATED_SUCCESSFULLY:
+				$mensaje = "Creado correctamente";
+				break;
+			case self::UPDATED_SUCCESSFULLY:
+				$mensaje = "Actualizado/a correctamente";
+				break;
+			case self::REMOVED_SUCCESSFULLY:
+				$mensaje = "Eliminado/a correctamente";
+				break;
 			case self::AD_CREATED_SUCCESSFULLY:
 				$mensaje = "Anuncio creado correctamente";
 				break;
@@ -95,6 +148,24 @@ class Notification{
 	public static function errorNotification($code){
 		$mensaje = "";
 		switch($code){
+			case self::NOT_CREATED:
+				$mensaje = "No se pudo crear";
+				break;
+			case self::NOT_UPDATED:
+				$mensaje = "No se pudo actualizar";
+				break;
+			case self::NOT_REMOVED:
+				$mensaje = "No se pudo eliminar";
+				break;
+			case self::NOT_EXIST:
+				$mensaje = "No existe";
+				break;
+			case self::ID_NOT_VALID:
+				$mensaje = "El identificador no es válido";
+				break;
+			case self::ADD_COULD_NOT_BE_CREATED:
+				$mensaje = "El anuncio no se pudo crear";
+				break;
 			case self::PROPERTY_NOT_EXIST:
 				$mensaje = "Esa propiedad no existe";
 				break;

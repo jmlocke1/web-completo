@@ -8,6 +8,25 @@ class Propiedad extends ActiveRecord {
 	const TABLENAME = "propiedades";
 	
 	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
+	protected static $notifications = [
+		'createdSuccessfully' => Notification::AD_CREATED_SUCCESSFULLY,
+		'removedSuccessfully' => Notification::PROPERTY_REMOVED_SUCCESSFULLY,
+		'updatedSuccessfully' => Notification::PROPERTY_UPDATED_SUCCESSFULLY,
+		'notExist' => Notification::PROPERTY_NOT_EXIST,
+		'notCreated' => Notification::ADD_COULD_NOT_BE_CREATED,
+		'notDeleted' => Notification::PROPERTY_COULD_NOT_BE_REMOVED,
+		'notUpdated' => Notification::PROPERTY_COULD_NOT_BE_UPDATED,
+		'idNotValid' => Notification::ID_NOT_VALID
+	];
+	/**
+	 * Script de destino en caso de éxito
+	 */
+	protected static $destinationOnSuccess = '/admin';
+	/**
+	 * Script de destino en caso de error
+	 */
+	protected static $destinationOnError = '/admin';
+
 	protected Image $imageFile;
 	
 	public $id;

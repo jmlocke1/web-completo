@@ -7,8 +7,20 @@ class Vendedor extends ActiveRecord {
 		'createdSuccessfully' => Notification::SELLER_CREATED_SUCCESSFULLY,
 		'removedSuccessfully' => Notification::SELLER_REMOVED_SUCCESSFULLY,
 		'updatedSuccessfully' => Notification::SELLER_UPDATED_SUCCESSFULLY,
-		'notExist' => Notification::SELLER_NOT_EXIST
+		'notExist' => Notification::SELLER_NOT_EXIST,
+		'notCreated' => Notification::SELLER_COULD_NOT_BE_CREATED,
+		'notDeleted' => Notification::SELLER_COULD_NOT_BE_DELETED,
+		'notUpdated' => Notification::SELLER_COULD_NOT_BE_UPDATED,
+		'idNotValid' => Notification::ID_NOT_VALID
 	];
+	/**
+	 * Script de destino en caso de éxito
+	 */
+	protected static $destinationOnSuccess = '/admin';
+	/**
+	 * Script de destino en caso de error
+	 */
+	protected static $destinationOnError = '/admin';
 	public $id;
 	public $nombre;
 	public $apellido;
