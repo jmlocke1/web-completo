@@ -7,7 +7,7 @@ class ActiveRecord {
 	const TABLENAME = '';
 	protected static $db;
 	protected static $errores = [];
-
+	protected static $notifications = [];
 
 	/**
 	 * Lista todos los registros

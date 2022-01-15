@@ -28,7 +28,7 @@ class Notification{
 	 */
 	const SELLER_REMOVED_SUCCESSFULLY = 5;
 	/**
-	 * Vendedor eliminado correctamente
+	 * Vendedor actualizado correctamente
 	 */
 	const SELLER_UPDATED_SUCCESSFULLY = 6;
 

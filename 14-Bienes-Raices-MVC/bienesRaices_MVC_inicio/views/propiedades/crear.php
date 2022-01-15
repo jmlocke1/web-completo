@@ -1,6 +1,6 @@
 
 <main class="contenedor seccion">
-        <h2>Crear</h2>
+        <h2>Crear Propiedad</h2>
 		<a href="/admin" class="boton boton-verde">Volver</a>
 
         <?php foreach($errores as $error): ?>

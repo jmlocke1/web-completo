@@ -180,9 +180,7 @@ function s($html){
  */
 function validarORedireccionar(string $url, string $nombreId = 'id'){
     // Validar la url por id válido
-    debuguear($_GET);
     $id = $_GET[$nombreId];
-    debuguear($_GET);
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if(!$id){
@@ -194,7 +192,6 @@ function validarORedireccionar(string $url, string $nombreId = 'id'){
 function existsProperty(string $url, string $nombreId = 'id'){
     $id = validarORedireccionar($url, $nombreId);
     $propiedad = Propiedad::find($id);
-    debuguear($propiedad);
     // Comprobamos si existe la propiedad
     if(is_null($propiedad)){
         header('location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
