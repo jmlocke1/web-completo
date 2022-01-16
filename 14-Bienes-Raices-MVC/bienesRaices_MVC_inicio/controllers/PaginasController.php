@@ -19,11 +19,12 @@ class PaginasController {
 	}
 
 	public static function propiedades( Router $router ){
-		$error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZE_NUMBER_INT)  : 0;
-		$mensajeError = null;
-		if($error){
-            $mensajeError = s(Notification::errorNotification($error));
-        }
+		if(isset($_GET['error'])){
+			$mensajeError = s(Notification::errorNotification($_GET['error']));
+		}else{
+			$mensajeError = '';
+		}
+        
 		$router->render('paginas/propiedades', [
 			'propiedades' => Propiedad::all(),
 			'mensajeError' => $mensajeError
