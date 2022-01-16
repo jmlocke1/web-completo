@@ -228,16 +228,17 @@ class ActiveRecord {
 	 * Comprueba si el id es válido. Si es válido devuelve un objeto con ese id.
 	 * Si el objeto no existe redirecciona a otra página mostrando un mensaje de error
 	 */
-	public static function existsById($id){
+	public static function existsById($id, $destination = null){
 		$id = filter_var($id, FILTER_VALIDATE_INT);
+		$destination = $destination ?? static::$destinationOnError;
 		if(!$id){
-			header('Location: '.static::$destinationOnError.'?error='. static::$notifications['idNotValid']);
+			header('Location: '.$destination.'?error='. static::$notifications['idNotValid']);
 			exit;
 		}
 		$object = static::find($id);
 		// Comprobamos si existe el objeto
 		if(is_null($object)){
-			header('location: '.static::$destinationOnError.'?error='.static::$notifications['notExist']);
+			header('location: '.$destination.'?error='.static::$notifications['notExist']);
 			exit;
 		}
 		return $object;

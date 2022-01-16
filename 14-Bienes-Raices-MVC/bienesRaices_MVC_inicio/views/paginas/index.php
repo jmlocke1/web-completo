@@ -7,10 +7,7 @@
     <section class="seccion contenedor">
         <h2>Casas y Deptos en Venta</h2>
 
-        <?php 
-        //$limite = 3;
-        include 'listado.php'; 
-        ?>
+        <?php include 'listado.php'; ?>
 
         <div class="alinear-derecha">
             <a class="boton-verde" href="anuncios.php">Ver Todas</a>

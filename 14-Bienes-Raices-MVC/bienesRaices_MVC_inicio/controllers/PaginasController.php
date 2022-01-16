@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Model\Propiedad;
 use MVC\Router;
+use Model\Notification;
 
 class PaginasController {
 	public static function index( Router $router ){
@@ -18,13 +19,23 @@ class PaginasController {
 	}
 
 	public static function propiedades( Router $router ){
+		$error = isset($_GET['error']) ? (int)filter_var( $_GET['error'], FILTER_SANITIZE_NUMBER_INT)  : 0;
+		$mensajeError = null;
+		if($error){
+            $mensajeError = s(Notification::errorNotification($error));
+        }
 		$router->render('paginas/propiedades', [
-			'propiedades' => Propiedad::all()
+			'propiedades' => Propiedad::all(),
+			'mensajeError' => $mensajeError
 		]);
 	}
 
 	public static function propiedad( Router $router ){
-		echo "Desde propiedad";
+		$propiedad = Propiedad::existsById($_GET['id'], '/propiedades');
+
+		$router->render('paginas/propiedad', [
+			'propiedad' => $propiedad
+		]);
 	}
 
 	public static function blog( Router $router ){
