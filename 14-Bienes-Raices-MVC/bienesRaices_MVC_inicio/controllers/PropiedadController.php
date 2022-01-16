@@ -61,12 +61,6 @@ class PropiedadController {
 
     public static function actualizarGet(Router $router){
         $propiedad = Propiedad::existsById($_GET['propiedad']);
-        // Comprobamos si existe la propiedad
-        if(is_null($propiedad)){
-            header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
-            exit;
-        }
-        
         $router->render('/propiedades/actualizar', [
             'propiedad' => $propiedad,
             'errores' => Propiedad::getErrors(),
@@ -76,17 +70,10 @@ class PropiedadController {
     }
 
     public static function actualizarPost(Router $router){
-        $id = validarORedireccionar('/admin', 'propiedad');
-        $propiedad = Propiedad::find(($id));
-        // Comprobamos si existe la propiedad
-        if(is_null($propiedad)){
-            header('Location: /admin?error='.Notification::PROPERTY_NOT_EXIST);
-            exit;
-        }
+        $propiedad = Propiedad::existsById(($_GET['propiedad']));
+        
         // Asignar los atributos
-        $args = $_POST['propiedad'];
-            
-        $propiedad->sincronizar($args);
+        $propiedad->sincronizar($_POST['propiedad']);
         $errores = $propiedad->validar();
 
         // Revisar que el array de errores esté vacío

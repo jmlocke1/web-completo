@@ -8,7 +8,7 @@ class Propiedad extends ActiveRecord {
 	const TABLENAME = "propiedades";
 	
 	protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedorId'];
-	protected static $notifications = [
+	public static $notifications = [
 		'createdSuccessfully' => Notification::AD_CREATED_SUCCESSFULLY,
 		'removedSuccessfully' => Notification::PROPERTY_REMOVED_SUCCESSFULLY,
 		'updatedSuccessfully' => Notification::PROPERTY_UPDATED_SUCCESSFULLY,

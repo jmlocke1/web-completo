@@ -3,7 +3,7 @@ namespace Model;
 class Vendedor extends ActiveRecord {
 	const TABLENAME = "vendedores";
 	protected static $columnasDB = ['id', 'nombre', 'apellido', 'telefono'];
-	protected static $notifications = [
+	public static $notifications = [
 		'createdSuccessfully' => Notification::SELLER_CREATED_SUCCESSFULLY,
 		'removedSuccessfully' => Notification::SELLER_REMOVED_SUCCESSFULLY,
 		'updatedSuccessfully' => Notification::SELLER_UPDATED_SUCCESSFULLY,

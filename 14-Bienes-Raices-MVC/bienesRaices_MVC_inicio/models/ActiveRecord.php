@@ -9,6 +9,12 @@ class ActiveRecord {
 	protected static $errores = [];
 	protected static $notifications = [];
 	/**
+	 * Clave o claves primarias. Si la clave primaria es diferente de 'id', hay que incluirla en
+	 * este array en la clase hija. Si hay más de una clave primaria se añaden cuantos valores hagan
+	 * falta
+	 */
+	protected static $primaryKeys = [];
+	/**
 	 * Script de destino en caso de éxito
 	 */
 	protected static $destinationOnSuccess = '';
@@ -44,10 +50,36 @@ class ActiveRecord {
 	}
 
 	/**
-	 * Busca un registro por su id
+	 * Busca un registro por su id. 
+	 * Si el identificador es múltiple, se llama a la función findArray, 
+	 * a la que también se la puede llamar directamente.
+	 * @param any
+	 * @return object Objeto de la clase que hereda de ActiveRecord
 	 */
 	public static function find($id){
+		if(is_array($id)){
+			return self::findArray($id);
+		}
 		$query = "SELECT * FROM ".get_called_class()::TABLENAME." WHERE id='$id'";
+		$result = self::consultarSQL($query);
+		// Devuelve el primer elemento del array
+		return array_shift($result);
+	}
+
+	/**
+	 * Busca un registro por su clave primaria combinada
+	 * 
+	 * @param array		Vector con las claves primarias a buscar
+	 * @return object 	Objeto de la clase que hereda de ActiveRecord
+	 */
+	public static function findArray(array $primaryKeys){
+		$fieldIds= '';
+		$and = '';
+		foreach($primaryKeys as $key => $id){
+			$fieldIds .= $and.$key."='$id'";
+			$and = " AND ";
+		}
+		$query = "SELECT * FROM ".get_called_class()::TABLENAME." WHERE $fieldIds";
 		$result = self::consultarSQL($query);
 		// Devuelve el primer elemento del array
 		return array_shift($result);
@@ -199,7 +231,7 @@ class ActiveRecord {
 	public static function existsById($id){
 		$id = filter_var($id, FILTER_VALIDATE_INT);
 		if(!$id){
-			header('Location: '.static::$destinationOnError.'?error='. Notification::ID_NOT_VALID);
+			header('Location: '.static::$destinationOnError.'?error='. static::$notifications['idNotValid']);
 			exit;
 		}
 		$object = static::find($id);
