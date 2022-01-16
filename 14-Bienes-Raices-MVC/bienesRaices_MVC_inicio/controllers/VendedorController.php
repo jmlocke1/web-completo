@@ -77,6 +77,13 @@ class VendedorController {
 	}
 
 	public static function eliminar(Router $router){
-		
+		$vendedor = Vendedor::existsById($_POST['id']);
+        $resultado = $vendedor->eliminar();
+        if($resultado){
+			header('location: /admin?resultado='.Vendedor::$notifications['removedSuccessfully']);
+		}else{
+            $_SESSION['error'] = DB::getDB()->error;
+			header('location: /admin?error='.Vendedor::$notifications['notDeleted']);
+		}
 	}
 }
