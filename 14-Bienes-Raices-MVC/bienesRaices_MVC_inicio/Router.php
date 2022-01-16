@@ -16,11 +16,10 @@ class Router{
         $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
         
-        
-        
+        // Comprueba si el método es correcto
         if($metodo === 'GET'){
             $fn = $this->rutasGET[$urlActual] ?? null;
-        }else{
+        }else if($metodo === 'POST'){
             $fn = $this->rutasPOST[$urlActual] ?? null;
         }
         
