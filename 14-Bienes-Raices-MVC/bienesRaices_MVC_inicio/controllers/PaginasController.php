@@ -40,18 +40,21 @@ class PaginasController {
 	}
 
 	public static function blog( Router $router ){
-		echo "Desde Blog";
+		$router->render('paginas/blog');
 	}
 
 	public static function entrada( Router $router ){
-		echo "Desde entrada";
+		$router->render('paginas/entrada');
 	}
 
 	public static function contactoGet( Router $router ){
-		echo "Desde contactoGet";
+		$router->render('paginas/contacto', [
+
+		]);
 	}
 
 	public static function contactoPost( Router $router ){
 		echo "Desde contactoPost";
+		debuguear($_POST);
 	}
 }
