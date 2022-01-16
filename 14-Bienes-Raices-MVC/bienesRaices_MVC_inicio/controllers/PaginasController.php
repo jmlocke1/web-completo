@@ -4,6 +4,9 @@ namespace Controllers;
 use Model\Propiedad;
 use MVC\Router;
 use Model\Notification;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class PaginasController {
 	public static function index( Router $router ){
@@ -54,7 +57,44 @@ class PaginasController {
 	}
 
 	public static function contactoPost( Router $router ){
-		echo "Desde contactoPost";
-		debuguear($_POST);
+		// Correo creado en Mailtrap para testeo de envío
+		
+		// Crear una nueva instancia de PHPMailer
+		$phpmailer = new PHPMailer(true);
+		try{
+			// Configurar SMTP
+			$phpmailer->isSMTP();
+			$phpmailer->Host = 'smtp.mailtrap.io';
+			$phpmailer->SMTPAuth = true;
+			$phpmailer->Port = 2525;
+			$phpmailer->Username = '7e616050a54470';
+			$phpmailer->Password = '9b8bd746ca9ac6';
+			//$phpmailer->SMTPSecure = 'tls';
+			
+			// Configurar el contenido del mail
+			$phpmailer->setFrom('josemidaw@gmail.com');
+			$phpmailer->addAddress('josemidaw@gmail.com', 'BienesRaices.com');
+			$phpmailer->Subject = 'Asunto: Nuevo Mensaje';
+
+			// Habilitar HTML
+			$phpmailer->isHTML(true);
+			$phpmailer->CharSet = 'UTF-8';
+
+			// Definir el contenido
+			$contenido = '<html> <p>Tienes un nuevo mensaje por tercera vez <bold>esto es en negrita</bold></p> </html>';
+			$phpmailer->Body = $contenido;
+			$phpmailer->AltBody = "Esto es texto alternativo sin HTML";
+			// Enviar el email
+			if($phpmailer->send()){
+				echo "Mensaje enviado correctamente";
+			}
+		}catch(Exception $e){
+			echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+		}
+		
+
+		$router->render('paginas/contacto', [
+
+		]);
 	}
 }
