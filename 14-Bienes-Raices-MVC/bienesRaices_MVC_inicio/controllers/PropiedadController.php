@@ -103,7 +103,7 @@ class PropiedadController {
     }
 
     public static function eliminar(Router $router){
-        $propiedad = existsProperty('/admin');
+        $propiedad = Propiedad::existsById($_POST['id']);
         $resultado = $propiedad->eliminar();
         if($resultado){
             header('location: /admin?resultado='.Notification::PROPERTY_REMOVED_SUCCESSFULLY);

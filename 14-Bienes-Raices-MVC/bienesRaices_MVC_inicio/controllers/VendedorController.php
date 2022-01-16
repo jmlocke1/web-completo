@@ -75,4 +75,8 @@ class VendedorController {
             'errores' => $errores
         ]);
 	}
+
+	public static function eliminar(Router $router){
+		
+	}
 }
