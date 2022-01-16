@@ -102,7 +102,7 @@ class PropiedadController {
         ]);
     }
 
-    public static function eliminar(Router $router){
+    public static function eliminar(){
         $propiedad = Propiedad::existsById($_POST['id']);
         $resultado = $propiedad->eliminar();
         if($resultado){
