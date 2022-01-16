@@ -1,11 +1,16 @@
 <?php
 namespace Controllers;
 
+use Model\Propiedad;
 use MVC\Router;
 
 class PaginasController {
 	public static function index( Router $router ){
-		echo "Desde Index";
+		
+		$router->render('paginas/index', [
+			'propiedades' => Propiedad::get(3),
+			'inicio' => ' inicio'
+		]);
 	}
 
 	public static function nosotros( Router $router ){
