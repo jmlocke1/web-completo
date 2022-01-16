@@ -1,24 +1,12 @@
-<?php
-//use App\Database\DB;
-//require_once __DIR__ . '/../funciones.php';
-//$db = DB::getDB();
-use App\Propiedad;
-if(isset($limite)){
-    $propiedades = Propiedad::get($limite);
-}else{
-    $propiedades = Propiedad::all();
-}
+	<main class="contenedor">
+        <h2>Casas y Deptos en Venta</h2>
 
-
-
-
-?>
-
-<div class="contenedor-anuncios">
+        
+        <div class="contenedor-anuncios">
     <?php foreach($propiedades as $propiedad): ?>
             <div class="anuncio">
                     
-                <img loading="lazy" src="/imagenes/<?= $propiedad->imagen; ?>"  alt="Imagen de la propiedad <?= $propiedad->titulo; ?>" title="Imagen de la propiedad <?= $propiedad->titulo; ?>">
+                <img loading="lazy" src="/build/imagenes/<?= $propiedad->imagen; ?>"  alt="Imagen de la propiedad <?= $propiedad->titulo; ?>" title="Imagen de la propiedad <?= $propiedad->titulo; ?>">
                 
                 <div class="contenido-anuncio">
                     <h3 title="<?= $propiedad->titulo; ?>"><?= $propiedad->titulo; ?></h3>
@@ -45,3 +33,5 @@ if(isset($limite)){
             </div><!--.anuncio-->
     <?php endforeach; ?>
 </div><!--.contenedor-anuncio-->
+        
+    </main>
