@@ -69,7 +69,7 @@ class PaginasController {
 			$phpmailer->Port = 2525;
 			$phpmailer->Username = '7e616050a54470';
 			$phpmailer->Password = '9b8bd746ca9ac6';
-			//$phpmailer->SMTPSecure = 'tls';
+			$phpmailer->SMTPSecure = 'tls';
 			
 			// Configurar el contenido del mail
 			$phpmailer->setFrom('josemidaw@gmail.com');
