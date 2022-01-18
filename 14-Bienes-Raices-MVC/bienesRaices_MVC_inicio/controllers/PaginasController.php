@@ -52,13 +52,14 @@ class PaginasController {
 
 	public static function contactoGet( Router $router ){
 		$router->render('paginas/contacto', [
-
+			'respuestas' => []
 		]);
 	}
 
 	public static function contactoPost( Router $router ){
+		$mensaje = null;
 		// Correo creado en Mailtrap para testeo de envío
-		
+		$respuestas = $_POST['contacto'];
 		// Crear una nueva instancia de PHPMailer
 		$phpmailer = new PHPMailer(true);
 		try{
@@ -74,14 +75,32 @@ class PaginasController {
 			// Configurar el contenido del mail
 			$phpmailer->setFrom('josemidaw@gmail.com');
 			$phpmailer->addAddress('josemidaw@gmail.com', 'BienesRaices.com');
-			$phpmailer->Subject = 'Asunto: Nuevo Mensaje';
+			$phpmailer->Subject = 'Asunto: Nuevo Mensaje con datos condicionales';
 
 			// Habilitar HTML
 			$phpmailer->isHTML(true);
 			$phpmailer->CharSet = 'UTF-8';
 
 			// Definir el contenido
-			$contenido = '<html> <p>Tienes un nuevo mensaje por tercera vez <bold>esto es en negrita</bold></p> </html>';
+			$contenido = '<html>';
+			$contenido .= '<p>Tienes un nuevo mensaje</p>';
+			$contenido .= '<p>Nombre: '.$respuestas['nombre'].'</p>';
+			// Enviar de forma condicional algunos campos de email o teléfono
+			if($respuestas['contacto'] === 'telefono'){
+				$contenido .= '<p>Eligió ser contactado por Teléfono';
+				$contenido .= '<p>Teléfono: '.$respuestas['telefono'].'</p>';
+				$contenido .= '<p>Fecha Contacto: '.$respuestas['fecha'].'</p>';
+				$contenido .= '<p>Hora: '.$respuestas['hora'].'</p>';
+			}else{
+				$contenido .= '<p>Eligió ser contactado por Email';
+				$contenido .= '<p>Email: '.$respuestas['email'].'</p>';
+			}
+			$contenido .= '<p>Mensaje: '.$respuestas['mensaje'].'</p>';
+			$contenido .= '<p>Vende o Compra: '.$respuestas['tipo'].'</p>';
+			$contenido .= '<p>Precio o Presupuesto: '.$respuestas['precio'].'</p>';
+			
+			
+			$contenido .= '</html>';
 			$phpmailer->Body = $contenido;
 			$phpmailer->AltBody = "Esto es texto alternativo sin HTML";
 			// Enviar el email
@@ -94,7 +113,12 @@ class PaginasController {
 		
 
 		$router->render('paginas/contacto', [
-
+			'respuestas' => $respuestas,
+			'tipo' => [
+				'seleccione' => '',
+				'compra' => $respuestas['tipo'] === 'Compra' ? 'selected' : '',
+				'vende' => $respuestas['tipo'] === 'Vende' ? 'selected' : ''
+			]
 		]);
 	}
 }

@@ -13,16 +13,10 @@
             <fieldset>
                 <legend>Información Personal</legend>
                 <label for="nombre">Nombre *</label>
-                <input type="text" placeholder="Tu Nombre" name="contacto[nombre]" id="nombre" required>
-
-                <label for="email">E-mail *</label>
-                <input type="email" placeholder="Tu Email" name="contacto[email]" id="email" required>
-
-                <label for="telefono">Teléfono</label>
-                <input type="tel" placeholder="Tu Teléfono" name="contacto[telefono]" id="telefono">
+                <input type="text" placeholder="Tu Nombre" name="contacto[nombre]" id="nombre" value="<?= $respuestas['nombre'] ?? ''; ?>" required>
 
                 <label for="mensaje">Mensaje: *</label>
-                <textarea name="contacto[mensaje]" id="mensaje" required></textarea>
+                <textarea name="contacto[mensaje]" id="mensaje" required><?= $respuestas['mensaje'] ?? ''; ?></textarea>
             </fieldset>
 
             <fieldset>
@@ -30,9 +24,9 @@
 
                 <label for="opciones">Vende o Compra: *</label>
                 <select name="contacto[tipo]" id="tipo" required>
-                    <option value="" disabled selected>-- Seleccione --</option>
-                    <option value="Compra">Compra</option>
-                    <option value="Vende">Vende</option>
+                    <option value="" disabled <?= $seleccione ?? 'selected'; ?>>-- Seleccione --</option>
+                    <option value="Compra" <?= $compra ?? ''; ?>>Compra</option>
+                    <option value="Vende" <?= $vende ?? ''; ?>>Vende</option>
                 </select>
 
                 <label for="presupuesto">Precio o Presupuesto *</label>
@@ -51,14 +45,9 @@
                     <label for="contactar-email">E-mail</label>
                     <input type="radio" value="email" name="contacto[contacto]" id="contactar-email" required>
                 </div>
-
-                <p>Si eligió teléfono, elija la fecha y la hora</p>
-
-                <label for="fecha">Fecha:</label>
-                <input type="date" name="contacto[fecha]" id="fecha">
-
-                <label for="hora">Hora</label>
-                <input type="time" name="contacto[hora]" id="hora" min="09:00" max="18:00">
+                <hr>
+                <div id="contacto"></div>
+                
             </fieldset>
 
             <input type="submit" value="enviar" class="boton-verde">
