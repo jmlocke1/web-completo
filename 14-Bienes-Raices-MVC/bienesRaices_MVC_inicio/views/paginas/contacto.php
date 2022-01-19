@@ -1,6 +1,8 @@
 <main class="contenedor seccion">
         <h2>Contacto</h2>
-
+        <?php if(isset($mensaje)){ ?>
+        <p class="alerta exito"><?= $mensaje; ?></p>
+        <?php } ?>
         <picture>
             <source srcset="build/img/destacada3.avif" type="image/avif">
             <source srcset="build/img/destacada3.webp" type="image/webp">
@@ -24,13 +26,13 @@
 
                 <label for="opciones">Vende o Compra: *</label>
                 <select name="contacto[tipo]" id="tipo" required>
-                    <option value="" disabled <?= $seleccione ?? 'selected'; ?>>-- Seleccione --</option>
-                    <option value="Compra" <?= $compra ?? ''; ?>>Compra</option>
-                    <option value="Vende" <?= $vende ?? ''; ?>>Vende</option>
+                    <option value="" disabled <?= $tipo['seleccione'] ?? 'selected'; ?>>-- Seleccione --</option>
+                    <option value="Compra" <?= $tipo['compra'] ?? ''; ?>>Compra</option>
+                    <option value="Vende" <?= $tipo['vende'] ?? ''; ?>>Vende</option>
                 </select>
 
                 <label for="presupuesto">Precio o Presupuesto *</label>
-                <input type="number" placeholder="Tu Precio o Presupuesto" name="contacto[precio]" id="precio" required>
+                <input type="number" placeholder="Tu Precio o Presupuesto" name="contacto[precio]" id="precio" required value="<?= $respuestas['precio'] ?? ''; ?>">
             </fieldset>
 
             <fieldset>
@@ -40,10 +42,10 @@
 
                 <div class="forma-contacto">
                     <label for="contactar-telefono">Teléfono</label>
-                    <input type="radio" value="telefono" name="contacto[contacto]" id="contactar-telefono" required>
+                    <input type="radio" value="telefono" name="contacto[contacto]" id="contactar-telefono" required <?= $telefono ?? ''; ?>>
 
                     <label for="contactar-email">E-mail</label>
-                    <input type="radio" value="email" name="contacto[contacto]" id="contactar-email" required>
+                    <input type="radio" value="email" name="contacto[contacto]" id="contactar-email" required <?= $email ?? ''; ?>>
                 </div>
                 <hr>
                 <div id="contacto"></div>

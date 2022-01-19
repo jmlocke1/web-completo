@@ -105,10 +105,10 @@ class PaginasController {
 			$phpmailer->AltBody = "Esto es texto alternativo sin HTML";
 			// Enviar el email
 			if($phpmailer->send()){
-				echo "Mensaje enviado correctamente";
+				$mensaje =  "Mensaje enviado correctamente";
 			}
 		}catch(Exception $e){
-			echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+			$mensaje =  "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
 		}
 		
 
@@ -118,7 +118,10 @@ class PaginasController {
 				'seleccione' => '',
 				'compra' => $respuestas['tipo'] === 'Compra' ? 'selected' : '',
 				'vende' => $respuestas['tipo'] === 'Vende' ? 'selected' : ''
-			]
+			],
+			'telefono' => $respuestas['contacto'] === 'telefono' ? 'checked' : '',
+			'email' => $respuestas['contacto'] === 'email' ? 'checked' : '',
+			'mensaje' => $mensaje
 		]);
 	}
 }
