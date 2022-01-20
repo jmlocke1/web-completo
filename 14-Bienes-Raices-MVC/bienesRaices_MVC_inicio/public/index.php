@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../includes/app.php';
 
+use Controllers\LoginController;
 use Controllers\PaginasController;
 use MVC\Router;
 use Controllers\PropiedadController;
@@ -32,5 +33,10 @@ $router->get('/blog', [PaginasController::class, 'blog']);
 $router->get('/blog/entrada', [PaginasController::class, 'entrada']);
 $router->get('/contacto', [PaginasController::class, 'contactoGet']);
 $router->post('/contacto', [PaginasController::class, 'contactoPost']);
+
+// Login y autenticación
+$router->get('/login', [LoginController::class, 'loginGet']);
+$router->post('/login', [LoginController::class, 'loginPost']);
+$router->get('/logout', [LoginController::class, 'logout']);
 
 $router->comprobarRutas();

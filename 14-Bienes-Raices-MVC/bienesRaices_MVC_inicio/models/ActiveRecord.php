@@ -206,7 +206,7 @@ class ActiveRecord {
 	public function sincronizar( $args = [] ){
 		
 		foreach($args as $key => $value){
-			if($key == "id") continue;
+			if(self::isPrimaryKey($key)) continue;
 			
 			if(property_exists($this, $key) && !is_null($value)){
 				$this->$key = $value;
@@ -218,7 +218,7 @@ class ActiveRecord {
 		$atributos = $this->atributos();
 		$sanitizado = [];
 		foreach($atributos as $key => $value){
-			if($key == 'id') continue;
+			if(self::isPrimaryKey($key)) continue;
 			$sanitizado[$key] = self::$db->escape_string($value);
 		}
 		return $sanitizado;
@@ -242,5 +242,9 @@ class ActiveRecord {
 			exit;
 		}
 		return $object;
+	}
+
+	protected static function isPrimaryKey($key){
+		return ($key === 'id' || in_array($key, static::$primaryKeys));
 	}
 }
