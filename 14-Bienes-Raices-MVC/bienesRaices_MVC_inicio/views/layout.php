@@ -36,9 +36,9 @@ if(!isset($inicio)){
                         <a href="/propiedades">Propiedades</a>
                         <a href="/blog">Blog</a>
                         <a href="/contacto">Contacto</a>
-                    <!-- <?php if(!$auth): ?> -->
+                    <?php if(!$auth): ?>
                         <a href="/login">Login</a>
-                    <!-- <?php endif; ?> -->
+                    <?php endif; ?>
                     <?php if($auth): ?>
                         <a href="/logout">Cerrar Sesión</a>
                         <a href="/admin">Admin</a>
@@ -48,7 +48,7 @@ if(!isset($inicio)){
                 
             </div> <!--.barra-->
             <?php if($inicio): ?>
-            <h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>
+            <h1 data-cy="heading-sitio">Venta de Casas y Departamentos Exclusivos de Lujo</h1>
             <?php endif ?>
         </div>
     </header>
