@@ -40,6 +40,10 @@ class Admin extends ActiveRecord {
     }
 
     public function comprobarPassword($password){
-        return password_verify($this->password, $password);
+        $auth = password_verify($this->password, $password);
+        if(!$auth){
+            self::$errores[] = 'El Password es incorrecto';
+        }
+        return $auth;
     }
 }
