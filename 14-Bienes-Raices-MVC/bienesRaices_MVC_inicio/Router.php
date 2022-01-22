@@ -3,6 +3,15 @@ namespace MVC;
 class Router{
     public $rutasGET = [];
     public $rutasPOST = [];
+    protected static $rutas_protegidas = [
+        '/admin',
+        '/propiedades/actualizar',
+        '/propiedades/crear',
+        '/propiedades/eliminar',
+        '/vendedores/crear',
+        '/vendedores/actualizar',
+        '/vendedores/eliminar'
+    ];
 
     public function get($url, $fn){
         $this->rutasGET[$url] = $fn;
@@ -13,6 +22,11 @@ class Router{
     }
 
     public function comprobarRutas(){
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        $auth = $_SESSION['login'] ?? null;
+        
         $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
         $metodo = $_SERVER['REQUEST_METHOD'];
         
@@ -21,6 +35,11 @@ class Router{
             $fn = $this->rutasGET[$urlActual] ?? null;
         }else if($metodo === 'POST'){
             $fn = $this->rutasPOST[$urlActual] ?? null;
+        }
+
+        // Proteger las rutas
+        if(in_array($urlActual, self::$rutas_protegidas) && !$auth){
+            header('Location: /');
         }
         
         if($fn){

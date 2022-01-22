@@ -40,7 +40,7 @@ if(!isset($inicio)){
                         <a href="/login">Login</a>
                     <!-- <?php endif; ?> -->
                     <?php if($auth): ?>
-                        <a href="/cerrar-sesion.php">Cerrar Sesión</a>
+                        <a href="/logout">Cerrar Sesión</a>
                         <a href="/admin">Admin</a>
                     <?php endif; ?>
                     </nav>
