@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use Model\Admin;
+use Model\Usuario;
 use MVC\Router;
 class LoginController {
     public static function loginGet(Router $router){
@@ -11,7 +11,7 @@ class LoginController {
     }
 
     public static function loginPost(Router $router){
-        $login = new Admin($_POST);
+        $login = new Usuario($_POST);
         
         $errores = $login->validar();
         if(empty($errores)){
@@ -21,7 +21,12 @@ class LoginController {
             }else{
                 // Verificar el password
                 $auth = $login->comprobarPassword($user->password);
-                debuguear($auth);
+                if($auth){
+                    // Autenticar al usuario
+                    $login->autenticar();
+                }else{
+                    $errores = $login->getErrors();
+                }
             }
         }
         $router->render('auth/login', [

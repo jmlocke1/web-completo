@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-class Admin extends ActiveRecord {
+class Usuario extends ActiveRecord {
     const TABLENAME = 'usuarios';
     protected static $columnasDB = ['id', 'email', 'password'];
 
@@ -45,5 +45,13 @@ class Admin extends ActiveRecord {
             self::$errores[] = 'El Password es incorrecto';
         }
         return $auth;
+    }
+
+    public function autenticar(){
+        session_start();
+        $_SESSION['usuario'] = $this->email;
+        $_SESSION['login'] = true;
+
+        header('Location: /admin');
     }
 }
