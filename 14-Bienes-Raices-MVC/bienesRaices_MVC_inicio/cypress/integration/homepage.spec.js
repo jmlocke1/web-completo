@@ -5,6 +5,7 @@ describe('Carga la página Principal', () =>{
         cy.visit('/');
 
         cy.get('[data-cy="heading-sitio"]').should('exist');
+        cy.get('[data-cy="heading-sitios"]').should('not.exist');
         
         cy.get('[data-cy="heading-sitio"]').invoke('text').should('equal', 'Venta de Casas y Departamentos Exclusivos de Lujo');
         cy.get('[data-cy="heading-sitio"]').invoke('text').should('not.equal', 'Bienes Raices');
