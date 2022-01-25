@@ -10,7 +10,7 @@
         <?php include 'listado.php'; ?>
 
         <div class="alinear-derecha">
-            <a class="boton-verde" href="/propiedades">Ver Todas</a>
+            <a class="boton-verde" href="/propiedades" data-cy="todas-propiedades">Ver Todas</a>
         </div>
     </section>
 

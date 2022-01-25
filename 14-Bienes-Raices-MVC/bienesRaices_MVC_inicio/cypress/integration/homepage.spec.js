@@ -28,5 +28,19 @@ describe('Carga la página Principal', () =>{
 
         // Probar el enlace de las propiedades
         cy.get('[data-cy="enlace-propiedad"]').should('have.class', 'boton-amarillo-block');
+        cy.get('[data-cy="enlace-propiedad"]').should('not.have.class', 'boton-amarillo');
+        cy.get('[data-cy="enlace-propiedad"]').first().invoke('text').should('equal', 'Ver Propiedad');
+
+        // Probar enlace a una propiedad
+        cy.get('[data-cy="enlace-propiedad"]').first().click();
+        cy.get('[data-cy="titulo-propiedad"]').should('exist');
+
+        cy.wait(1000);
+        cy.go('back');
+    });
+
+    it('Prueba el Routing hacia todas las Propiedades', () => {
+        cy.get('[data-cy="todas-propiedades"]').should('exist');
+        cy.get('[data-cy="todas-propiedades"]').should('have.class', 'boton-verde');
     });
 });
