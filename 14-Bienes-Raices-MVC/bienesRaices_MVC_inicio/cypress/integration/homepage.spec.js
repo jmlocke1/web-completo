@@ -35,7 +35,7 @@ describe('Carga la página Principal', () =>{
         cy.get('[data-cy="enlace-propiedad"]').first().click();
         cy.get('[data-cy="titulo-propiedad"]').should('exist');
 
-        cy.wait(100);
+        // cy.wait(100);
         cy.go('back');
     });
 
@@ -46,7 +46,7 @@ describe('Carga la página Principal', () =>{
 
         cy.get('[data-cy="todas-propiedades"]').click();
         cy.get('[data-cy="heading-propiedades"]').invoke('text').should('equal', 'Casas y Deptos en Venta');
-        cy.wait(100);
+        // cy.wait(100);
         cy.go('back');
     });
 
@@ -58,13 +58,20 @@ describe('Carga la página Principal', () =>{
             .then( href => {
                 cy.visit(href),
                 cy.get('[data-cy="heading-contacto"]').should('exist'),
-                cy.wait(100),
+                // cy.wait(100),
                 // Al acceder con visit no podemos volver con go('back')
                 cy.visit('/')
             });
-        
+    });
 
-        
-        //cy.go('back');
+    it('Prueba los testimoniales y el blog', () => {
+        cy.get('[data-cy="blog"]').should('exist');
+        cy.get('[data-cy="blog"]').find('H3').invoke('text').should('equal', 'Nuestro Blog');
+        cy.get('[data-cy="blog"]').find('H3').invoke('text').should('not.equal', 'Blog');
+        cy.get('[data-cy="blog"]').find('IMG').should('have.length', 2);
+
+        cy.get('[data-cy="testimoniales"]').should('exist');
+        cy.get('[data-cy="testimoniales"]').find('H3').invoke('text').should('equal', 'Testimoniales');
+        cy.get('[data-cy="testimoniales"]').find('H3').invoke('text').should('not.equal', 'Nuestros Testimoniales');
     });
 });
