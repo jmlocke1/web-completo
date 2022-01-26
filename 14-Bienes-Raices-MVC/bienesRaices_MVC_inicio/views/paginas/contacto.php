@@ -1,5 +1,5 @@
 <main class="contenedor seccion">
-        <h2>Contacto</h2>
+        <h2 data-cy="heading-contacto">Contacto</h2>
         <?php if(isset($mensaje)){ ?>
         <p class="alerta exito"><?= $mensaje; ?></p>
         <?php } ?>

@@ -1,5 +1,5 @@
 	<main class="contenedor">
-        <h2>Casas y Deptos en Venta</h2>
+        <h2 data-cy="heading-propiedades">Casas y Deptos en Venta</h2>
 
         <!-- Errores -->
         <?php if(!empty($mensajeError)): ?>

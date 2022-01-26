@@ -1,4 +1,4 @@
-/// <references types="cypress" />
+/// <reference types="cypress" />
 
 describe('Carga la página Principal', () =>{
     it('Prueba el Header de la página principal', () => {
@@ -35,12 +35,36 @@ describe('Carga la página Principal', () =>{
         cy.get('[data-cy="enlace-propiedad"]').first().click();
         cy.get('[data-cy="titulo-propiedad"]').should('exist');
 
-        cy.wait(1000);
+        cy.wait(100);
         cy.go('back');
     });
 
     it('Prueba el Routing hacia todas las Propiedades', () => {
         cy.get('[data-cy="todas-propiedades"]').should('exist');
         cy.get('[data-cy="todas-propiedades"]').should('have.class', 'boton-verde');
+        cy.get('[data-cy="todas-propiedades"]').invoke('attr', 'href').should('equal', '/propiedades');
+
+        cy.get('[data-cy="todas-propiedades"]').click();
+        cy.get('[data-cy="heading-propiedades"]').invoke('text').should('equal', 'Casas y Deptos en Venta');
+        cy.wait(100);
+        cy.go('back');
+    });
+
+    it('Prueba el bloque de contactos', () => {
+        cy.get('[data-cy="imagen-contacto"]').should('exist');
+        cy.get('[data-cy="imagen-contacto"]').find('H2').invoke('text').should('equal', 'Encuentra la casa de tus sueños');
+        cy.get('[data-cy="imagen-contacto"]').find('P').invoke('text').should('equal', 'Llena el formulario de contacto y un asesor se pondrá en contacto contigo con la mayor brevedad');
+        cy.get('[data-cy="imagen-contacto"]').find('A').invoke('attr', 'href')
+            .then( href => {
+                cy.visit(href),
+                cy.get('[data-cy="heading-contacto"]').should('exist'),
+                cy.wait(100),
+                // Al acceder con visit no podemos volver con go('back')
+                cy.visit('/')
+            });
+        
+
+        
+        //cy.go('back');
     });
 });
