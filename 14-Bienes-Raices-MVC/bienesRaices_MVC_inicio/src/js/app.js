@@ -59,7 +59,6 @@ function eventListeners() {
     // Muestra campos condicionales
     const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
     metodoContacto.forEach(input => input.addEventListener('click', mostrarMetodosContacto));
-    
 }
 
 function mostrarMetodosContacto(e) {
@@ -68,14 +67,14 @@ function mostrarMetodosContacto(e) {
     if(tipo === 'contactar-telefono'){
         contactoDiv.innerHTML = `
             <label for="telefono">Número Teléfono</label>
-            <input type="tel" placeholder="Tu Teléfono" name="contacto[telefono]" id="telefono">
+            <input data-cy="input-telefono" type="tel" placeholder="Tu Teléfono" name="contacto[telefono]" id="telefono">
             <p>Elija la fecha y la hora para la llamada</p>
 
             <label for="fecha">Fecha:</label>
-            <input type="date" name="contacto[fecha]" id="fecha">
+            <input data-cy="input-fecha" type="date" name="contacto[fecha]" id="fecha" >
 
             <label for="hora">Hora</label>
-            <input type="time" name="contacto[hora]" id="hora" min="09:00" max="18:00">
+            <input data-cy="input-hora" type="time" name="contacto[hora]" id="hora" min="09:00" max="18:00">
         `;
     }else if(tipo === 'contactar-email'){
         contactoDiv.innerHTML = `
