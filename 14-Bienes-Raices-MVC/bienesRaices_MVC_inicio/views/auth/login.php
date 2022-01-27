@@ -10,10 +10,10 @@
                
 
                 <label for="email">E-mail *</label>
-                <input type="email" name="email" placeholder="Tu Email" id="email" required>
+                <input data-cy="email-login" type="email" name="email" placeholder="Tu Email" id="email" required>
 
                 <label for="password">Password *</label>
-                <input type="password" name="password" placeholder="Tu Password" id="password" required>
+                <input data-cy="password-login" type="password" name="password" placeholder="Tu Password" id="password" required>
             </fieldset>
 
             <input type="submit" value="Iniciar Sesión" class="boton boton-verde">

@@ -1,5 +1,5 @@
 <main class="contenedor">
-        <h2>Administrador de Bienes Raices</h2>
+        <h2 data-cy="heading-admin">Administrador de Bienes Raices</h2>
         
         <?php if(isset($mensajeExito)): ?>
             <p class="alerta exito"><?= $mensajeExito; ?></p>
