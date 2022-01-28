@@ -1,8 +1,11 @@
 <?php
 namespace Controllers;
+
+use MVC\Router;
+
 class LoginController {
-    public static function loginGet(){
-        echo "Desde loginGet";
+    public static function loginGet(Router $router){
+        $router->render('auth/login');
     }
 
     public static function loginPost(){
