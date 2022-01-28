@@ -1,64 +1,53 @@
 <?php
-
 namespace MVC;
+class Router{
+    public $rutasGET = [];
+    public $rutasPOST = [];
+    
 
-class Router
-{
-    public array $getRoutes = [];
-    public array $postRoutes = [];
-
-    public function get($url, $fn)
-    {
-        $this->getRoutes[$url] = $fn;
+    public function get($url, $fn){
+        $this->rutasGET[$url] = $fn;
     }
 
-    public function post($url, $fn)
-    {
-        $this->postRoutes[$url] = $fn;
+    public function post($url, $fn){
+        $this->rutasPOST[$url] = $fn;
     }
 
-    public function comprobarRutas()
-    {
+    public function comprobarRutas(){
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        $auth = $_SESSION['login'] ?? null;
         
-        // Proteger Rutas...
-        session_start();
-
-        // Arreglo de rutas protegidas...
-        // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
-
-        // $auth = $_SESSION['login'] ?? null;
-
-        $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
-
-        if ($method === 'GET') {
-            $fn = $this->getRoutes[$currentUrl] ?? null;
-        } else {
-            $fn = $this->postRoutes[$currentUrl] ?? null;
+        $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';
+        $metodo = $_SERVER['REQUEST_METHOD'];
+        
+        // Comprueba si el método es correcto
+        if($metodo === 'GET'){
+            $fn = $this->rutasGET[$urlActual] ?? null;
+        }else if($metodo === 'POST'){
+            $fn = $this->rutasPOST[$urlActual] ?? null;
         }
 
-
-        if ( $fn ) {
-            // Call user fn va a llamar una función cuando no sabemos cual sera
-            call_user_func($fn, $this); // This es para pasar argumentos
-        } else {
-            echo "Página No Encontrada o Ruta no válida";
+        
+        
+        if($fn){
+            // La url existe y hay una función asociada
+            call_user_func($fn, $this);
+        }else{
+            echo "Página no encontrada";
         }
     }
 
-    public function render($view, $datos = [])
-    {
-
-        // Leer lo que le pasamos  a la vista
-        foreach ($datos as $key => $value) {
-            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla a otra no la reescribe, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
+    public function render($view, $datos = [] ) {
+        foreach($datos as $key => $value){
+            $$key = $value;
         }
-
         ob_start(); // Almacenamiento en memoria durante un momento...
+        include __DIR__."/views/$view.php";
 
-        // entonces incluimos la vista en el layout
-        include_once __DIR__ . "/views/$view.php";
         $contenido = ob_get_clean(); // Limpia el Buffer
-        include_once __DIR__ . '/views/layout.php';
+
+        include __DIR__."/views/layout.php";
     }
 }
