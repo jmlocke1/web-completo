@@ -4,8 +4,11 @@
 .contenedor-app {
 	@include m.tablet {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: 1fr 2fr;
 		min-height: 100vh;
+	}
+	@include m.desktop{
+		grid-template-columns: repeat(2, 1fr);
 	}
 
 	.imagen {

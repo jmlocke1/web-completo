@@ -8,12 +8,23 @@
 }
 
 .campo {
-	display: flex;
+	display: block;
+	label{
+		display: block;
+		margin-bottom: 1rem;
+	}
+	input{
+		width: 100%;
+	}
 	margin-bottom: 2rem;
 	align-items: center;
-	label {
-		flex: 0 0 10rem;
+	@include m.telefono{
+		display: flex;
+		label {
+			flex: 0 0 10rem;
+		}
 	}
+	
 	input {
 		flex: 1;
 		border: none;
