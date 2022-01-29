@@ -1,6 +1,8 @@
 <?php
 namespace Model;
 
+use Model\Database\DB;
+
 class Usuario extends ActiveRecord {
 	// Base de datos
 	protected static $tabla = 'usuarios';
@@ -29,13 +31,36 @@ class Usuario extends ActiveRecord {
 	}
 
 	public function validarNuevaCuenta(){
+		self::$alertas = [];
 		if(!$this->nombre){
-			self::$alertas['error'][] = 'El nombre del Cliente es obligatorio';
+			self::$alertas['error'][] = 'El nombre es obligatorio';
 		}
 		if(!$this->apellido){
-			self::$alertas['error'][] = 'El apellido del Cliente es obligatorio';
+			self::$alertas['error'][] = 'El apellido es obligatorio';
+		}
+		if(!$this->email){
+			self::$alertas['error'][] = 'El Email es obligatorio';
+		}
+		if(!$this->password){
+			self::$alertas['error'][] = 'El Password es obligatorio';
+		}
+		if(strlen($this->password) < \Config::MIN_LENGTH_PASSWORD){
+			self::$alertas['error'][] = 'El password debe contener al menos 6 caracteres';
 		}
 
 		return self::$alertas;
+	}
+
+	/**
+	 * Revisa si el usuario existe
+	 */
+	public function existeUsuario() {
+		$query = " SELECT * FROM ".self::$tabla." WHERE email = '{$this->email}' LIMIT 1";
+		$resultado = DB::getQueryArray($query);
+		$existe = !empty($resultado);
+		if($existe){
+			self::$alertas['error'][] = 'El Usuario ya está registrado';
+		}
+		return $existe;
 	}
 }

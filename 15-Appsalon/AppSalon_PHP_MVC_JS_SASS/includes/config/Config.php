@@ -23,6 +23,11 @@ class Config {
 	 * Carpeta de imágenes para la vista
 	 */
 	const CARPETA_IMAGENES_VIEW = '/build/img/';
+
+	/**
+	 * Longitud mínima del password
+	 */
+	const MIN_LENGTH_PASSWORD = 6;
 	
 	/**
 	 * Host de la base de datos

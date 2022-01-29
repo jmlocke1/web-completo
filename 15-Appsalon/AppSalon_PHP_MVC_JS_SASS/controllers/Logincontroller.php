@@ -48,6 +48,16 @@ class LoginController {
         $usuario->sincronizar($_POST);
         $alertas = $usuario->validarNuevaCuenta();
         
+        // Revisar que alerta esté vacío
+        if(empty($alertas)){
+            // Verificar que el usuario no esté registrado
+            if($usuario->existeUsuario()) {
+                $alertas = Usuario::getAlertas();
+            }else{
+                // No está registrado
+                debuguear('No está registrado');
+            }
+        }
         $router->render('auth/crear-cuenta', [
             'usuario' => $usuario,
             'alertas' => $alertas
