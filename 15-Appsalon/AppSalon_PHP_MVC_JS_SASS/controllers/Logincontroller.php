@@ -38,7 +38,8 @@ class LoginController {
     public static function crearGet(Router $router){
         $usuario = new Usuario();
         $router->render('auth/crear-cuenta', [
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'alertas' => []
         ]);
     }
 
@@ -46,9 +47,10 @@ class LoginController {
         $usuario = new Usuario;
         $usuario->sincronizar($_POST);
         $alertas = $usuario->validarNuevaCuenta();
-        debuguear($alertas);
+        
         $router->render('auth/crear-cuenta', [
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'alertas' => $alertas
         ]);
     }
 }

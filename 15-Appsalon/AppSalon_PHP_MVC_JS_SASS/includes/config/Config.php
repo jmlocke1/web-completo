@@ -2,6 +2,7 @@
 //namespace App\Config;
 define('DIR_ROOT', dirname(dirname(__DIR__)).'/');
 define('FUNCIONES_URL', DIR_ROOT.'funciones/funciones.php');
+define('TEMPLATES_URL', DIR_ROOT.'includes/templates');
 
 if(!isset($_SESSION)) {
     session_start();
