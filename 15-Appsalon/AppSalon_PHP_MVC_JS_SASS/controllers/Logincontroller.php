@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Model\Usuario;
 use MVC\Router;
 
 class LoginController {
@@ -8,7 +9,7 @@ class LoginController {
         $router->render('auth/login');
     }
 
-    public static function loginPost(){
+    public static function loginPost(Router $router){
         echo "Desde loginPost";
     }
 
@@ -26,21 +27,28 @@ class LoginController {
         echo "Desde olvidePost";
     }
 
-    public static function recuperarGet(){
+    public static function recuperarGet(Router $router){
         echo "Desde RecuperarGet";
     }
 
-    public static function recuperarPost(){
+    public static function recuperarPost(Router $router){
         echo "Desde RecuperarPost";
     }
 
     public static function crearGet(Router $router){
+        $usuario = new Usuario();
         $router->render('auth/crear-cuenta', [
-
+            'usuario' => $usuario
         ]);
     }
 
-    public static function crearPost(){
-        echo "Desde crearCuentaPost";
+    public static function crearPost(Router $router){
+        $usuario = new Usuario;
+        $usuario->sincronizar($_POST);
+        $alertas = $usuario->validarNuevaCuenta();
+        debuguear($alertas);
+        $router->render('auth/crear-cuenta', [
+            'usuario' => $usuario
+        ]);
     }
 }

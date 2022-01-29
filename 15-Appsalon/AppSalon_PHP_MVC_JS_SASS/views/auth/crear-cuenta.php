@@ -4,22 +4,22 @@
 <form action="/crear-cuenta" method="POST" class="formulario">
 	<div class="campo">
 		<label for="nombre">Nombre</label>
-		<input type="text" name="nombre" id="nombre" placeholder="Tu Nombre">
+		<input type="text" name="nombre" id="nombre" placeholder="Tu Nombre" value="<?= s($usuario->nombre); ?>">
 	</div>
 
 	<div class="campo">
 		<label for="apellido">Apellidos</label>
-		<input type="text" name="apellido" id="apellido" placeholder="Tus apellidos">
+		<input type="text" name="apellido" id="apellido" placeholder="Tus apellidos" value="<?= s($usuario->apellido); ?>">
 	</div>
 
 	<div class="campo">
 		<label for="telefono">Teléfono</label>
-		<input type="tel" name="telefono" id="telefono" placeholder="Tu Teléfono">
+		<input type="tel" name="telefono" id="telefono" placeholder="Tu Teléfono" value="<?= s($usuario->telefono); ?>">
 	</div>
 
 	<div class="campo">
 		<label for="email">E-mail</label>
-		<input type="email" name="email" id="email" placeholder="Tu E-mail">
+		<input type="email" name="email" id="email" placeholder="Tu E-mail" value="<?= s($usuario->email); ?>">
 	</div>
 
 	<div class="campo">
