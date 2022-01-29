@@ -107,6 +107,7 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellido` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` char(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telefono` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
   `confirmado` tinyint(1) DEFAULT NULL,
@@ -121,7 +122,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'José Miguel','Izquierdo Martínez','correo@correo.com','123456789',NULL,1,NULL);
+INSERT INTO `usuarios` VALUES (1,'José Miguel','Izquierdo Martínez','correo@correo.com',NULL,'123456789',NULL,1,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -134,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-29 14:19:04
+-- Dump completed on 2022-01-29 18:29:38
