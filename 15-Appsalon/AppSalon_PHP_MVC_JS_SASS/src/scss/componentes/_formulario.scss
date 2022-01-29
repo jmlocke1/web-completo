@@ -1,5 +1,6 @@
 @use 'base/mixins' as m;
 @use 'base/variables' as v;
+@use 'sass:math';
 
 .formulario {
 	width: 100%;
@@ -14,5 +15,8 @@
 	}
 	input {
 		flex: 1;
+		border: none;
+		padding: calc(v.$separacion / 4);
+		border-radius: 1rem;
 	}
 }

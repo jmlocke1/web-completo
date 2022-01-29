@@ -12,7 +12,7 @@
 		<input type="password" name="password" id="password" placeholder="Tu Password">
 	</div>
 
-	<input type="submit" value="Iniciar Sesión">
+	<input type="submit" class="boton" value="Iniciar Sesión">
 </form>
 
 <div class="acciones">

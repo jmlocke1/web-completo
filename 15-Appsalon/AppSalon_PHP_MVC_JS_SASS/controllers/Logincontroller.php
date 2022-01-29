@@ -32,8 +32,10 @@ class LoginController {
         echo "Desde RecuperarPost";
     }
 
-    public static function crearGet(){
-        echo "Desde crearCuentaGet";
+    public static function crearGet(Router $router){
+        $router->render('auth/crear-cuenta', [
+            
+        ]);
     }
 
     public static function crearPost(){
