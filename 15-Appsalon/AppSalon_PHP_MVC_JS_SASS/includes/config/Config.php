@@ -28,6 +28,11 @@ class Config {
 	 * Longitud mínima del password
 	 */
 	const MIN_LENGTH_PASSWORD = 6;
+
+	/**
+	 *  Coste del algoritmo de generación de claves
+	 */ 
+    const PASSWORD_COST = 10;
 	
 	/**
 	 * Host de la base de datos

@@ -10,6 +10,13 @@ class ActiveRecord {
 
     // Alertas y Mensajes
     protected static $alertas = [];
+
+    /**
+	 * Clave o claves primarias. Si la clave primaria es diferente de 'id', hay que incluirla en
+	 * este array en la clase hija. Si hay más de una clave primaria se añaden cuantos valores hagan
+	 * falta
+	 */
+	protected static $primaryKeys = [];
     
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {
