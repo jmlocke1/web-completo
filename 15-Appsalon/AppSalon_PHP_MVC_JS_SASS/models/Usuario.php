@@ -2,6 +2,7 @@
 namespace Model;
 
 use Model\Database\DB;
+use MVC\Utilities\Password;
 
 class Usuario extends ActiveRecord {
 	// Base de datos
@@ -62,5 +63,13 @@ class Usuario extends ActiveRecord {
 			self::$alertas['error'][] = 'El Usuario ya está registrado';
 		}
 		return $existe;
+	}
+
+	public function hashPassword(){
+		$this->password = Password::hash($this->password);
+	}
+
+	public function crearToken() {
+		$this->token = uniqid();
 	}
 }

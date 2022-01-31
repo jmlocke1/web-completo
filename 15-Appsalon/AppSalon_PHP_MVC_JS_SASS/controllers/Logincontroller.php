@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Model\Usuario;
 use MVC\Router;
+use MVC\Utilities\Email;
 
 class LoginController {
     public static function loginGet(Router $router){
@@ -55,8 +56,16 @@ class LoginController {
                 $alertas = Usuario::getAlertas();
             }else{
                 // Hashear el Password
-                
-                debuguear('No está registrado');
+                $usuario->hashPassword();
+
+                // Generar un token único
+                $usuario->crearToken();
+
+                // Enviar el email
+
+                $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
+                debuguear($email);
+                debuguear($usuario);
             }
         }
         $router->render('auth/crear-cuenta', [

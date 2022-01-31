@@ -15,5 +15,7 @@
             "email": "worldcode.info@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    }
 }
