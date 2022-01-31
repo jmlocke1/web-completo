@@ -16,6 +16,10 @@ error_reporting(E_ALL);
 class Config {
 	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
 	/**
+	 * Dominio del proyecto
+	 */
+	const DOMAIN_PROJECT = 'appsalon.test';
+	/**
 	 * Carpeta de imágenes para PHP
 	 */
 	const CARPETA_IMAGENES = DIR_ROOT."/public/build/img/";
@@ -50,4 +54,21 @@ class Config {
 	 * Nombre de la base de datos
 	 */
 	const DB_NAME = 'appsalon_mvc';
+
+	// Configuración de mailer
+	/**
+	 * Host de mailtrap
+	 */
+	const MAILTRAP_HOST = 'smtp.mailtrap.io';
+	/**
+	 * Puerto de mailtrap
+	 */
+	const MAILTRAP_PORT = 2525;
+	const MAILTRAP_USERNAME = '7e616050a54470';
+	const MAILTRAP_PASSWORD = '9b8bd746ca9ac6';
+	/**
+	 * Email desde donde se mandan las notificaciones. En el despliegue
+	 * hay que poner el adecuado, pues este es de prueba y no existe.
+	 */
+	const MAIL_ORIGIN = 'cuentas@appsalon.com';
 }
