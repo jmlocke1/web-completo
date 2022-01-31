@@ -37,7 +37,7 @@ class Email {
 			$phpmailer->CharSet = 'UTF-8';
 			$contenido = "<html>";
 			$contenido .= "<p><strong>Hola ". $this->nombre . "</strong> Has creado tu cuenta en AppSalon, solo debes confirmarla presionando el siguiente enlace</p>";
-			$contenido .= "<p>Presiona aquí: <a href='https://".Config::DOMAIN_PROJECT."/confirma-cuenta?token=". $this->token ."'>Confirma tu cuenta</a> </p>";
+			$contenido .= "<p>Presiona aquí: <a href='https://".Config::DOMAIN_PROJECT."/confirmar-cuenta?token=". $this->token ."' title='Conecta con AppSalon para confirmar tu cuenta'>Confirma tu cuenta</a> </p>";
 			$contenido .= "<p>Si tú no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
 			$contenido .= "</html>";
 			$phpmailer->Body = $contenido;
