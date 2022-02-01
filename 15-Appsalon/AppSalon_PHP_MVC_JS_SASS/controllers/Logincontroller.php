@@ -16,6 +16,27 @@ class LoginController {
         $alertas = [];
         $auth = new Usuario($_POST);
         $alertas = $auth->validarLogin();
+        if(empty($alertas)){
+            // Comprobar que exista el usuario
+            $usuario = Usuario::where('email', $auth->email);
+            
+            if($usuario){
+                // Verificar el password
+                if($usuario->comprobarPasswordYVerificado($auth->password)){
+                    $usuario->saveDataInSession();
+                    // Redireccionamiento
+                    if($usuario->admin === '1'){
+                        debuguear('Es admin');
+                    }else{
+                        debuguear('Es Cliente');
+                    }
+                }
+            }else{
+                Usuario::setAlerta('error', 'Usuario no encontrado');
+            }
+            $alertas = Usuario::getAlertas();
+        }
+        
         $router->render('auth/login', [
             'alertas' => $alertas
         ]);

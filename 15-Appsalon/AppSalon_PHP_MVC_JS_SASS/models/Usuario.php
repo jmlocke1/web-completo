@@ -83,4 +83,46 @@ class Usuario extends ActiveRecord {
 	public function crearToken() {
 		$this->token = uniqid();
 	}
+
+	public function comprobarPasswordYVerificado(string $password){
+		if(!$this->confirmado){
+			self::setAlerta('error', 'El usuario no está aún confirmado');
+			return false;
+		}
+		$passCorrect = Password::verify($password, $this->password);
+		if($passCorrect){
+			self::setAlerta('exito', 'El Password es correcto');
+			$this->needsRehash($password);
+			return true;
+		}else{
+			self::setAlerta('error', 'El Password no es correcto');
+			return false;
+		}
+	}
+
+	/**
+	 * Guarda los datos del usuario en la sesión actual
+	 */
+	public function saveDataInSession(){
+		session_start();
+		$_SESSION['id'] = $this->id;
+		$_SESSION['nombre'] = $this->nombre;
+		$_SESSION['email'] = $this->email;
+		$_SESSION['login'] = true;
+		$_SESSION['id'] = $this->id;
+	}
+
+	/**
+	 * Comprueba si el password necesita ser hasheado de nuevo.
+	 * Esto puede ocurrir si cambia el algoritmo de hash por defecto
+	 * de PHP.
+	 */
+	private function needsRehash(string $password){
+		$rehash = Password::needsRehash($password, $this->password);
+		if($rehash){
+			self::setAlerta('exito', 'El Password ha sido hasheado de nuevo para cumplir con los estándares de seguridad actuales');
+			$this->password = $rehash;
+			$this->guardar();
+		}
+	}
 }

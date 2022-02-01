@@ -40,4 +40,12 @@ class Password {
             return false;
         }
     }
+
+    public static function verifyAndRehash($password, $hash, $cost = \Config::PASSWORD_COST) {
+        $passwordCorrect = self::verify($password, $hash);
+        debuguear($passwordCorrect);
+        if($passwordCorrect){
+
+        }
+    }
 }
