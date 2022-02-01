@@ -24,11 +24,13 @@ class LoginController {
                 // Verificar el password
                 if($usuario->comprobarPasswordYVerificado($auth->password)){
                     $usuario->saveDataInSession();
+                    
                     // Redireccionamiento
                     if($usuario->admin === '1'){
-                        debuguear('Es admin');
+                        $_SESSION['admin'] = $usuario->admin ?? null;
+                        header('Location: /admin');
                     }else{
-                        debuguear('Es Cliente');
+                        header('Location: /cita');
                     }
                 }
             }else{
