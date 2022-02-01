@@ -7,11 +7,18 @@ use MVC\Utilities\Email;
 
 class LoginController {
     public static function loginGet(Router $router){
-        $router->render('auth/login');
+        $router->render('auth/login', [
+            'alertas' => []
+        ]);
     }
 
     public static function loginPost(Router $router){
-        echo "Desde loginPost";
+        $alertas = [];
+        $auth = new Usuario($_POST);
+        $alertas = $auth->validarLogin();
+        $router->render('auth/login', [
+            'alertas' => $alertas
+        ]);
     }
 
     public static function logout(){
