@@ -4,7 +4,7 @@ namespace Model\Database;
 class DB {
     protected static $db;
     private $query;
-
+    private static $errors = [];
 
     public function __construct($query = null){
         self::hayDB();
@@ -29,7 +29,7 @@ class DB {
     public static function conectarDB() {
         self::$db = new \mysqli(\Config::DB_HOST, \Config::DB_USER, \Config::DB_PASSWORD, \Config::DB_NAME);
         if(self::$db->connect_errno) {
-            echo "Error. No se pudo conectar: ".self::$db->connect_error;
+            self::$errors[] =  "Error ".self::$db->connect_errno.". No se pudo conectar: ".self::$db->connect_error;
             exit;
         }
         return self::$db;
@@ -40,7 +40,11 @@ class DB {
      */
     public static function insert($query){
         self::hayDB();
-        return self::$db->query($query);
+        $resultado = self::$db->query($query);
+        if(!$resultado){
+            self::$errors[] = "Error ".self::$db->errno.". No se pudo realizar la inserción: ".self::$db->error;
+        }
+        return $resultado;
     }
 
     public static function getQueryObject($query){
@@ -73,6 +77,7 @@ class DB {
 	 * Comprueba si tenemos conexión a la base de datos, de lo contrario obtiene una
 	 */
 	private static function hayDB(){
+        self::$errors = [];
 		if(!isset(self::$db)){
 			self::conectarDB();
 		}
@@ -81,5 +86,9 @@ class DB {
     public static function table($table){
         $newDB = new self( "SELECT * FROM {$table}" );
         return $newDB;
+    }
+
+    public static function getErrors(){
+        return self::$errors;
     }
 }

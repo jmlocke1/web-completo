@@ -23,8 +23,20 @@ class ActiveRecord {
         self::$db = $database;
     }
 
+    /**
+     * Establece una alerta de un determinado tipo
+     */
     public static function setAlerta($tipo, $mensaje) {
         static::$alertas[$tipo][] = $mensaje;
+    }
+
+    /**
+     * Añade un array de alertas al array de alertas del objeto ActiveRecord
+     */
+    public static function addAlertasError(array $errores){
+        foreach($errores as $error){
+            self::setAlerta('error', $error);
+        }
     }
 
     // Validación

@@ -104,7 +104,9 @@ class Usuario extends ActiveRecord {
 	 * Guarda los datos del usuario en la sesión actual
 	 */
 	public function saveDataInSession(){
-		session_start();
+		if(!isset($_SESSION)) {
+            session_start();
+        }
 		$_SESSION['id'] = $this->id;
 		$_SESSION['nombre'] = $this->nombre;
 		$_SESSION['email'] = $this->email;
@@ -120,9 +122,15 @@ class Usuario extends ActiveRecord {
 	private function needsRehash(string $password){
 		$rehash = Password::needsRehash($password, $this->password);
 		if($rehash){
-			self::setAlerta('exito', 'El Password ha sido hasheado de nuevo para cumplir con los estándares de seguridad actuales');
+			
 			$this->password = $rehash;
-			$this->guardar();
+			if($this->guardar()){
+				self::setAlerta('exito', 'El Password ha sido hasheado de nuevo para cumplir con los estándares de seguridad actuales');
+			}else{
+				self::setAlerta('error', 'El Password debe ser hasheado de nuevo para cumplir con los estándares de seguridad actuales, pero no se ha podido guardar el objeto. ');
+				self::addAlertasError(DB::getErrors());
+			}
+			
 		}
 	}
 }
