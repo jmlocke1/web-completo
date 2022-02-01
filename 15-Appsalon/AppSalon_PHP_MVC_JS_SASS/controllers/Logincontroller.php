@@ -49,21 +49,72 @@ class LoginController {
     }
 
     public static function olvideGet(Router $router){
+        
         $router->render('auth/olvide-password', [
-            
+            'alertas' => []
         ]);
     }
 
     public static function olvidePost(Router $router){
-        echo "Desde olvidePost";
+        $alertas = [];
+        $auth = new Usuario($_POST);
+        $alertas = $auth->validarEmail();
+        if(empty($alertas)){
+            $usuario = Usuario::where('email', $auth->email);
+
+            if($usuario){
+                $mensaje = 'El Usuario sí existe';
+                if($usuario->confirmado === '1'){
+                    $mensaje .= ' y está confirmado';
+                    Usuario::setAlerta('exito', $mensaje);
+                    // Generar un token
+                    $usuario->crearToken();
+                    $usuario->guardar();
+
+                    // TODO: Enviar el email
+                    $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
+                    $email->enviarInstruccionesRecuperacion();
+                    // Alerta de éxito
+                    Usuario::setAlerta('exito', 'Se ha mandado la información de recuperación a tu email. Revísalo y sigue las instrucciones');
+                }else{
+                    $mensaje .= ' pero no está confirmado. Revise su email donde encontrará instrucciones para confirmarlo';
+                    Usuario::setAlerta('error', $mensaje);
+                }
+            }else{
+                Usuario::setAlerta('error', 'El Usuario No existe');
+            }
+            $alertas = Usuario::getAlertas();
+        }
+        $router->render('auth/olvide-password', [
+            'alertas' => $alertas
+        ]);
     }
 
     public static function recuperarGet(Router $router){
-        echo "Desde RecuperarGet";
+        $error = self::compruebaToken(s($_GET['token']));
+        $router->render('auth/recuperar-password', [
+            'alertas' => Usuario::getAlertas(),
+            'error' => $error
+        ]);
     }
 
     public static function recuperarPost(Router $router){
-        echo "Desde RecuperarPost";
+        $error = self::compruebaToken(s($_GET['token']));
+        $router->render('auth/recuperar-password', [
+            'alertas' => Usuario::getAlertas(),
+            'error' => $error
+        ]);
+    }
+
+    private static function compruebaToken($token) {
+        $error = false;
+        // Buscar usuario por su token
+        $usuario = Usuario::where('token', $token);
+        if(empty($usuario)) {
+            Usuario::setAlerta('error', 'Token no válido');
+            $error = true;
+        }
+        return $error;
     }
 
     public static function crearGet(Router $router){
