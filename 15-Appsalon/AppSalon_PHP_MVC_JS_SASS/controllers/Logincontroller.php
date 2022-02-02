@@ -176,6 +176,12 @@ class LoginController {
         $router->render('auth/mensaje');
     }
 
+    /**
+     * Confirma la cuenta creada.
+     * 
+     * @param Router $router
+     * @return void
+     */
     public static function confirmar(Router $router){
         $alertas = [];
         $token = s($_GET['token']);
