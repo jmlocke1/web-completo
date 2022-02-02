@@ -74,7 +74,7 @@ class Usuario extends ActiveRecord {
 		if(!$this->password) {
 			self::setAlerta('error', 'El Password es obligatorio');
 		}
-		if(strlen($this->password < 6)) {
+		if(strlen($this->password)  < 6) {
 			self::setAlerta('error', 'El Password debe tener al menos 6 caracteres');
 		}
 		return self::$alertas;
@@ -92,6 +92,17 @@ class Usuario extends ActiveRecord {
 		}
 		return $existe;
 	}
+
+	public static function getUserByToken($token) {
+        // Buscar usuario por su token
+        $usuario = self::where('token', $token);
+        if(empty($usuario)) {
+            Usuario::setAlerta('error', 'Token no válido');
+            return false;
+        }else{
+            return $usuario;
+        }
+    }
 
 	public function hashPassword(){
 		$this->password = Password::hash($this->password);
@@ -139,7 +150,6 @@ class Usuario extends ActiveRecord {
 	private function needsRehash(string $password){
 		$rehash = Password::needsRehash($password, $this->password);
 		if($rehash){
-			
 			$this->password = $rehash;
 			if($this->guardar()){
 				self::setAlerta('exito', 'El Password ha sido hasheado de nuevo para cumplir con los estándares de seguridad actuales');
@@ -147,7 +157,6 @@ class Usuario extends ActiveRecord {
 				self::setAlerta('error', 'El Password debe ser hasheado de nuevo para cumplir con los estándares de seguridad actuales, pero no se ha podido guardar el objeto. ');
 				self::addAlertasError(DB::getErrors());
 			}
-			
 		}
 	}
 }

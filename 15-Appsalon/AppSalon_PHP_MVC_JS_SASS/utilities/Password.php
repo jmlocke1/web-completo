@@ -41,11 +41,21 @@ class Password {
         }
     }
 
-    public static function verifyAndRehash($password, $hash, $cost = \Config::PASSWORD_COST) {
-        $passwordCorrect = self::verify($password, $hash);
-        debuguear($passwordCorrect);
-        if($passwordCorrect){
-
+    /**
+     * Verifica un password para comprobar si es correcto. Si necesita 
+     * recodificar el hash, devuelve el nuevo hash también.
+     * 
+     * @param string $password
+     * @param string $hash
+     * @param mixed $cost
+     * @return array    Array asociativo conteniendo un booleano y un hash, si procede
+     */
+    public static function verifyAndRehash(string $password, string $hash, $cost = \Config::PASSWORD_COST) {
+        $verify['password'] = self::verify($password, $hash);
+        
+        if($verify['password']){
+            $verify['newHash'] = self::needsRehash($password, $hash);
         }
+        return $verify;
     }
 }

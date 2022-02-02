@@ -91,7 +91,12 @@ class LoginController {
     }
 
     public static function recuperarGet(Router $router){
-        $error = self::compruebaToken(s($_GET['token']));
+        $usuario = Usuario::getUserByToken(s($_GET['token']));
+        if($usuario){
+            $error = false;
+        }else{
+            $error = true;
+        }
         $router->render('auth/recuperar-password', [
             'alertas' => Usuario::getAlertas(),
             'error' => $error
@@ -99,24 +104,30 @@ class LoginController {
     }
 
     public static function recuperarPost(Router $router){
-        $error = self::compruebaToken(s($_GET['token']));
+        $usuario = Usuario::getUserByToken(s($_GET['token']));
+        if($usuario){
+            $error = false;
+        }else{
+            $error = true;
+        }
+        $password = new Usuario($_POST);
+        $alertas = $password->validarPassword();
+        if(empty($alertas)){
+            $usuario->password = $password->password;
+            $usuario->hashPassword();
+            $usuario->token = null;
+            $resultado = $usuario->guardar();
+            if($resultado){
+                header('Location: /');
+            }
+        }
         $router->render('auth/recuperar-password', [
-            'alertas' => Usuario::getAlertas(),
+            'alertas' => $alertas,
             'error' => $error
         ]);
     }
 
-    private static function compruebaToken($token) {
-        $error = false;
-        // Buscar usuario por su token
-        $usuario = Usuario::where('token', $token);
-        if(empty($usuario)) {
-            Usuario::setAlerta('error', 'Token no válido');
-            $error = true;
-        }
-        return $error;
-    }
-
+    
     public static function crearGet(Router $router){
         $usuario = new Usuario();
         $router->render('auth/crear-cuenta', [
