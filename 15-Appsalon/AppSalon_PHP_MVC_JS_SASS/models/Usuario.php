@@ -136,7 +136,7 @@ class Usuario extends ActiveRecord {
             session_start();
         }
 		$_SESSION['id'] = $this->id;
-		$_SESSION['nombre'] = $this->nombre;
+		$_SESSION['nombre'] = $this->nombre . " " . $this->apellido;
 		$_SESSION['email'] = $this->email;
 		$_SESSION['login'] = true;
 		$_SESSION['id'] = $this->id;
