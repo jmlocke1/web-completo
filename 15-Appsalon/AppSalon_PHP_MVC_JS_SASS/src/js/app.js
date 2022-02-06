@@ -21,6 +21,8 @@ function iniciarApp() {
     paginaAnterior();
 
     consultarAPI();     // Consulta la API en el Backend de PHP
+    nombreCliente();    // Añade el nombre del cliente al objeto de cita
+    seleccionarFecha(); // Añade la fecha de la cita en el objeto
 }
 
 function mostrarSeccion() {
@@ -128,7 +130,60 @@ function mostrarServicios(servicios) {
 }
 
 function seleccionarServicio(servicio) {
+    const { id } = servicio;
     const { servicios } = cita;
-    cita.servicios = [...servicios, servicio];
+
+    // Identificar el elemento al que se le da click
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+    // Comprobar si un servicio ya fue agregado
+    if (servicios.some(agregado => agregado.id === id)) {
+        // Eliminarlo
+        cita.servicios = servicios.filter(agregado => agregado.id !== id);
+        divServicio.classList.remove('seleccionado');
+    } else {
+        // Agregarlo
+        cita.servicios = [...servicios, servicio];
+        divServicio.classList.add('seleccionado');
+    }
     console.log(cita);
+}
+
+function nombreCliente() {
+    cita.nombre = document.querySelector('#nombre').value;
+}
+
+function seleccionarFecha() {
+    const inputFecha = document.querySelector('#fecha');
+    inputFecha.addEventListener('input', function (e) {
+        const dia = new Date(e.target.value).getUTCDay();
+        console.log('Día: ', dia);
+        if ([6, 0].includes(dia)) {
+            e.target.value = '';
+            mostrarAlerta('Fines de semana no abrimos', 'error');
+            console.log('Estamos en alerta');
+        } else {
+            cita.fecha = e.target.value;
+        }
+    })
+}
+
+function mostrarAlerta(mensaje, tipo) {
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+
+    const formulario = document.querySelector('.formulario');
+    // Previene que se genere más de una alerta
+    alerta.id = 'weekend';
+    const alertaAnterior = document.querySelector('#weekend');
+    if (alertaAnterior) {
+        alertaAnterior.remove();
+    }
+    formulario.appendChild(alerta);
+    // Eliminar la alerta pasados 3 segundos
+    setTimeout(() => {
+        alerta.remove();
+    }, 3000);
 }
