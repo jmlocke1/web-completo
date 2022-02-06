@@ -1,5 +1,6 @@
 import { Paginador } from './paginador.js';
 let paso = parseInt(localStorage.getItem('paso'));
+const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
 if (!paso) {
     paso = 1;
     localStorage.setItem('paso', 1);
@@ -24,7 +25,7 @@ function mostrarSeccion() {
     }
     
     // Seleccionar la sección con el paso
-    const seccion = document.querySelector(`#paso-${paso}`);
+    const seccion = document.querySelector(`#paso-${pagina.PaginaActual}`);
     seccion.classList.add('mostrar');
 
     // Quita la clase de actual al tab anterior
@@ -34,7 +35,7 @@ function mostrarSeccion() {
     }
 
     // Resalta el tab actual
-    const tab = document.querySelector(`[data-paso="${paso}"]`);
+    const tab = document.querySelector(`[data-paso="${pagina.PaginaActual}"]`);
     tab.classList.add('actual');
 }
 function tabs() {
@@ -42,7 +43,8 @@ function tabs() {
     botones.forEach(boton => { 
         boton.addEventListener('click', function (e) {
             paso = parseInt(e.target.dataset.paso);
-            localStorage.setItem('paso', paso);
+            pagina.setPaginaActual( parseInt(e.target.dataset.paso) );
+            localStorage.setItem('paso', pagina.PaginaActual);
             mostrarSeccion();
             botonesPaginador();
         });
@@ -51,10 +53,10 @@ function tabs() {
 function botonesPaginador() {
     const paginaAnterior = document.querySelector('#anterior');
     const paginaSiguiente = document.querySelector('#siguiente');
-    if (paso === 1) {
+    if ( pagina.isFirstPage ) {
         paginaAnterior.classList.add('ocultar');
         paginaSiguiente.classList.remove('ocultar');
-    } else if(paso === 3) {
+    } else if( pagina.isLastPage ) {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
     } else {
