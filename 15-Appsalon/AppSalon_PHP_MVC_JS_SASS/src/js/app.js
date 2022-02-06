@@ -2,6 +2,12 @@ import { Paginador } from './paginador.js';
 
 const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
 
+const cita = {
+    nombre: '',
+    fecha: '',
+    hora: '',
+    servicios: []
+}
 document.addEventListener('DOMContentLoaded', function () {
     iniciarApp();
 });
@@ -114,7 +120,15 @@ function mostrarServicios(servicios) {
         servicioDiv.dataset.idServicio = id;
         servicioDiv.appendChild(nombreServicio);
         servicioDiv.appendChild(precioServicio);
-
+        servicioDiv.onclick = () => {
+            seleccionarServicio(servicio);
+        };
         containerServicios.appendChild(servicioDiv);
     });
+}
+
+function seleccionarServicio(servicio) {
+    const { servicios } = cita;
+    cita.servicios = [...servicios, servicio];
+    console.log(cita);
 }
