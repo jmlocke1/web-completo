@@ -30,13 +30,19 @@ function css() {
         .pipe( dest('public/build/css') );
 }
 
+// Se desactiva para el desarrollo. Hay que activarlo en producción
+// function javascript() {
+//     return src(paths.js)
+//       .pipe(terser())
+//       .pipe(sourcemaps.write('.'))
+//       .pipe(dest('public/build/js'));
+// }
 
 function javascript() {
     return src(paths.js)
-      .pipe(terser())
-      .pipe(sourcemaps.write('.'))
       .pipe(dest('public/build/js'));
 }
+
 
 function imagenes() {
     return src(paths.imagenes)

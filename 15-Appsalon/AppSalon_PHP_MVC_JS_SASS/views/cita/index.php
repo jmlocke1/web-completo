@@ -25,9 +25,9 @@
 
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha">
+                <input type="date" id="fecha" name="fecha" min="<?= date('Y-m-d'); ?>">
             </div>
-
+            
             <div class="campo">
                 <label for="hora">Hora</label>
                 <input type="time" id="hora" name="hora" placeholder="Tu nombre">
