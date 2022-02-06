@@ -46,6 +46,6 @@
 </div>
 
 <?php $script = "
-    <script src='build/js/app.js'></script>
+    <script type='module' src='build/js/app.js'></script>
 ";
 ?>

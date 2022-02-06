@@ -1,0 +1,1 @@
+export class Paginador{maxPaginas=3;pagina;constructor(a){this.pagina=a}get PaginaActual(){return this.pagina}setPaginaActual(a){if(a>this.maxPaginas)return"Error. Se ha superado el máximo de páginas";this.pagina=a}}
