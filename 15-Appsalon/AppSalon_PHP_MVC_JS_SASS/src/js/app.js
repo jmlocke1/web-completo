@@ -1,10 +1,6 @@
 import { Paginador } from './paginador.js';
-let paso = parseInt(localStorage.getItem('paso'));
+
 const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
-if (!paso) {
-    paso = 1;
-    localStorage.setItem('paso', 1);
-}
 
 document.addEventListener('DOMContentLoaded', function () {
     iniciarApp();
@@ -15,6 +11,8 @@ function iniciarApp() {
     mostrarSeccion();   // Muestra y oculta las secciones
     tabs();             // Cambia la sección cuando se presionen los tabs
     botonesPaginador(); // Agrega o quita los botones del paginador
+    paginaSiguiente();
+    paginaAnterior();
 }
 
 function mostrarSeccion() {
@@ -42,10 +40,9 @@ function tabs() {
     const botones = document.querySelectorAll('.tabs button');
     botones.forEach(boton => { 
         boton.addEventListener('click', function (e) {
-            paso = parseInt(e.target.dataset.paso);
             pagina.setPaginaActual( parseInt(e.target.dataset.paso) );
             localStorage.setItem('paso', pagina.PaginaActual);
-            mostrarSeccion();
+            //mostrarSeccion();
             botonesPaginador();
         });
     });
@@ -63,5 +60,28 @@ function botonesPaginador() {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
     }
+    mostrarSeccion();
+}
+
+
+
+function paginaAnterior() {
+    const paginaAnterior = document.querySelector('#anterior');
+    paginaAnterior.addEventListener('click', function () {
+        pagina.decrementa();
+        //mostrarSeccion();
+        botonesPaginador();
+    } );
+    
+}
+
+function paginaSiguiente() {
+    const paginaSiguiente = document.querySelector('#siguiente');
+    paginaSiguiente.addEventListener('click', function () {
+        pagina.incrementa();
+        //mostrarSeccion();
+        botonesPaginador();
+    } );
+    
     
 }
