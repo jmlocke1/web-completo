@@ -13,6 +13,8 @@ function iniciarApp() {
     botonesPaginador(); // Agrega o quita los botones del paginador
     paginaSiguiente();
     paginaAnterior();
+
+    consultarAPI();     // Consulta la API en el Backend de PHP
 }
 
 function mostrarSeccion() {
@@ -82,6 +84,37 @@ function paginaSiguiente() {
         //mostrarSeccion();
         botonesPaginador();
     } );
-    
-    
+}
+
+async function consultarAPI() {
+    try {
+        const url = 'https://appsalon.test/api/servicios';
+        const resultado = await fetch(url);
+        const servicios = await resultado.json();
+        mostrarServicios(servicios);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function mostrarServicios(servicios) {
+    const containerServicios = document.querySelector('#servicios');
+    servicios.forEach(servicio => {
+        const { id, nombre, precio } = servicio;
+        const nombreServicio = document.createElement('P');
+        nombreServicio.classList.add('nombre-servicio');
+        nombreServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.classList.add('precio-servicio');
+        precioServicio.textContent = `$${precio}`;
+        
+        const servicioDiv = document.createElement('DIV');
+        servicioDiv.classList.add('servicio');
+        servicioDiv.dataset.idServicio = id;
+        servicioDiv.appendChild(nombreServicio);
+        servicioDiv.appendChild(precioServicio);
+
+        containerServicios.appendChild(servicioDiv);
+    });
 }
