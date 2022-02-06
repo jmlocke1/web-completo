@@ -20,13 +20,13 @@ const paths = {
 }
 
 // css es una función que se puede llamar automaticamente
+// Desactivada la minificación en desarrollo. Activar para producción
 function css() {
     return src(paths.scss)
-        .pipe(sourcemaps.init())
+//        .pipe(sourcemaps.init())
         .pipe(sass())
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        // .pipe(postcss([autoprefixer()]))
-        .pipe(sourcemaps.write('.'))
+//        .pipe(postcss([autoprefixer(), cssnano()]))
+//        .pipe(sourcemaps.write('.'))
         .pipe( dest('public/build/css') );
 }
 
