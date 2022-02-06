@@ -23,6 +23,7 @@ function iniciarApp() {
     consultarAPI();     // Consulta la API en el Backend de PHP
     nombreCliente();    // Añade el nombre del cliente al objeto de cita
     seleccionarFecha(); // Añade la fecha de la cita en el objeto
+    seleccionarHora();  // añade la hora de la cita en el objeto
 }
 
 function mostrarSeccion() {
@@ -167,6 +168,13 @@ function seleccionarFecha() {
     })
 }
 
+function seleccionarHora() {
+    const inputHora = document.querySelector('#hora');
+    inputHora.addEventListener('input', function (e) {
+        console.log(inputHora.value);
+    });
+}
+
 function mostrarAlerta(mensaje, tipo) {
     const alerta = document.createElement('DIV');
     alerta.textContent = mensaje;
@@ -187,3 +195,4 @@ function mostrarAlerta(mensaje, tipo) {
         alerta.remove();
     }, 3000);
 }
+
