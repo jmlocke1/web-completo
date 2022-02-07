@@ -488,6 +488,19 @@ p {
   margin: 0;
 }
 
+.contenido-resumen p {
+  margin-bottom: 1rem;
+}
+.contenido-resumen span {
+  color: #0da6f3;
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
+.contenedor-servicio {
+  border-bottom: 1px solid #e1e1e1;
+}
+
 .formulario {
   margin-top: 5rem;
   width: 100%;
