@@ -25,16 +25,16 @@
 
             <div class="campo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha" min="<?= date('Y-m-d'); ?>">
+                <input type="date" id="fecha" name="fecha" min="<?= date('Y-m-d'); ?>" >
             </div>
             
             <div class="campo">
                 <label for="hora">Hora</label>
-                <input type="time" id="hora" name="hora" placeholder="Tu nombre">
+                <input type="time" id="hora" name="hora" placeholder="Tu nombre" value="">
             </div>
         </form>
     </div>
-    <div id="paso-3" class="seccion">
+    <div id="paso-3" class="seccion contenido-resumen">
         <h2>Resumen</h2>
         <p>Verifica que la información sea correcta</p>
     </div>

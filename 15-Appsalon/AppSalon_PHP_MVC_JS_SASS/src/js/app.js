@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function iniciarApp() {
+    ponerACero()        // Pone a cero los campos de fecha y hora
     // Cambia la sección cuando se presionan los tabs
     mostrarSeccion();   // Muestra y oculta las secciones
     tabs();             // Cambia la sección cuando se presionen los tabs
@@ -24,6 +25,13 @@ function iniciarApp() {
     nombreCliente();    // Añade el nombre del cliente al objeto de cita
     seleccionarFecha(); // Añade la fecha de la cita en el objeto
     seleccionarHora();  // añade la hora de la cita en el objeto
+
+    mostrarResumen();   // Muestra el resumen de la cita
+}
+
+function ponerACero() {
+    document.querySelector('#fecha').value = '';
+    document.querySelector('#hora').value = '';
 }
 
 function mostrarSeccion() {
@@ -55,6 +63,9 @@ function tabs() {
             localStorage.setItem('paso', pagina.PaginaActual);
             //mostrarSeccion();
             botonesPaginador();
+            
+            
+            
         });
     });
 }
@@ -67,10 +78,12 @@ function botonesPaginador() {
     } else if( pagina.isLastPage ) {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
+        mostrarResumen();
     } else {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
     }
+    
     mostrarSeccion();
 }
 
@@ -157,13 +170,12 @@ function seleccionarFecha() {
     const inputFecha = document.querySelector('#fecha');
     inputFecha.addEventListener('input', function (e) {
         const dia = new Date(e.target.value).getUTCDay();
-        console.log('Día: ', dia);
         if ([6, 0].includes(dia)) {
             e.target.value = '';
             mostrarAlerta('Fines de semana no abrimos', 'error');
-            console.log('Estamos en alerta');
         } else {
             cita.fecha = e.target.value;
+            console.log(cita);
         }
     })
 }
@@ -171,7 +183,14 @@ function seleccionarFecha() {
 function seleccionarHora() {
     const inputHora = document.querySelector('#hora');
     inputHora.addEventListener('input', function (e) {
-        console.log(inputHora.value);
+        const horaCita = e.target.value;
+        const hora = horaCita.split(":")[0];
+        if (hora < 10 || hora > 18) {
+            mostrarAlerta("Hora no válida", 'error');
+            e.target.value = '';
+        } else {
+            cita.hora = e.target.value;
+        }
     });
 }
 
@@ -196,3 +215,12 @@ function mostrarAlerta(mensaje, tipo) {
     }, 3000);
 }
 
+function mostrarResumen() {
+    const resumen = document.querySelector('.contenido-resumen');
+    console.log(cita);
+    if (Object.values(cita).includes('')) {
+        console.log('Hacen falta datos');
+    } else {
+        console.log('Todo correcto');
+    }
+}

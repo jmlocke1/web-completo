@@ -23,6 +23,7 @@
 		}
 		&:hover {
 			transform: scale(1.1);
+			box-shadow: 0 0 1rem .5rem rgb(173, 190, 204);
 		}
 		p {
 			color: v.$negro;
