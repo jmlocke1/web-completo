@@ -35,8 +35,7 @@
         </form>
     </div>
     <div id="paso-3" class="seccion contenido-resumen">
-        <h2>Resumen</h2>
-        <p>Verifica que la información sea correcta</p>
+        
     </div>
 
     <div class="paginacion">

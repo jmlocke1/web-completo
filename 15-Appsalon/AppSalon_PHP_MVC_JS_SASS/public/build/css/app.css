@@ -498,7 +498,11 @@ p {
 }
 
 .contenedor-servicio {
+  padding: 3rem 0;
   border-bottom: 1px solid #e1e1e1;
+}
+.contenedor-servicio:last-of-type {
+  margin-bottom: 5rem;
 }
 
 .formulario {

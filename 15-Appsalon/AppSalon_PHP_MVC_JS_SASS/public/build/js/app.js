@@ -243,7 +243,11 @@ function formateaResumen() {
     const resumen = document.querySelector('.contenido-resumen');
     const { nombre, fecha, hora, servicios } = cita;
 
-    
+    // Heading para Servicios en Resumen
+    const headingServicios = document.createElement('H3');
+    headingServicios.textContent = 'Resumen de servicios';
+    resumen.appendChild(headingServicios);
+
     servicios.forEach(servicio => {
         const { id, precio, nombre } = servicio;
         const contenedorServicio = document.createElement('DIV');
@@ -260,7 +264,11 @@ function formateaResumen() {
 
         resumen.appendChild(contenedorServicio);
     });
-    
+    // Heading para Cita en Resumen
+    const headingCita = document.createElement('H3');
+    headingCita.textContent = 'Resumen de Cita';
+    resumen.appendChild(headingCita);
+
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
 
@@ -268,7 +276,7 @@ function formateaResumen() {
     fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`;
 
     const horaCita = document.createElement('P');
-    horaCita.innerHTML = `<span>Hora:</span> ${hora}`;
+    horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`;
 
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCita);
