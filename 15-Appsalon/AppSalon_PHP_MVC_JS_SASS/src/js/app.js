@@ -1,5 +1,5 @@
 import { Paginador } from './paginador.js';
-
+import { config } from './config.js';
 const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
 
 const cita = {
@@ -280,9 +280,16 @@ function formateaResumen() {
     const horaCita = document.createElement('P');
     horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`;
 
+    // Botón para crear una cita
+    const botonReservarCita = document.createElement('BUTTON');
+    botonReservarCita.classList.add('boton');
+    botonReservarCita.textContent = 'Reservar Cita';
+    botonReservarCita.onclick = reservarCita;
+
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCita);
     resumen.appendChild(horaCita);
+    resumen.appendChild(botonReservarCita);
 }
 
 function formatearFecha(fecha, codificacion = 'es-ES') {
@@ -299,4 +306,19 @@ function formatearFecha(fecha, codificacion = 'es-ES') {
         year: "numeric"
     });
     return fechaFormateada;
+}
+
+async function reservarCita() {
+    const datos = new FormData();
+
+    datos.append('nombre', 'José Miguel');
+    datos.append('edad', 56);
+    const url = config.urlLocal + '/api/citas';
+    const respuesta = await fetch(url, {
+        method: 'POST',
+        body: datos
+    });
+
+    const resultado = await respuesta.json();
+    console.log(resultado);
 }
