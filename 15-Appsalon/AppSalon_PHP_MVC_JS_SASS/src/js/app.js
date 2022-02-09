@@ -309,10 +309,17 @@ function formatearFecha(fecha, codificacion = 'es-ES') {
 }
 
 async function reservarCita() {
+    const { nombre, fecha, hora, servicios } = cita;
     const datos = new FormData();
-
-    datos.append('nombre', 'José Miguel');
-    datos.append('edad', 56);
+    const idServicios = servicios.map(servicio => servicio.id);
+    
+    
+    datos.append('nombre', nombre);
+    datos.append('fecha', fecha);
+    datos.append('hora', hora);
+    datos.append('servicios', idServicios);
+    // console.log([...datos]);
+    
     const url = config.urlLocal + '/api/citas';
     const respuesta = await fetch(url, {
         method: 'POST',

@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
 
+use Model\Cita;
+use Model\Database\DB;
 use Model\Servicio;
 
 class APIController {
@@ -10,8 +12,13 @@ class APIController {
 	}
 
 	public static function guardar(){
+		$cita = new Cita($_POST);
+		$resultado = $cita->guardar();
+
 		$respuesta = [
-			'mensaje' => $_POST
+			'cita' => $cita,
+			'resultado' => $resultado,
+			'errores' => DB::getErrors()
 		];
 
 		echo json_encode($respuesta);

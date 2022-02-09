@@ -164,6 +164,17 @@ class ActiveRecord {
 
         // Resultado de la consulta
         $resultado = self::$db->query($query);
+        if($resultado){
+            $respuesta = [
+                'resultado' =>  $resultado,
+                'id' => self::$db->insert_id
+             ];
+        }else{
+            $respuesta = [
+                "error" => 'Error al insertar en la base de datos'
+
+            ];
+        }
         return [
            'resultado' =>  $resultado,
            'id' => self::$db->insert_id
