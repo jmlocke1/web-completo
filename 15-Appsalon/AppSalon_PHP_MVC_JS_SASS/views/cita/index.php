@@ -32,6 +32,8 @@
                 <label for="hora">Hora</label>
                 <input type="time" id="hora" name="hora" placeholder="Tu nombre" value="">
             </div>
+
+            <input type="hidden" name="id" id="id" value="<?= $id; ?>">
         </form>
     </div>
     <div id="paso-3" class="seccion contenido-resumen">

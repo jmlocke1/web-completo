@@ -58,7 +58,6 @@ class DB {
     public static function query($query){
         self::hayDB();
         $resultado = self::$db->query($query);
-        
         if(self::$db->errno){
             self::$errors[] = "Error ".self::$db->errno.". No se pudo realizar la inserción: ".self::$db->error;
         }

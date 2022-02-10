@@ -98,9 +98,9 @@ class ActiveRecord {
     // Sincroniza BD con Objetos en memoria
     public function sincronizar($args=[]) { 
         foreach($args as $key => $value) {
-          if(property_exists($this, $key) && !is_null($value)) {
-            $this->$key = $value;
-          }
+            if(property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
         }
     }
 
@@ -159,7 +159,7 @@ class ActiveRecord {
 
         // Resultado de la consulta
         //$resultado = self::$db->query($query);
-        $resultado = DB::insertOrUpdate($query);
+        $resultado = DB::query($query);
         if($resultado){
             $respuesta = [
                 'resultado' =>  $resultado,

@@ -3,6 +3,7 @@ import { config } from './config.js';
 const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
 
 const cita = {
+    id: '',
     nombre: '',
     fecha: '',
     hora: '',
@@ -22,6 +23,8 @@ function iniciarApp() {
     paginaAnterior();
 
     consultarAPI();     // Consulta la API en el Backend de PHP
+
+    idCliente();
     nombreCliente();    // Añade el nombre del cliente al objeto de cita
     seleccionarFecha(); // Añade la fecha de la cita en el objeto
     seleccionarHora();  // añade la hora de la cita en el objeto
@@ -159,6 +162,10 @@ function seleccionarServicio(servicio) {
         cita.servicios = [...servicios, servicio];
         divServicio.classList.add('seleccionado');
     }
+}
+
+function idCliente() {
+    cita.id = document.querySelector('#id').value;
 }
 
 function nombreCliente() {
@@ -309,12 +316,12 @@ function formatearFecha(fecha, codificacion = 'es-ES') {
 }
 
 async function reservarCita() {
-    const { nombre, fecha, hora, servicios } = cita;
+    const { id, fecha, hora, servicios } = cita;
     const datos = new FormData();
     const idServicios = servicios.map(servicio => servicio.id);
     
     
-    datos.append('nombre', nombre);
+    datos.append('usuarioid', id);
     datos.append('fecha', fecha);
     datos.append('hora', hora);
     datos.append('servicios', idServicios);
