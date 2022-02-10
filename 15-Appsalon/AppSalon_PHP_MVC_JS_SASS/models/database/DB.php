@@ -5,6 +5,13 @@ class DB {
     protected static $db;
     private $query;
     private static $errors = [];
+    /**
+     * Id creado automáticamente. Se almacena aquí cuando se inserta un nuevo 
+     * registro
+     *
+     * @var [int]
+     */
+    private static $id = null;
 
     public function __construct($query = null){
         self::hayDB();
@@ -38,13 +45,33 @@ class DB {
     /**
      * Realiza una operación de inserción en la base de datos
      */
-    public static function insert($query){
+    public static function insertOrUpdate($query){
         self::hayDB();
         $resultado = self::$db->query($query);
+        
         if(!$resultado){
             self::$errors[] = "Error ".self::$db->errno.". No se pudo realizar la inserción: ".self::$db->error;
         }
         return $resultado;
+    }
+
+    public static function query($query){
+        self::hayDB();
+        $resultado = self::$db->query($query);
+        
+        if(self::$db->errno){
+            self::$errors[] = "Error ".self::$db->errno.". No se pudo realizar la inserción: ".self::$db->error;
+        }
+        return $resultado;
+    }
+
+    /**
+     * Devuelve el id de clave primaria del registro recién insertado
+     *
+     * @return int|null
+     */
+    public static function getId(){
+        return self::$db->insert_id;
     }
 
     public static function getQueryObject($query){
@@ -54,6 +81,8 @@ class DB {
         while($row = $result->fetch_object()){
             $data[] = $row;
         }
+        // Liberar la memoria
+        $result->free();
         return $data;
     }
 
@@ -64,6 +93,8 @@ class DB {
         while($row = $result->fetch_assoc()){
             $data[] = $row;
         }
+        // Liberar la memoria
+        $result->free();
         return $data;
     }
 
@@ -90,5 +121,10 @@ class DB {
 
     public static function getErrors(){
         return self::$errors;
+    }
+
+    public static function escape_string($value){
+        self::hayDB();
+        return self::$db->escape_string($value);
     }
 }

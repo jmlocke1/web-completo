@@ -52,17 +52,12 @@ class ActiveRecord {
     // Consulta SQL para crear un objeto en Memoria
     public static function consultarSQL($query) {
         // Consultar la base de datos
-        $resultado = self::$db->query($query);
-
+        $resultado = DB::getQueryArray($query);
         // Iterar los resultados
         $array = [];
-        while($registro = $resultado->fetch_assoc()) {
+        foreach($resultado as $registro){
             $array[] = static::crearObjeto($registro);
         }
-
-        // liberar la memoria
-        $resultado->free();
-
         // retornar los resultados
         return $array;
     }
@@ -95,7 +90,7 @@ class ActiveRecord {
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value ) {
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = DB::escape_string($value);
         }
         return $sanitizado;
     }
@@ -163,22 +158,21 @@ class ActiveRecord {
         $query .= "') ";
 
         // Resultado de la consulta
-        $resultado = self::$db->query($query);
+        //$resultado = self::$db->query($query);
+        $resultado = DB::insertOrUpdate($query);
         if($resultado){
             $respuesta = [
                 'resultado' =>  $resultado,
-                'id' => self::$db->insert_id
+                'id' => DB::getId()
              ];
         }else{
             $respuesta = [
-                "error" => 'Error al insertar en la base de datos'
+                'resultado' => $resultado,
+                "error" => DB::getErrors()
 
             ];
         }
-        return [
-           'resultado' =>  $resultado,
-           'id' => self::$db->insert_id
-        ];
+        return $respuesta;
     }
 
     // Actualizar el registro
@@ -195,11 +189,11 @@ class ActiveRecord {
         // Consulta SQL
         $query = "UPDATE " . static::$tabla ." SET ";
         $query .=  join(', ', $valores );
-        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " WHERE id = '" . DB::escape_string($this->id) . "' ";
         $query .= " LIMIT 1 "; 
 
         // Actualizar BD
-        $resultado = self::$db->query($query);
+        $resultado = DB::insertOrUpdate($query);
         return $resultado;
     }
 
