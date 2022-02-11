@@ -1,6 +1,7 @@
 import { Paginador } from './paginador.js';
 import { config } from './config.js';
-const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
+// const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
+const pagina = new Paginador(1);
 
 const cita = {
     id: '',
@@ -35,6 +36,9 @@ function iniciarApp() {
 function ponerACero() {
     document.querySelector('#fecha').value = '';
     document.querySelector('#hora').value = '';
+    cita.fecha = '';
+    cita.hora = '';
+    cita.servicios = [];
 }
 
 function mostrarSeccion() {
@@ -64,11 +68,7 @@ function tabs() {
         boton.addEventListener('click', function (e) {
             pagina.setPaginaActual( parseInt(e.target.dataset.paso) );
             localStorage.setItem('paso', pagina.PaginaActual);
-            //mostrarSeccion();
             botonesPaginador();
-            
-            
-            
         });
     });
 }
@@ -335,4 +335,20 @@ async function reservarCita() {
 
     const resultado = await respuesta.json();
     console.log(resultado);
+    if (resultado.resultado) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Cita creada correctamente.',
+            text: `Tu cita para el día ${cita.fecha} a las ${cita.hora} ha sido creada correctamente`
+        }).then(() => {
+            window.location.reload();
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+    }
 }

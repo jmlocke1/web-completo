@@ -18,7 +18,7 @@ class APIController {
 		$respuesta = [
 			'cita' => $cita,
 			'resultado' => $resultado,
-			'errores' => DB::getErrors()
+			'error' => array_shift( DB::getErrors() )
 		];
 
 		echo json_encode($respuesta);
