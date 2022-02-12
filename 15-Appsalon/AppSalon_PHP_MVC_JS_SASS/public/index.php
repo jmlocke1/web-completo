@@ -6,8 +6,11 @@ use Controllers\APIController;
 use Controllers\LoginController;
 use MVC\Router;
 use Controllers\CitaController;
+use Model\Cita;
+use Model\CitaServicio;
 
 $router = new Router();
+
 
 // Iniciar sesión
 $router->get('/', [LoginController::class, 'loginGet']);

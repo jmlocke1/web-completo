@@ -17,6 +17,21 @@ class ActiveRecord {
 	 * falta
 	 */
 	protected static $primaryKeys = [];
+
+    /**
+	 * Claves foráneas de la aplicación. la clave asociativa es la clave foránea
+	 * y el valor es la tabla:
+	 * $foreignKeys[foreignkey] = tablename
+	 */
+	protected static $foreignKeys = [];
+
+    /**
+     * Claves primarias que son generadas automáticamente. Estas claves no 
+     * se introducen cuando se crea un nuevo registro. El valor por defecto es
+     * la clave 'id', si se establece otro u otros nombres como claves primarias
+     * automáticas
+     */
+    protected static $automaticIds = ['id'];
     
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {
@@ -79,7 +94,7 @@ class ActiveRecord {
     public function atributos() {
         $atributos = [];
         foreach(static::$columnasDB as $columna) {
-            if($columna === 'id' || in_array($columna, static::$primaryKeys)) continue;
+            if(in_array($columna, static::$automaticIds)) continue;
             $atributos[$columna] = $this->$columna;
         }
         return $atributos;
@@ -125,15 +140,18 @@ class ActiveRecord {
     }
 
     // Busca un registro por su id
-    public static function find($id) {
+    public static function find(array|int $id) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE id = ${id}";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
 
     // Obtener Registros con cierta cantidad
-    public static function get($limite) {
+    public static function get($limite, $offset = null) {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT ${limite}";
+        if(!is_null($offset)){
+            $query .= " OFFSET ${offset}";
+        }
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
