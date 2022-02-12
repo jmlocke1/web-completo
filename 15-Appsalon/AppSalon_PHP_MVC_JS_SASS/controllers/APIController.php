@@ -12,8 +12,13 @@ class APIController {
 	}
 
 	public static function guardar(){
-		$cita = new Cita($_POST);
-		$resultado = $cita->guardar();
+		// Almacena la cita y devuelve el id
+		// $cita = new Cita($_POST);
+		// $resultado = $cita->guardar();
+
+		// Almacena la cita y el servicio
+		$idServicios = explode(',', $_POST['servicios']);
+		$resultado['servicios'] = $_POST['servicios'];
 		echo json_encode($resultado);
 	}
 }

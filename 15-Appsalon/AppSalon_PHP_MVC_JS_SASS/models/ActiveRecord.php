@@ -156,7 +156,7 @@ class ActiveRecord {
         $query .= " ) VALUES ('"; 
         $query .= join("', '", array_values($atributos));
         $query .= "') ";
-
+        //return json_encode(['query' => $query]);
         // Resultado de la consulta
         $resultado = DB::query($query);
         if($resultado){
