@@ -327,28 +327,40 @@ async function reservarCita() {
     datos.append('servicios', idServicios);
     // console.log([...datos]);
     
-    const url = config.urlLocal + '/api/citas';
-    const respuesta = await fetch(url, {
-        method: 'POST',
-        body: datos
-    });
-
-    const resultado = await respuesta.json();
-    console.log(resultado);
-    if (resultado.resultado) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Cita creada correctamente.',
-            text: `Tu cita para el día ${cita.fecha} a las ${cita.hora} ha sido creada correctamente`
-        }).then(() => {
-            window.location.reload();
+    try {
+        const url = window.location.origin + '/api/citas';
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: datos
         });
-    } else {
+
+        const resultado = await respuesta.json();
+        console.log(resultado);
+        if (resultado.resultado) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Cita creada correctamente.',
+                text: `Tu cita para el día ${cita.fecha} a las ${cita.hora} ha sido creada correctamente`
+            }).then(() => {
+                window.location.reload();
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al guardar la cita: '+ resultado.error
+            }).then(() => {
+                window.location.reload();
+            });
+        }
+    } catch (error) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
-        })
+            text: 'Hay un problema con el servidor: '+ error
+        }).then(() => {
+            window.location.reload();
+        });
     }
+    
 }

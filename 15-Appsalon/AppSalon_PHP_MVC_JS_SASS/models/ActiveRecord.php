@@ -158,7 +158,6 @@ class ActiveRecord {
         $query .= "') ";
 
         // Resultado de la consulta
-        //$resultado = self::$db->query($query);
         $resultado = DB::query($query);
         if($resultado){
             $respuesta = [
@@ -168,7 +167,7 @@ class ActiveRecord {
         }else{
             $respuesta = [
                 'resultado' => $resultado,
-                "error" => DB::getErrors()
+                "error" => DB::getLastError()
 
             ];
         }
@@ -193,7 +192,7 @@ class ActiveRecord {
         $query .= " LIMIT 1 "; 
 
         // Actualizar BD
-        $resultado = DB::insertOrUpdate($query);
+        $resultado = DB::query($query);
         return $resultado;
     }
 

@@ -14,13 +14,6 @@ class APIController {
 	public static function guardar(){
 		$cita = new Cita($_POST);
 		$resultado = $cita->guardar();
-
-		$respuesta = [
-			'cita' => $cita,
-			'resultado' => $resultado,
-			'error' => array_shift( DB::getErrors() )
-		];
-
-		echo json_encode($respuesta);
+		echo json_encode($resultado);
 	}
 }

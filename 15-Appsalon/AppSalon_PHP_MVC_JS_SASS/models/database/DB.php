@@ -107,7 +107,6 @@ class DB {
 	 * Comprueba si tenemos conexión a la base de datos, de lo contrario obtiene una
 	 */
 	private static function hayDB(){
-        self::$errors = [];
 		if(!isset(self::$db)){
 			self::conectarDB();
 		}
@@ -118,6 +117,29 @@ class DB {
         return $newDB;
     }
 
+    /**
+     * Devuelve el primer error ocurrido
+     *
+     * @return string
+     */
+    public static function getFirstError(){
+        return array_shift( self::$errors );
+    }
+
+    /**
+     * Devuelve el último error ocurrido
+     *
+     * @return string
+     */
+    public static function getLastError(){
+        return end( self::$errors );
+    }
+
+    /**
+     * Devuelve todos los errores ocurridos en el script
+     *
+     * @return array<string>
+     */
     public static function getErrors(){
         return self::$errors;
     }
