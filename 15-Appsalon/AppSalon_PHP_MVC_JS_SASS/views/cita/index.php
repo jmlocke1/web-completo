@@ -2,10 +2,7 @@
 <h1 class="nombre-pagina">Crear Nueva Cita</h1>
 <p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
-<div class="barra">
-    <p>Hola: <?= $nombre ?? ''; ?></p>
-    <a class="boton" href="/logout">Cerrar Sesión</a>
-</div>
+<?php include TEMPLATES_URL."/barra.php"; ?>
 
 <div id="app">
     <div class="tabs">

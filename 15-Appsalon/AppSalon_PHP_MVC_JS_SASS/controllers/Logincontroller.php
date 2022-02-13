@@ -7,9 +7,9 @@ use MVC\Utilities\Email;
 
 class LoginController {
     public static function loginGet(Router $router){
-        //debuguear($_SESSION);
-        session_start();
-        
+        if(!isset($_SESSION)){
+            session_start();
+        }
         $router->render('auth/login', [
             'alertas' => []
         ]);

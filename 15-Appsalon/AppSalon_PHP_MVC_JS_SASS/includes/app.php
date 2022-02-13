@@ -1,7 +1,7 @@
 <?php 
 require __DIR__ . '/../vendor/autoload.php';
-require 'funciones.php';
 require_once "config/Config.php";
+require FUNCIONES_URL.'/funciones.php';
 //require 'database.php';
 use Model\Database\DB;
 DB::conectarDB();

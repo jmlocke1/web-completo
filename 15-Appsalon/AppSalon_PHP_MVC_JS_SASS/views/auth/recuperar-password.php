@@ -1,7 +1,7 @@
 <h1 class="nombre-pagina">Recuperar Password</h1>
 <p class="descripcion-pagina">Coloca tu nuevo password a continuación</p>
 
-<?php include_once DIR_ROOT.'includes/templates/alertas.php'; ?>
+<?php include_once DIR_ROOT.'/includes/templates/alertas.php'; ?>
 
 <?php if($error) return; ?>
 <form  class="formulario" method="POST">

@@ -1,7 +1,7 @@
 <h1 class="nombre-pagina">Login</h1>
 <p class="descripcion-pagina">Inicia sesión con tus datos</p>
 
-<?php include_once DIR_ROOT.'includes/templates/alertas.php'; ?>
+<?php include_once DIR_ROOT.'/includes/templates/alertas.php'; ?>
 
 <form action="/" class="formulario" method="POST">
 	<div class="campo">
