@@ -337,10 +337,15 @@ async function reservarCita() {
         const resultado = await respuesta.json();
         console.log(resultado);
         if (resultado.resultado) {
+            let mensaje = `Tu cita para el día ${cita.fecha} a las ${cita.hora} ha sido creada correctamente`;
+            if (resultado.servicios.errores) {
+                let serviciosFallidos = Object.keys(resultado.servicios.errores).length;
+                mensaje += `, pero ${serviciosFallidos} servicios no se han podido guardar`;
+            }
             Swal.fire({
                 icon: 'success',
                 title: 'Cita creada correctamente.',
-                text: `Tu cita para el día ${cita.fecha} a las ${cita.hora} ha sido creada correctamente`
+                text: mensaje
             }).then(() => {
                 window.location.reload();
             });

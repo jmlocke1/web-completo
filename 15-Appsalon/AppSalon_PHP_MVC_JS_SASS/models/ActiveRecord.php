@@ -7,6 +7,7 @@ class ActiveRecord {
     protected static $db;
     protected static $tabla = '';
     protected static $columnasDB = [];
+    protected static $where = '';
 
     // Alertas y Mensajes
     protected static $alertas = [];
@@ -57,6 +58,15 @@ class ActiveRecord {
     // Validación
     public static function getAlertas() {
         return static::$alertas;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public static function borrarAlertas(){
+        static::$alertas = [];
     }
 
     public function validar() {
@@ -156,7 +166,7 @@ class ActiveRecord {
         return array_shift( $resultado ) ;
     }
 
-    // Busca un registro por su id
+    // Busca un registro por el valor de una columna
     public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE ${columna} = '${valor}'";
         $resultado = self::consultarSQL($query);
