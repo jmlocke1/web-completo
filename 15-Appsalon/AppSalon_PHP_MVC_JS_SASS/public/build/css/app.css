@@ -440,6 +440,44 @@ p {
   padding: 3rem 0;
 }
 
+.barra {
+  margin: 5rem 0;
+}
+@media (min-width: 768px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.barra .boton {
+  background-color: #1a1b15;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 5rem 0;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .barra .boton {
+    width: auto;
+  }
+}
+.barra .boton:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
 .seccion {
   padding: 5rem 0;
   display: none;

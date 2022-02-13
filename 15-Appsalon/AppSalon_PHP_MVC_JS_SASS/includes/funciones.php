@@ -12,3 +12,17 @@ function s($html) : string {
     $s = htmlspecialchars($html);
     return $s;
 }
+
+/**
+ * Función que comprueba si el usuario está autenticado
+ *
+ * @return void
+ */
+function isAuth() :void {
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    if(!isset($_SESSION['login'])){
+        header('Location: /');
+    }
+}
