@@ -1,5 +1,6 @@
 import { Paginador } from './paginador.js';
 import { config } from './config.js';
+import { mostrarAlerta } from './utilidades.js';
 // const pagina = new Paginador(parseInt(localStorage.getItem('paso')));
 const pagina = new Paginador(1);
 
@@ -113,7 +114,7 @@ function paginaSiguiente() {
 
 async function consultarAPI() {
     try {
-        const url = 'https://appsalon.test/api/servicios';
+        const url = window.location.origin + '/api/servicios';
         const resultado = await fetch(url);
         const servicios = await resultado.json();
         mostrarServicios(servicios);
@@ -199,31 +200,7 @@ function seleccionarHora() {
     });
 }
 
-function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
-    const alerta = document.createElement('DIV');
-    alerta.textContent = mensaje;
-    
-    alerta.classList.add('alerta');
-    alerta.classList.add(tipo);
 
-    const referencia = document.querySelector(elemento);
-    // Previene que se genere más de una alerta
-    // alerta.classList.add = 'weekend';
-    const alertasAnteriores = document.querySelectorAll('.alerta');
-    alertasAnteriores.forEach(alertaAnterior => { 
-        if (alertaAnterior.textContent === mensaje) {
-            alertaAnterior.remove();
-        }
-    });
-    referencia.appendChild(alerta);
-    if (desaparece) {
-        // Eliminar la alerta pasados 3 segundos
-        setTimeout(() => {
-            alerta.remove();
-        }, 3000);
-    }
-    
-}
 
 function mostrarResumen() {
     let error = false;

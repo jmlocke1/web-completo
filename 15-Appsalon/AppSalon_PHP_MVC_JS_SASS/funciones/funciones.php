@@ -35,3 +35,11 @@ function isAuth() :void {
         header('Location: /');
     }
 }
+
+function validarFecha(string $fecha = '') : bool {
+    if(empty($fecha)){
+        return false;
+    }
+    $fecha = explode('-', $fecha);
+    return checkdate($fecha[1], $fecha[2], $fecha[0]);
+}

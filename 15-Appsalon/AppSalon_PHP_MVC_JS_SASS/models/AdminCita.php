@@ -3,9 +3,10 @@ namespace Model;
 
 class AdminCita extends ActiveRecord {
     protected static $tabla = 'citasservicios';
-    protected static $columnasDB = ['id', 'hora', 'cliente', 'email', 'telefono', 'servicio', 'precio'];
+    protected static $columnasDB = ['id', 'fecha', 'hora', 'cliente', 'email', 'telefono', 'servicio', 'precio'];
 
     public $id;
+    public $fecha;
     public $hora;
     public $cliente;
     public $email;
@@ -24,9 +25,12 @@ class AdminCita extends ActiveRecord {
         $this->precio = $args['precio'] ?? '';
     }
 
-    public static function getCitas($fecha = null){
+    public static function getCitas($fecha = null, $hasta = null){
+        if(isset($fecha) && !isset($hasta)){
+            $hasta = $fecha;
+        }
         // Consultar la base de datos
-		$consulta = "SELECT citas.id, citas.hora, CONCAT( usuarios.nombre, ' ', usuarios.apellido) as cliente, ";
+		$consulta = "SELECT citas.id, citas.fecha, citas.hora, CONCAT( usuarios.nombre, ' ', usuarios.apellido) as cliente, ";
 		$consulta .= " usuarios.email, usuarios.telefono, servicios.nombre as servicio, servicios.precio  ";
 		$consulta .= " FROM citas  ";
 		$consulta .= " LEFT OUTER JOIN usuarios ";
@@ -35,9 +39,13 @@ class AdminCita extends ActiveRecord {
 		$consulta .= " ON citasServicios.citaId=citas.id ";
 		$consulta .= " LEFT OUTER JOIN servicios ";
 		$consulta .= " ON servicios.id=citasServicios.servicioId ";
-        if(isset($fecha)){
-            $consulta .= " WHERE fecha =  '${fecha}' ";
+        if(isset($fecha) && !isset($hasta)){
+            $consulta .= " WHERE fecha = '${fecha}'";
         }
+        if(isset($fecha) && isset($hasta)){
+            $consulta .= " WHERE fecha BETWEEN  '${fecha}' AND '${hasta}'";
+        }
+        $consulta .= " ORDER BY citas.fecha";
 
         $citas = self::sql($consulta);
         return $citas;
