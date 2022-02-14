@@ -12,4 +12,23 @@
 	</form>
 </div>
 
-<div class="citas-admin"></div>
+<div class="citas-admin">
+	<ul class="citas">
+		<?php 
+		$idCita = '';
+		foreach( $citas as $cita ){ 
+			if($idCita !== $cita->id){
+		?>
+			<li>
+				<p>ID: <span><?= $cita->id; ?></span></p>
+				<p>Hora: <span><?= $cita->hora; ?></span></p>
+				<p>Cliente: <span><?= $cita->cliente; ?></span></p>
+			<?php 
+				$idCita = $cita->id;
+			} // Fin de if 
+			?>
+			</li>
+		<?php } // Fin de foreach ?>
+	</ul>
+	
+</div>

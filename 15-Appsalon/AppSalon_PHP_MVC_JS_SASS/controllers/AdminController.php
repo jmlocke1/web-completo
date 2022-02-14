@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Model\AdminCita;
 use MVC\Router;
 
 class Admincontroller {
@@ -8,8 +9,11 @@ class Admincontroller {
 		if(!isset($_SESSION)){
 			session_start();
 		}
+		$citas = AdminCita::getCitas();
+		
 		$router->render('admin/index', [
-			'nombre' => $_SESSION['nombre']
+			'nombre' => $_SESSION['nombre'],
+			'citas' => $citas
 		]);
 	}
 }
