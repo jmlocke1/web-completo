@@ -13,6 +13,15 @@ function s($html) : string {
     return $s;
 }
 
+function esUltimo(string $actual, string $proximo) : bool {
+    if($actual !== $proximo){
+        return true;
+    }else{
+        return false;
+    }
+    
+}
+
 /**
  * Función que comprueba si el usuario está autenticado
  *

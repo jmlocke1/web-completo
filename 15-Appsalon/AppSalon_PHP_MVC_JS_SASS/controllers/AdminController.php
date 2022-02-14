@@ -9,11 +9,14 @@ class Admincontroller {
 		if(!isset($_SESSION)){
 			session_start();
 		}
+		$fecha = date('Y-m-d');
+		
 		$citas = AdminCita::getCitas();
 		
 		$router->render('admin/index', [
 			'nombre' => $_SESSION['nombre'],
-			'citas' => $citas
+			'citas' => $citas,
+			'fecha' => $fecha
 		]);
 	}
 }
