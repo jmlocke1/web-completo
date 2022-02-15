@@ -48,14 +48,20 @@
 			?>
 				<p class="servicio"><?= $cita->servicio . " - " . $cita->precio; ?></p>
 			
-	<?php 
-		$actual = $cita->id;
-		$proximo = $citas[$key + 1]->id ?? 0;
-		$total += floatval( $cita->precio );
-		if(esUltimo($actual, $proximo)){
-			echo "<p>Total: <span> $total</span></p>";
-			$total = 0;
-		}
+		<?php 
+			$actual = $cita->id;
+			$proximo = $citas[$key + 1]->id ?? 0;
+			$total += floatval( $cita->precio );
+			if(esUltimo($actual, $proximo)){
+		?>
+				<p>Total: <span> <?= $total; ?></span></p>
+				<form action="/api/eliminar" method="POST">
+					<input type="hidden" name="id" value="<?= $cita->id; ?>">
+					<input type="submit" value="Eliminar" class="boton-eliminar">
+				</form>
+		<?php
+				$total = 0;
+			}
 		} // Fin de foreach 
 	?>
 	</ul>
