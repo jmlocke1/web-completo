@@ -9,6 +9,8 @@ class Admincontroller {
 		if(!isset($_SESSION)){
 			session_start();
 		}
+		
+		isAdmin();
 		if(validarFecha($_GET['fecha-desde'] ?? '')){
 			$fecha = $_GET['fecha-desde'];
 		}else{

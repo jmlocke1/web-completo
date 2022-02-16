@@ -10,6 +10,12 @@ class LoginController {
         if(!isset($_SESSION)){
             session_start();
         }
+        
+        $auth = $_SESSION['login'] ?? false;
+        if($auth){
+            header('Location: /cita');
+        }
+        
         $router->render('auth/login', [
             'alertas' => []
         ]);
