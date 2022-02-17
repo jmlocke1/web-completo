@@ -51,3 +51,9 @@ function isAdmin(){
         header('Location: /');
     }
 }
+
+function iniciaSesión(){
+    if(!isset($_SESSION)){
+        session_start();
+    }
+}

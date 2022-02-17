@@ -510,6 +510,7 @@ p {
 .listado-servicios {
   display: grid;
   gap: 2rem;
+  overflow: visible;
 }
 @media (min-width: 768px) {
   .listado-servicios {
@@ -535,6 +536,7 @@ p {
 .listado-servicios .servicio:hover {
   transform: scale(1.1);
   box-shadow: 0 0 1rem 0.5rem #adbecc;
+  z-index: 1;
 }
 .listado-servicios .servicio p {
   color: #1a1b15;

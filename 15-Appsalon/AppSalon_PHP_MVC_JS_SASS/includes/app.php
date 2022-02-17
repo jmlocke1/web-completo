@@ -9,4 +9,4 @@ DB::conectarDB();
 
 // Conectarnos a la base de datos
 use Model\ActiveRecord;
-ActiveRecord::setDB(DB::getDB());
+//ActiveRecord::setDB(DB::getDB());

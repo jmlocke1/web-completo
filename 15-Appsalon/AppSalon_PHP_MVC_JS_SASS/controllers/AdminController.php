@@ -6,9 +6,7 @@ use MVC\Router;
 
 class Admincontroller {
 	public static function index( Router $router ){
-		if(!isset($_SESSION)){
-			session_start();
-		}
+		iniciaSesión();
 		
 		isAdmin();
 		if(validarFecha($_GET['fecha-desde'] ?? '')){

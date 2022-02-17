@@ -132,9 +132,7 @@ class Usuario extends ActiveRecord {
 	 * Guarda los datos del usuario en la sesión actual
 	 */
 	public function saveDataInSession(){
-		if(!isset($_SESSION)) {
-            session_start();
-        }
+		iniciaSesión();
 		$_SESSION['id'] = $this->id;
 		$_SESSION['nombre'] = $this->nombre . " " . $this->apellido;
 		$_SESSION['email'] = $this->email;

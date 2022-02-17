@@ -14,9 +14,7 @@ class Router{
     }
 
     public function comprobarRutas(){
-        if(!isset($_SESSION)) {
-            session_start();
-        }
+        iniciaSesión();
         $auth = $_SESSION['login'] ?? null;
         
         $urlActual = $_SERVER['REDIRECT_URL'] ?? '/';

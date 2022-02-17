@@ -7,9 +7,7 @@ use MVC\Utilities\Email;
 
 class LoginController {
     public static function loginGet(Router $router){
-        if(!isset($_SESSION)){
-            session_start();
-        }
+        iniciaSesión();
         
         $auth = $_SESSION['login'] ?? false;
         if($auth){
@@ -54,9 +52,7 @@ class LoginController {
     }
 
     public static function logout(){
-        if(!isset($_SESSION)){
-            session_start();
-        }
+        iniciaSesión();
         
         // Destruir todas las variables de sesión.
         $_SESSION = array();
