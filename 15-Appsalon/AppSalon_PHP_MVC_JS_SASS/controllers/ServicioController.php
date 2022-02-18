@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Model\Servicio;
 use MVC\Router;
 
 class ServicioController {
@@ -13,15 +14,29 @@ class ServicioController {
 
     public static function crearGet(Router $router) {
         iniciaSesión();
+        $servicio = new Servicio();
+        $alertas = [];
         $router->render('servicios/crear', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            //'alertas' => $alertas
         ]);
     }
 
     public static function crearPost(Router $router) {
         iniciaSesión();
+        $alertas = [];
+        $servicio = new Servicio();
+        $servicio->sincronizar($_POST);
+        $alertas = $servicio->validar();
+        if(empty($alertas)){
+            $servicio->guardar();
+            header('Location: /servicios');
+        }
         $router->render('servicios/crear', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            'alertas' => $alertas
         ]);
     }
 
