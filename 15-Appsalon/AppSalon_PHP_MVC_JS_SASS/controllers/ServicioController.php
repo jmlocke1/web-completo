@@ -7,8 +7,10 @@ use MVC\Router;
 class ServicioController {
     public static function index(Router $router){
         iniciaSesión();
+        $servicios = Servicio::all();
         $router->render('servicios/index', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicios' => $servicios
         ]);
     }
 
@@ -19,7 +21,7 @@ class ServicioController {
         $router->render('servicios/crear', [
             'nombre' => $_SESSION['nombre'],
             'servicio' => $servicio,
-            //'alertas' => $alertas
+            'alertas' => $alertas
         ]);
     }
 
@@ -42,15 +44,19 @@ class ServicioController {
 
     public static function actualizarGet(Router $router) {
         iniciaSesión();
+        $alertas = [];
         $router->render('servicios/actualizar', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'alertas' => $alertas
         ]);
     }
 
     public static function actualizarPost(Router $router) {
         iniciaSesión();
+        $alertas = [];
         $router->render('servicios/actualizar', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'alertas' => $alertas
         ]);
     }
 

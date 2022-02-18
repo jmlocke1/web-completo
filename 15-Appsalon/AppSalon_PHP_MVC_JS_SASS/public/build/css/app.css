@@ -566,25 +566,34 @@ p {
   margin-bottom: 5rem;
 }
 
-.citas {
+.citas, .servicios {
   list-style: none;
   padding: 0;
 }
-.citas li {
+.citas li, .servicios li {
   padding: 1rem;
   border-top: 1px solid #FFFFFF;
 }
-.citas li p {
+.citas li p, .servicios li p {
   font-weight: 700;
   color: #0da6f3;
 }
-.citas li span,
-.citas li .servicio {
+.citas li span, .servicios li span,
+.citas li .servicio,
+.servicios li .servicio {
   font-weight: 400;
   color: #FFFFFF;
 }
-.citas li:hover {
+.citas li:hover, .servicios li:hover {
   background-color: #2f2f2f;
+}
+
+.servicios .acciones {
+  margin: 0;
+}
+.servicios .boton,
+.servicios .boton-eliminar {
+  margin: 0;
 }
 
 .formulario {
@@ -685,6 +694,7 @@ p {
   .acciones {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 }
 .acciones a {
