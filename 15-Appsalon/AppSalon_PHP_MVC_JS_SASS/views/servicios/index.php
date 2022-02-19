@@ -3,6 +3,8 @@
 
 <?php include DIR_ROOT.'/includes/templates/barra.php'; ?>
 
+<?php include DIR_ROOT.'/includes/templates/alertas.php'; ?>
+
 <ul class="servicios">
 <?php foreach($servicios as $servicio){ ?>
     <li>

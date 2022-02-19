@@ -1,7 +1,6 @@
 <?php
 namespace MVC\Utilities;
 
-use COM;
 use Config;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
