@@ -150,11 +150,11 @@ class ActiveRecord {
     }
 
     // Busca un registro por su id
-    public static function find(array|int $id) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE id = ${id}";
-        $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
-    }
+public static function find(array|int $id) {
+    $query = "SELECT * FROM " . static::$tabla  ." WHERE id = ${id}";
+    $resultado = self::consultarSQL($query);
+    return array_shift( $resultado ) ;
+}
 
     // Obtener Registros con cierta cantidad
     public static function get($limite, $offset = null) {
