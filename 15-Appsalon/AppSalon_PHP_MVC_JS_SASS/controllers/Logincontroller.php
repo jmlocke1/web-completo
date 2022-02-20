@@ -164,7 +164,13 @@ class LoginController {
 
     public static function crearPost(Router $router){
         $usuario = new Usuario;
-        $usuario->sincronizar($_POST);
+        $datos['nombre'] = $_POST['nombre'] ?? null;
+        $datos['apellido'] = $_POST['apellido'] ?? null;
+        $datos['email'] = $_POST['email'] ?? null;
+        $datos['password'] = $_POST['password'] ?? null;
+        $datos['telefono'] = $_POST['telefono'] ?? null;
+
+        $usuario->sincronizar($datos);
         $alertas = $usuario->validarNuevaCuenta();
         
         // Revisar que alerta esté vacío
