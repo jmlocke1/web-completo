@@ -15,7 +15,7 @@ class APIController {
 	public static function guardar(){
 		// Almacena la cita y devuelve el id
 		$cita = new Cita($_POST);
-		$resultado = $cita->guardar();
+		$resultado = $cita->crear();
 		if($resultado['resultado']){
 			$citaid = $resultado['id'];
 		}else{

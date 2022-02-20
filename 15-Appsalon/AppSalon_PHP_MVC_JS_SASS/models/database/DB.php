@@ -34,7 +34,9 @@ class DB {
      * Devuelve una conexión a la base de datos
      */
     public static function conectarDB() {
-        self::$db = new \mysqli(\Config::DB_HOST, \Config::DB_USER, \Config::DB_PASSWORD, \Config::DB_NAME);
+        
+        //self::$db = new \mysqli(\Config::DB_HOST, \Config::DB_USER, \Config::DB_PASSWORD, \Config::DB_NAME);
+        self::$db = new \mysqli($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
         if(self::$db->connect_errno) {
             self::$errors[] =  "Error ".self::$db->connect_errno.". No se pudo conectar: ".self::$db->connect_error;
             exit;

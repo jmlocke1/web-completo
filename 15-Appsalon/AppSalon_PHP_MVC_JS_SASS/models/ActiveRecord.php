@@ -9,6 +9,13 @@ class ActiveRecord {
     protected static $columnasDB = [];
     protected static $where = '';
 
+    /**
+     * Variable que indica si el objeto es nuevo o no
+     *
+     * @var boolean
+     */
+    protected $newObject = false;
+
     // Alertas y Mensajes
     protected static $alertas = [];
 
@@ -33,6 +40,15 @@ class ActiveRecord {
      * automáticas
      */
     protected static $automaticIds = ['id'];
+
+    protected static function quitaIds(array $array){
+        foreach(self::$automaticIds as $id){
+            if(isset($array[$id])){
+                unset($array[$id]);
+            }
+        }
+        return $array;
+    }
     
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {
