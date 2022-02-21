@@ -16,11 +16,10 @@ error_reporting(E_ALL);
  * Configuración de la aplicación AppSalon.
  */
 class Config {
-	const CONSTANTE_PRUEBA = 'Prueba de constante en clase';
 	/**
 	 * Dominio del proyecto
 	 */
-	const DOMAIN_PROJECT = 'appsalon.test';
+	const DOMAIN_PROJECT = 'uptask.test';
 	/**
 	 * Carpeta de imágenes para PHP
 	 */
@@ -55,7 +54,7 @@ class Config {
 	/**
 	 * Nombre de la base de datos
 	 */
-	const DB_NAME = 'appsalon_mvc';
+	const DB_NAME = 'uptask_mvc';
 
 	// Configuración de mailer
 	/**
@@ -72,5 +71,5 @@ class Config {
 	 * Email desde donde se mandan las notificaciones. En el despliegue
 	 * hay que poner el adecuado, pues este es de prueba y no existe.
 	 */
-	const MAIL_ORIGIN = 'cuentas@appsalon.com';
+	const MAIL_ORIGIN = 'cuentas@uptask.com';
 }
