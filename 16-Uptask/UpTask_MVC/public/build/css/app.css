@@ -395,3 +395,95 @@ p {
   color: #6b7280;
   line-height: 1.8;
 }
+
+.tagline {
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  color: #000;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.descripcion-pagina {
+  text-align: center;
+}
+
+/** Media Queries **/
+.formulario {
+  margin-top: 5rem;
+}
+.formulario .campo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.formulario .campo label {
+  flex: 0 0 10rem;
+}
+.formulario .campo input {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  background-color: #d8dadf;
+}
+
+.acciones {
+  margin-top: 5rem;
+}
+@media (min-width: 768px) {
+  .acciones {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.acciones a {
+  display: block;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #000;
+}
+.acciones a:last-of-type {
+  margin-bottom: 0;
+}
+
+.login {
+  margin-top: 5rem;
+}
+.login .uptask {
+  background: linear-gradient(to right, #0891B2 0%, #0ab9e3 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .login .uptask {
+    font-size: 10rem;
+  }
+}
+.login input[type=submit] {
+  background-color: #0891B2;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .login input[type=submit] {
+    width: auto;
+  }
+}
+.login input[type=submit]:hover {
+  background-color: #066981;
+  cursor: pointer;
+}
+.login .acciones a {
+  color: #0891B2;
+}
