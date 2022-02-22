@@ -487,3 +487,45 @@ p {
 .login .acciones a {
   color: #0891B2;
 }
+
+.crear {
+  margin-top: 5rem;
+}
+.crear .uptask {
+  background: linear-gradient(to right, #7C3AED 0%, #9b69f1 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .crear .uptask {
+    font-size: 10rem;
+  }
+}
+.crear input[type=submit] {
+  background-color: #7C3AED;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .crear input[type=submit] {
+    width: auto;
+  }
+}
+.crear input[type=submit]:hover {
+  background-color: #5f14e0;
+  cursor: pointer;
+}
+.crear .acciones a {
+  color: #7C3AED;
+}
