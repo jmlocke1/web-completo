@@ -1,4 +1,4 @@
-<div class="contenedor login">
+<div class="contenedor login crear">
 	<?php include DIR_ROOT. '/views/templates/nombre-sitio.php' ?>
 
 	<div class="contenedor-sm">

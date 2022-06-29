@@ -48,12 +48,12 @@
 
 @mixin textoDegradado($color){
     background: linear-gradient(to right, $color 0%, lighten($color, 10%) 100%);
-        color: transparent;
-        background-clip: text;
-        text-align: center;
-        font-size: 7rem;
+    color: transparent;
+    background-clip: text;
+    text-align: center;
+    font-size: 7rem;
 
-        @include tablet {
-            font-size: 10rem;
-        }
+    @include tablet {
+        font-size: 10rem;
+    }
 }

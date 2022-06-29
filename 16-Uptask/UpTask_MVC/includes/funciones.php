@@ -7,6 +7,12 @@ function debuguear($variable) : string {
     exit;
 }
 
+function debuguearSinExit($variable)  {
+    echo "<pre>";
+    var_dump($variable);
+    echo "</pre>";
+}
+
 // Escapa / Sanitizar el HTML
 function s($html) : string {
     $s = htmlspecialchars($html);
