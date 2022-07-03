@@ -446,6 +446,20 @@ p {
   margin-bottom: 0;
 }
 
+.alerta {
+  padding: 1rem 1rem 1rem 2rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  max-width: 80rem;
+}
+.alerta.error {
+  background-color: #ffdcdc;
+  border-left: 0.5rem solid #a90000;
+  color: #a90000;
+}
+
 .login {
   margin-top: 5rem;
 }
