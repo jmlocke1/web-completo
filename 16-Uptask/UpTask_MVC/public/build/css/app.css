@@ -529,3 +529,125 @@ p {
 .crear .acciones a {
   color: #7C3AED;
 }
+
+.olvide {
+  margin-top: 5rem;
+}
+.olvide .uptask {
+  background: linear-gradient(to right, #DB2777 0%, #e25393 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .olvide .uptask {
+    font-size: 10rem;
+  }
+}
+.olvide input[type=submit] {
+  background-color: #DB2777;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .olvide input[type=submit] {
+    width: auto;
+  }
+}
+.olvide input[type=submit]:hover {
+  background-color: #b11e5f;
+  cursor: pointer;
+}
+.olvide .acciones a {
+  color: #DB2777;
+}
+
+.reestablecer {
+  margin-top: 5rem;
+}
+.reestablecer .uptask {
+  background: linear-gradient(to right, #2563EB 0%, #5484ef 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .reestablecer .uptask {
+    font-size: 10rem;
+  }
+}
+.reestablecer input[type=submit] {
+  background-color: #2563EB;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .reestablecer input[type=submit] {
+    width: auto;
+  }
+}
+.reestablecer input[type=submit]:hover {
+  background-color: #134cca;
+  cursor: pointer;
+}
+.reestablecer .acciones a {
+  color: #2563EB;
+}
+
+.mensaje {
+  margin-top: 5rem;
+}
+.mensaje .uptask {
+  background: linear-gradient(to right, #F59E0B 0%, #f7b13c 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .mensaje .uptask {
+    font-size: 10rem;
+  }
+}
+
+.confirmar {
+  margin-top: 5rem;
+}
+.confirmar .uptask {
+  background: linear-gradient(to right, #4338CA 0%, #6960d5 100%);
+  color: transparent;
+  background-clip: text;
+  text-align: center;
+  font-size: 7rem;
+}
+@media (min-width: 768px) {
+  .confirmar .uptask {
+    font-size: 10rem;
+  }
+}
+.confirmar .acciones {
+  justify-content: center;
+}
+.confirmar .acciones a {
+  color: #4338CA;
+}

@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Usuario;
 use MVC\Router;
 
 class LoginController {
@@ -25,19 +26,29 @@ class LoginController {
 	}
 
 	public static function crearGet(Router $router) {
-		
+		$usuario = new Usuario();
 
 		$router->render('auth/crear', [
-			'titulo' => 'Crea tu cuenta'
+			'titulo' => 'Crea tu cuenta',
+			'usuario' => $usuario
 		]);
 	}
 
 	public static function crearPost(Router $router) {
-		echo 'Desde Crear Post';
+		$usuario = new Usuario;
+		$usuario->sincronizar($_POST);
+		$alertas = $usuario->validarNuevaCuenta();
+		$router->render('auth/crear', [
+			'titulo' => 'Crea tu cuenta',
+			'usuario' => $usuario,
+			'alertas' => $alertas
+		]);
 	}
 
 	public static function olvideGet(Router $router) {
-		echo "Desde Olvidé Get";
+		$router->render('auth/olvide', [
+			'titulo' => 'Olvidé Password'
+		]);
 	}
 
 	public static function olvidePost(Router $router) {
@@ -45,7 +56,9 @@ class LoginController {
 	}
 
 	public static function reestablecerGet(Router $router) {
-		echo "Desde Reestablecer Get";
+		$router->render('auth/reestablecer', [
+			'titulo' => 'Restablecer Password'
+		]);
 	}
 
 	public static function reestablecerPost(Router $router) {
@@ -53,10 +66,14 @@ class LoginController {
 	}
 
 	public static function mensaje(Router $router) {
-		echo 'Desde Mensaje';
+		$router->render('auth/mensaje', [
+			'titulo' => 'Cuenta creada con éxito'
+		]);
 	}
 
 	public static function confirmar(Router $router) {
-		echo 'Desde Confirmar';
+		$router->render('auth/confirmar', [
+			'titulo' => 'Confirma tu cuenta UpTask'
+		]);
 	}
 }
