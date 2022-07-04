@@ -20,9 +20,13 @@ class Usuario extends ActiveRecord {
 		if(!$this->nombre) {
 			self::$alertas['error'][] = 'El nombre del usuario es obligatorio';
 		}
-		if(!$this->email) {
-			self::$alertas['error'][] = 'El email del usuario es obligatorio';
-		}
+		self::validarEmail();
+		self::validarPassword();
+
+		return self::$alertas;
+	}
+
+	public function validarPassword(){
 		if(!$this->password) {
 			self::$alertas['error'][] = 'El Password no puede ir vacío';
 		}
@@ -32,7 +36,6 @@ class Usuario extends ActiveRecord {
 		if($this->password !== $this->password2) {
 			self::$alertas['error'][] = 'Los Password son diferentes';
 		}
-
 		return self::$alertas;
 	}
 
@@ -48,5 +51,15 @@ class Usuario extends ActiveRecord {
 
 	public function crearToken(){
 		$this->token = uniqid();
+	}
+
+	public function validarEmail() {
+		if(!$this->email){
+			self::$alertas['error'][] = "El Email es Obligatorio";
+		}
+		if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+			self::$alertas['error'][] = "Email no Válido";
+		}
+		return self::$alertas;
 	}
 }

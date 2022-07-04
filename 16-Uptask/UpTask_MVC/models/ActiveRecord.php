@@ -131,8 +131,12 @@ class ActiveRecord {
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value ) {
-            if(is_null($value)) continue;
-            $sanitizado[$key] = DB::escape_string($value);
+            if(is_null($value)){
+                $sanitizado[$key] = $value;
+            }else{
+                $sanitizado[$key] = DB::escape_string($value);
+            }
+            
         }
         return $sanitizado;
     }
@@ -248,7 +252,6 @@ public static function find(array|int $id) {
         $query .=  join(', ', $valores );
         $query .= " WHERE id = '" . DB::escape_string($this->id) . "' ";
         $query .= " LIMIT 1 "; 
-
         // Actualizar BD
         $resultado = DB::query($query);
         return $resultado;
