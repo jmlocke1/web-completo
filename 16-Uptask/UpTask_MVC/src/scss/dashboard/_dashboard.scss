@@ -1,0 +1,15 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.dashboard {
+	background-color: v.$grisClaro;
+
+	@include m.tablet{
+		display: flex;
+		height: 100vh;
+	}
+
+	.principal {
+		flex: 1;
+	}
+}

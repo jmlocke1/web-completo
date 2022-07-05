@@ -670,3 +670,91 @@ p {
 .confirmar .acciones a {
   color: #4338CA;
 }
+
+.dashboard {
+  background-color: #f3f4f6;
+}
+@media (min-width: 768px) {
+  .dashboard {
+    display: flex;
+    height: 100vh;
+  }
+}
+.dashboard .principal {
+  flex: 1;
+}
+
+.sidebar {
+  background-color: #4338CA;
+  padding: 2rem;
+}
+.sidebar h2 {
+  color: #FFFFFF;
+  margin: 0;
+  text-align: center;
+}
+.sidebar .sidebar-nav {
+  margin-top: 5rem;
+}
+.sidebar .sidebar-nav a {
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  transition-property: background-color;
+  transition-duration: 300ms;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.sidebar .sidebar-nav a:hover {
+  background-color: #28217b;
+  border-radius: 0.5rem;
+}
+
+.barra {
+  background-color: #FFFFFF;
+  padding: 1rem 2rem;
+  box-shadow: 1px 12px 9px -13px rgba(0, 0, 0, 0.4);
+}
+@media (min-width: 768px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.barra p {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.barra p span {
+  font-weight: 700;
+  color: #4338CA;
+}
+.barra .cerrar-sesion {
+  background-color: #28217b;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+@media (min-width: 768px) {
+  .barra .cerrar-sesion {
+    width: auto;
+  }
+}
+.barra .cerrar-sesion:hover {
+  background-color: #1b1653;
+  cursor: pointer;
+}
