@@ -690,6 +690,36 @@ p {
   font-size: 2.8rem;
   text-align: center;
 }
+.dashboard .formulario input:not([type=submit]) {
+  background-color: #FFFFFF;
+}
+.dashboard .formulario input[type=submit] {
+  background-color: #4338CA;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+@media (min-width: 768px) {
+  .dashboard .formulario input[type=submit] {
+    width: auto;
+  }
+}
+.dashboard .formulario input[type=submit]:hover {
+  background-color: #352ca3;
+  cursor: pointer;
+}
 
 .sidebar {
   background-color: #4338CA;
@@ -764,4 +794,46 @@ p {
 .barra .cerrar-sesion:hover {
   background-color: #1b1653;
   cursor: pointer;
+}
+
+.no-proyectos a {
+  color: #4338CA;
+}
+
+.listado-proyectos {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 768px) {
+  .listado-proyectos {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .listado-proyectos {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.listado-proyectos .proyecto {
+  background-color: #564ccf;
+  min-height: 12rem;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  line-height: 2;
+  border-radius: 0.5rem;
+}
+.listado-proyectos .proyecto:hover {
+  background-color: #3b31b8;
+}
+.listado-proyectos .proyecto a {
+  color: #FFFFFF;
 }

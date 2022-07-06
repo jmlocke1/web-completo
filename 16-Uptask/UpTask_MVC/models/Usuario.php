@@ -13,7 +13,7 @@ class Usuario extends ActiveRecord {
 		$this->password = $args['password'] ?? null;
 		$this->password2 = $args['password2'] ?? null;
 		$this->token = $args['token'] ?? null;
-		$this->confirmado = $args['confirmado'] ?? null;
+		$this->confirmado = $args['confirmado'] ?? 0;
 	}
 
 	public function validarLogin(){

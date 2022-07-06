@@ -194,6 +194,13 @@ public static function find(array|int $id) {
         return array_shift( $resultado ) ;
     }
 
+    // Busca un registro por el valor de una columna
+    public static function belongsTo($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     /**
      * Consulta plana de SQL. Utilizar cuando los métodos del modelo 
      * no son suficientes
