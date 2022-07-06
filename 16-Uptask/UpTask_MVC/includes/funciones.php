@@ -25,3 +25,9 @@ function isAuth() : void {
         header('Location: /');
     }
 }
+
+function iniciar_sesion(){
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+}
