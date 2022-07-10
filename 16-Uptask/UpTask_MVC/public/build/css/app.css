@@ -837,3 +837,57 @@ p {
 .listado-proyectos .proyecto a {
   color: #FFFFFF;
 }
+
+.contenedor-nueva-tarea {
+  display: flex;
+  justify-content: center;
+}
+.contenedor-nueva-tarea .agregar-tarea {
+  background-color: #0891B2;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .contenedor-nueva-tarea .agregar-tarea {
+    width: auto;
+  }
+}
+.contenedor-nueva-tarea .agregar-tarea:hover {
+  background-color: #066981;
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.modal .formulario {
+  max-width: 60rem;
+  background-color: #FFFFFF;
+  padding: 2rem;
+  margin: 0 auto;
+  transform: translateY(-50vh);
+  transition-property: all;
+  transition-duration: 800ms;
+  transition-timing-function: ease-in-out;
+  opacity: 0;
+}
+.modal .formulario.animar {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+}
