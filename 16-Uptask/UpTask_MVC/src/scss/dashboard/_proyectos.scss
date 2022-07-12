@@ -21,19 +21,20 @@
 	}
 
 	.proyecto {
-		background-color: lighten(v.$indigo, 5%);
-		min-height: 12rem;
 		display: flex;
-		align-items: center;
+		background-color: lighten(v.$indigo, 5%);
+		border-radius: .5rem;
+		min-height: 12rem;
 		padding: 2rem;
 		line-height: 2;
-		border-radius: .5rem;
+		align-items: center;
+		color: v.$blanco;
 
 		&:hover {
 			background-color: darken(v.$indigo, 5%);
 		}
 		a {
-			color: v.$blanco;
+			
 		}
 	}
 }

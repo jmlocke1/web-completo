@@ -823,21 +823,18 @@ p {
   }
 }
 .listado-proyectos .proyecto {
-  background-color: #564ccf;
-  min-height: 12rem;
   display: flex;
-  align-items: center;
+  background-color: #564ccf;
+  border-radius: 0.5rem;
+  min-height: 12rem;
   padding: 2rem;
   line-height: 2;
-  border-radius: 0.5rem;
+  align-items: center;
+  color: #FFFFFF;
 }
 .listado-proyectos .proyecto:hover {
   background-color: #3b31b8;
 }
-.listado-proyectos .proyecto a {
-  color: #FFFFFF;
-}
-
 .contenedor-nueva-tarea {
   display: flex;
   justify-content: center;
