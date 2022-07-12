@@ -881,10 +881,73 @@ p {
   transition-duration: 800ms;
   transition-timing-function: ease-in-out;
   opacity: 0;
+  border-radius: 1rem;
+}
+.modal .formulario legend {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  display: block;
+}
+.modal .formulario .opciones {
+  display: flex;
+  justify-content: space-between;
+}
+.modal .formulario .submit-nueva-tarea {
+  background-color: #4338CA;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .modal .formulario .submit-nueva-tarea {
+    width: auto;
+  }
+}
+.modal .formulario .submit-nueva-tarea:hover {
+  background-color: #352ca3;
+  cursor: pointer;
+}
+.modal .formulario .cerrar-modal {
+  background-color: #F59E0B;
+  padding: 1.5rem 4rem;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  display: inline-block;
+  font-weight: 700;
+  border: none;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .modal .formulario .cerrar-modal {
+    width: auto;
+  }
+}
+.modal .formulario .cerrar-modal:hover {
+  background-color: #c57f08;
+  cursor: pointer;
 }
 .modal .formulario.animar {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   opacity: 1;
+}
+.modal .formulario.cerrar {
+  top: 0;
+  transform: translateY(-50%);
+  opacity: 0;
 }
