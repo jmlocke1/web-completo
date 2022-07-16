@@ -34,8 +34,25 @@
 				}, 800);
 				
 			}
-			console.log(e.target);
+			if (e.target.classList.contains('submit-nueva-tarea')) {
+				submitFormularioNuevaTarea();
+			}
 		});
 		document.querySelector('body').appendChild(modal);
+	}
+
+	function submitFormularioNuevaTarea() {
+		const tarea = document.querySelector('#tarea').value.trim();
+		if (tarea === '') {
+			mostrarAlerta('El nombre de la tarea es Obligatorio', 'error', document.querySelector('.formulario legend'));
+			return;
+		}
+	}
+
+	function mostrarAlerta(mensaje, tipo, referencia) {
+		const alerta = document.createElement('DIV');
+		alerta.classList.add('alerta', tipo);
+		alerta.textContent = mensaje;
+		referencia.parentElement.insertBefore(alerta, referencia);
 	}
 })();
