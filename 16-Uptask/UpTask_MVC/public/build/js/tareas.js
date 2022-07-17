@@ -38,21 +38,51 @@
 				submitFormularioNuevaTarea();
 			}
 		});
-		document.querySelector('body').appendChild(modal);
+		document.querySelector('.dashboard').appendChild(modal);
 	}
 
 	function submitFormularioNuevaTarea() {
 		const tarea = document.querySelector('#tarea').value.trim();
-		if (tarea === '') {
-			mostrarAlerta('El nombre de la tarea es Obligatorio', 'error', document.querySelector('.formulario legend'));
+		const referencia = document.querySelector('.formulario legend');
+		
+		const textoAlerta = 'El nombre de la tarea es Obligatorio';
+		if ((tarea === '')) {
+			// Primero elimina una alerta igual
+			const alertas = document.querySelectorAll("form .alerta");
+			removeSameAlert(alertas, textoAlerta);
+			mostrarAlerta(textoAlerta, 'error', referencia);
 			return;
 		}
+		agregarTarea(tarea);
+	}
+
+	/**
+	 * Función que previene que se muestre una alerta igual en un array de elementos del dom
+	 * 
+	 * @param {*} alertas 		Array de elementos del DOM que contienen una alerta
+	 * @param {*} textoAlerta 	Texto a comparar, si se encuentra un elemento con el mismo texto, se elimina del DOM
+	 */
+	function removeSameAlert(alertas, textoAlerta){
+		alertas.forEach(element => {
+			if(textoAlerta === element.textContent){
+				element.remove();
+			}
+		});
 	}
 
 	function mostrarAlerta(mensaje, tipo, referencia) {
 		const alerta = document.createElement('DIV');
 		alerta.classList.add('alerta', tipo);
 		alerta.textContent = mensaje;
-		referencia.parentElement.insertBefore(alerta, referencia);
+		referencia.parentElement.insertBefore(alerta, referencia.nextElementSibling);
+		// Eliminar la alerta después de 5 segundos
+		setTimeout(() => {
+			alerta.remove();
+		}, 5000);
+	}
+
+	// Consultar el Servidor para añadir una nueva tarea al proyecto actual
+	function agregarTarea(tarea){
+
 	}
 })();

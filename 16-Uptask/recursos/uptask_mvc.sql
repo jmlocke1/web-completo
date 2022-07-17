@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-07-2022 a las 21:35:17
+-- Tiempo de generación: 17-07-2022 a las 20:09:23
 -- Versión del servidor: 8.0.27
 -- Versión de PHP: 8.1.7
 
@@ -46,6 +46,19 @@ INSERT INTO `proyectos` (`id`, `proyecto`, `url`, `propietarioId`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tareas`
+--
+
+CREATE TABLE `tareas` (
+  `id` int NOT NULL,
+  `nombre` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  `proyectoId` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -79,6 +92,13 @@ ALTER TABLE `proyectos`
   ADD KEY `fk_proyecto_usuario` (`propietarioId`);
 
 --
+-- Indices de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tareas_ibfk_1` (`proyectoId`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -109,6 +129,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `proyectos`
   ADD CONSTRAINT `fk_proyecto_usuario` FOREIGN KEY (`propietarioId`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD CONSTRAINT `tareas_ibfk_1` FOREIGN KEY (`proyectoId`) REFERENCES `proyectos` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

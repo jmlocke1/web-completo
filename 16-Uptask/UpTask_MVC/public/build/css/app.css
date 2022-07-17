@@ -890,6 +890,10 @@ p {
   margin-bottom: 2rem;
   display: block;
 }
+.modal .formulario input[type=text] {
+  border: 1px solid #6b7280;
+  border-radius: 0.5rem;
+}
 .modal .formulario .opciones {
   display: flex;
   justify-content: space-between;
