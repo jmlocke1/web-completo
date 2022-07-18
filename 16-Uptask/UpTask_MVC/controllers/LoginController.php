@@ -80,23 +80,23 @@ class LoginController {
 		$alertas = $usuario->validarNuevaCuenta();
 		if(empty($alertas)){
 			$existeUsuario = $usuario->where('email', $usuario->email);
-            if($existeUsuario){
-                Usuario::setAlerta('error', 'El usuario ya existe');
-                $alertas = Usuario::getAlertas();
-            }else{
-                // Crear un nuevo usuario
-                // Hashear password
-                $hash = $usuario->hashPassword();
-                // Eliminar password2
-                unset($usuario->password2);
-                $usuario->crearToken();
-                $resultado = $usuario->guardar();
-                $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
-                $email->enviarConfirmacion();
-                if($resultado){
-                    header('Location: /mensaje');
-                }
-            }
+			if($existeUsuario){
+				Usuario::setAlerta('error', 'El usuario ya existe');
+				$alertas = Usuario::getAlertas();
+			}else{
+				// Crear un nuevo usuario
+				// Hashear password
+				$hash = $usuario->hashPassword();
+				// Eliminar password2
+				unset($usuario->password2);
+				$usuario->crearToken();
+				$resultado = $usuario->guardar();
+				$email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+				$email->enviarConfirmacion();
+				if($resultado){
+					header('Location: /mensaje');
+				}
+			}
 		}
 		
 		$router->render('auth/crear', [
