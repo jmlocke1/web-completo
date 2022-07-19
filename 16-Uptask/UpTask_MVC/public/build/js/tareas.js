@@ -87,6 +87,11 @@
 		const datos = new FormData();
 		datos.append('nombre', tarea);
 
+		const proyectoParams = new URLSearchParams(window.location.search);
+		const proyecto = Object.fromEntries(proyectoParams.entries());
+		console.log(proyecto.id);
+		return;
+
 		try {
 			const url = 'https://uptask.test/api/tarea';
 			const respuesta = await fetch(url, {
