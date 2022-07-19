@@ -1,6 +1,6 @@
 <?php
 
-use Model\Database\DB;
+use Model\Database\DB as DB;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__.'/config/Config.php';
