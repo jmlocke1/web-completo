@@ -86,11 +86,8 @@
 		// Construir la petición
 		const datos = new FormData();
 		datos.append('nombre', tarea);
+		datos.append('proyectoId', obtenerProyecto());
 
-		const proyectoParams = new URLSearchParams(window.location.search);
-		const proyecto = Object.fromEntries(proyectoParams.entries());
-		console.log(proyecto.id);
-		return;
 
 		try {
 			const url = 'https://uptask.test/api/tarea';
@@ -100,8 +97,24 @@
 			});
 			const resultado = await respuesta.json();
 			console.log(resultado);
+
+			const alertas = document.querySelectorAll("form .alerta");
+			const textoAlerta = resultado.mensaje;
+			removeSameAlert(alertas, textoAlerta);
+			mostrarAlerta(textoAlerta, resultado.tipo, document.querySelector('.formulario legend'));
 		} catch (error) {
 			console.log(error);
 		}
+	}
+
+	/**
+	 * Devuelve el id del proyecto obteniéndolo de la url
+	 * 
+	 * @returns string 	id del proyecto
+	 */
+	function obtenerProyecto() {
+		const proyectoParams = new URLSearchParams(window.location.search);
+		const proyecto = Object.fromEntries(proyectoParams.entries());
+		return proyecto.id;
 	}
 })();
