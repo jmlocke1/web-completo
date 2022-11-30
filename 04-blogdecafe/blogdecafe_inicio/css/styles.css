@@ -258,17 +258,31 @@ img {
 }
 .campo {
 	display: flex;
+	flex-direction: column;
 	margin-bottom: 2rem;
-	gap: 2rem;
+	gap: 1rem;
 }
 .campo__label {
-	flex: 0 0 9rem;
-	text-align: right;
+	text-align: left;
 }
+
 .campo__field {
 	flex: 1;
 	border: 1px solid var(--gris);
 }
+
 .campo__field--textarea {
-	height: 20rem;
+	min-height: 20rem;
+}
+
+@media (min-width: 768px){
+	.campo {
+		flex-direction: row;
+		gap: 2rem;
+	}
+
+	.campo__label {
+		flex: 0 0 9rem;
+		text-align: right;
+	}
 }
