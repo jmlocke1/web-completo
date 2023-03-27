@@ -90,11 +90,12 @@
 
 
 		try {
-			const url = 'https://uptask.test/api/tarea';
+			const url = '/api/tarea';
 			const respuesta = await fetch(url, {
 				method: 'POST',
 				body: datos
 			});
+			console.log(respuesta);
 			const resultado = await respuesta.json();
 			console.log(resultado);
 
