@@ -88,7 +88,6 @@
 		datos.append('nombre', tarea);
 		datos.append('proyectoId', obtenerProyecto());
 
-
 		try {
 			const url = '/api/tarea';
 			const respuesta = await fetch(url, {

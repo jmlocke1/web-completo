@@ -1,142 +1,111 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 17-07-2022 a las 20:09:23
--- Versión del servidor: 8.0.27
--- Versión de PHP: 8.1.7
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: uptask_mvc
+-- ------------------------------------------------------
+-- Server version	8.0.30
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `uptask_mvc`
+-- Table structure for table `proyectos`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyectos`
---
-
+DROP TABLE IF EXISTS `proyectos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proyectos` (
-  `id` int NOT NULL,
-  `proyecto` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `propietarioId` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `proyecto` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `propietarioId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_proyecto_usuario` (`propietarioId`),
+  CONSTRAINT `fk_proyecto_usuario` FOREIGN KEY (`propietarioId`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `proyectos`
+-- Dumping data for table `proyectos`
 --
 
-INSERT INTO `proyectos` (`id`, `proyecto`, `url`, `propietarioId`) VALUES
-(1, 'Tienda Virtual', '037b3635c9642403bc7dd436620741ca', 2),
-(2, 'Crear Proyecto para Shopify.', 'd2b76b34407bd2c11cea2ccbfbd2a61d', 2),
-(3, 'Proyecto de Embudo Virtual', '80334a5bb91e446ea510dc7b71b2cc0e', 3);
-
--- --------------------------------------------------------
+LOCK TABLES `proyectos` WRITE;
+/*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
+INSERT INTO `proyectos` VALUES (1,'Tienda Virtual','037b3635c9642403bc7dd436620741ca',2),(2,'Crear Proyecto para Shopify.','d2b76b34407bd2c11cea2ccbfbd2a61d',2),(3,'Proyecto de Embudo Virtual','80334a5bb91e446ea510dc7b71b2cc0e',3),(4,'a','555c382ed55e718d7667d1e66c7b2ccf',2);
+/*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `tareas`
+-- Table structure for table `tareas`
 --
 
+DROP TABLE IF EXISTS `tareas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tareas` (
-  `id` int NOT NULL,
-  `nombre` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL,
-  `proyectoId` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
+  `proyectoId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tareas_ibfk_1` (`proyectoId`),
+  CONSTRAINT `tareas_ibfk_1` FOREIGN KEY (`proyectoId`) REFERENCES `proyectos` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Dumping data for table `tareas`
 --
 
+LOCK TABLES `tareas` WRITE;
+/*!40000 ALTER TABLE `tareas` DISABLE KEYS */;
+INSERT INTO `tareas` VALUES (1,'Crear nuevo post de inteligencia artificial',0,4);
+/*!40000 ALTER TABLE `tareas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
-  `nombre` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `token` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `confirmado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `confirmado` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `token`, `confirmado`) VALUES
-(2, 'Jose', 'correo@correo.com', '$2y$10$3brcYTGh8CfS4pTtRuOrsOcagFow53eXR5WKF2vsNjb5U1vzVJhZm', '', 1),
-(3, 'Paco', 'paco@paco.com', '$2y$10$yTStqL2rDjNn5h2R3ywUuOny4SiPRr4LIp8omYi2LKQNVve90v78y', '', 1),
-(4, 'Mariano Manólez', 'manolo@manolo.com', '$2y$10$SVLCgPBB5bPQ5ZzmLMh4zuUFTm7KiRI2OwrFw3nJKa0xUbgP.zaHy', '', 1);
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (2,'Jose','correo@correo.com','$2y$10$TsP5MZiJ6tdQ1PW05wsrxuEmqAh9HXNVXghskwr0OiHG.0v0AG8XC','635ade36884ac',1),(3,'Paco','paco@paco.com','$2y$10$yTStqL2rDjNn5h2R3ywUuOny4SiPRr4LIp8omYi2LKQNVve90v78y','',1),(4,'Mariano Manólez','manolo@manolo.com','$2y$10$SVLCgPBB5bPQ5ZzmLMh4zuUFTm7KiRI2OwrFw3nJKa0xUbgP.zaHy','',1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `proyectos`
---
-ALTER TABLE `proyectos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_proyecto_usuario` (`propietarioId`);
-
---
--- Indices de la tabla `tareas`
---
-ALTER TABLE `tareas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tareas_ibfk_1` (`proyectoId`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `proyectos`
---
-ALTER TABLE `proyectos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `proyectos`
---
-ALTER TABLE `proyectos`
-  ADD CONSTRAINT `fk_proyecto_usuario` FOREIGN KEY (`propietarioId`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `tareas`
---
-ALTER TABLE `tareas`
-  ADD CONSTRAINT `tareas_ibfk_1` FOREIGN KEY (`proyectoId`) REFERENCES `proyectos` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-03-28 23:12:35
