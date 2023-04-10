@@ -102,6 +102,15 @@
 			const textoAlerta = resultado.mensaje;
 			removeSameAlert(alertas, textoAlerta);
 			mostrarAlerta(textoAlerta, resultado.tipo, document.querySelector('.formulario legend'));
+
+			if(resultado.tipo === 'exito'){
+				const modal = document.querySelector('.modal');
+				const add_button = document.querySelector('.opciones .submit-nueva-tarea');
+				add_button.remove();
+				setTimeout(() => {
+					modal.remove();
+				}, 3000);
+			}
 		} catch (error) {
 			console.log(error);
 		}
