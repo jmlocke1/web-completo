@@ -9,6 +9,8 @@
 			>&plus; Nueva Tarea</button>
 			
 		</div>
+
+		<ul id="listado-tareas" class="listado-tareas"></ul>
 	</div>
 
 <?php include __DIR__ . '/footer-dashboard.php'; ?>

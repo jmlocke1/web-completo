@@ -652,6 +652,7 @@ p {
 }
 .dashboard .principal {
   flex: 1;
+  overflow: scroll;
 }
 .dashboard .contenido {
   padding: 2rem;
@@ -831,6 +832,66 @@ p {
 .contenedor-nueva-tarea .agregar-tarea:hover {
   background-color: #066981;
   cursor: pointer;
+}
+
+.listado-tareas {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+}
+.listado-tareas .no-tareas {
+  text-align: center;
+}
+
+.tarea {
+  padding: 0.5rem 2rem;
+  border-bottom: 2px solid #e4e7eb;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tarea:last-of-type {
+  border: none;
+}
+.tarea p {
+  font-size: 1.4rem;
+}
+.tarea .opciones {
+  display: flex;
+  gap: 1rem;
+}
+.tarea .opciones button {
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 1rem;
+}
+.tarea .opciones button:hover {
+  cursor: pointer;
+}
+.tarea .opciones .completa {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+.tarea .opciones .completa:hover {
+  background-color: #134cca;
+}
+.tarea .opciones .pendiente {
+  background-color: #F59E0B;
+  color: #FFFFFF;
+}
+.tarea .opciones .pendiente:hover {
+  background-color: #c57f08;
+}
+.tarea .opciones .eliminar-tarea {
+  background-color: rgb(169, 0, 0);
+  color: #FFFFFF;
+}
+.tarea .opciones .eliminar-tarea:hover {
+  background-color: #760000;
 }
 
 .modal {
