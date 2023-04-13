@@ -58,7 +58,7 @@ CREATE TABLE `tareas` (
   PRIMARY KEY (`id`),
   KEY `tareas_ibfk_1` (`proyectoId`),
   CONSTRAINT `tareas_ibfk_1` FOREIGN KEY (`proyectoId`) REFERENCES `proyectos` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `tareas` (
 
 LOCK TABLES `tareas` WRITE;
 /*!40000 ALTER TABLE `tareas` DISABLE KEYS */;
-INSERT INTO `tareas` VALUES (1,'Crear nuevo post de inteligencia artificial',0,4);
+INSERT INTO `tareas` VALUES (1,'Crear nuevo post de inteligencia artificial',0,4),(2,'Crear otro nuevo post de inteligencia artificial',0,4),(3,'Ver videos de gatitos blancos',0,4),(4,'Ver videos de gatitos verdes',1,4),(5,'Ver videos de gatitos siameses',0,4),(6,'Crear tarea en proyecto',0,4),(7,'Investigar Hosting',0,4),(8,'Elegir Servidor',0,4),(9,'Elegir otro Servidor para BD',0,4),(10,'Elegir otro servidor para email',0,4),(11,'Crear mockups',0,1),(12,'Crear nuevo post de inteligencia artificiales',0,1),(13,'Maquetar en SCSS',0,1),(14,'Probar la usabilidad de las maquetas',0,1),(15,'Buscar un tema de WooCommerce',0,1),(16,'Nueva tarea',0,1);
 /*!40000 ALTER TABLE `tareas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-28 23:12:35
+-- Dump completed on 2023-04-13 21:28:33
