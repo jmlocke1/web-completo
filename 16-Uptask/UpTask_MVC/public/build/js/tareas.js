@@ -52,6 +52,10 @@
 			btnEstadoTarea.classList.add(`${estados[tarea.estado].toLowerCase()}`)
 			btnEstadoTarea.textContent = estados[tarea.estado];
 			btnEstadoTarea.dataset.estadoTarea = tarea.estado;
+			btnEstadoTarea.title = "Doble click para cambiar el estado";
+			btnEstadoTarea.ondblclick = function() {
+				cambiarEstadoTarea({...tarea});
+			};
 
 			const btnEliminarTarea = document.createElement('BUTTON');
 			btnEliminarTarea.classList.add('eliminar-tarea');
@@ -191,6 +195,17 @@
 		}
 	}
 
+	function cambiarEstadoTarea(tarea){
+		console.log(tarea);
+
+		const nuevoEstado = tarea.estado === "1" ? "0" : "1";
+		tarea.estado = nuevoEstado;
+		actualizarTarea(tarea);
+	}
+
+	function actualizarTarea(tarea){
+		console.log(tarea)
+	}
 	/**
 	 * Devuelve el id del proyecto obteniéndolo de la url
 	 * 
