@@ -48,7 +48,7 @@ class TareaController {
 	}
 
 	public static function actualizar() {
-		
+		echo json_encode($_POST);
 	}
 
 	public static function eliminar() {

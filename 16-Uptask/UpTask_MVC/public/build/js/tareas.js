@@ -196,15 +196,32 @@
 	}
 
 	function cambiarEstadoTarea(tarea){
-		console.log(tarea);
-
 		const nuevoEstado = tarea.estado === "1" ? "0" : "1";
 		tarea.estado = nuevoEstado;
 		actualizarTarea(tarea);
 	}
 
-	function actualizarTarea(tarea){
-		console.log(tarea)
+	async function actualizarTarea(tarea){
+		const {estado, id, nombre, proyectoId} = tarea;
+		const datos = new FormData();
+		datos.append('id', id);
+		datos.append('nombre', nombre);
+		datos.append('estado', estado);
+		datos.append('proyectoId', obtenerProyecto());
+
+		try {
+			const url = '/api/tarea';
+
+			const respuesta = await fetch(url, {
+				method: 'PUT',
+				body: datos
+			});
+			const resultado = await respuesta.json();
+			console.log(respuesta);
+			console.log(resultado);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	/**
 	 * Devuelve el id del proyecto obteniéndolo de la url
