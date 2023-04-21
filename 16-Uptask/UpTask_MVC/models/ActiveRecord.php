@@ -184,7 +184,7 @@ public static function find(array|int $id) {
             $query .= " OFFSET {$offset}";
         }
         $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
+        return $resultado;
     }
 
     // Busca un registro por el valor de una columna

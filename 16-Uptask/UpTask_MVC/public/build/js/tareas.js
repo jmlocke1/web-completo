@@ -210,15 +210,30 @@
 		datos.append('proyectoId', obtenerProyecto());
 
 		try {
-			const url = '/api/tarea';
+			const url = '/api/tarea/actualizar';
 
 			const respuesta = await fetch(url, {
-				method: 'PUT',
+				method: 'POST',
 				body: datos
 			});
 			const resultado = await respuesta.json();
-			console.log(respuesta);
 			console.log(resultado);
+			if(resultado.respuesta.tipo === 'exito'){
+				mostrarAlerta(
+					resultado.respuesta.mensaje, 
+					resultado.respuesta.tipo,
+					document.querySelector('.contenedor-nueva-tarea')
+				);
+
+				tareas = tareas.map(tareaMemoria => {
+					if(tareaMemoria.id === id){
+						tareaMemoria.estado = estado;
+					}
+					return tareaMemoria;
+				});
+				mostrarTareas();
+			}
+			
 		} catch (error) {
 			console.log(error);
 		}
