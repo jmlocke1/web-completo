@@ -1,8 +1,9 @@
 <?php
 namespace Controllers;
 
-use Model\Proyecto;
+use MVC\Router;
 use Model\Tarea;
+use Model\Proyecto;
 
 class TareaController {
 	public static function index() {
@@ -74,6 +75,27 @@ class TareaController {
 	}
 
 	public static function eliminar() {
-		
+		// Validar que el proyecto exista
+		$proyecto = Proyecto::where('url', $_POST['proyectoId']);
+		if(!$proyecto || $proyecto->propietarioId !== $_SESSION['id']){
+			$respuesta = [
+				'tipo' => 'error',
+				'mensaje' => 'Hubo un error al eliminar la tarea'
+			];
+			echo json_encode($respuesta);
+			return;
+		}
+		$tarea = new Tarea($_POST);
+		$tarea->proyectoId = $proyecto->id;
+		$resultado = $tarea->eliminar();
+		if($resultado){
+			$respuesta = [
+				'tipo' => 'exito',
+				'id' => $tarea->id,
+				'proyectoId' => $proyecto->id,
+				'mensaje' => "Tarea \"{$tarea->nombre}\" eliminada correctamente"
+			];
+			echo json_encode(['respuesta' => $respuesta]);
+		}
 	}
 }
