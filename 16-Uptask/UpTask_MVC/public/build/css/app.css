@@ -986,3 +986,43 @@ p {
   transform: translateY(-50%);
   opacity: 0;
 }
+
+.filtros {
+  background-color: #FFFFFF;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+@media (min-width: 768px) {
+  .filtros .filtros-inputs {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+.filtros h2 {
+  color: #4338CA;
+  font-size: 2.8rem;
+}
+@media (min-width: 768px) {
+  .filtros h2 {
+    margin: 0;
+  }
+}
+.filtros .campo {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .filtros .campo {
+    margin-bottom: 0;
+  }
+}
+.filtros input[type=radio] {
+  accent-color: #4338CA;
+  width: 1.8rem;
+  height: 1.8rem;
+}
