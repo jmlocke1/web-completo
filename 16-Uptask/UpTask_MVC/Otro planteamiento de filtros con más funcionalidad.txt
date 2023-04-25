@@ -1,0 +1,174 @@
+Otro planteamiento de filtros con más funcionalidad y código más sencillo.
+
+Es evidente que un programa se puede escribir de muchas maneras, y no necesariamente un cambio puede ser mejor que otro. Como ha comentado Javier en otra pregunta, hay algunos casos en los que no funciona del todo bien.
+Cuando se cambia el estado de una tarea no se actualiza automáticamente, si estás en completados o pendientes. Si estás en completados, la tarea cambia de estado a pendientes, pero sigue ahí, no se va. Lo mismo con los pendientes.
+Si estás en pendientes y añades una tarea, tampoco se añade, y debería, pues una tarea "nace" en estado pendiente por definición.
+En una aplicación real no habría que añadir funcionalidades no requeridas, o sea, si no nos han pedido eso expresamente y lo tenemos en el estado actual, deberíamos dejarlo así y continuar con el desarrollo. Pero como estamos aprendiendo, he tomado el papel de usuario exigente y he añadido estos requisitos.
+El resultado es que he reescrito casi totalmente la funcionalidad de filtros, procurando simplifiquar el código al máximo para hacerlo más mantenible. He aquí mi solución:
+Primero declaro al principio tres referencias a los radio check:
+(function(){
+	let $todasCheck = document.querySelector('#todas'),
+		$completadasCheck = document.querySelector('#completadas'),
+		$pendientesCheck = document. querySelector('#pendientes');
+El poner un carácter de dólar al principio de la variable es una simple cuestión de estilo, quiere decir que referencia a un elemento del DOM. Por supuesto, podría no seleccionarlos aquí de forma global, y seleccionarlos en el momento que los necesitara, pero vamos a acceder muy a menudo a estos elementos, y seleccionar elementos del DOM es una tarea muy costosa, por lo que es más recomendable seleccionarlos al principio una única vez.
+A continuación declaramos el array global de tareas y dos más:
+	let tareas = [],
+		completadas = [],
+		pendientes = [];
+Vemos que hay dos misteriosos arrays nuevos, pero ¿qué pasó con nuestro querido amigo filtradas? Bien, está a continuación:
+	// De momento lo dejo por compatibilidad, pero HAY QUE BORRARLO AL ACABAR LA IMPLEMENTACIÓN
+	let filtradas = [];
+El comentario creo que es suficientemente explícito, por lo que no me voy a extender.
+Vayamos ahora con la función obtenerTareas, que es la que se ejecuta al cargar la página para obtener las tareas del servidor.
+async function obtenerTareas(){
+	try {
+		const id = obtenerProyecto();
+		const url = `/api/tareas?id=${id}`;
+		const respuesta = await fetch(url);
+		const resultado = await respuesta.json();
+		tareas = resultado.tareas;
+		mostrarTareas();
+	} catch (error) {
+		console.log(error);
+	}
+}
+Una vez obtenemos las tareas debemos recargar los otros dos arrays. Así, antes de llamar a mostrarTareas escribimos lo siguiente:
+	tareas = resultado.tareas;
+	// Inicializamos las completadas y las pendientes
+	completadas = tareas.filter(tarea => tarea.estado === "1");
+	if(!completadas.length){
+		// Si no hay tareas completadas, 
+		// desactivamos el radio button completadas
+		$completadasCheck.disabled = true;
+	} else {
+		// Pero si hay, lo activamos
+		$completadasCheck.disabled = false;
+	}
+	// Vamos con las pendientes
+	pendientes = tareas.filter(tarea => tarea.estado === "0");
+	if(!pendientes.length){
+		$pendientesCheck.disabled = true;
+	} else {
+		$pendientesCheck.disabled = false;
+	}
+
+	mostrarTareas();
+	} catch (error) {
+		console.log(error);
+	}
+}
+Perfecto, ya tenemos nuestros tres arrays rellenos, pero ¿cómo sabremos cual mostrar en cada momento? Para ello, usaremos el valor del atributo checked de nuestros radio buttons. Vayamos a mostrarTareas:
+function mostrarTareas() {
+	limpiarTareas();
+	//totalPendientes();
+	// const arrayTareas = filtradas.length ? filtradas : tareas;
+	let arrayTareas = [];
+	// checked puede ser true o false, según esté seleccionado o no
+	if($todasCheck.checked){
+		arrayTareas = tareas;
+	}else if($completadasCheck.checked){
+		arrayTareas = completadas;
+	}else{
+		arrayTareas = pendientes;
+	}
+
+	if(arrayTareas.length === 0){
+...
+Con lo que tenemos hasta ahora, ya podemos recargar la página y ver los primeros resultados. Cuando cambiamos de Todas a completadas, cambia correctamente, y también cuando cambiamos a pendientes. Sin embargo, falta que se actualice cuando cambiamos el estado a una tarea, eliminamos o añadimos una nueva tarea.
+Eliminar tarea
+Eliminar una tarea se realiza en la función asíncrona eliminarTarea. En esta función se actualiza el array tareas y luego se muestran las tareas:
+async function eliminarTarea(tarea){
+	...
+	tareas = tareas.filter( tareaMemoria => tareaMemoria.id !== tarea.id);
+	mostrarTareas();
+...
+Entre tareas y mostrarTareas debemos copiar el código que escribimos antes en obtenerTareas. Ahora bien, el código se va a usar tal cual, sin cambios, por lo que es conveniente que refactoricemos sacando dicho código a una función, y llamando a esa función una vez el array tareas esté actualizado:
+function actualizarCompletadasYPendientes(){
+	// Inicializamos las completadas y las pendientes
+	completadas = tareas.filter(tarea => tarea.estado === "1");
+	if(!completadas.length){
+		$completadasCheck.disabled = true;
+	} else {
+		$completadasCheck.disabled = false;
+	}
+	pendientes = tareas.filter(tarea => tarea.estado === "0");
+	if(!pendientes.length){
+		$pendientesCheck.disabled = true;
+	} else {
+		$pendientesCheck.disabled = false;
+	}
+}
+De esta forma, la función eliminarTarea se quedaría de esta forma:
+async function eliminarTarea(tarea){
+	...
+	tareas = tareas.filter( tareaMemoria => tareaMemoria.id !== tarea.id);
+	actualizarCompletadasYPendientes();
+	mostrarTareas();
+...
+Actualizar Tarea:
+async function actualizarTarea(tarea){
+...
+			tareas = tareas.map(tareaMemoria => {
+				if(tareaMemoria.id === tarea.id){
+					tareaMemoria.nombre = tarea.nombre;
+					tareaMemoria.estado = tarea.estado;
+				}
+				return tareaMemoria;
+			});
+			actualizarCompletadasYPendientes();
+			mostrarTareas();
+		}
+	} catch (error) {
+		console.log(error);
+	}
+}
+Agregar Tarea:
+async function agregarTarea(tarea){
+	...
+			tareas = [...tareas, tareaObj];
+			actualizarCompletadasYPendientes()
+			mostrarTareas();
+		}
+	} catch (error) {
+		console.log(error);
+	}
+}
+Y listo, ya tenemos toda nuestra funcionalidad. Ahora demos un paseo por el código sobrante.
+Cuando añadimos los eventos a los radio buttons, les asignamos la función filtrarTareas:
+filtros.forEach(radio => {
+	radio.addEventListener('input', filtrarTareas);
+});
+
+function filtrarTareas(e) {
+	const filtro = e.target.value;
+	if(filtro !== ''){
+		filtradas = tareas.filter(tarea => tarea.estado === filtro);
+	}else{
+		filtradas = [];
+	}
+	mostrarTareas();
+}
+Si os dáis cuenta, realmente ya no se accede al array filtradas, por lo que ese código se puede comentar sin problemas
+function filtrarTareas(e) {
+	// const filtro = e.target.value;
+	// if(filtro !== ''){
+	// 	filtradas = tareas.filter(tarea => tarea.estado === filtro);
+	// }else{
+	// 	filtradas = [];
+	// }
+	mostrarTareas();
+}
+Se puede comprobar que funciona igual, por tanto, esa función únicamente llama a mostrarTareas, así que se puede hacer directamente:
+filtros.forEach(radio => {
+	radio.addEventListener('input', mostrarTareas);
+});
+Las funciones totalPendientes y totalCompletadas tampoco son necesarias, por lo que se pueden borrar.
+En la función mostrarTareas se eliminaron las llamadas a totalPendientes, totalCompletadas y la asignación a arrayTareas de filtradas o tareas, pues ya asignamos los nuevos arrays
+function mostrarTareas() {
+	limpiarTareas();
+	//totalPendientes();
+	// const arrayTareas = filtradas.length ? filtradas : tareas;
+	let arrayTareas = [];
+	if($todasCheck.checked){
+... 
+Y con esto finaliza mi implementación. Como dije al principio, no tiene por qué ser la mejor ni la más eficiente, es simplemente mi visión de realizar esta tarea añadiéndole la funcionalidad completa. Si tenéis implementaciones alternativas sería interesante que las mostrárais a continuación, para ver soluciones distintas

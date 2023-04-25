@@ -1,8 +1,13 @@
 (function(){
+	let $todasCheck = document.querySelector('#todas'),
+		$completadasCheck = document.querySelector('#completadas'),
+		$pendientesCheck = document. querySelector('#pendientes');
 	obtenerTareas();
-	let tareas = [];
-	let filtradas = [];
+	let tareas = [],
+		completadas = [],
+		pendientes = [];
 
+	
 	// Botón para mostrar el Modal de Agregar Tarea
 	const nuevaTareaBtn = document.querySelector('#agregar-tarea');
 	nuevaTareaBtn.addEventListener('click', function() {
@@ -12,18 +17,8 @@
 	// Filtros de búsqueda
 	const filtros = document.querySelectorAll('#filtros input[type="radio"]');
 	filtros.forEach(radio => {
-		radio.addEventListener('input', filtrarTareas);
+		radio.addEventListener('input', mostrarTareas);
 	});
-
-	function filtrarTareas(e) {
-		const filtro = e.target.value;
-		if(filtro !== ''){
-			filtradas = tareas.filter(tarea => tarea.estado === filtro);
-		}else{
-			filtradas = [];
-		}
-		mostrarTareas();
-	}
 
 	async function obtenerTareas(){
 		try {
@@ -32,16 +27,39 @@
 			const respuesta = await fetch(url);
 			const resultado = await respuesta.json();
 			tareas = resultado.tareas;
+			actualizarCompletadasYPendientes();
 			mostrarTareas();
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
+	function actualizarCompletadasYPendientes(){
+		// Inicializamos las completadas y las pendientes
+		completadas = tareas.filter(tarea => tarea.estado === "1");
+		if(!completadas.length){
+			$completadasCheck.disabled = true;
+		} else {
+			$completadasCheck.disabled = false;
+		}
+		pendientes = tareas.filter(tarea => tarea.estado === "0");
+		if(!pendientes.length){
+			$pendientesCheck.disabled = true;
+		} else {
+			$pendientesCheck.disabled = false;
+		}
+	}
+
 	function mostrarTareas() {
 		limpiarTareas();
-		totalPendientes();
-		const arrayTareas = filtradas.length ? filtradas : tareas;
+		let arrayTareas = [];
+		if($todasCheck.checked){
+			arrayTareas = tareas;
+		}else if($completadasCheck.checked){
+			arrayTareas = completadas;
+		}else{
+			arrayTareas = pendientes;
+		}
 
 		if(arrayTareas.length === 0){
 			const contenedorTareas = document.querySelector('#listado-tareas');
@@ -228,6 +246,7 @@
 					proyectoId: resultado.proyectoId
 				}
 				tareas = [...tareas, tareaObj];
+				actualizarCompletadasYPendientes()
 				mostrarTareas();
 			}
 		} catch (error) {
@@ -291,9 +310,9 @@
 					}
 					return tareaMemoria;
 				});
+				actualizarCompletadasYPendientes();
 				mostrarTareas();
 			}
-			
 		} catch (error) {
 			console.log(error);
 		}
@@ -330,6 +349,7 @@
 				// );
 				Swal.fire('Eliminado', resultado.respuesta.mensaje, 'success');
 				tareas = tareas.filter( tareaMemoria => tareaMemoria.id !== tarea.id);
+				actualizarCompletadasYPendientes()
 				mostrarTareas();
 			}
 		} catch (error) {
