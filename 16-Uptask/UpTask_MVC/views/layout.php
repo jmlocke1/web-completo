@@ -13,6 +13,6 @@
 
     <?php echo $contenido; ?>
     <?php echo $script ?? ''; ?>
-    <script src="/build/js/app.js"></script>
+    
 </body>
 </html>

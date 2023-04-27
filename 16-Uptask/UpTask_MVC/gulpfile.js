@@ -41,8 +41,8 @@ function javascript() {
 function imagenes() {
     return src(paths.imagenes)
         .pipe(cache(imagemin({ optimizationLevel: 3})))
-        .pipe(dest('public/build/img'))
-        .pipe(notify({ message: 'Imagen Completada'}));
+        .pipe(dest('public/build/img'));
+        //.pipe(notify({ message: 'Imagen Completada'}));
 }
 
 function versionWebp() {
