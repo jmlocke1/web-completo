@@ -25,7 +25,7 @@ class LoginController {
 			if(!$usuario || !$usuario->confirmado){
 				Usuario::setAlerta('error', 'El Usuario no existe o no está confirmado');
 			}else{
-				if(password_verify($auth->password, $usuario->password)){
+				if($usuario->login($auth->password)){
 					// Iniciar la sesión
 					if(!isset($_SESSION)) {
 						session_start();
@@ -37,8 +37,6 @@ class LoginController {
 
 					// Redireccionar
 					header('Location: /dashboard');
-				}else{
-					Usuario::setAlerta('error', 'Password Incorrecto');
 				}
 			}
 		}

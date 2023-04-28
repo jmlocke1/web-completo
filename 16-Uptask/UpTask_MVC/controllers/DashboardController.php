@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Model\Proyecto;
+use Model\Usuario;
 use MVC\Router;
 
 class DashboardController {
@@ -72,8 +73,71 @@ class DashboardController {
 	public static function perfil(Router $router){
 		iniciar_sesion();
 		isAuth();
+		$usuario = Usuario::find($_SESSION['id']);
+
 		$router->render('dashboard/perfil', [
-			'titulo' => 'Perfil'
+			'titulo' => 'Perfil',
+			'usuario' => $usuario,
+			'alertas' => Usuario::getAlertas()
+		]);
+	}
+
+	public static function perfil_post(Router $router){
+		iniciar_sesion();
+		isAuth();
+		$usuario = Usuario::find($_SESSION['id']);
+		$usuario->sincronizar($_POST);
+		$alertas = $usuario->validar_perfil();
+		if(empty($alertas)){
+			$existeUsuario = Usuario::where('email', $usuario->email);
+
+			if($existeUsuario && $existeUsuario->id !== $_SESSION['id']) {
+				// Mensaje de error
+				Usuario::setAlerta('error', 'Email no válido, ya pertenece a otra cuenta');
+				// Restauramos usuario
+				$usuario = Usuario::find($_SESSION['id']);
+			} else {
+				// Guardar el registro
+				$usuario->guardar();
+				
+				$_SESSION['nombre'] = $usuario->nombre;
+				$usuario::setAlerta('exito', 'Datos de usuario actualizados correctamente');
+			}
+			
+		}
+		$router->render('dashboard/perfil', [
+			'titulo' => 'Perfil',
+			'usuario' => $usuario,
+			'alertas' => Usuario::getAlertas()
+		]);
+	}
+
+	public static function cambiar_password(Router $router){
+		iniciar_sesion();
+		isAuth();
+
+		$router->render('dashboard/cambiar-password', [
+			'titulo' => 'Cambiar Password'
+		]);
+	}
+
+	public static function cambiar_password_post(Router $router){
+		iniciar_sesion();
+		isAuth();
+		$usuario = Usuario::find($_SESSION['id']);
+		$ok = $usuario->nuevo_password($_POST['password_actual'], $_POST['password_nuevo']);
+		if($ok) {
+			$resultado = $usuario->guardar();
+			if($resultado){
+				Usuario::setAlerta('exito', 'Se ha actualizado el password correctamente');
+			}else{
+				Usuario::setAlerta('error', 'No se ha podido guardar el password en la base de datos');
+			}
+			
+		}
+		$router->render('dashboard/cambiar-password', [
+			'titulo' => 'Cambiar Password',
+			'alertas' => Usuario::getAlertas()
 		]);
 	}
 }

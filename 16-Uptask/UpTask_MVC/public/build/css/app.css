@@ -691,6 +691,12 @@ p {
   background-color: #352ca3;
   cursor: pointer;
 }
+.dashboard .enlace {
+  color: #4338CA;
+}
+.dashboard .enlace:hover {
+  color: #28217b;
+}
 
 .sidebar {
   opacity: 0;
