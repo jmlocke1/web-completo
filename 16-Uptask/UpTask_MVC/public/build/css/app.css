@@ -441,7 +441,7 @@ p {
 .login .uptask {
   background: linear-gradient(to right, #0891B2 0%, #0ab9e3 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -483,7 +483,7 @@ p {
 .crear .uptask {
   background: linear-gradient(to right, #7C3AED 0%, #9b69f1 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -525,7 +525,7 @@ p {
 .olvide .uptask {
   background: linear-gradient(to right, #DB2777 0%, #e25393 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -567,7 +567,7 @@ p {
 .reestablecer .uptask {
   background: linear-gradient(to right, #2563EB 0%, #5484ef 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -609,7 +609,7 @@ p {
 .mensaje .uptask {
   background: linear-gradient(to right, #F59E0B 0%, #f7b13c 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -625,7 +625,7 @@ p {
 .confirmar .uptask {
   background: linear-gradient(to right, #4338CA 0%, #6960d5 100%);
   color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text;
   text-align: center;
   font-size: 7rem;
 }
@@ -1147,4 +1147,131 @@ p {
   accent-color: #4338CA;
   width: 1.8rem;
   height: 1.8rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2c2c3b;
+  }
+  .tagline,
+  .formulario label,
+  .login .acciones a,
+  .crear .acciones a,
+  .olvide .acciones a {
+    color: #FFFFFF;
+  }
+  .descripcion-pagina,
+  .formulario .campo input,
+  .nombre-pagina {
+    color: #c7ccd5;
+  }
+  .formulario .campo input {
+    background-color: #4d4d67;
+    color: #FFFFFF;
+  }
+  .formulario .campo input::placeholder {
+    color: #d6d9e0;
+  }
+  .alerta.error {
+    background-color: #FFFFFF;
+  }
+}
+@media (prefers-color-scheme: dark) and (min-width: 768px) {
+  .sidebar {
+    background-color: #21212c;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .sidebar .sidebar-nav a.activo, .sidebar .sidebar-nav a:hover {
+    background-color: #F59E0B;
+  }
+  .barra-mobile,
+  .barra {
+    background-color: #1d1d27;
+  }
+  .barra p {
+    color: #F59E0B;
+  }
+  .barra p span {
+    color: #f3f4f6;
+  }
+  .barra .cerrar-sesion {
+    background-color: #F59E0B;
+    padding: 1.5rem 4rem;
+    color: #FFFFFF;
+    font-size: 1.6rem;
+    display: inline-block;
+    font-weight: 700;
+    border: none;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+}
+@media (prefers-color-scheme: dark) and (min-width: 768px) {
+  .barra .cerrar-sesion {
+    width: auto;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .barra .cerrar-sesion:hover {
+    background-color: #c57f08;
+    cursor: pointer;
+  }
+  .filtros {
+    background-color: #424258;
+  }
+  .filtros h2,
+  .filtros label {
+    color: #FFFFFF;
+  }
+  .filtros input[type=radio] {
+    accent-color: #F59E0B;
+  }
+  .dashboard {
+    background-color: #2c2c3b;
+  }
+  .dashboard .enlace {
+    color: #f3f4f6;
+  }
+  .dashboard .enlace:hover {
+    color: #c7ccd5;
+  }
+  .dashboard .formulario input:not([type=submit]) {
+    background-color: #585875;
+    color: #FFFFFF;
+  }
+  .dashboard .formulario input:not([type=submit])::placeholder {
+    color: #d6d9e0;
+  }
+  .listado-proyectos .proyecto {
+    background-color: #585875;
+  }
+  .listado-proyectos .proyecto:hover {
+    background-color: #4d4d67;
+  }
+  .listado-tareas .tarea {
+    background-color: #424258;
+    border: none;
+  }
+  .listado-tareas .tarea p {
+    color: #f3f4f6;
+  }
+  .modal .formulario {
+    background-color: #2c2c3b;
+  }
+  .modal .formulario input[type=text] {
+    background-color: #585875;
+    color: #FFFFFF;
+  }
+  .modal .formulario input[type=text]::placeholder {
+    color: #b9bfca;
+  }
+  .modal .formulario legend {
+    color: #f3f4f6;
+  }
 }

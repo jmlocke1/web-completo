@@ -49,7 +49,7 @@
 @mixin textoDegradado($color){
     background: linear-gradient(to right, $color 0%, lighten($color, 10%) 100%);
     color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text;
     text-align: center;
     font-size: 7rem;
 

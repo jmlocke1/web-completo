@@ -9,8 +9,6 @@ class Usuario extends ActiveRecord {
 	public $nombre;
 	public $email;
 	public $password;
-	public $password_actual;
-	public $password_nuevo;
 	public $password2;
 	public $token;
 	public $confirmado;
@@ -21,8 +19,6 @@ class Usuario extends ActiveRecord {
 		$this->nombre = $args['nombre'] ?? null;
 		$this->email = $args['email'] ?? null;
 		$this->password = $args['password'] ?? null;
-		$this->password_actual = $args['password_actual'] ?? null;
-		$this->password_nuevo = $args['password_nuevo'] ?? null;
 		$this->password2 = $args['password2'] ?? null;
 		$this->token = $args['token'] ?? null;
 		$this->confirmado = $args['confirmado'] ?? 0;
