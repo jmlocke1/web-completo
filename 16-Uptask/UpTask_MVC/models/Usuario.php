@@ -95,7 +95,6 @@ class Usuario extends ActiveRecord {
 		}else{
 			return false;
 		}
-
 	}
 
 	public function login(string $password): bool {
