@@ -26,7 +26,7 @@ function isAuth() : void {
     }
 }
 
-function iniciar_sesion(){
+function iniciar_sesion(): void {
     if(!isset($_SESSION)) {
         session_start();
     }
