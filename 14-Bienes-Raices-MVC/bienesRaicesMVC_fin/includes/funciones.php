@@ -6,7 +6,7 @@ define('FUNCIONES_URL', __DIR__ . 'funciones.php');
 define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
 
 function incluirTemplate( string  $nombre, bool $inicio = false ) {
-    include TEMPLATES_URL . "/${nombre}.php"; 
+    include TEMPLATES_URL . "/{$nombre}.php"; 
 }
 
 
@@ -58,7 +58,7 @@ function validarORedireccionar(string $url) {
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if(!$id) {
-        header("Location: ${url} " );
+        header("Location: {$url} " );
     }
 
     return $id;

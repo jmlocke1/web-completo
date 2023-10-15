@@ -7,7 +7,7 @@ define('CARPETA_IMAGENES', __DIR__ . '/../imagenes/');
 
 
 function incluirTemplate( string  $nombre, bool $inicio = false ) {
-    include TEMPLATES_URL . "/${nombre}.php"; 
+    include TEMPLATES_URL . "/{$nombre}.php"; 
 }
 
 function estaAutenticado() {

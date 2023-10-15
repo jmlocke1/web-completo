@@ -5,7 +5,7 @@
 
 
     // consultar
-    $query = "SELECT * FROM propiedades LIMIT ${limite}";
+    $query = "SELECT * FROM propiedades LIMIT {$limite}";
 
     // obtener resultado
     $resultado = mysqli_query($db, $query);

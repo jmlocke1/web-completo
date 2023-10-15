@@ -15,7 +15,7 @@ var_dump($passwordHash);
 echo "</pre>";
 
 // Query para crear el usuario
-$query = " INSERT INTO usuarios (email, password) VALUES ( '${email}', '${passwordHash}')";
+$query = " INSERT INTO usuarios (email, password) VALUES ( '{$email}', '{$passwordHash}')";
 
 
 mysqli_query($db, $query);

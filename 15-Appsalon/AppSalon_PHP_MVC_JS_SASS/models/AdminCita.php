@@ -40,10 +40,10 @@ class AdminCita extends ActiveRecord {
 		$consulta .= " LEFT OUTER JOIN servicios ";
 		$consulta .= " ON servicios.id=citasServicios.servicioId ";
         if(isset($fecha) && !isset($hasta)){
-            $consulta .= " WHERE fecha = '${fecha}'";
+            $consulta .= " WHERE fecha = '{$fecha}'";
         }
         if(isset($fecha) && isset($hasta)){
-            $consulta .= " WHERE fecha BETWEEN  '${fecha}' AND '${hasta}'";
+            $consulta .= " WHERE fecha BETWEEN  '{$fecha}' AND '{$hasta}'";
         }
         $consulta .= " ORDER BY citas.fecha";
 

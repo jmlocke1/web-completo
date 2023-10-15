@@ -13,7 +13,7 @@ require_once __DIR__.'/config/database.php';
 $db = conectarDB();
 
 function incluirTemplate( string $nombre, string $inicio = '' ) {
-    include TEMPLATES_URL."/${nombre}.php";
+    include TEMPLATES_URL."/{$nombre}.php";
 }
 
 function deleteProperty(int $id): bool {
@@ -21,7 +21,7 @@ function deleteProperty(int $id): bool {
     // Primero eliminamos la imagen
     deleteImageProperty($id);
     // Borramos la propiedad
-    $query = "DELETE FROM propiedades WHERE id=${id}";
+    $query = "DELETE FROM propiedades WHERE id={$id}";
     $result = mysqli_query($db, $query);
     $exito = $db->affected_rows > 0;
     if($exito){

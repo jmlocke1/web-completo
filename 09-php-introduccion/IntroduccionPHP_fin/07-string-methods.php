@@ -31,6 +31,6 @@ echo "<br>";
 
 echo "El Cliente " . $nombreCliente . " es " . $tipoCliente;
 
-echo "El Cliente {$nombreCliente} es ${tipoCliente} ";
+echo "El Cliente {$nombreCliente} es {$tipoCliente} ";
 
 include 'includes/footer.php';

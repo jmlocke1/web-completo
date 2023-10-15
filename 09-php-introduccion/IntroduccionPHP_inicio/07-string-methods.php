@@ -14,5 +14,5 @@ define("PRUEBA", "Valor de prueba");
 echo PRUEBA, "<br>";
 echo "El Cliente ". $nombreCliente." es ".$tipoCliente;
 echo "<br>El cliente $nombreCliente es $tipoCliente PRUEBA, {PRUEBA}".PRUEBA;
-echo "<br>El cliente ${nombreCliente} es {$tipoCliente}";
+echo "<br>El cliente {$nombreCliente} es {$tipoCliente}";
 include 'includes/footer.php';
