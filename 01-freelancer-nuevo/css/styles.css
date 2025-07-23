@@ -1,0 +1,35 @@
+:root {
+    --blanco: #FFFFFF;
+    --oscuro: #212121;
+    --primario: #FFC107;
+    --secundario: #0097A7;
+    --gris: #757575;
+}
+.krub-regular {
+  font-family: "Krub", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.krub-bold {
+  font-family: "Krub", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+html{
+    font-size: 62.5%;
+}
+body{
+    font-size: 16px; /* 1rem = 10px */
+    font-family: 'krub', sans-serif;
+}
+.titulo{
+    text-align: center;
+    font-size: 3.8rem;
+
+}
+.titulo span {
+    font-size: 2rem;
+}
