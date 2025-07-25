@@ -41,11 +41,17 @@ body{
     background-color: var(--secundario);
 }
 .navegacion-principal {
-    padding: 1rem;
     display: flex;
     justify-content: space-between;
 }
 .navegacion-principal a {
+    padding: 1rem;
     color: var(--blanco);
     text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.navegacion-principal a:hover {
+    background-color: var(--primario);
+    color: var(--oscuro);
 }
