@@ -33,3 +33,13 @@ body{
 .titulo span {
     font-size: 2rem;
 }
+.contenedor {
+    width: 120rem;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+}
+.navegacion-principal {
+    background-color: var(--secundario);
+}
