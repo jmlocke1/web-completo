@@ -50,7 +50,7 @@ class Admin extends ActiveRecord {
         if(!$this->autenticado) {
             self::$errores[] = 'El Password es Incorrecto';
             return;
-        } 384
+        }
     }
 
     public function autenticar() {
